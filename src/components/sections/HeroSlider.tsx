@@ -1,126 +1,158 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ChevronDown, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/Button';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-const heroSlides = [
+import { api } from '../../services/api';
+
+// Fallback slides if DB is empty
+const defaultSlides = [
     {
-        image: "https://liferepublic.in/images/home/slider-1.webp",
-        title: "Life Republic",
-        subtitle: "A Township for the Thinking Minds",
-        description: "Experience a holistic lifestyle nestled amidst nature."
+        id: 1,
+        image_url: 'https://liferepublic.in/images/slider/1.webp',
+        title: 'Where Life Finds Its Rhythm',
+        subtitle: 'Experience the symphony of nature and modern living',
+        description: 'A 390+ acre integrated township that offers a world of its own.'
     },
     {
-        image: "https://liferepublic.in/images/home/slider-2.webp",
-        title: "Premium Living",
-        subtitle: "World-Class Amenities",
-        description: "Designed to offer the perfect blend of luxury and comfort."
+        id: 2,
+        image_url: 'https://liferepublic.in/images/slider/2.webp',
+        title: 'Spaces That Inspire',
+        subtitle: 'Homes designed for those who dream big',
+        description: 'From smart homes to luxury villas, find your perfect space.'
     },
     {
-        image: "https://liferepublic.in/images/home/slider-3.webp",
-        title: "Smart Homes",
-        subtitle: "Future-Ready Infrastructure",
-        description: "Live in a community that is secure, smart, and sustainable."
-    }
+        id: 3,
+        image_url: 'https://liferepublic.in/images/slider/3.webp',
+        title: 'A Community Like No Other',
+        subtitle: 'Connect, celebrate, and grow together',
+        description: 'Join a vibrant community of over 10,000 happy families.'
+    },
 ];
 
 export const HeroSlider: React.FC = () => {
-    return (
-        <section className="relative h-screen w-full">
-            <Swiper
-                modules={[Autoplay, EffectFade, Navigation, Pagination]}
-                effect="fade"
-                speed={1000}
-                autoplay={{
-                    delay: 5000,
-                    disableOnInteraction: false,
-                }}
-                pagination={{ clickable: true }}
-                loop={true}
-                className="h-full w-full"
-            >
-                {heroSlides.map((slide, index) => (
-                    <SwiperSlide key={index}>
-                        <div className="relative h-full w-full">
-                            {/* Background Image */}
-                            <div
-                                className="absolute inset-0 bg-cover bg-center transition-transform duration-[10s] hover:scale-105"
-                                style={{ backgroundImage: `url(${slide.image})` }}
-                            >
-                                <div className="absolute inset-0 bg-black/40" />
-                            </div>
+    const navigate = useNavigate();
+    const { scrollY } = useScroll();
+    const y = useTransform(scrollY, [0, 500], [0, 200]);
+    const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+    const [slides, setSlides] = React.useState<any[]>(defaultSlides);
 
-                            {/* Content */}
-                            <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4">
-                                <div className="max-w-4xl mx-auto">
-                                    <motion.span
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.8 }}
-                                        className="inline-block bg-accent px-4 py-1 text-sm font-semibold tracking-wider uppercase mb-4 rounded-sm"
-                                    >
-                                        {slide.subtitle}
-                                    </motion.span>
+    React.useEffect(() => {
+        const loadBanners = async () => {
+            try {
+                const data = await api.banners.getAll();
+                if (data && data.length > 0) {
+                    setSlides(data);
+                }
+            } catch (error) {
+                console.error('Failed to load banners:', error);
+            }
+        };
+        loadBanners();
+    }, []);
+
+    return (
+        <section className="relative h-screen w-full overflow-hidden">
+            <motion.div style={{ y }} className="absolute inset-0 w-full h-full">
+                <Swiper
+                    modules={[Autoplay, EffectFade, Navigation, Pagination]}
+                    effect="fade"
+                    autoplay={{
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    }}
+                    loop={true}
+                    pagination={{
+                        clickable: true,
+                        renderBullet: function (_index, className) {
+                            return '<span class="' + className + ' !bg-white !opacity-50 hover:!opacity-100 transition-opacity"></span>';
+                        },
+                    }}
+                    className="h-full w-full"
+                >
+                    {slides.map((slide) => (
+                        <SwiperSlide key={slide.id}>
+                            <div className="relative h-full w-full">
+                                <div className="absolute inset-0 bg-black/40 z-10" />
+                                <img
+                                    src={slide.image_url}
+                                    alt={slide.title}
+                                    className="h-full w-full object-cover"
+                                />
+                                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
                                     <motion.h1
                                         initial={{ opacity: 0, y: 30 }}
                                         whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
                                         transition={{ duration: 0.8, delay: 0.2 }}
-                                        className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight"
+                                        className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg tracking-tight"
                                     >
                                         {slide.title}
                                     </motion.h1>
                                     <motion.p
-                                        initial={{ opacity: 0, y: 30 }}
+                                        initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
                                         transition={{ duration: 0.8, delay: 0.4 }}
-                                        className="text-xl md:text-2xl mb-10 font-light max-w-2xl mx-auto"
+                                        className="text-lg md:text-2xl text-gray-100 font-light tracking-wide max-w-3xl drop-shadow-md mb-8"
                                     >
-                                        {slide.description}
+                                        {slide.subtitle}
                                     </motion.p>
                                     <motion.div
                                         initial={{ opacity: 0, y: 30 }}
                                         whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
                                         transition={{ duration: 0.8, delay: 0.6 }}
                                         className="flex flex-col sm:flex-row gap-4 justify-center"
                                     >
-                                        <Button variant="primary" size="lg" className="gap-2 bg-accent hover:bg-white hover:text-accent border-2 border-transparent">
+                                        <Button
+                                            variant="primary"
+                                            size="lg"
+                                            className="gap-2 bg-accent hover:bg-white hover:text-accent border-2 border-transparent"
+                                            onClick={() => navigate('/projects')}
+                                        >
                                             Explore Projects <ArrowRight size={20} />
-                                        </Button>
-                                        <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-secondary">
-                                            Download Brochure
                                         </Button>
                                     </motion.div>
                                 </div>
                             </div>
-                        </div>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </motion.div>
 
-            {/* Custom Styles for Swiper Pagination */}
+            {/* Scroll Indicator */}
+            <motion.div
+                style={{ opacity }}
+                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center cursor-pointer pointer-events-none"
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+                <span className="text-white/80 text-xs tracking-[0.2em] mb-2 uppercase">Scroll to Explore</span>
+                <ChevronDown className="text-white/80" size={24} />
+            </motion.div>
+
             <style>{`
-        .swiper-pagination-bullet {
-          background: white;
-          opacity: 0.5;
-          width: 10px;
-          height: 10px;
-          transition: all 0.3s ease;
-        }
-        .swiper-pagination-bullet-active {
-          opacity: 1;
-          background: #C5A059;
-          width: 30px;
-          border-radius: 5px;
-        }
-      `}</style>
+                .swiper-pagination-bullet {
+                  width: 10px;
+                  height: 10px;
+                  transition: all 0.3s ease;
+                }
+                .swiper-pagination-bullet-active {
+                  background: #C5A059 !important;
+                  width: 30px;
+                  border-radius: 5px;
+                  opacity: 1 !important;
+                }
+              `}</style>
         </section>
     );
 };

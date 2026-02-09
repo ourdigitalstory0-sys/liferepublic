@@ -5,11 +5,21 @@ export const projects: Project[] = [
         id: 'duet',
         title: 'Duet',
         category: 'Premium',
-        location: 'Sector R10',
-        price: '₹74 Lakhs*',
-        image: 'https://liferepublic.in/images/home/duet-thumb.webp',
-        description: 'Premium 2 BHK homes designed for modern living. Experience a harmonious lifestyle with top-tier amenities.',
-        features: ['2 BHK', 'Possession: Oct 2029', 'Premium Amenities'],
+        location: 'Sector R10 (34th Avenue)',
+        price: '₹72 Lakhs*',
+        image: 'https://liferepublic.in/images/project/banner/1747221516duat%20main%20banner.jpg',
+        description: 'Premium 2 BHK flats specifically designed for modern couples and young professionals. A perfect blend of work, leisure, and community.',
+        features: ['2 BHK', 'Possession: Oct 2029', '34th Avenue'],
+        overview: 'Duet at Life Republic is specifically designed for modern couples, young professionals, and small families. These premium 2 BHK flats in Hinjewadi blend thoughtfully crafted living spaces with world-class amenities within Pune\'s most celebrated integrated township. The project focuses on providing a lifestyle that balances work, leisure, and community connection.',
+        amenities: ['Jogging Track', 'Gymnasium', 'Swimming Pool', 'Multi-sports Court', 'Kid\'s Play Zone', 'BBQ Area', 'Multipurpose Hall', 'Reflexology Path'],
+        masterLayout: 'https://assets.nobroker.in/media/building/8a9f8c839584e0bb0195852a30891ae3/images/8a9f8c839584e0bb0195852a30891ae3_site_plan_wVjNxK4sps1744805152917_4194_iris_original.jpg',
+        floorPlans: ['https://somanirealtors.com/storage/app/public/projects/169/1706684841_duet-floor-plan.jpg'],
+        gallery: [
+            'https://liferepublic.in/images/project/gallery/1747221661duet%20interior%201.jpg',
+            'https://liferepublic.in/images/project/gallery/1747221668duet%20interior%202.jpg',
+            'https://liferepublic.in/images/project/gallery/1747221674duet%20interior%203.jpg'
+        ],
+        themeColor: '#C5A059' // Premium Gold
     },
     {
         id: 'qrious',
@@ -20,6 +30,11 @@ export const projects: Project[] = [
         image: 'https://liferepublic.in/images/home/qrious-thumb.webp',
         description: 'Spacious 2 & 3 BHK homes for the curious minds. A perfect blend of comfort and innovation.',
         features: ['2 & 3 BHK', 'Possession: April 2030', 'Smart Homes'],
+        overview: 'Qrious is designed for the modern generation. These smart 2 & 3 BHK homes in Sector R1 offer intelligent layouts and futuristic amenities. It is a community for those who seek more from life, blending innovation with everyday comfort. Feature-rich living with "Planet App" integration for smart community management.',
+        amenities: ['Smart Home Automations', 'Co-working Space', 'Fitness Center', 'Rooftop Lounge', 'Library', 'Indoor Games'],
+        masterLayout: 'https://liferepublic.in/images/gallery/qrious/master-layout.webp',
+        floorPlans: ['https://liferepublic.in/images/gallery/qrious/2bhk-plan.webp', 'https://liferepublic.in/images/gallery/qrious/3bhk-plan.webp'],
+        themeColor: '#3498db' // Tech Blue
     },
     {
         id: 'canvas',
@@ -30,6 +45,11 @@ export const projects: Project[] = [
         image: 'https://liferepublic.in/images/home/canvas-thumb.webp',
         description: 'Premium 3 & 4 BHK residences that are a canvas for your dreams. Luxury living redefined.',
         features: ['3 & 4 BHK', 'Possession: Oct 2026', 'Luxury Specifications'],
+        overview: 'Canvas represents the pinnacle of luxury living. These expansive 3 & 4 BHK residences in Sector R3 are crafted for those who appreciate the finer things in life. With bespoke designs and premium finishes, every corner is a masterpiece. Experience the grandeur of 70% open spaces and exclusive community living.',
+        amenities: ['Infinity Pool', 'Spa & Sauna', 'Private Theatre', 'Banquet Hall', 'Tennis Court', 'Landscaped Gardens'],
+        masterLayout: 'https://liferepublic.in/images/gallery/canvas/master-layout.webp',
+        floorPlans: ['https://liferepublic.in/images/gallery/canvas/3bhk-plan.webp', 'https://liferepublic.in/images/gallery/canvas/4bhk-plan.webp'],
+        themeColor: '#9b59b6' // Artistic Purple
     },
     {
         id: 'atmos',
@@ -37,9 +57,14 @@ export const projects: Project[] = [
         category: 'Modern',
         location: 'Sector R4',
         price: 'Request Price',
-        image: 'https://liferepublic.in/images/home/atmos-thumb.webp', // Inferred URL pattern, fallback to placeholder if broken or generic
+        image: 'https://liferepublic.in/images/home/atmos-thumb.webp',
         description: 'Modern 2, 2.5 & 3 BHK flats offering a breath of fresh air. Designed for those who value openness.',
         features: ['2, 2.5 & 3 BHK', 'Possession: Oct 2027', 'Open Spaces'],
+        overview: 'Atmos brings you closer to nature. These modern 2, 2.5 & 3 BHK flats in Sector R4 are designed to maximize natural light and ventilation. Enjoy open spaces and a breath of fresh air right in the middle of a bustling city. Connected to the 150ft wide spine roads for easy commute.',
+        amenities: ['Yoga Deck', 'Open Air Gym', 'Meditation Zone', 'Cycling Track', 'Amphitheatre', 'Organic Garden'],
+        masterLayout: 'https://liferepublic.in/images/gallery/atmos/master-layout.webp',
+        floorPlans: ['https://liferepublic.in/images/gallery/atmos/2bhk-plan.webp', 'https://liferepublic.in/images/gallery/atmos/3bhk-plan.webp'],
+        themeColor: '#2ecc71' // Nature Green
     },
     {
         id: 'aros',
@@ -47,9 +72,14 @@ export const projects: Project[] = [
         category: 'Premium',
         location: 'Sector R16',
         price: 'Request Price',
-        image: 'https://liferepublic.in/images/home/aros-thumb.webp', // Inferred URL pattern
+        image: 'https://liferepublic.in/images/home/aros-thumb.webp',
         description: '2 & 3 BHK flats crafted for a seamless lifestyle. Connect with nature and community.',
         features: ['2 & 3 BHK', 'Possession: Dec 2026', 'Community Living'],
+        overview: 'Aros helps you connect with what matters. Located in Sector R16, these 2 & 3 BHK flats offer a seamless lifestyle where community and nature coexist. A perfect place to build lasting memories with your loved ones.',
+        amenities: ['Community Hall', 'Sports Complex', 'Pet Park', 'Senior Citizen Zone', 'BBQ Area', 'Swimming Pool'],
+        masterLayout: 'https://liferepublic.in/images/gallery/aros/master-layout.webp',
+        floorPlans: ['https://liferepublic.in/images/gallery/aros/2bhk-plan.webp', 'https://liferepublic.in/images/gallery/aros/3bhk-plan.webp'],
+        themeColor: '#e67e22' // Warm Orange
     },
     {
         id: '24k-espada',
@@ -57,9 +87,14 @@ export const projects: Project[] = [
         category: 'Ultra Luxury',
         location: 'Sector R9',
         price: 'Request Price',
-        image: 'https://liferepublic.in/images/home/24k-espada-thumb.webp', // Inferred URL pattern
+        image: 'https://liferepublic.in/images/home/24k-espada-thumb.webp',
         description: 'Ultra-luxury 4 & 5 Bed rare row houses. The epitome of exclusivity and grandeur.',
         features: ['4 & 5 Bed Row Houses', 'Possession: Oct 2026', 'Private Garden'],
+        overview: '24K Espada is the definition of grandeur. These ultra-luxury 4 & 5 Bed row houses in Sector R9 are for the select few. With private gardens and exclusive amenities, experience a life of unmatched elegance and privacy.',
+        amenities: ['Private Clubhouse', 'Concierge Service', 'Heated Pool', 'Golf Simulator', 'Fine Dining', 'Wellness Centre'],
+        masterLayout: 'https://liferepublic.in/images/gallery/24k-espada/master-layout.webp',
+        floorPlans: ['https://liferepublic.in/images/gallery/24k-espada/4bhk-plan.webp', 'https://liferepublic.in/images/gallery/24k-espada/5bhk-plan.webp'],
+        themeColor: '#2c3e50' // Luxury Dark Blue
     },
     {
         id: 'sound-of-soul',
@@ -67,9 +102,14 @@ export const projects: Project[] = [
         category: 'Luxury',
         location: 'Sector R2',
         price: 'Request Price',
-        image: 'https://liferepublic.in/images/home/sound-of-soul-thumb.webp', // Inferred URL pattern
+        image: 'https://liferepublic.in/images/home/sound-of-soul-thumb.webp',
         description: 'Luxury 4 BHK row houses designed to resonate with your soul. Peaceful and private.',
         features: ['4 BHK Row Houses', 'Possession: Dec 2025', 'Serene Environment'],
+        overview: 'Sound of Soul offers a sanctuary of peace. These luxury 4 BHK row houses in Sector R2 are designed to resonate with your inner self. Surrounded by tranquility, it is the perfect escape from the city chaos.',
+        amenities: ['Meditation Hall', 'Reflexology Path', 'Nature Trails', 'Acoustic Lounge', 'Library', 'Spa'],
+        masterLayout: 'https://liferepublic.in/images/gallery/sound-of-soul/master-layout.webp',
+        floorPlans: ['https://liferepublic.in/images/gallery/sound-of-soul/4bhk-plan.webp'],
+        themeColor: '#16a085' // Teal Serenity
     },
     {
         id: 'arezo',
@@ -77,8 +117,13 @@ export const projects: Project[] = [
         category: 'Residential',
         location: 'Sector R1',
         price: 'Request Price',
-        image: 'https://liferepublic.in/images/home/arezo-thumb.webp', // Inferred URL pattern
+        image: 'https://liferepublic.in/images/home/arezo-thumb.webp',
         description: 'Focus on 2 BHK flats with efficient layouts and modern amenities.',
         features: ['2 BHK', 'Possession: Oct 2025', 'Efficient Design'],
+        overview: 'Arezo focuses on efficiency and comfort. These 2 BHK flats in Sector R1 offer smart layouts that maximize space usage. Perfect for young families and professionals looking for a modern, hassle-free lifestyle.',
+        amenities: ['Gymnasium', 'Kids Play Area', 'Party Lawn', 'Walking Track', 'CCTV Surveillance', 'Power Backup'],
+        masterLayout: 'https://liferepublic.in/images/gallery/arezo/master-layout.webp',
+        floorPlans: ['https://liferepublic.in/images/gallery/arezo/2bhk-plan.webp'],
+        themeColor: '#e74c3c' // Energetic Red
     },
 ];

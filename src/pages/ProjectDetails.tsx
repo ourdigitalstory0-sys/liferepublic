@@ -1,18 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MapPin, CheckCircle, Phone, MessageSquare } from 'lucide-react';
 import { Button } from '../components/ui/Button';
-import { projects } from '../data/projects';
+import { api } from '../services/api';
+import type { Project } from '../lib/types';
+import { SimilarProjects } from '../components/sections/SimilarProjects';
 
 const ProjectDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const project = projects.find((p) => p.id === id);
+    const [project, setProject] = useState<Project | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        const loadProject = async () => {
+            if (!id) return;
+            try {
+                const data = await api.projects.getById(id);
+                if (data) {
+                    setProject(data);
+                } else {
+                    // Fallback
+                    const { projects: staticProjects } = await import('../data/projects');
+                    const found = staticProjects.find(p => p.id === id);
+                    if (found) setProject(found);
+                }
+            } catch (error) {
+                console.error('Failed to load project:', error);
+                const { projects: staticProjects } = await import('../data/projects');
+                const found = staticProjects.find(p => p.id === id);
+                if (found) setProject(found);
+            } finally {
+                setLoading(false);
+            }
+        };
+        loadProject();
     }, [id]);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent"></div>
+            </div>
+        );
+    }
 
     if (!project) {
         return (
@@ -24,6 +57,9 @@ const ProjectDetails: React.FC = () => {
             </div>
         );
     }
+
+    // Default theme color if not present
+    const themeColor = project.themeColor || '#C5A059';
 
     return (
         <div className="pt-20">
@@ -41,12 +77,15 @@ const ProjectDetails: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
                         >
-                            <span className="bg-accent px-4 py-1 text-sm font-semibold rounded-full mb-4 inline-block">
+                            <span
+                                className="px-4 py-1 text-sm font-semibold rounded-full mb-4 inline-block shadow-lg border border-white/20 backdrop-blur-sm"
+                                style={{ backgroundColor: themeColor }}
+                            >
                                 {project.category}
                             </span>
-                            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-4">{project.title}</h1>
-                            <p className="text-xl md:text-2xl flex items-center justify-center gap-2">
-                                <MapPin size={24} /> {project.location}
+                            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-4 text-shadow-lg">{project.title}</h1>
+                            <p className="text-xl md:text-2xl flex items-center justify-center gap-2 text-shadow">
+                                <MapPin size={24} style={{ color: themeColor }} /> {project.location}
                             </p>
                         </motion.div>
                     </div>
@@ -66,8 +105,8 @@ const ProjectDetails: React.FC = () => {
                         <h3 className="text-2xl font-serif font-bold mb-6 text-secondary">Key Features</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                             {project.features.map((feature, index) => (
-                                <div key={index} className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg border border-gray-100">
-                                    <CheckCircle className="text-accent" size={24} />
+                                <div key={index} className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+                                    <CheckCircle size={24} style={{ color: themeColor }} />
                                     <span className="text-gray-700 font-medium">{feature}</span>
                                 </div>
                             ))}
@@ -81,9 +120,16 @@ const ProjectDetails: React.FC = () => {
                             </div>
                             <div className="flex justify-between items-center py-3">
                                 <span className="text-gray-600">Starting Price</span>
-                                <span className="font-bold text-accent text-lg">{project.price}</span>
+                                <span className="font-bold text-lg" style={{ color: themeColor }}>{project.price}</span>
                             </div>
                         </div>
+
+                        {/* Similar Projects Section */}
+                        {project.id && (
+                            <div className="mt-16">
+                                <SimilarProjects currentId={project.id} />
+                            </div>
+                        )}
                     </div>
 
                     {/* Sidebar / Contact Form */}
@@ -93,17 +139,32 @@ const ProjectDetails: React.FC = () => {
                             <form className="space-y-4">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                                    <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-accent focus:border-accent" placeholder="John Doe" />
+                                    <input
+                                        type="text"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
+                                        style={{ '--tw-ring-color': themeColor } as React.CSSProperties}
+                                        placeholder="John Doe"
+                                    />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                                    <input type="tel" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-accent focus:border-accent" placeholder="+91 98765 43210" />
+                                    <input
+                                        type="tel"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
+                                        style={{ '--tw-ring-color': themeColor } as React.CSSProperties}
+                                        placeholder="+91 98765 43210"
+                                    />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Email (Optional)</label>
-                                    <input type="email" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-accent focus:border-accent" placeholder="john@example.com" />
+                                    <input
+                                        type="email"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
+                                        style={{ '--tw-ring-color': themeColor } as React.CSSProperties}
+                                        placeholder="john@example.com"
+                                    />
                                 </div>
-                                <Button className="w-full">
+                                <Button className="w-full" style={{ backgroundColor: themeColor }}>
                                     Request Call Back
                                 </Button>
                             </form>

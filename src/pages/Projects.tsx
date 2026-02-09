@@ -1,10 +1,30 @@
-import React, { useEffect } from 'react';
-import { projects } from '../data/projects';
+import React, { useEffect, useState } from 'react';
+import { api } from '../services/api';
+import type { Project } from '../lib/types';
 import { ProjectCard } from '../components/ui/ProjectCard';
 
 const Projects: React.FC = () => {
+    const [allProjects, setAllProjects] = useState<Project[]>([]);
+
     useEffect(() => {
         window.scrollTo(0, 0);
+        const loadProjects = async () => {
+            try {
+                const data = await api.projects.getAll();
+                if (data && data.length > 0) {
+                    setAllProjects(data);
+                } else {
+                    // Fallback
+                    const { projects: staticProjects } = await import('../data/projects');
+                    setAllProjects(staticProjects);
+                }
+            } catch (error) {
+                console.error('Failed to load projects:', error);
+                const { projects: staticProjects } = await import('../data/projects');
+                setAllProjects(staticProjects);
+            }
+        };
+        loadProjects();
     }, []);
 
     return (
@@ -19,7 +39,7 @@ const Projects: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project) => (
+                    {allProjects.map((project) => (
                         <ProjectCard key={project.id} project={project} />
                     ))}
                 </div>
