@@ -41,8 +41,9 @@ async function prerender() {
 
     // Start Static Server (serve)
     const previewServer = spawn('npx', ['serve', '-s', 'dist', '-l', '4173'], {
-        stdio: 'pipe', // Capture output
+        stdio: 'pipe',
         shell: true,
+        detached: true, // Critical: Allows killing the entire process tree (shell + serve)
     });
 
     previewServer.stdout.on('data', (data) => console.log(`[Server]: ${data}`));
@@ -69,8 +70,8 @@ async function prerender() {
     const isServerUp = await waitForServer();
     if (!isServerUp) {
         console.error('❌ Server failed to start within timeout. Prerendering skipped (falling back to SPA).');
-        previewServer.kill();
-        process.exit(0); // Soft fail: Deploy SPA even if prerender fails
+        if (previewServer.pid) process.kill(-previewServer.pid); // Kill process group
+        process.exit(0);
     }
 
     let browser;
@@ -91,8 +92,8 @@ async function prerender() {
         });
     } catch (error) {
         console.error('❌ Failed to launch Puppeteer. Prerendering skipped (falling back to SPA).', error);
-        previewServer.kill();
-        process.exit(0); // Soft fail
+        if (previewServer.pid) process.kill(-previewServer.pid);
+        process.exit(0);
     }
 
     try {
@@ -137,7 +138,16 @@ async function prerender() {
         console.error('❌ Critical error during rendering loop:', e);
     } finally {
         if (browser) await browser.close();
-        previewServer.kill();
+
+        console.log('🛑 Stopping server...');
+        if (previewServer.pid) {
+            try {
+                process.kill(-previewServer.pid); // Kill the process group
+            } catch (e) {
+                console.error('⚠️ Failed to kill server process group:', e);
+            }
+        }
+
         console.log('✅ Prerendering Finished (or skipped gracefully).');
         process.exit(0);
     }
