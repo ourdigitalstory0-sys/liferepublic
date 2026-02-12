@@ -31,7 +31,7 @@ export const EMICalculator: React.FC = () => {
     return (
         <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
             <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-primary/10 rounded-lg text-primary">
+                <div className="p-3 bg-accent/10 rounded-lg text-accent">
                     <Calculator size={24} />
                 </div>
                 <div>
@@ -45,7 +45,7 @@ export const EMICalculator: React.FC = () => {
                 <div>
                     <div className="flex justify-between mb-2">
                         <label className="text-sm font-medium text-gray-700">Loan Amount</label>
-                        <span className="text-sm font-bold text-primary">{formatCurrency(loanAmount)}</span>
+                        <span className="text-sm font-bold text-accent">{formatCurrency(loanAmount)}</span>
                     </div>
                     <input
                         type="range"
@@ -54,7 +54,7 @@ export const EMICalculator: React.FC = () => {
                         step="100000"
                         value={loanAmount}
                         onChange={(e) => setLoanAmount(Number(e.target.value))}
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-accent"
                     />
                 </div>
 
@@ -62,7 +62,7 @@ export const EMICalculator: React.FC = () => {
                 <div>
                     <div className="flex justify-between mb-2">
                         <label className="text-sm font-medium text-gray-700">Interest Rate (% p.a)</label>
-                        <span className="text-sm font-bold text-primary">{interestRate}%</span>
+                        <span className="text-sm font-bold text-accent">{interestRate}%</span>
                     </div>
                     <input
                         type="range"
@@ -71,7 +71,7 @@ export const EMICalculator: React.FC = () => {
                         step="0.1"
                         value={interestRate}
                         onChange={(e) => setInterestRate(Number(e.target.value))}
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-accent"
                     />
                 </div>
 
@@ -79,7 +79,7 @@ export const EMICalculator: React.FC = () => {
                 <div>
                     <div className="flex justify-between mb-2">
                         <label className="text-sm font-medium text-gray-700">Loan Tenure (Years)</label>
-                        <span className="text-sm font-bold text-primary">{loanTenure} Years</span>
+                        <span className="text-sm font-bold text-accent">{loanTenure} Years</span>
                     </div>
                     <input
                         type="range"
@@ -88,7 +88,7 @@ export const EMICalculator: React.FC = () => {
                         step="1"
                         value={loanTenure}
                         onChange={(e) => setLoanTenure(Number(e.target.value))}
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-accent"
                     />
                 </div>
 
@@ -96,7 +96,7 @@ export const EMICalculator: React.FC = () => {
                 <div className="bg-gray-50 p-4 rounded-lg border border-gray-100 mt-6">
                     <p className="text-sm text-gray-500 mb-1">Monthly EMI</p>
                     <div className="flex items-center gap-2 text-2xl font-bold text-gray-800">
-                        <IndianRupee size={24} className="text-primary" />
+                        <IndianRupee size={24} className="text-accent" />
                         {emi.toLocaleString('en-IN')}
                     </div>
                 </div>
