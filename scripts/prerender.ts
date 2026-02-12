@@ -41,26 +41,53 @@ async function prerender() {
 
     // Start Static Server (serve)
     const previewServer = spawn('npx', ['serve', '-s', 'dist', '-l', '4173'], {
-        stdio: 'inherit',
+        stdio: 'pipe', // Capture output
         shell: true,
     });
 
-    // Give server time to start
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    previewServer.stdout.on('data', (data) => console.log(`[Server]: ${data}`));
+    previewServer.stderr.on('data', (data) => console.error(`[Server Error]: ${data}`));
+
+    // Wait for server to be ready
+    console.log('⏳ Waiting for server to start...');
+    const waitForServer = async (retries = 20) => {
+        for (let i = 0; i < retries; i++) {
+            try {
+                const response = await fetch(DOMAIN);
+                if (response.ok) {
+                    console.log('✅ Server is up!');
+                    return true;
+                }
+            } catch (e) {
+                // Ignore error and retry
+            }
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+        return false;
+    };
+
+    const isServerUp = await waitForServer();
+    if (!isServerUp) {
+        console.error('❌ Server failed to start within timeout.');
+        previewServer.kill();
+        process.exit(1);
+    }
 
     let browser;
     try {
+        console.log('🚀 Launching Puppeteer...');
         browser = await puppeteer.launch({
             headless: true,
+            dumpio: true, // Log browser output
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage', // Critical for CI environments with limited shared memory
+                '--disable-dev-shm-usage',
                 '--disable-gpu',
                 '--no-zygote',
-                '--single-process'
+                '--single-process',
+                '--disable-extensions'
             ],
-            // executablePath: process.env.CHROME_BIN || undefined // Optional: use system chrome if available
         });
     } catch (error) {
         console.error('❌ Failed to launch Puppeteer:', error);
@@ -68,61 +95,59 @@ async function prerender() {
         process.exit(1);
     }
 
-    for (const route of routes) {
-        const page = await browser.newPage();
-        try {
-            // Set viewport for consistent rendering
-            await page.setViewport({ width: 1280, height: 800 });
+    try {
+        for (const route of routes) {
+            const page = await browser.newPage();
+            try {
+                // Set viewport
+                await page.setViewport({ width: 1280, height: 800 });
 
-            const url = `${DOMAIN}${route}`;
-            console.log(`Rendering: ${route}`);
+                const url = `${DOMAIN}${route}`;
+                console.log(`Rendering: ${route}`);
 
-            await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
+                await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 }); // Increased timeout
 
-            // Wait for some selector to ensure app is mounted (e.g., #root or title)
-            await page.waitForSelector('#root');
+                await page.waitForSelector('#root', { timeout: 10000 });
 
-            // Helper to fix relative paths for production
-            await page.evaluate(() => {
-                // Fix scripts
-                document.querySelectorAll('script[src^="/"]').forEach((el) => {
-                    el.setAttribute('src', 'https://life-republic.in' + el.getAttribute('src'));
+                // Helper to fix relative paths
+                await page.evaluate(() => {
+                    document.querySelectorAll('script[src^="/"]').forEach((el) => {
+                        el.setAttribute('src', 'https://life-republic.in' + el.getAttribute('src'));
+                    });
+                    document.querySelectorAll('link[href^="/"]').forEach((el) => {
+                        el.setAttribute('href', 'https://life-republic.in' + el.getAttribute('href'));
+                    });
+                    document.querySelectorAll('img[src^="/"]').forEach((el) => {
+                        el.setAttribute('src', 'https://life-republic.in' + el.getAttribute('src'));
+                    });
                 });
-                // Fix links
-                document.querySelectorAll('link[href^="/"]').forEach((el) => {
-                    el.setAttribute('href', 'https://life-republic.in' + el.getAttribute('href'));
-                });
-                // Fix images
-                document.querySelectorAll('img[src^="/"]').forEach((el) => {
-                    el.setAttribute('src', 'https://life-republic.in' + el.getAttribute('src'));
-                });
-            });
 
-            const content = await page.content();
+                const content = await page.content();
 
-            // Determine output path
-            const filePath = route === '/'
-                ? path.join(OUT_DIR, 'index.html')
-                : path.join(OUT_DIR, route, 'index.html');
+                const filePath = route === '/'
+                    ? path.join(OUT_DIR, 'index.html')
+                    : path.join(OUT_DIR, route, 'index.html');
 
-            const dir = path.dirname(filePath);
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir, { recursive: true });
+                const dir = path.dirname(filePath);
+                if (!fs.existsSync(dir)) {
+                    fs.mkdirSync(dir, { recursive: true });
+                }
+
+                fs.writeFileSync(filePath, content);
+
+            } catch (e) {
+                console.error(`⚠️ Failed to render ${route}:`, e);
+                // Don't fail the whole build for one route, but log it.
+            } finally {
+                await page.close();
             }
-
-            fs.writeFileSync(filePath, content);
-
-        } catch (e) {
-            console.error(`Failed to render ${route}:`, e);
-        } finally {
-            await page.close();
         }
+    } finally {
+        if (browser) await browser.close();
+        previewServer.kill();
+        console.log('✅ Prerendering Finished.');
+        process.exit(0);
     }
-
-    await browser.close();
-    previewServer.kill();
-    console.log('✅ Prerendering Complete!');
-    process.exit(0);
 }
 
 prerender();
