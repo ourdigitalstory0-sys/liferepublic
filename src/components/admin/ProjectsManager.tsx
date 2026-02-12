@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../../services/api';
-import type { Project } from '../../lib/types';
+import type { Project, Amenity } from '../../lib/types';
 import { Button } from '../ui/Button';
-import { Plus, Trash2, Edit2, Save, X, Image as ImageIcon, Check } from 'lucide-react';
+import { Plus, Trash2, Edit2, Save, X, Image as ImageIcon, Check, Star } from 'lucide-react';
 
 export const ProjectsManager: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
+    const [globalAmenities, setGlobalAmenities] = useState<Amenity[]>([]);
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState<'basic' | 'details' | 'media' | 'gallery' | 'plans' | 'amenities'>('basic');
@@ -30,8 +31,12 @@ export const ProjectsManager: React.FC = () => {
 
     const loadProjects = async () => {
         try {
-            const data = await api.projects.getAll();
+            const [data, amenitiesData] = await Promise.all([
+                api.projects.getAll(),
+                api.amenities.getAll()
+            ]);
             setProjects(data);
+            setGlobalAmenities(amenitiesData);
         } catch (error) {
             console.error('Error loading projects:', error);
         } finally {
@@ -84,7 +89,7 @@ export const ProjectsManager: React.FC = () => {
     };
 
     // Helper for input changes
-    const handleChange = (field: keyof Project, value: any) => {
+    const handleChange = (field: keyof Project, value: Project[keyof Project]) => {
         setFormData({ ...formData, [field]: value });
     };
 
@@ -195,6 +200,15 @@ export const ProjectsManager: React.FC = () => {
                                     />
                                 </div>
                             </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">RERA Number</label>
+                                <input
+                                    className="w-full px-3 py-2 border rounded-md uppercase"
+                                    value={formData.rera || ''}
+                                    onChange={e => handleChange('rera', e.target.value)}
+                                    placeholder="e.g. P52100031799"
+                                />
+                            </div>
                         </div>
                     )}
 
@@ -258,6 +272,7 @@ export const ProjectsManager: React.FC = () => {
                                                         const url = await api.upload.image(e.target.files[0], 'projects');
                                                         handleChange('image', url);
                                                     } catch (err) {
+                                                        console.error(err);
                                                         alert('Upload failed');
                                                     }
                                                 }
@@ -279,22 +294,43 @@ export const ProjectsManager: React.FC = () => {
                         <div className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium mb-2">Project Gallery</label>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                                    {formData.gallery?.map((url, index) => (
-                                        <div key={index} className="relative group rounded-lg overflow-hidden h-32 border bg-gray-100">
-                                            <img src={url} alt="" className="w-full h-full object-cover" />
-                                            <button
-                                                onClick={() => {
-                                                    const newGallery = formData.gallery?.filter((_, i) => i !== index);
-                                                    handleChange('gallery', newGallery);
-                                                }}
-                                                className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                                            >
-                                                <X size={14} />
-                                            </button>
-                                        </div>
-                                    ))}
-                                    <label className="border-2 border-dashed border-gray-300 rounded-lg h-32 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                    {formData.gallery?.map((item, index) => {
+                                        const url = typeof item === 'string' ? item : item.url;
+                                        const alt = typeof item === 'string' ? '' : item.alt || '';
+
+                                        return (
+                                            <div key={index} className="relative group rounded-lg border bg-gray-50 p-2">
+                                                <div className="relative h-32 w-full overflow-hidden rounded mb-2 bg-gray-200">
+                                                    <img src={url} alt={alt} className="w-full h-full object-cover" />
+                                                    <button
+                                                        onClick={() => {
+                                                            const newGallery = formData.gallery?.filter((_, i) => i !== index);
+                                                            handleChange('gallery', newGallery);
+                                                        }}
+                                                        className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                                    >
+                                                        <X size={14} />
+                                                    </button>
+                                                </div>
+                                                <div className="space-y-1">
+                                                    <label className="text-xs font-medium text-gray-500 uppercase">Alt Text</label>
+                                                    <input
+                                                        type="text"
+                                                        value={alt}
+                                                        placeholder="Describe image for SEO"
+                                                        className="w-full text-xs px-2 py-1 border rounded"
+                                                        onChange={(e) => {
+                                                            const newGallery = [...(formData.gallery || [])];
+                                                            newGallery[index] = { url, alt: e.target.value };
+                                                            handleChange('gallery', newGallery);
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                    <label className="border-2 border-dashed border-gray-300 rounded-lg h-full min-h-[180px] flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors">
                                         <Plus className="text-gray-400 mb-1" />
                                         <span className="text-xs text-gray-500">Add Image</span>
                                         <input
@@ -303,22 +339,26 @@ export const ProjectsManager: React.FC = () => {
                                             multiple
                                             onChange={async (e) => {
                                                 if (e.target.files?.length) {
-                                                    const newUrls = [];
+                                                    const newItems = [];
                                                     for (let i = 0; i < e.target.files.length; i++) {
                                                         try {
                                                             const url = await api.upload.image(e.target.files[i], 'projects');
-                                                            newUrls.push(url);
+                                                            // Add as object with empty alt
+                                                            newItems.push({ url, alt: '' });
                                                         } catch (err) {
                                                             console.error(err);
                                                         }
                                                     }
-                                                    handleChange('gallery', [...(formData.gallery || []), ...newUrls]);
+                                                    handleChange('gallery', [...(formData.gallery || []), ...newItems]);
                                                 }
                                             }}
                                             accept="image/*"
                                         />
                                     </label>
                                 </div>
+                                <p className="text-xs text-gray-500">
+                                    Tip: Add descriptive "Alt Text" for each image to improve SEO ranking.
+                                </p>
                             </div>
                         </div>
                     )}
@@ -349,7 +389,7 @@ export const ProjectsManager: React.FC = () => {
                                                     try {
                                                         const url = await api.upload.image(e.target.files[0], 'projects');
                                                         handleChange('masterLayout', url);
-                                                    } catch (err) {
+                                                    } catch {
                                                         alert('Upload failed');
                                                     }
                                                 }
@@ -368,7 +408,7 @@ export const ProjectsManager: React.FC = () => {
                                 <label className="block text-sm font-medium mb-4">Floor Plans</label>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {/* Existing Plans */}
-                                    {formData.floorPlans?.map((plan: any, index: number) => (
+                                    {formData.floorPlans?.map((plan: string, index: number) => (
                                         <div key={index} className="flex gap-4 p-3 border rounded-lg bg-gray-50">
                                             <div className="w-24 h-24 bg-gray-200 rounded overflow-hidden flex-shrink-0">
                                                 {typeof plan === 'string' ? (
@@ -429,8 +469,56 @@ export const ProjectsManager: React.FC = () => {
                     {/* AMENITIES TAB */}
                     {activeTab === 'amenities' && (
                         <div className="space-y-6">
+                            {/* Global Amenities Selection */}
+                            <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                                <h4 className="text-sm font-bold text-blue-800 mb-3 flex items-center gap-2">
+                                    <Star size={16} /> Select Global Amenities
+                                </h4>
+                                {loading ? (
+                                    <div className="text-sm text-gray-500">Loading details...</div>
+                                ) : (
+                                    <div className="flex flex-wrap gap-2">
+                                        {globalAmenities.map(amenity => {
+                                            const isSelected = formData.amenities?.includes(amenity.title);
+                                            return (
+                                                <button
+                                                    key={amenity.id}
+                                                    onClick={() => {
+                                                        const current = formData.amenities || [];
+                                                        let newAmenities;
+                                                        if (isSelected) {
+                                                            newAmenities = current.filter(a => a !== amenity.title);
+                                                        } else {
+                                                            newAmenities = [...current, amenity.title];
+                                                        }
+                                                        handleChange('amenities', newAmenities);
+                                                        setAmenitiesInput(newAmenities.join(', '));
+                                                    }}
+                                                    className={`px-3 py-2 rounded-md text-sm border transition-all flex items-center gap-2 ${isSelected ? 'bg-blue-600 text-white border-blue-600 shadow-sm' : 'bg-white text-gray-700 border-gray-200 hover:border-blue-300'}`}
+                                                >
+                                                    {isSelected && <Check size={14} />}
+                                                    {amenity.title}
+                                                </button>
+                                            );
+                                        })}
+                                        {globalAmenities.length === 0 && (
+                                            <p className="text-sm text-gray-500 italic">No global amenities found. Create them in the Amenities tab first.</p>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="relative">
+                                <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                                    <div className="w-full border-t border-gray-300"></div>
+                                </div>
+                                <div className="relative flex justify-center">
+                                    <span className="px-2 bg-white text-sm text-gray-500">OR / AND</span>
+                                </div>
+                            </div>
+
                             <div>
-                                <label className="block text-sm font-medium mb-2">Amenities (Comma separated)</label>
+                                <label className="block text-sm font-medium mb-2">Custom Amenities (Comma separated)</label>
                                 <textarea
                                     className="w-full px-3 py-2 border rounded-md h-32"
                                     value={amenitiesInput}
@@ -440,7 +528,7 @@ export const ProjectsManager: React.FC = () => {
                                     }}
                                     placeholder="Swimming Pool, Gym, Clubhouse..."
                                 />
-                                <p className="text-xs text-gray-500 mt-2">Enter amenities separated by commas.</p>
+                                <p className="text-xs text-gray-500 mt-2">You can manually type amenities here or use the selector above.</p>
                             </div>
 
                             <div className="border-t pt-6">

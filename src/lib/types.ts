@@ -12,7 +12,8 @@ export interface Project {
     masterLayout?: string;
     floorPlans?: string[];
     status?: string; // Added for DB
-    gallery?: string[]; // Added for DB
+    gallery?: (string | { url: string; alt?: string })[]; // Added for DB
+    rera?: string; // Added for RERA compliance
     themeColor?: string; // Added for UI Theme Logic
 }
 
@@ -35,4 +36,14 @@ export interface Lead {
     project_id?: string;
     message?: string;
     status: 'New' | 'Contacted' | 'Closed';
+}
+
+export interface Amenity {
+    id: number;
+    title: string;
+    description: string;
+    icon: string;
+    image_url?: string;
+    order: number;
+    created_at?: string;
 }

@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { EMICalculator } from '../components/tools/EMICalculator';
+import { ROICalculator } from '../components/tools/ROICalculator';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MapPin, CheckCircle, Phone, MessageSquare } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { api } from '../services/api';
-import type { Project } from '../lib/types';
+import type { Project, Amenity } from '../lib/types';
+import { Star } from 'lucide-react';
+import { ICON_MAP } from '../lib/icons';
 import { SimilarProjects } from '../components/sections/SimilarProjects';
+import { SEO } from '../components/seo/SEO';
+import { Breadcrumbs } from '../components/ui/Breadcrumbs';
+import { ShareButtons } from '../components/ui/ShareButtons';
+import { generateSemanticKeywords, generateSemanticDescription, generateSemanticTitle } from '../lib/seo-utils';
+import { generateProjectSchema } from '../utils/schemaGenerator';
 
 const ProjectDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const [project, setProject] = useState<Project | null>(null);
+    const [globalAmenities, setGlobalAmenities] = useState<Amenity[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -18,9 +28,14 @@ const ProjectDetails: React.FC = () => {
         const loadProject = async () => {
             if (!id) return;
             try {
-                const data = await api.projects.getById(id);
-                if (data) {
-                    setProject(data);
+                const [projectData, amenitiesData] = await Promise.all([
+                    api.projects.getById(id),
+                    api.amenities.getAll().catch(() => [])
+                ]);
+
+                if (projectData) {
+                    setProject(projectData);
+                    setGlobalAmenities(amenitiesData);
                 } else {
                     // Fallback
                     const { projects: staticProjects } = await import('../data/projects');
@@ -61,13 +76,36 @@ const ProjectDetails: React.FC = () => {
     // Default theme color if not present
     const themeColor = project.themeColor || '#C5A059';
 
+    // Construct Schema using logic
+    const projectSchema = generateProjectSchema(project);
+
+    const seoContext = {
+        title: project.title,
+        category: project.category,
+        location: 'Hinjewadi', // Hardcoded as primary target
+        price: project.price
+    };
+
+    const dynamicTitle = generateSemanticTitle(seoContext);
+    const dynamicDesc = generateSemanticDescription(seoContext);
+    const dynamicKeywords = generateSemanticKeywords(seoContext);
+
     return (
         <div className="pt-20">
+            <Breadcrumbs />
+            <SEO
+                title={dynamicTitle}
+                description={dynamicDesc}
+                keywords={dynamicKeywords}
+                image={project.image}
+                canonical={`/projects/${project.id}`}
+                schema={projectSchema}
+            />
             {/* Project Hero */}
             <section className="relative h-[60vh] w-full">
                 <img
                     src={project.image}
-                    alt={project.title}
+                    alt={`Kolte Patil Life Republic - ${project.title}`}
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
@@ -112,6 +150,54 @@ const ProjectDetails: React.FC = () => {
                             ))}
                         </div>
 
+                        {/* Amenities Section */}
+                        {project.amenities && project.amenities.length > 0 && (
+                            <div className="mb-12">
+                                <h3 className="text-2xl font-serif font-bold mb-6 text-secondary">Amenities</h3>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    {project.amenities.map((amenityName, index) => {
+                                        const originalAmenity = globalAmenities.find(a => a.title === amenityName);
+                                        const IconComponent = originalAmenity?.icon ? ICON_MAP[originalAmenity.icon] : Star;
+                                        return (
+                                            <div key={index} className="flex flex-col items-center justify-center p-4 bg-white rounded-xl shadow-sm border border-gray-100 text-center gap-2 hover:border-accent/30 transition-colors">
+                                                {originalAmenity?.image_url ? (
+                                                    <img src={originalAmenity.image_url} alt={amenityName} className="w-10 h-10 object-cover rounded-full" />
+                                                ) : (
+                                                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
+                                                        {IconComponent ? <IconComponent size={20} /> : <Star size={20} />}
+                                                    </div>
+                                                )}
+                                                <span className="text-sm font-medium text-gray-700">{amenityName}</span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Gallery Section */}
+                        {project.gallery && project.gallery.length > 0 && (
+                            <div className="mb-12">
+                                <h3 className="text-2xl font-serif font-bold mb-6 text-secondary">Gallery</h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {project.gallery.map((item, index) => {
+                                        const url = typeof item === 'string' ? item : item.url;
+                                        const alt = typeof item === 'string' ? `Life Republic Project Image ${index + 1}` : item.alt || `Life Republic - ${project.title} Gallery`;
+
+                                        return (
+                                            <div key={index} className="relative h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
+                                                <img
+                                                    src={url}
+                                                    alt={alt}
+                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
                         <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
                             <h3 className="text-xl font-bold mb-4">Configuration & Pricing</h3>
                             <div className="flex justify-between items-center border-b border-gray-200 py-3">
@@ -121,6 +207,15 @@ const ProjectDetails: React.FC = () => {
                             <div className="flex justify-between items-center py-3">
                                 <span className="text-gray-600">Starting Price</span>
                                 <span className="font-bold text-lg" style={{ color: themeColor }}>{project.price}</span>
+                            </div>
+                        </div>
+
+                        {/* Financial Tools Section (New for Engagement) */}
+                        <div className="mt-12 mb-16">
+                            <h2 className="text-2xl font-serif font-bold text-gray-800 mb-8">Financial Planning Tools</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <EMICalculator />
+                                <ROICalculator />
                             </div>
                         </div>
 
@@ -136,55 +231,105 @@ const ProjectDetails: React.FC = () => {
                     <div className="lg:col-span-1">
                         <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 sticky top-24">
                             <h3 className="text-2xl font-serif font-bold mb-6 text-center">Enquire Now</h3>
-                            <form className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                                    <input
-                                        type="text"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
-                                        style={{ '--tw-ring-color': themeColor } as React.CSSProperties}
-                                        placeholder="John Doe"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                                    <input
-                                        type="tel"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
-                                        style={{ '--tw-ring-color': themeColor } as React.CSSProperties}
-                                        placeholder="+91 98765 43210"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Email (Optional)</label>
-                                    <input
-                                        type="email"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
-                                        style={{ '--tw-ring-color': themeColor } as React.CSSProperties}
-                                        placeholder="john@example.com"
-                                    />
-                                </div>
-                                <Button className="w-full" style={{ backgroundColor: themeColor }}>
-                                    Request Call Back
-                                </Button>
-                            </form>
+                            <ProjectEnquiryForm project={project} themeColor={themeColor} />
 
                             <div className="mt-8">
                                 <p className="text-center text-gray-500 mb-4 text-sm">Or connect instantly via</p>
                                 <div className="flex gap-4">
-                                    <Button variant="outline" className="flex-1 gap-2 border-green-500 text-green-600 hover:bg-green-50" onClick={() => window.open('https://wa.me/919999999999', '_blank')}>
+                                    <Button variant="outline" className="flex-1 gap-2 border-green-500 text-green-600 hover:bg-green-50" onClick={() => window.open('https://wa.me/917744009295', '_blank')}>
                                         <MessageSquare size={18} /> WhatsApp
                                     </Button>
-                                    <Button variant="outline" className="flex-1 gap-2" onClick={() => window.location.href = 'tel:+919999999999'}>
+                                    <Button variant="outline" className="flex-1 gap-2" onClick={() => window.location.href = 'tel:+917744009295'}>
                                         <Phone size={18} /> Call
                                     </Button>
                                 </div>
                             </div>
                         </div>
+
+                        <div className="mt-6 pt-6 border-t border-gray-100">
+                            <ShareButtons
+                                url={`/projects/${project.id}`}
+                                title={`Check out ${project.title} at Life Republic`}
+                                className="justify-center"
+                            />
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
+    );
+};
+
+const ProjectEnquiryForm: React.FC<{ project: Project; themeColor: string }> = ({ project, themeColor }) => {
+    const [formData, setFormData] = React.useState({
+        name: '',
+        phone: '',
+        email: ''
+    });
+    const [loading, setLoading] = React.useState(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            await api.leads.create({
+                name: formData.name,
+                phone: formData.phone,
+                email: formData.email,
+                project_id: project.id,
+                message: `Enquiry from Project Page: ${project.title}`
+            });
+            alert('Thank you! We will contact you shortly.');
+            setFormData({ name: '', phone: '', email: '' });
+        } catch (error) {
+            console.error(error);
+            alert('Something went wrong. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <form className="space-y-4" onSubmit={handleSubmit}>
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <input
+                    required
+                    type="text"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
+                    style={{ '--tw-ring-color': themeColor } as React.CSSProperties}
+                    placeholder="John Doe"
+                    value={formData.name}
+                    onChange={e => setFormData({ ...formData, name: e.target.value })}
+                />
+            </div>
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                <input
+                    required
+                    type="tel"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
+                    style={{ '--tw-ring-color': themeColor } as React.CSSProperties}
+                    placeholder="+91 77440 09295"
+                    value={formData.phone}
+                    onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                />
+            </div>
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email (Optional)</label>
+                <input
+                    type="email"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
+                    style={{ '--tw-ring-color': themeColor } as React.CSSProperties}
+                    placeholder="john@example.com"
+                    value={formData.email}
+                    onChange={e => setFormData({ ...formData, email: e.target.value })}
+                />
+            </div>
+            <Button className="w-full" disabled={loading} style={{ backgroundColor: themeColor }}>
+                {loading ? 'Submitting...' : 'Request Call Back'}
+            </Button>
+        </form>
     );
 };
 

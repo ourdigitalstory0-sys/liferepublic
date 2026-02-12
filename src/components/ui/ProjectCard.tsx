@@ -8,9 +8,10 @@ import { useNavigate } from 'react-router-dom';
 
 interface ProjectCardProps {
     project: Project;
+    priority?: boolean;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = false }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<'overview' | 'amenities' | 'plans'>('overview');
     const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -18,6 +19,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
     // Default accent color if themeColor is not provided
     const themeColor = project.themeColor || '#C5A059';
+
+    console.log('ProjectCard:', project.title, { masterLayout: project.masterLayout, floorPlans: project.floorPlans });
 
     return (
         <>
@@ -42,7 +45,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 <div className="relative h-72 overflow-hidden">
                     <img
                         src={project.image}
-                        alt={project.title}
+                        alt={`Kolte Patil Life Republic Township - ${project.title} - ${project.category}`}
+                        loading={priority ? "eager" : "lazy"}
+                        // @ts-ignore - fetchPriority is valid but React types might not know it yet
+                        fetchpriority={priority ? "high" : "auto"}
+                        width="400"
+                        height="300"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute top-4 left-4 z-20">
@@ -169,7 +177,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                                                     className="w-full text-left flex items-center p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group/item border border-gray-100"
                                                 >
                                                     <div className="w-12 h-12 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
-                                                        <img src={plan} alt={`Floor Plan ${idx + 1}`} className="w-full h-full object-cover" />
+                                                        <img src={plan} alt={`Floor Plan ${idx + 1} - ${project.title}`} className="w-full h-full object-cover" />
                                                     </div>
                                                     <div className="ml-3">
                                                         <p className="text-xs font-bold text-gray-700">Floor Plan {idx + 1}</p>
@@ -225,6 +233,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                             <Download size={16} /> Brochure
                         </Button>
                     </div>
+                    {project.rera && (
+                        <div className="text-[10px] text-gray-400 text-center mt-2 px-2 border-t border-gray-50 pt-2">
+                            RERA: {project.rera}
+                        </div>
+                    )}
                 </div>
             </motion.div>
 

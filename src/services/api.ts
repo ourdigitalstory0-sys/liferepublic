@@ -1,5 +1,7 @@
 import { supabase } from '../lib/supabase';
-import type { Banner, Project } from '../lib/types';
+import type { Banner, Project, Lead, Amenity } from '../lib/types';
+
+
 
 export const api = {
     banners: {
@@ -31,6 +33,7 @@ export const api = {
             const { data, error } = await supabase.from('projects').select('*');
             if (error) throw error;
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return data.map((p: any) => ({
                 ...p,
                 masterLayout: p.master_layout,
@@ -66,6 +69,7 @@ export const api = {
                 floor_plans: project.floorPlans,
                 gallery: project.gallery,
                 status: project.status,
+                rera: project.rera,
                 theme_color: project.themeColor
             };
             const { data, error } = await supabase.from('projects').insert(dbProject).select().single();
@@ -74,6 +78,7 @@ export const api = {
         },
         update: async (id: string, project: Partial<Project>) => {
             // Transform partial update
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const dbProject: any = { ...project };
             if (project.masterLayout) {
                 dbProject.master_layout = project.masterLayout;
@@ -94,6 +99,54 @@ export const api = {
         },
         delete: async (id: string) => {
             const { error } = await supabase.from('projects').delete().eq('id', id);
+            if (error) throw error;
+        }
+    },
+    leads: {
+        getAll: async () => {
+            const { data, error } = await supabase
+                .from('leads')
+                .select('*, projects(title)')
+                .order('created_at', { ascending: false });
+            if (error) throw error;
+            return data;
+        },
+        create: async (lead: Omit<Lead, 'id' | 'created_at' | 'status'>) => {
+            const { data, error } = await supabase.from('leads').insert({ ...lead, status: 'New' }).select().single();
+            if (error) throw error;
+            return data;
+        },
+        updateStatus: async (id: number, status: 'New' | 'Contacted' | 'Closed') => {
+            const { data, error } = await supabase.from('leads').update({ status }).eq('id', id).select().single();
+            if (error) throw error;
+            return data;
+        },
+        delete: async (id: number) => {
+            const { error } = await supabase.from('leads').delete().eq('id', id);
+            if (error) throw error;
+        }
+    },
+    amenities: {
+        getAll: async () => {
+            const { data, error } = await supabase
+                .from('amenities')
+                .select('*')
+                .order('order', { ascending: true });
+            if (error) throw error;
+            return data as Amenity[];
+        },
+        create: async (amenity: Omit<Amenity, 'id' | 'created_at'>) => {
+            const { data, error } = await supabase.from('amenities').insert(amenity).select().single();
+            if (error) throw error;
+            return data;
+        },
+        update: async (id: number, updates: Partial<Amenity>) => {
+            const { data, error } = await supabase.from('amenities').update(updates).eq('id', id).select().single();
+            if (error) throw error;
+            return data;
+        },
+        delete: async (id: number) => {
+            const { error } = await supabase.from('amenities').delete().eq('id', id);
             if (error) throw error;
         }
     },

@@ -2,9 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import { Upload, Trash2, Copy, Check } from 'lucide-react';
 
+interface FileObject {
+    name: string;
+    id: string | null;
+    updated_at: string | null;
+    created_at: string | null;
+    last_accessed_at: string | null;
+    metadata: Record<string, unknown> | null;
+}
+
 export const ImageManager: React.FC = () => {
     const [uploading, setUploading] = useState(false);
-    const [images, setImages] = useState<any[]>([]);
+    const [images, setImages] = useState<FileObject[]>([]);
     const [copiedId, setCopiedId] = useState<string | null>(null);
 
     useEffect(() => {

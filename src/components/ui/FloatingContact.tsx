@@ -6,7 +6,7 @@ export const FloatingContact: React.FC = () => {
     return (
         <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
             <motion.a
-                href="https://wa.me/919876543210"
+                href="https://wa.me/917744009295"
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ scale: 0 }}
@@ -18,7 +18,7 @@ export const FloatingContact: React.FC = () => {
             </motion.a>
 
             <motion.a
-                href="tel:+919876543210"
+                href="tel:+917744009295"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 whileHover={{ scale: 1.1 }}

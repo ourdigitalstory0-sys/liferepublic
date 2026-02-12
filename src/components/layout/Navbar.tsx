@@ -30,15 +30,20 @@ export const Navbar: React.FC = () => {
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 flex justify-center ${isScrolled ? 'pt-4' : 'py-6'}`}
+                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 flex justify-center ${isScrolled ? 'pt-4' : 'py-0'}`}
             >
+                {/* Gradient Overlay for better contrast when at top */}
+                {!isScrolled && (
+                    <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/70 via-black/30 to-transparent -z-10 pointer-events-none" />
+                )}
+
                 <div
                     className={`
                         transition-all duration-500 ease-in-out
                         flex items-center justify-between
                         ${isScrolled
-                            ? 'w-[90%] md:w-[85%] lg:w-[70%] bg-white/80 backdrop-blur-md shadow-lg rounded-full px-6 py-3 border border-white/40'
-                            : 'w-full container px-4 bg-transparent border-transparent'
+                            ? 'w-[95%] md:w-[85%] lg:w-[70%] bg-white/95 backdrop-blur-md shadow-lg rounded-full px-6 py-3 border border-white/40' // Increased opacity
+                            : 'w-full container px-4 py-6 bg-transparent border-transparent'
                         }
                     `}
                 >
@@ -47,7 +52,9 @@ export const Navbar: React.FC = () => {
                     <Link to="/" className="flex items-center gap-3 group">
                         <img
                             src="/logo-theme.png"
-                            alt="Life Republic"
+                            alt="Kolte Patil Life Republic Township Logo"
+                            width="160"
+                            height="56"
                             className={`object-contain transition-all duration-500 ${isScrolled ? 'h-10' : 'h-14'}`}
                             onError={(e) => {
                                 e.currentTarget.style.display = 'none';
@@ -78,7 +85,7 @@ export const Navbar: React.FC = () => {
                                             ? 'text-secondary bg-white shadow-sm'
                                             : isScrolled
                                                 ? 'text-gray-600 hover:text-secondary hover:bg-white/50'
-                                                : 'text-gray-200 hover:text-white hover:bg-white/10'
+                                                : 'text-white hover:bg-white/10 drop-shadow-md font-semibold' // Increased contrast
                                             }`}
                                     >
                                         {link.name}
@@ -98,7 +105,7 @@ export const Navbar: React.FC = () => {
                                 }`}
                         >
                             <Phone size={16} />
-                            <span className="hidden lg:inline">+91 98765 43210</span>
+                            <span className="hidden lg:inline">+91 77440 09295</span>
                         </Button>
 
                         <button
@@ -107,6 +114,7 @@ export const Navbar: React.FC = () => {
                                 : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-md'
                                 }`}
                             onClick={() => setIsMobileMenuOpen(true)}
+                            aria-label="Open Menu"
                         >
                             <Menu size={20} />
                         </button>
@@ -138,6 +146,7 @@ export const Navbar: React.FC = () => {
                                 <button
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500"
+                                    aria-label="Close Menu"
                                 >
                                     <X size={24} />
                                 </button>
@@ -163,11 +172,11 @@ export const Navbar: React.FC = () => {
                             <div className="mt-auto">
                                 <div className="bg-gray-50 p-4 rounded-xl space-y-4">
                                     <p className="text-sm text-gray-500">Get in touch</p>
-                                    <a href="tel:+919876543210" className="flex items-center gap-3 text-secondary font-medium text-lg">
+                                    <a href="tel:+917744009295" className="flex items-center gap-3 text-secondary font-medium text-lg">
                                         <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
                                             <Phone size={20} />
                                         </div>
-                                        +91 98765 43210
+                                        +91 77440 09295
                                     </a>
                                 </div>
                             </div>

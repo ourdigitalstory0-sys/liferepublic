@@ -7,6 +7,8 @@ import type { Project } from '../lib/types';
 import { ProjectCard } from '../components/ui/ProjectCard';
 import { HeroSlider } from '../components/sections/HeroSlider';
 import { AmenitiesCarousel } from '../components/sections/AmenitiesCarousel';
+import { FAQ } from '../components/sections/FAQ';
+import { SEO } from '../components/seo/SEO';
 
 const Home: React.FC = () => {
     const [featuredProjects, setFeaturedProjects] = React.useState<Project[]>([]);
@@ -35,8 +37,91 @@ const Home: React.FC = () => {
         loadProjects();
     }, []);
 
+    const schema = {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "name": "Kolte Patil Life Republic",
+        "image": "https://liferepublic.in/images/gallery/eros/master-layout.webp",
+        "description": "Kolte Patil Life Republic is a 390+ acre integrated township in Hinjewadi, Pune offering 1, 2, 3 BHK flats, villas, and row houses.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Marunji, Hinjewadi",
+            "addressLocality": "Pune",
+            "addressRegion": "Maharashtra",
+            "postalCode": "411057",
+            "addressCountry": "IN"
+        },
+        "telephone": "+917744009295",
+        "url": "https://life-republic.in/",
+        "priceRange": "MNR 40 Lakhs - 3 Crores",
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "18.5913",
+            "longitude": "73.7212"
+        },
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                "opens": "09:00",
+                "closes": "19:00"
+            }
+        ],
+        "sameAs": [
+            "https://www.facebook.com/koltepatildevelopers",
+            "https://twitter.com/koltepatil",
+            "https://www.instagram.com/koltepatil/"
+        ],
+        "makesOffer": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "2 BHK Flats in Hinjewadi",
+                    "description": "Spacious 2 BHK apartments in Life Republic Township"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "3 BHK Luxury Flats",
+                    "description": "Premium 3 BHK homes near Hinjewadi IT Park"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "4 BHK Villas & Bungalows",
+                    "description": "Exclusive 4 BHK Villas and Row Houses in Life Republic"
+                }
+            }
+        ],
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://life-republic.in/projects/{search_term_string}",
+            "query-input": "required name=search_term_string"
+        },
+        "video": {
+            "@type": "VideoObject",
+            "name": "Life Republic Township Overview",
+            "description": "Aerial view and master plan of Kolte Patil Life Republic Hinjewadi.",
+            "thumbnailUrl": "https://liferepublic.in/images/gallery/eros/master-layout.webp",
+            "uploadDate": "2024-01-01",
+            "contentUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        }
+    };
+
     return (
         <div className="w-full">
+            <SEO
+                title="Kolte Patil Life Republic Township Hinjewadi"
+                description="Official Guide to Life Republic by Kolte Patil. Explore 2, 3, 4 BHK flats and villas in Hinjewadi. Check current pricing, floor plans, possession dates, and latest reviews."
+                keywords="Kolte Patil Life Republic Township Hinjewadi, Life Republic Price, Life Republic Hinjewadi Location, 2 BHK in Hinjewadi, 3 BHK in Hinjewadi, 4 BHK Villas in Pune, Life Republic Atmos, Life Republic Aros"
+                canonical="/"
+                schema={schema}
+            />
             {/* Hero Section */}
             <HeroSlider />
 
@@ -44,16 +129,16 @@ const Home: React.FC = () => {
             <section className="py-20 bg-gray-50">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-serif font-bold mb-4 text-secondary">Featured Projects</h2>
+                        <h2 className="text-4xl font-serif font-bold mb-4 text-secondary">Kolte Patil Life Republic Township Hinjewadi</h2>
                         <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
                         <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-                            Discover our diverse range of residential projects, each designed to offer a unique lifestyle.
+                            Experience the finest living at <strong>Kolte Patil Life Republic Township Hinjewadi</strong>. Discover our diverse range of 2, 3, 4 BHK flats and luxury villas, designed to offer a unique lifestyle in Pune's most integrated township.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {featuredProjects.map((project) => (
-                            <ProjectCard key={project.id} project={project} />
+                        {featuredProjects.map((project, index) => (
+                            <ProjectCard key={project.id} project={project} priority={index < 3} />
                         ))}
                     </div>
 
@@ -68,8 +153,15 @@ const Home: React.FC = () => {
             </section>
 
             {/* Location Advantages Section */}
-            <section className="py-20 bg-secondary text-white relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://liferepublic.in/images/gallery/eros/master-layout.webp')] bg-cover bg-center opacity-5"></div>
+            <section className="py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white relative overflow-hidden">
+                {/* Background Blobs for specific color splash */}
+                <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[100px]"></div>
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[100px]"></div>
+                </div>
+
+                <div className="absolute inset-0 bg-[url('https://liferepublic.in/images/gallery/eros/master-layout.webp')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
+
                 <div className="container mx-auto px-4 relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -77,19 +169,63 @@ const Home: React.FC = () => {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-4xl font-serif font-bold mb-4">Strategic Location</h2>
-                        <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
-                        <p className="text-gray-300 max-w-2xl mx-auto text-lg">
-                            Connected to the world, yet a world of its own. Located in the heart of Hinjewadi.
+                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Hinjewadi: A Real Estate Investment Hotspot</h2>
+                        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-green-500 to-orange-500 mx-auto mb-6 rounded-full"></div>
+                        <p className="text-gray-300 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+                            Connected to the world, yet a world of its own. Located in the heart of Hinjewadi, a prime real estate corridor, Kolte Patil Life Republic Township offers unmatched connectivity and property value appreciation.
                         </p>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
-                            { icon: Briefcase, title: 'Work', desc: 'Rajiv Gandhi IT Park', time: '10 Mins' },
-                            { icon: Plane, title: 'Connect', desc: 'Mumbai-Pune Expy', time: '15 Mins' },
-                            { icon: GraduationCap, title: 'Learn', desc: 'Anisha Global School', time: 'Inside' },
-                            { icon: HeartPulse, title: 'Care', desc: 'Ruby Hall Clinic', time: '15 Mins' }
+                            {
+                                icon: Briefcase,
+                                title: 'Work',
+                                desc: 'Rajiv Gandhi IT Park',
+                                time: '10 Mins',
+                                gradient: 'from-blue-500/20 to-cyan-500/5',
+                                border: 'border-blue-500/30',
+                                text: 'text-blue-400',
+                                bgIcon: 'bg-blue-500/20 text-blue-400',
+                                glow: 'bg-blue-500/20',
+                                glowHover: 'group-hover:bg-blue-500/30'
+                            },
+                            {
+                                icon: Plane,
+                                title: 'Connect',
+                                desc: 'Mumbai-Pune Expy',
+                                time: '15 Mins',
+                                gradient: 'from-orange-500/20 to-amber-500/5',
+                                border: 'border-orange-500/30',
+                                text: 'text-orange-400',
+                                bgIcon: 'bg-orange-500/20 text-orange-400',
+                                glow: 'bg-orange-500/20',
+                                glowHover: 'group-hover:bg-orange-500/30'
+                            },
+                            {
+                                icon: GraduationCap,
+                                title: 'Learn',
+                                desc: 'Anisha Global School',
+                                time: 'Inside',
+                                gradient: 'from-green-500/20 to-emerald-500/5',
+                                border: 'border-green-500/30',
+                                text: 'text-green-400',
+                                bgIcon: 'bg-green-500/20 text-green-400',
+                                glow: 'bg-green-500/20',
+                                glowHover: 'group-hover:bg-green-500/30'
+                            },
+                            {
+                                icon: HeartPulse,
+                                title: 'Care',
+                                desc: 'Ruby Hall Clinic',
+                                time: '15 Mins',
+                                gradient: 'from-rose-500/20 to-pink-500/5',
+                                border: 'border-rose-500/30',
+                                text: 'text-rose-400',
+                                bgIcon: 'bg-rose-500/20 text-rose-400',
+                                glow: 'bg-rose-500/20',
+                                glowHover: 'group-hover:bg-rose-500/30'
+                            }
                         ].map((item, index) => (
                             <motion.div
                                 key={index}
@@ -97,14 +233,24 @@ const Home: React.FC = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/10 hover:bg-white/20 transition-all group"
+                                whileHover={{ y: -5, scale: 1.02 }}
+                                className={`
+                                    relative overflow-hidden p-6 rounded-2xl border backdrop-blur-md transition-all duration-300 group
+                                    bg-gradient-to-br ${item.gradient} ${item.border}
+                                    hover:shadow-[0_0_30px_-5px_rgba(0,0,0,0.3)]
+                                `}
                             >
-                                <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                    <item.icon className="text-white" size={24} />
+                                {/* Hover Glow Effect */}
+                                <div className={`absolute -right-10 -top-10 w-32 h-32 rounded-full blur-[50px] transition-all duration-500 ${item.glow} ${item.glowHover}`}></div>
+
+                                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 ${item.bgIcon}`}>
+                                    <item.icon size={28} strokeWidth={1.5} />
                                 </div>
-                                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                                <p className="text-gray-300 mb-1">{item.desc}</p>
-                                <p className="text-accent font-bold text-sm">{item.time}</p>
+                                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-white transition-colors">{item.title}</h3>
+                                <p className="text-gray-400 mb-4 font-light text-sm">{item.desc}</p>
+                                <div className={`inline-block px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-black/30 border border-white/10 ${item.text}`}>
+                                    {item.time}
+                                </div>
                             </motion.div>
                         ))}
                     </div>
@@ -120,10 +266,10 @@ const Home: React.FC = () => {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-4xl font-serif font-bold mb-4 text-secondary">Life at Republic</h2>
+                        <h2 className="text-4xl font-serif font-bold mb-4 text-secondary">Life at Kolte Patil Life Republic</h2>
                         <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
                         <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-                            An ecosystem designed for a holistic lifestyle.
+                            An ecosystem designed for a holistic lifestyle within Kolte Patil Life Republic Township Hinjewadi.
                         </p>
                     </motion.div>
 
@@ -190,6 +336,9 @@ const Home: React.FC = () => {
             {/* Amenities Section */}
             <AmenitiesCarousel />
 
+            {/* FAQ Section */}
+            <FAQ />
+
             {/* About Section */}
             <section className="py-20 bg-primary/20">
                 <div className="container mx-auto px-4 text-center">
@@ -198,17 +347,88 @@ const Home: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl font-serif font-bold mb-6 text-secondary">Welcome to Life Republic</h2>
+                        <h2 className="text-4xl font-serif font-bold mb-6 text-secondary">About Kolte Patil Life Republic Township</h2>
                         <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
-                        <p className="max-w-4xl mx-auto text-gray-600 leading-relaxed text-lg mb-8">
-                            Situated just 4.5 km from Hinjewadi, the IT Hub of Pune, Kolte Patil Life Republic is a township built for thinking minds.
-                            With a 5-acre entrance boulevard and 150ft wide internal spine roads, it offers a life of magnitude.
-                            Enjoy a self-sustainable ecosystem with global schools, fire stations, and multi-level security, all amidst 390+ acres of lush greenery.
-                        </p>
-                        <div className="inline-block p-4 bg-white rounded-lg shadow-sm border border-gray-100">
-                            <span className="text-accent font-bold">RERA Registered</span> | Award Winning Township
+                        <div className="max-w-5xl mx-auto text-left space-y-6 text-gray-600 leading-relaxed text-lg">
+                            <p>
+                                <strong>Kolte Patil Life Republic</strong> is a premium 390+ acre integrated township located in the heart of <strong>Hinjewadi, Pune</strong>. Developed by the renowned Kolte Patil Developers, this township is designed to offer a holistic lifestyle with world-class amenities, smart infrastructure, and lush green surroundings near Rajiv Gandhi Infotech Park.
+                            </p>
+                            <p>
+                                The township offers a wide range of residential options including <strong>2 BHK, 3 BHK, and 4 BHK flats in Hinjewadi</strong>, as well as exclusive villas and row houses. With sectors like <strong>Life Republic Atmos</strong>, <strong>Life Republic Aros</strong>, and <strong>Life Republic Arezo</strong>, homebuyers can choose from under-construction and <strong>ready possession flats in Pune</strong>.
+                            </p>
+
+                            <h3 className="text-2xl font-bold text-secondary mt-8">Price Trends & Configuration</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h4 className="font-bold text-accent mb-2">2 BHK Apartments</h4>
+                                    <p className="text-sm">Starting from <span className="text-secondary font-bold">₹72 Lakhs*</span></p>
+                                    <p className="text-xs text-gray-500 mt-1">Carpet: 629 - 887 sq. ft.</p>
+                                </div>
+                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h4 className="font-bold text-accent mb-2">3 BHK Premium</h4>
+                                    <p className="text-sm">Starting from <span className="text-secondary font-bold">₹1.05 Cr*</span></p>
+                                    <p className="text-xs text-gray-500 mt-1">Carpet: 1000 - 1500+ sq. ft.</p>
+                                </div>
+                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h4 className="font-bold text-accent mb-2">4 BHK & Villas</h4>
+                                    <p className="text-sm">Starting from <span className="text-secondary font-bold">₹2.0 Cr*</span></p>
+                                    <p className="text-xs text-gray-500 mt-1">Carpet: 1700 - 2500+ sq. ft.</p>
+                                </div>
+                            </div>
+
+                            <p className="mt-6">
+                                With possession dates ranging from <strong>December 2025 (Arezo)</strong> to <strong>December 2027 (Atmos)</strong>, Life Republic is the perfect choice for real estate investment in Hinjewadi. The community boasts a 3.5-acre Urban Park, a 150ft wide spine road, and seamless connectivity to the Mumbai-Pune Expressway.
+                            </p>
+                        </div>
+                        <div className="inline-block p-4 bg-white rounded-lg shadow-sm border border-gray-100 mt-8">
+                            <span className="text-accent font-bold">RERA Registered</span> | Award Winning Township | <span className="text-secondary font-bold">Call +91 77440 09295</span>
                         </div>
                     </motion.div>
+                </div>
+            </section>
+            {/* Deep Web Data Content Sections (SEO Focused) */}
+            <section className="py-16 bg-white border-t border-gray-100">
+                <div className="container mx-auto px-4 max-w-5xl">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        {/* Investment Analysis */}
+                        <div>
+                            <h3 className="text-2xl font-serif font-bold mb-4 text-secondary">Why Invest in Life Republic Hinjewadi?</h3>
+                            <p className="text-gray-600 mb-4 leading-relaxed">
+                                <strong>Kolte Patil Life Republic</strong> is a prime investment destination. Market analysis for <strong>2025</strong> predicts a property appreciation of <strong>10-12%</strong> in Hinjewadi, driven by the upcoming Metro Line and Ring Road.
+                            </p>
+                            <p className="text-gray-600 leading-relaxed">
+                                Investors can expect a robust <strong>rental yield of 5-7%</strong>, significantly higher than Wakad or Baner. With over 230 IT companies in Rajiv Gandhi Infotech Park, tenant occupancy is consistently near 100%.
+                            </p>
+                        </div>
+
+                        {/* Township vs Standalone */}
+                        <div>
+                            <h3 className="text-2xl font-serif font-bold mb-4 text-secondary">Township vs Standalone Buildings</h3>
+                            <p className="text-gray-600 mb-4 leading-relaxed">
+                                Choosing a flat in a township like <strong>Life Republic</strong> ensures you are not just buying four walls but a lifestyle. Unlike standalone buildings in <strong>Wakad</strong> or <strong>Marunji</strong>, residents here enjoy:
+                            </p>
+                            <ul className="list-disc pl-5 space-y-2 text-gray-600">
+                                <li><strong>24x7 Security & Surveillance</strong>: A safe haven for families.</li>
+                                <li><strong>Walk-to-Work Concept</strong>: Proximity to Rajiv Gandhi Infotech Park reducing commute stress.</li>
+                                <li><strong>Social Infrastructure</strong>: Anisha Global School and Fire Station within the campus.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* FAQ Schema Expansion Content (Visible) */}
+                    <div className="mt-12">
+                        <h3 className="text-2xl font-serif font-bold mb-6 text-secondary text-center">Frequently Asked Questions</h3>
+                        <div className="space-y-6">
+                            <div className="bg-gray-50 p-6 rounded-xl">
+                                <h4 className="font-bold text-lg mb-2">How far is Life Republic from Hinjewadi Phase 1?</h4>
+                                <p className="text-gray-600">Life Republic is approximately <strong>4.5 km</strong> from Hinjewadi Phase 1, making it a 10-15 minute drive via the main Marunji road. Connectivity spans Phase 1, 2, and 3 effortlessly.</p>
+                            </div>
+                            <div className="bg-gray-50 p-6 rounded-xl">
+                                <h4 className="font-bold text-lg mb-2">Is water supply a problem in Life Republic?</h4>
+                                <p className="text-gray-600">No, unlike many standalone societies in Hinjewadi, Life Republic has a robust water management system with PMRDA water connection and dedicated treatment plants, ensuring consistent supply.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

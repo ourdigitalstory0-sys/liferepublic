@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://life-republic.in/sitemap.xml

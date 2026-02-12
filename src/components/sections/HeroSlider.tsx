@@ -12,29 +12,33 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { api } from '../../services/api';
+import type { Banner } from '../../lib/types';
 
 // Fallback slides if DB is empty
 const defaultSlides = [
     {
         id: 1,
         image_url: 'https://liferepublic.in/images/slider/1.webp',
-        title: 'Where Life Finds Its Rhythm',
-        subtitle: 'Experience the symphony of nature and modern living',
-        description: 'A 390+ acre integrated township that offers a world of its own.'
+        title: 'Kolte Patil Life Republic Township Hinjewadi',
+        subtitle: 'Experience 400+ acres of integrated community living near Rajiv Gandhi IT Park in Hinjewadi',
+        description: 'A 390+ acre integrated township in Hinjewadi that offers a world of its own.',
+        order: 1
     },
     {
         id: 2,
         image_url: 'https://liferepublic.in/images/slider/2.webp',
-        title: 'Spaces That Inspire',
-        subtitle: 'Homes designed for those who dream big',
-        description: 'From smart homes to luxury villas, find your perfect space.'
+        title: 'Luxury 1, 2 & 3 BHK Flats in Pune West',
+        subtitle: 'Homes designed for those who dream big. Ready possession apartments available.',
+        description: 'From smart homes to luxury villas, find your perfect space.',
+        order: 2
     },
     {
         id: 3,
         image_url: 'https://liferepublic.in/images/slider/3.webp',
-        title: 'A Community Like No Other',
-        subtitle: 'Connect, celebrate, and grow together',
-        description: 'Join a vibrant community of over 10,000 happy families.'
+        title: 'World-Class Amenities & Infrastructure',
+        subtitle: 'Global schools, 150ft wide roads, and multi-level security',
+        description: 'Join a vibrant community of over 10,000 happy families.',
+        order: 3
     },
 ];
 
@@ -43,7 +47,7 @@ export const HeroSlider: React.FC = () => {
     const { scrollY } = useScroll();
     const y = useTransform(scrollY, [0, 500], [0, 200]);
     const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-    const [slides, setSlides] = React.useState<any[]>(defaultSlides);
+    const [slides, setSlides] = React.useState<Banner[]>(defaultSlides);
 
     React.useEffect(() => {
         const loadBanners = async () => {
@@ -78,13 +82,15 @@ export const HeroSlider: React.FC = () => {
                     }}
                     className="h-full w-full"
                 >
-                    {slides.map((slide) => (
+                    {slides.map((slide, index) => (
                         <SwiperSlide key={slide.id}>
                             <div className="relative h-full w-full">
                                 <div className="absolute inset-0 bg-black/40 z-10" />
                                 <img
                                     src={slide.image_url}
                                     alt={slide.title}
+                                    loading={index === 0 ? "eager" : "lazy"}
+                                    fetchPriority={index === 0 ? "high" : "low"}
                                     className="h-full w-full object-cover"
                                 />
                                 <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">

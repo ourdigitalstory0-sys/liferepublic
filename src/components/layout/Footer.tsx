@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Twitter, Linkedin, Phone, Mail, MapPin, ArrowUpRight } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { RERA_NUMBERS } from '../../data/rera';
+import { Facebook, Instagram, Twitter, Linkedin, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {
     return (
@@ -19,8 +19,8 @@ export const Footer: React.FC = () => {
             <div className="container mx-auto px-6 relative z-10 pt-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
 
-                    {/* Brand Column (Span 4) */}
-                    <div className="lg:col-span-4 space-y-8">
+                    {/* Brand Column (Span 3) */}
+                    <div className="lg:col-span-3 space-y-8">
                         <div className="flex flex-col">
                             <span className="text-3xl font-serif font-bold tracking-wider text-white">
                                 LIFE REPUBLIC
@@ -30,14 +30,20 @@ export const Footer: React.FC = () => {
                             </span>
                         </div>
                         <p className="text-gray-400 leading-relaxed max-w-sm">
-                            Experience a world of luxury and tranquility. A 390+ acre integrated township redefining modern living in Hinjewadi, Pune.
+                            <strong>Kolte Patil Life Republic Township Hinjewadi</strong> is a premium 390+ acre integrated township. Offering 1, 2, 3 BHK flats and villas near Rajiv Gandhi IT Park.
                         </p>
                         <div className="flex gap-4">
-                            {[Facebook, Instagram, Twitter, Linkedin].map((Icon, idx) => (
+                            {[
+                                { Icon: Facebook, label: 'Facebook' },
+                                { Icon: Instagram, label: 'Instagram' },
+                                { Icon: Twitter, label: 'Twitter' },
+                                { Icon: Linkedin, label: 'LinkedIn' }
+                            ].map(({ Icon, label }, idx) => (
                                 <a
                                     key={idx}
                                     href="#"
                                     className="h-12 w-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-accent hover:border-accent hover:text-white transition-all duration-300 group"
+                                    aria-label={label}
                                 >
                                     <Icon size={20} className="text-gray-400 group-hover:text-white transition-colors" />
                                 </a>
@@ -46,7 +52,7 @@ export const Footer: React.FC = () => {
                     </div>
 
                     {/* Quick Link Columns (Span 2 each) */}
-                    <div className="lg:col-span-2 lg:col-start-6">
+                    <div className="lg:col-span-2 lg:col-start-4">
                         <h4 className="text-lg font-serif font-bold mb-8 text-white">Explore</h4>
                         <ul className="space-y-4">
                             {[
@@ -54,7 +60,7 @@ export const Footer: React.FC = () => {
                                 { name: 'Projects', path: '/projects' },
                                 { name: 'Amenities', path: '/amenities' },
                                 { name: 'Contact', path: '/contact' },
-                                { name: 'About Us', path: '#' }
+                                { name: 'About Us', path: '/about' }
                             ].map((link) => (
                                 <li key={link.name}>
                                     <Link
@@ -75,7 +81,7 @@ export const Footer: React.FC = () => {
                             {[
                                 'Atmos - Premium',
                                 'Villas - Luxury',
-                                '24K World',
+                                '24K Espada',
                                 'Aros - Smart',
                                 'Arezo - 2 & 3 BHK'
                             ].map((project) => (
@@ -92,8 +98,31 @@ export const Footer: React.FC = () => {
                         </ul>
                     </div>
 
-                    {/* Contact Column (Span 4) */}
-                    <div className="lg:col-span-4 lg:col-start-10">
+                    <div className="lg:col-span-2">
+                        <h4 className="text-lg font-serif font-bold mb-8 text-white">Locations</h4>
+                        <ul className="space-y-4">
+                            {[
+                                { name: 'Near Hinjewadi', path: '/location/flats-near-hinjewadi' },
+                                { name: 'Near Tathawade', path: '/location/flats-near-tathawade' },
+                                { name: 'Near Punawale', path: '/location/flats-near-punawale' },
+                                { name: 'Near Wakad', path: '/location/flats-near-wakad' },
+                                { name: 'Near Marunji', path: '/location/flats-near-marunji' }
+                            ].map((link) => (
+                                <li key={link.name}>
+                                    <Link
+                                        to={link.path}
+                                        className="text-gray-400 hover:text-white group flex items-center gap-2 transition-all duration-300"
+                                    >
+                                        {link.name}
+                                        <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300 text-accent" />
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Contact Column (Span 3) */}
+                    <div className="lg:col-span-3">
                         <h4 className="text-lg font-serif font-bold mb-8 text-white">Visit Us</h4>
                         <div className="space-y-6">
                             <div className="flex items-start gap-4 group">
@@ -112,51 +141,40 @@ export const Footer: React.FC = () => {
                                 </div>
                                 <div>
                                     <p className="text-gray-300 font-medium">Call Us</p>
-                                    <a href="tel:+919876543210" className="text-sm text-gray-500 hover:text-white transition-colors">+91 98765 43210</a>
+                                    <a href="tel:+917744009295" className="text-sm text-gray-500 hover:text-white transition-colors">+91 77440 09295</a>
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-4 group">
-                                <div className="p-3 rounded-lg bg-white/5 group-hover:bg-accent/20 transition-colors">
-                                    <Mail size={20} className="text-accent" />
-                                </div>
-                                <div>
-                                    <p className="text-gray-300 font-medium">Email Us</p>
-                                    <a href="mailto:sales@liferepublic.in" className="text-sm text-gray-500 hover:text-white transition-colors">sales@liferepublic.in</a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
 
-                {/* Newsletter Strip */}
-                <div className="relative py-12 px-8 rounded-2xl bg-gradient-to-r from-white/5 to-transparent border border-white/5 mb-16 overflow-hidden">
-                    <div className="absolute inset-0 bg-accent/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                        <div>
-                            <h3 className="text-2xl font-serif font-bold mb-2">Join our Exclusive Newsletter</h3>
-                            <p className="text-gray-400 text-sm">Be the first to know about new launches and offers.</p>
-                        </div>
-                        <div className="flex w-full md:w-auto gap-2">
-                            <input
-                                type="email"
-                                placeholder="Enter your email"
-                                className="bg-black/30 border border-white/10 rounded-lg px-6 py-3 w-full md:w-80 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 transition-all text-sm backdrop-blur-sm"
-                            />
-                            <Button variant="primary" className="whitespace-nowrap px-8">
-                                Subscribe
-                            </Button>
-                        </div>
+
+
+                {/* RERA Numbers Section */}
+                <div className="border-t border-white/5 py-8 mt-12">
+                    <h5 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">RERA Registration Numbers</h5>
+                    <div className="flex flex-wrap gap-x-6 gap-y-2 text-[10px] text-gray-500">
+                        {RERA_NUMBERS.map((item, index) => (
+                            <span key={index} className="flex items-center gap-1">
+                                <span className="text-gray-400">{item.title}:</span>
+                                <span className="font-mono text-accent/80">{item.rera}</span>
+                            </span>
+                        ))}
                     </div>
+                    <p className="text-[10px] text-gray-600 mt-4 italic">
+                        The projects have been registered via MahaRERA registration numbers and are available on the website <a href="https://maharera.mahaonline.gov.in" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-accent underline">https://maharera.mahaonline.gov.in</a> under registered projects.
+                    </p>
                 </div>
 
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500/60">
                     <p>© 2025 Life Republic. Designed with precision.</p>
                     <div className="flex gap-8">
-                        <a href="#" className="hover:text-accent transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-accent transition-colors">Terms of Use</a>
-                        <a href="#" className="hover:text-accent transition-colors">Sitemap</a>
+                        <Link to="/privacy" className="hover:text-accent transition-colors">Privacy Policy</Link>
+                        <Link to="/terms" className="hover:text-accent transition-colors">Terms of Use</Link>
+                        <a href="/sitemap.xml" className="hover:text-accent transition-colors">Sitemap</a>
                     </div>
                 </div>
             </div>

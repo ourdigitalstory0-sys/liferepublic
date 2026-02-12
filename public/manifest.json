@@ -1,0 +1,21 @@
+{
+    "name": "Kolte Patil Life Republic",
+    "short_name": "Life Republic",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#C5A059",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "https://liferepublic.in/logo-theme.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://liferepublic.in/logo-theme.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

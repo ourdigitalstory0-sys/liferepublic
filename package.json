@@ -7,16 +7,21 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prerender": "npx tsx scripts/prerender.ts",
+    "build:ssg": "npm run build && npm run prerender"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",
     "framer-motion": "^12.33.0",
     "lenis": "^1.3.17",
     "lucide-react": "^0.563.0",
+    "puppeteer": "^24.37.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-helmet-async": "^2.0.5",
     "react-router-dom": "^7.13.0",
+    "serve": "^14.2.5",
     "swiper": "^12.1.0"
   },
   "devDependencies": {

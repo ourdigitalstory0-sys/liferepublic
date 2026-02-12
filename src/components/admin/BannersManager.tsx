@@ -120,19 +120,31 @@ export const BannersManager: React.FC = () => {
                         <div className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium mb-1">Image</label>
-                                <div className="flex gap-2">
-                                    <div className="relative flex-1 h-32 bg-gray-200 rounded-md overflow-hidden flex items-center justify-center">
-                                        {formData.image_url ? (
-                                            <img src={formData.image_url} alt="Preview" className="w-full h-full object-cover" />
-                                        ) : (
-                                            <ImageIcon className="text-gray-400" />
-                                        )}
-                                        {uploading && <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-xs">Uploading...</div>}
-                                    </div>
-                                    <div className="flex flex-col justify-end">
-                                        <input type="file" id="bannerUpload" className="hidden" onChange={handleImageUpload} accept="image/*" />
-                                        <label htmlFor="bannerUpload" className="cursor-pointer bg-white border border-gray-300 px-3 py-2 rounded-md hover:bg-gray-50 text-sm">Change</label>
-                                    </div>
+                                <div className="relative flex-1 h-32 bg-gray-200 rounded-md overflow-hidden flex items-center justify-center border border-dashed border-gray-400">
+                                    {formData.image_url ? (
+                                        <img src={formData.image_url} alt="Preview" className="w-full h-full object-cover" />
+                                    ) : (
+                                        <div className="text-center p-2">
+                                            <ImageIcon className="text-gray-400 mx-auto mb-1" />
+                                            <span className="text-xs text-gray-500">No image selected</span>
+                                        </div>
+                                    )}
+                                    {uploading && <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-xs font-medium">Uploading...</div>}
+                                </div>
+                                <div className="flex flex-col justify-end">
+                                    <input
+                                        type="file"
+                                        id="bannerUpload"
+                                        className="hidden"
+                                        onChange={handleImageUpload}
+                                        accept="image/*"
+                                    />
+                                    <label
+                                        htmlFor="bannerUpload"
+                                        className={`cursor-pointer bg-white border border-gray-300 px-3 py-2 rounded-md hover:bg-gray-50 text-sm whitespace-nowrap text-center ${uploading ? 'opacity-50 pointer-events-none' : ''}`}
+                                    >
+                                        {formData.image_url ? 'Change Image' : 'Select Image'}
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +159,7 @@ export const BannersManager: React.FC = () => {
             {/* List */}
             <div className="space-y-4">
                 {banners.map(banner => (
-                    <div key={banner.id} className="flex items-center gap-4 p-4 border rounded-lg hover:shadow-sm bg-white transition-all">
+                    <div key={banner.id} className="flex flex-col md:flex-row items-start md:items-center gap-4 p-4 border rounded-lg hover:shadow-sm bg-white transition-all">
                         <img src={banner.image_url} alt={banner.title} className="w-24 h-16 object-cover rounded bg-gray-200" />
                         <div className="flex-1">
                             <h3 className="font-bold">{banner.title}</h3>

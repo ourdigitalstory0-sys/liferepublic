@@ -2,7 +2,7 @@ import type { Project } from '../lib/types';
 
 export const projects: Project[] = [
     {
-        id: 'duet',
+        id: 'kolte-patil-life-republic-duet-premium-2-bhk-flats-hinjewadi',
         title: 'Duet',
         category: 'Premium',
         location: 'Sector R10 (34th Avenue)',
@@ -22,11 +22,11 @@ export const projects: Project[] = [
         themeColor: '#C5A059' // Premium Gold
     },
     {
-        id: 'qrious',
+        id: 'kolte-patil-life-republic-qrious-smart-2-3-bhk-homes-hinjewadi',
         title: 'Qrious',
         category: 'Smart',
         location: 'Sector R1',
-        price: 'Request Price',
+        price: '₹72 Lakhs*',
         image: 'https://liferepublic.in/images/home/qrious-thumb.webp',
         description: 'Spacious 2 & 3 BHK homes for the curious minds. A perfect blend of comfort and innovation.',
         features: ['2 & 3 BHK', 'Possession: April 2030', 'Smart Homes'],
@@ -37,11 +37,11 @@ export const projects: Project[] = [
         themeColor: '#3498db' // Tech Blue
     },
     {
-        id: 'canvas',
+        id: 'kolte-patil-life-republic-canvas-luxury-3-4-bhk-flats-hinjewadi',
         title: 'Canvas',
         category: 'Luxury',
         location: 'Sector R3',
-        price: 'Request Price',
+        price: '₹1.68 Cr*',
         image: 'https://liferepublic.in/images/home/canvas-thumb.webp',
         description: 'Premium 3 & 4 BHK residences that are a canvas for your dreams. Luxury living redefined.',
         features: ['3 & 4 BHK', 'Possession: Oct 2026', 'Luxury Specifications'],
@@ -52,11 +52,11 @@ export const projects: Project[] = [
         themeColor: '#9b59b6' // Artistic Purple
     },
     {
-        id: 'atmos',
+        id: 'kolte-patil-life-republic-atmos-modern-2-3-bhk-flats-hinjewadi',
         title: 'Atmos',
         category: 'Modern',
         location: 'Sector R4',
-        price: 'Request Price',
+        price: '₹75 Lakhs*',
         image: 'https://liferepublic.in/images/home/atmos-thumb.webp',
         description: 'Modern 2, 2.5 & 3 BHK flats offering a breath of fresh air. Designed for those who value openness.',
         features: ['2, 2.5 & 3 BHK', 'Possession: Oct 2027', 'Open Spaces'],
@@ -67,11 +67,11 @@ export const projects: Project[] = [
         themeColor: '#2ecc71' // Nature Green
     },
     {
-        id: 'aros',
+        id: 'kolte-patil-life-republic-aros-premium-2-3-bhk-flats-hinjewadi',
         title: 'Aros',
         category: 'Premium',
         location: 'Sector R16',
-        price: 'Request Price',
+        price: '₹82 Lakhs*',
         image: 'https://liferepublic.in/images/home/aros-thumb.webp',
         description: '2 & 3 BHK flats crafted for a seamless lifestyle. Connect with nature and community.',
         features: ['2 & 3 BHK', 'Possession: Dec 2026', 'Community Living'],
@@ -82,11 +82,11 @@ export const projects: Project[] = [
         themeColor: '#e67e22' // Warm Orange
     },
     {
-        id: '24k-espada',
+        id: 'kolte-patil-life-republic-24k-espada-ultra-luxury-row-houses-hinjewadi',
         title: '24K Espada',
         category: 'Ultra Luxury',
         location: 'Sector R9',
-        price: 'Request Price',
+        price: '₹2.60 Cr*',
         image: 'https://liferepublic.in/images/home/24k-espada-thumb.webp',
         description: 'Ultra-luxury 4 & 5 Bed rare row houses. The epitome of exclusivity and grandeur.',
         features: ['4 & 5 Bed Row Houses', 'Possession: Oct 2026', 'Private Garden'],
@@ -97,11 +97,11 @@ export const projects: Project[] = [
         themeColor: '#2c3e50' // Luxury Dark Blue
     },
     {
-        id: 'sound-of-soul',
+        id: 'kolte-patil-life-republic-sound-of-soul-luxury-4-bhk-row-houses-hinjewadi',
         title: 'Sound of Soul',
         category: 'Luxury',
         location: 'Sector R2',
-        price: 'Request Price',
+        price: '₹2.45 Cr*',
         image: 'https://liferepublic.in/images/home/sound-of-soul-thumb.webp',
         description: 'Luxury 4 BHK row houses designed to resonate with your soul. Peaceful and private.',
         features: ['4 BHK Row Houses', 'Possession: Dec 2025', 'Serene Environment'],
@@ -112,11 +112,11 @@ export const projects: Project[] = [
         themeColor: '#16a085' // Teal Serenity
     },
     {
-        id: 'arezo',
+        id: 'kolte-patil-life-republic-arezo-efficient-2-bhk-flats-hinjewadi',
         title: 'Arezo',
         category: 'Residential',
         location: 'Sector R1',
-        price: 'Request Price',
+        price: '₹72 Lakhs*',
         image: 'https://liferepublic.in/images/home/arezo-thumb.webp',
         description: 'Focus on 2 BHK flats with efficient layouts and modern amenities.',
         features: ['2 BHK', 'Possession: Oct 2025', 'Efficient Design'],

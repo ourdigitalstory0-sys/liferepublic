@@ -1,42 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { motion } from 'framer-motion';
+import { api } from '../../services/api';
+import type { Amenity } from '../../lib/types';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-const amenities = [
-    {
-        image: "https://liferepublic.in/images/homeaminities/aminities/1708779581amenities-02.webp",
-        title: "Grand Clubhouse",
-        description: "A sprawling clubhouse for social gatherings and recreation."
-    },
-    {
-        image: "https://liferepublic.in/images/homeaminities/aminities/1714995734Boulevard%201-%20DSC_2081-%20911%20x%20500%20copy.webp",
-        title: "Green Boulevards",
-        description: "Lush green pathways for peaceful walks and nature connect."
-    },
-    {
-        image: "https://liferepublic.in/images/homeaminities/aminities/1714995818Swimming-pool.webp",
-        title: "Infinity Pool",
-        description: "Relax and rejuvenate in our temperature-controlled swimming pool."
-    },
-    {
-        image: "https://liferepublic.in/images/homeaminities/aminities/1714995633Boulevard%202-%20DSC_2109-%20911%20x%20500%20copy.webp",
-        title: "Landscaped Gardens",
-        description: "Beautifully manicured gardens that soothe your senses."
-    },
-    {
-        image: "https://liferepublic.in/images/homeaminities/aminities/1708779581amenities-02.webp", // Reusing for demo, ideally different
-        title: "Sports Arena",
-        description: "World-class facilities for tennis, basketball, and more."
-    }
-];
-
 export const AmenitiesCarousel: React.FC = () => {
+    const [amenities, setAmenities] = useState<Amenity[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadAmenities = async () => {
+            try {
+                const data = await api.amenities.getAll();
+                // Filter only amenities with images for the carousel
+                setAmenities(data.filter(a => a.image_url));
+            } catch (error) {
+                console.error('Failed to load amenities:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        loadAmenities();
+    }, []);
+
+    const displayAmenities = amenities.length > 0 ? amenities : [
+        {
+            image_url: "https://liferepublic.in/images/homeaminities/aminities/1708779581amenities-02.webp",
+            title: "Grand Clubhouse",
+            description: "A sprawling clubhouse for social gatherings and recreation."
+        },
+        {
+            image_url: "https://liferepublic.in/images/homeaminities/aminities/1714995734Boulevard%201-%20DSC_2081-%20911%20x%20500%20copy.webp",
+            title: "Green Boulevards",
+            description: "Lush green pathways for peaceful walks and nature connect."
+        },
+        {
+            image_url: "https://liferepublic.in/images/homeaminities/aminities/1714995818Swimming-pool.webp",
+            title: "Infinity Pool",
+            description: "Relax and rejuvenate in our temperature-controlled swimming pool."
+        },
+        {
+            image_url: "https://liferepublic.in/images/homeaminities/aminities/1714995633Boulevard%202-%20DSC_2109-%20911%20x%20500%20copy.webp",
+            title: "Landscaped Gardens",
+            description: "Beautifully manicured gardens that soothe your senses."
+        },
+        {
+            image_url: "https://liferepublic.in/images/homeaminities/aminities/1708779581amenities-02.webp",
+            title: "Sports Arena",
+            description: "World-class facilities for tennis, basketball, and more."
+        }
+    ];
+
+    if (loading) return null; // Or a spinner
+
     return (
         <section className="py-24 bg-primary overflow-hidden">
             <div className="container mx-auto px-4">
@@ -84,12 +106,15 @@ export const AmenitiesCarousel: React.FC = () => {
                     }}
                     className="pb-16"
                 >
-                    {amenities.map((item, index) => (
+                    {displayAmenities.map((item, index) => (
                         <SwiperSlide key={index}>
                             <div className="group relative h-[400px] rounded-2xl overflow-hidden shadow-lg border border-gray-100">
                                 <img
-                                    src={item.image}
+                                    src={item.image_url}
                                     alt={item.title}
+                                    width="400"
+                                    height="400"
+                                    loading="lazy"
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
