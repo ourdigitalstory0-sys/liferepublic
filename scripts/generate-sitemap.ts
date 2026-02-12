@@ -1,8 +1,10 @@
+
 import fs from 'fs';
 import path from 'path';
 import { projects } from '../src/data/projects';
 
 const DOMAIN = 'https://life-republic.in';
+const PUBLIC_DIR = path.resolve(process.cwd(), 'public');
 
 const staticRoutes = [
     '/',
@@ -27,67 +29,43 @@ const staticRoutes = [
 ];
 
 function generateSitemap() {
-    const urls = [];
+    console.log('🗺️  Generating Sitemap...');
 
-    // Add static routes
-    staticRoutes.forEach((route) => {
-        urls.push({
-            loc: `${DOMAIN}${route === '/' ? '' : route}`,
-            lastmod: new Date().toISOString().split('T')[0],
-            changefreq: 'weekly',
-            priority: route === '/' ? '1.0' : '0.8',
-        });
-    });
+    const projectRoutes = projects.map(p => `/projects/${p.id}`);
+    const allRoutes = [...staticRoutes, ...projectRoutes];
 
-    // Add project routes
-    projects.forEach((project) => {
-        urls.push({
-            loc: `${DOMAIN}/projects/${project.id}`,
-            lastmod: new Date().toISOString().split('T')[0],
-            changefreq: 'weekly',
-            priority: '0.9',
-        });
-    });
-
-    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+    const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${urls
-            .map(
-                (url) => `
-  <url>
-    <loc>${url.loc}</loc>
-    <lastmod>${url.lastmod}</lastmod>
-    <changefreq>${url.changefreq}</changefreq>
-    <priority>${url.priority}</priority>
-  </url>`
-            )
-            .join('')}
+${allRoutes.map(route => `  <url>
+    <loc>${DOMAIN}${route}</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>${route === '/' ? '1.0' : route.startsWith('/projects/') ? '0.9' : '0.8'}</priority>
+  </url>`).join('\n')}
 </urlset>`;
 
-    const publicDir = path.resolve(process.cwd(), 'public');
-    if (!fs.existsSync(publicDir)) {
-        fs.mkdirSync(publicDir);
-    }
-
-    fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemap);
-    console.log('✅ sitemap.xml generated successfully!');
+    fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapContent);
+    console.log(`✅ Sitemap generated with ${allRoutes.length} URLs.`);
 }
 
 function generateRobots() {
-    const robots = `User-agent: *
+    console.log('🤖 Generating robots.txt...');
+    const robotsContent = `User-agent: *
 Allow: /
 Sitemap: ${DOMAIN}/sitemap.xml
 `;
-
-    const publicDir = path.resolve(process.cwd(), 'public');
-    fs.writeFileSync(path.join(publicDir, 'robots.txt'), robots);
-    console.log('✅ robots.txt generated successfully!');
+    fs.writeFileSync(path.join(PUBLIC_DIR, 'robots.txt'), robotsContent);
+    console.log('✅ robots.txt generated.');
 }
 
 try {
+    if (!fs.existsSync(PUBLIC_DIR)) {
+        fs.mkdirSync(PUBLIC_DIR, { recursive: true });
+    }
     generateSitemap();
     generateRobots();
+    console.log('✨ SEO assets updated successfully.');
 } catch (error) {
-    console.error('Error generating sitemap:', error);
+    console.error('❌ Failed to generate SEO assets:', error);
     process.exit(1);
 }
