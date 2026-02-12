@@ -68,9 +68,9 @@ async function prerender() {
 
     const isServerUp = await waitForServer();
     if (!isServerUp) {
-        console.error('❌ Server failed to start within timeout.');
+        console.error('❌ Server failed to start within timeout. Prerendering skipped (falling back to SPA).');
         previewServer.kill();
-        process.exit(1);
+        process.exit(0); // Soft fail: Deploy SPA even if prerender fails
     }
 
     let browser;
@@ -90,26 +90,22 @@ async function prerender() {
             ],
         });
     } catch (error) {
-        console.error('❌ Failed to launch Puppeteer:', error);
+        console.error('❌ Failed to launch Puppeteer. Prerendering skipped (falling back to SPA).', error);
         previewServer.kill();
-        process.exit(1);
+        process.exit(0); // Soft fail
     }
 
     try {
         for (const route of routes) {
+            // ... (rest of the loop is fine, inner catch already handles route errors)
             const page = await browser.newPage();
             try {
-                // Set viewport
                 await page.setViewport({ width: 1280, height: 800 });
-
                 const url = `${DOMAIN}${route}`;
                 console.log(`Rendering: ${route}`);
-
-                await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 }); // Increased timeout
-
+                await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
                 await page.waitForSelector('#root', { timeout: 10000 });
 
-                // Helper to fix relative paths
                 await page.evaluate(() => {
                     document.querySelectorAll('script[src^="/"]').forEach((el) => {
                         el.setAttribute('src', 'https://life-republic.in' + el.getAttribute('src'));
@@ -123,29 +119,26 @@ async function prerender() {
                 });
 
                 const content = await page.content();
-
                 const filePath = route === '/'
                     ? path.join(OUT_DIR, 'index.html')
                     : path.join(OUT_DIR, route, 'index.html');
 
                 const dir = path.dirname(filePath);
-                if (!fs.existsSync(dir)) {
-                    fs.mkdirSync(dir, { recursive: true });
-                }
-
+                if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
                 fs.writeFileSync(filePath, content);
 
             } catch (e) {
                 console.error(`⚠️ Failed to render ${route}:`, e);
-                // Don't fail the whole build for one route, but log it.
             } finally {
                 await page.close();
             }
         }
+    } catch (e) {
+        console.error('❌ Critical error during rendering loop:', e);
     } finally {
         if (browser) await browser.close();
         previewServer.kill();
-        console.log('✅ Prerendering Finished.');
+        console.log('✅ Prerendering Finished (or skipped gracefully).');
         process.exit(0);
     }
 }
