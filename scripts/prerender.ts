@@ -48,10 +48,25 @@ async function prerender() {
     // Give server time to start
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+    let browser;
+    try {
+        browser = await puppeteer.launch({
+            headless: true,
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage', // Critical for CI environments with limited shared memory
+                '--disable-gpu',
+                '--no-zygote',
+                '--single-process'
+            ],
+            // executablePath: process.env.CHROME_BIN || undefined // Optional: use system chrome if available
+        });
+    } catch (error) {
+        console.error('❌ Failed to launch Puppeteer:', error);
+        previewServer.kill();
+        process.exit(1);
+    }
 
     for (const route of routes) {
         const page = await browser.newPage();
