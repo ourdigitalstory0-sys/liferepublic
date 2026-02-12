@@ -31,7 +31,7 @@ export const AmenitiesCarousel: React.FC = () => {
 
     const displayAmenities = amenities.length > 0 ? amenities : [
         {
-            image_url: "https://liferepublic.in/images/homeaminities/aminities/1708779581amenities-02.webp",
+            image_url: "https://liferepublic.in/images/gallery/clubhouse.webp",
             title: "Grand Clubhouse",
             description: "A sprawling clubhouse for social gatherings and recreation."
         },
