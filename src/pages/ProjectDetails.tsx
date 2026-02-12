@@ -3,7 +3,7 @@ import { EMICalculator } from '../components/tools/EMICalculator';
 import { ROICalculator } from '../components/tools/ROICalculator';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, CheckCircle, Phone, MessageSquare } from 'lucide-react';
+import { MapPin, CheckCircle, Phone, MessageSquare, ZoomIn } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { api } from '../services/api';
 import type { Project, Amenity } from '../lib/types';
@@ -13,6 +13,7 @@ import { SimilarProjects } from '../components/sections/SimilarProjects';
 import { SEO } from '../components/seo/SEO';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { ShareButtons } from '../components/ui/ShareButtons';
+import { ImageModal } from '../components/ui/ImageModal';
 import { generateSemanticKeywords, generateSemanticDescription, generateSemanticTitle } from '../lib/seo-utils';
 import { generateProjectSchema } from '../utils/schemaGenerator';
 
@@ -22,6 +23,17 @@ const ProjectDetails: React.FC = () => {
     const [project, setProject] = useState<Project | null>(null);
     const [globalAmenities, setGlobalAmenities] = useState<Amenity[]>([]);
     const [loading, setLoading] = useState(true);
+
+    // Lightbox State
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [currentImage, setCurrentImage] = useState<string | null>(null);
+    const [currentAlt, setCurrentAlt] = useState('');
+
+    const openLightbox = (image: string, alt: string) => {
+        setCurrentImage(image);
+        setCurrentAlt(alt);
+        setLightboxOpen(true);
+    };
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -150,6 +162,66 @@ const ProjectDetails: React.FC = () => {
                             ))}
                         </div>
 
+                        {/* Master Layout & Floor Plans Section */}
+                        {(project.masterLayout || (project.floorPlans && project.floorPlans.length > 0)) && (
+                            <div className="mb-12">
+                                <h3 className="text-2xl font-serif font-bold mb-6 text-secondary">Layouts & Plans</h3>
+
+                                {/* Master Layout */}
+                                {project.masterLayout && (
+                                    <div className="mb-8">
+                                        <h4 className="text-lg font-semibold mb-4 text-gray-700">Master Layout</h4>
+                                        <button
+                                            onClick={() => openLightbox(project.masterLayout!, `${project.title} - Master Layout`)}
+                                            className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden border border-gray-200 group bg-gray-50"
+                                        >
+                                            <img
+                                                src={project.masterLayout}
+                                                alt={`${project.title} Master Layout`}
+                                                className="w-full h-full object-contain"
+                                            />
+                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                                <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 flex items-center gap-2">
+                                                    <ZoomIn size={16} />
+                                                    <span className="text-sm font-medium">View Full Size</span>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                )}
+
+                                {/* Floor Plans */}
+                                {project.floorPlans && project.floorPlans.length > 0 && (
+                                    <div>
+                                        <h4 className="text-lg font-semibold mb-4 text-gray-700">Floor Plans</h4>
+                                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                            {project.floorPlans.map((plan, idx) => (
+                                                <button
+                                                    key={idx}
+                                                    onClick={() => openLightbox(plan, `${project.title} - Floor Plan ${idx + 1}`)}
+                                                    className="relative aspect-[4/3] rounded-xl overflow-hidden border border-gray-200 group bg-gray-50 flex flex-col"
+                                                >
+                                                    <div className="flex-grow w-full relative">
+                                                        <img
+                                                            src={plan}
+                                                            alt={`Floor Plan ${idx + 1}`}
+                                                            className="w-full h-full object-contain p-2"
+                                                        />
+                                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                                            <ZoomIn size={20} className="text-gray-800 opacity-0 group-hover:opacity-100 transition-all transform scale-75 group-hover:scale-100" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-full py-2 bg-white border-t border-gray-100 text-center text-sm font-medium text-gray-600">
+                                                        Type {idx + 1}
+                                                    </div>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
                         {/* Amenities Section */}
                         {project.amenities && project.amenities.length > 0 && (
                             <div className="mb-12">
@@ -256,6 +328,12 @@ const ProjectDetails: React.FC = () => {
                     </div>
                 </div>
             </section>
+            <ImageModal
+                isOpen={lightboxOpen}
+                onClose={() => setLightboxOpen(false)}
+                imageSrc={currentImage}
+                altText={currentAlt}
+            />
         </div>
     );
 };

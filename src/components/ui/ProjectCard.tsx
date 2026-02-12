@@ -13,14 +13,16 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = false }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState<'overview' | 'amenities' | 'plans'>('overview');
-    const [previewImage, setPreviewImage] = useState<string | null>(null);
+    const [activeTab, setActiveTab] = useState<'overview' | 'amenities'>('overview');
+
+
+
     const navigate = useNavigate();
 
     // Default accent color if themeColor is not provided
     const themeColor = project.themeColor || '#C5A059';
 
-    console.log('ProjectCard:', project.title, { masterLayout: project.masterLayout, floorPlans: project.floorPlans });
+
 
     return (
         <>
@@ -42,13 +44,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                 />
 
                 {/* Image Section */}
-                <div className="relative h-72 overflow-hidden">
+                <div className="relative h-72 overflow-hidden cursor-pointer" onClick={() => navigate(`/projects/${project.id}`)}>
                     <img
                         src={project.image}
                         alt={`Kolte Patil Life Republic Township - ${project.title} - ${project.category}`}
                         loading={priority ? "eager" : "lazy"}
-                        // @ts-ignore - fetchPriority is valid but React types might not know it yet
-                        fetchpriority={priority ? "high" : "auto"}
+                        // @ts-ignore
+                        fetchPriority={priority ? "high" : "auto"}
                         width="400"
                         height="300"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -56,7 +58,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                     <div className="absolute top-4 left-4 z-20">
                         <span
                             className="text-white px-3 py-1 text-xs font-bold tracking-wider uppercase rounded-full shadow-lg backdrop-blur-md border border-white/20"
-                            style={{ backgroundColor: `${themeColor}CC` }} // 80% opacity
+                            style={{ backgroundColor: `${themeColor}CC` }}
                         >
                             {project.category}
                         </span>
@@ -77,8 +79,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                 <div className="p-6 flex flex-col flex-grow relative bg-white">
                     <div className="flex items-center justify-between mb-2">
                         <h3
-                            className="text-2xl font-serif font-bold transition-colors"
+                            className="text-2xl font-serif font-bold transition-colors cursor-pointer hover:opacity-80"
                             style={{ color: '#333' }}
+                            onClick={() => navigate(`/projects/${project.id}`)}
                         >
                             {project.title}
                         </h3>
@@ -90,7 +93,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
 
                     {/* Tabs Navigation */}
                     <div className="flex border-b border-gray-100 mb-5">
-                        {(['overview', 'amenities', 'plans'] as const).map((tab) => (
+                        {(['overview', 'amenities'] as const).map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
@@ -152,64 +155,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                                 </div>
                             )}
 
-                            {activeTab === 'plans' && (
-                                <div className="space-y-3 h-full">
-                                    {!previewImage ? (
-                                        <div className="overflow-y-auto max-h-[140px] pr-1 custom-scrollbar space-y-3">
-                                            {project.masterLayout && (
-                                                <button
-                                                    onClick={() => setPreviewImage(project.masterLayout!)}
-                                                    className="w-full text-left flex items-center p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group/item border border-gray-100"
-                                                >
-                                                    <div className="w-12 h-12 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
-                                                        <img src={project.masterLayout} alt="Master Layout" className="w-full h-full object-cover" />
-                                                    </div>
-                                                    <div className="ml-3">
-                                                        <p className="text-xs font-bold text-gray-700">Master Layout</p>
-                                                        <p className="text-[10px]" style={{ color: themeColor }}>Click to view</p>
-                                                    </div>
-                                                </button>
-                                            )}
-                                            {project.floorPlans?.map((plan, idx) => (
-                                                <button
-                                                    key={idx}
-                                                    onClick={() => setPreviewImage(plan)}
-                                                    className="w-full text-left flex items-center p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group/item border border-gray-100"
-                                                >
-                                                    <div className="w-12 h-12 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
-                                                        <img src={plan} alt={`Floor Plan ${idx + 1} - ${project.title}`} className="w-full h-full object-cover" />
-                                                    </div>
-                                                    <div className="ml-3">
-                                                        <p className="text-xs font-bold text-gray-700">Floor Plan {idx + 1}</p>
-                                                        <p className="text-[10px]" style={{ color: themeColor }}>Click to view</p>
-                                                    </div>
-                                                </button>
-                                            ))}
-                                            {!project.masterLayout && !project.floorPlans?.length && (
-                                                <div className="text-center text-gray-400 text-xs py-4">
-                                                    Layouts coming soon
-                                                </div>
-                                            )}
-                                        </div>
-                                    ) : (
-                                        <div className="relative h-full min-h-[140px] bg-gray-50 rounded-lg overflow-hidden group/preview border border-gray-200">
-                                            <button
-                                                onClick={() => setPreviewImage(null)}
-                                                className="absolute top-2 left-2 z-10 p-1.5 bg-white/90 rounded-full shadow-sm hover:bg-white text-gray-600 transition-colors"
-                                            >
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-                                                </svg>
-                                            </button>
-                                            <img
-                                                src={previewImage}
-                                                alt="Plan Preview"
-                                                className="w-full h-full object-contain p-2"
-                                            />
-                                        </div>
-                                    )}
-                                </div>
-                            )}
+
                         </motion.div>
                     </div>
 
@@ -246,6 +192,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                 onClose={() => setIsModalOpen(false)}
                 projectName={project.title}
             />
+
+
         </>
     );
 };

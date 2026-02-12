@@ -268,8 +268,8 @@ const Home: React.FC = () => {
                     >
                         <h2 className="text-4xl font-serif font-bold mb-4 text-secondary">Life at Kolte Patil Life Republic</h2>
                         <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
-                        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-                            An ecosystem designed for a holistic lifestyle within Kolte Patil Life Republic Township Hinjewadi.
+                        <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
+                            Discover a world beyond just a home. <strong>Life Republic Township</strong> offers an ecosystem designed for a holistic lifestyle, blending <strong>urban luxury</strong> with nature's tranquility in the heart of <strong>Hinjewadi, Pune</strong>.
                         </p>
                     </motion.div>
 
@@ -279,39 +279,51 @@ const Home: React.FC = () => {
                             whileHover={{ y: -5 }}
                             className="md:col-span-2 bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between h-64 relative overflow-hidden group"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 to-secondary/40 z-10"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 to-secondary/50 z-10"></div>
                             <img src="https://liferepublic.in/images/gallery/nature-nest.webp" alt="Nature" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             <div className="relative z-20 text-white">
                                 <div className="bg-white/20 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center mb-4">
                                     <Trees size={24} />
                                 </div>
                                 <h3 className="text-2xl font-bold mb-2">3.5 Acre Urban Park</h3>
-                                <p className="text-gray-200">A sprawling green lung with 7,700+ trees and botanical gardens.</p>
+                                <p className="text-gray-100 font-medium leading-relaxed">
+                                    Refresh your senses in our massive <strong>3.5-acre Urban Park</strong>, a green lung featuring over <strong>7,700 trees</strong>, botanical gardens, and jogging tracks. Perfect for morning walks and weekend family picnics within the township.
+                                </p>
                             </div>
                         </motion.div>
 
                         {/* Standard Item */}
                         <motion.div
                             whileHover={{ y: -5 }}
-                            className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-center h-64"
+                            className="bg-secondary text-white rounded-2xl p-8 shadow-md border border-secondary flex flex-col justify-center h-64 group relative overflow-hidden"
                         >
-                            <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mb-4 text-accent">
+                            {/* Decorative Background Element */}
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
+
+                            <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-4 text-accent">
                                 <Dumbbell size={24} />
                             </div>
-                            <h3 className="text-xl font-bold text-secondary mb-2">World-Class Sports</h3>
-                            <p className="text-gray-600 text-sm">Cricket pitch, Olympic-size pool, and 4km jogging track.</p>
+                            <h3 className="text-xl font-bold text-white mb-2">World-Class Sports Arena</h3>
+                            <p className="text-gray-300 text-sm leading-relaxed">
+                                Stay active with our <strong>Olympic-size swimming pool</strong>, professional cricket pitch, tennis courts, and a 4km spine road dedicated to cycling and jogging enthusiasts.
+                            </p>
                         </motion.div>
 
                         {/* Standard Item */}
                         <motion.div
                             whileHover={{ y: -5 }}
-                            className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-center h-64"
+                            className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 flex flex-col justify-center h-64 group relative overflow-hidden"
                         >
+                            {/* Decorative Background Element */}
+                            <div className="absolute bottom-0 left-0 w-24 h-24 bg-accent/5 rounded-full blur-2xl -ml-5 -mb-5 pointer-events-none"></div>
+
                             <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mb-4 text-accent">
                                 <Music size={24} />
                             </div>
                             <h3 className="text-xl font-bold text-secondary mb-2">United Sky Theatre</h3>
-                            <p className="text-gray-600 text-sm">Open-air amphitheatre for community events and cultural nights.</p>
+                            <p className="text-gray-600 text-sm leading-relaxed">
+                                Experience culture and community at the <strong>Open-Air Amphitheatre</strong>. From festive celebrations to cultural nights, it's the vibrant heart of social life at <strong>Life Republic</strong>.
+                            </p>
                         </motion.div>
 
                         {/* Large Item */}
@@ -319,14 +331,16 @@ const Home: React.FC = () => {
                             whileHover={{ y: -5 }}
                             className="md:col-span-2 bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between h-64 relative overflow-hidden group"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-accent/90 to-accent/40 z-10"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-accent/95 to-accent/50 z-10"></div>
                             <img src="https://liferepublic.in/images/gallery/clubhouse.webp" alt="Clubhouse" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             <div className="relative z-20 text-white">
                                 <div className="bg-white/20 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center mb-4">
                                     <ShieldCheck size={24} />
                                 </div>
-                                <h3 className="text-2xl font-bold mb-2">Smart & Secure</h3>
-                                <p className="text-gray-200">Multi-level security, fire station, and 'Planet App' for smart community living.</p>
+                                <h3 className="text-2xl font-bold mb-2">Smart & Secure Living</h3>
+                                <p className="text-gray-100 font-medium leading-relaxed">
+                                    Your safety is our priority. With <strong>multi-tier security</strong>, a dedicated fire station, and the smart <strong>'Planet App'</strong> for seamless community management, enjoy peace of mind in a secure <strong>gated community in Hinjewadi</strong>.
+                                </p>
                             </div>
                         </motion.div>
                     </div>
