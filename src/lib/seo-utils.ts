@@ -73,8 +73,14 @@ export const generateLocationKeywords = (location: string): string => {
 };
 
 export const generateSemanticTitle = (ctx: SEOContext): string => {
+    const hasBranding = ctx.title.includes('Life Republic');
+
     // High-CTR Title Templates
-    const templates = [
+    const templates = hasBranding ? [
+        `${ctx.title} | ${ctx.category} in ${ctx.location}`,
+        `${ctx.title} - Stores offering ${ctx.category} | Starts ${ctx.price}`,
+        `${ctx.title} | Official Brochure & Pricing`
+    ] : [
         `${ctx.title} at Life Republic | Premium ${ctx.category} in ${ctx.location}`,
         `${ctx.title} Hinjewadi | ${ctx.category} starting ${ctx.price} | Kolte Patil`,
         `Buy ${ctx.category} in ${ctx.title} | Best Township in ${ctx.location}`
