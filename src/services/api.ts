@@ -1,6 +1,6 @@
 import { supabase } from '../lib/supabase';
 import type { Banner, Project, Lead, Amenity } from '../lib/types';
-
+import { emailService } from './email';
 
 
 
@@ -138,6 +138,16 @@ export const api = {
         create: async (lead: Omit<Lead, 'id' | 'created_at' | 'status'>) => {
             const { data, error } = await supabase.from('leads').insert({ ...lead, status: 'New' }).select().single();
             if (error) throw error;
+
+            // Send email notification (non-blocking)
+            emailService.sendLeadNotification({
+                name: lead.name,
+                phone: lead.phone,
+                email: lead.email,
+                message: lead.message,
+                project: (lead as any).project_id ? `Project ID: ${(lead as any).project_id}` : undefined
+            });
+
             return data;
         },
         updateStatus: async (id: number, status: 'New' | 'Contacted' | 'Closed') => {
