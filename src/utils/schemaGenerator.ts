@@ -22,7 +22,18 @@ export const generateProjectSchema = (project: Project) => {
         offers: {
             '@type': 'Offer',
             priceCurrency: 'INR',
-            price: project.price.replace(/[^0-9.]/g, '') || '0', // Basic cleanup
+            price: (() => {
+                const priceStr = project.price.replace(/[^0-9.CrLakhs]/g, '');
+                let value = 0;
+                if (priceStr.includes('Cr')) {
+                    value = parseFloat(priceStr) * 10000000;
+                } else if (priceStr.includes('Lakhs')) {
+                    value = parseFloat(priceStr) * 100000;
+                } else {
+                    value = parseFloat(priceStr.replace(/[^0-9.]/g, '')) || 0;
+                }
+                return value.toString();
+            })(),
             availability: 'https://schema.org/InStock',
             url: `${DOMAIN}/projects/${project.id}`,
         },

@@ -116,7 +116,6 @@ const Home: React.FC = () => {
     return (
         <div className="w-full">
             <SEO
-                title="Kolte Patil Life Republic Township Hinjewadi"
                 description="Official Guide to Life Republic by Kolte Patil. Explore 2, 3, 4 BHK flats and villas in Hinjewadi. Check current pricing, floor plans, possession dates, and latest reviews."
                 keywords="Kolte Patil Life Republic Township Hinjewadi, Life Republic Price, Life Republic Hinjewadi Location, 2 BHK in Hinjewadi, 3 BHK in Hinjewadi, 4 BHK Villas in Pune, Life Republic Atmos, Life Republic Aros"
                 canonical="/"
