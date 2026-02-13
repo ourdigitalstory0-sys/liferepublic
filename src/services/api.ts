@@ -136,7 +136,7 @@ export const api = {
             return data;
         },
         create: async (lead: Omit<Lead, 'id' | 'created_at' | 'status'>) => {
-            const { data, error } = await supabase.from('leads').insert({ ...lead, status: 'New' }).select().single();
+            const { error } = await supabase.from('leads').insert({ ...lead, status: 'New' });
             if (error) throw error;
 
             // Send email notification (non-blocking)
@@ -148,7 +148,7 @@ export const api = {
                 project: (lead as any).project_id ? `Project ID: ${(lead as any).project_id}` : undefined
             });
 
-            return data;
+            return null;
         },
         updateStatus: async (id: number, status: 'New' | 'Contacted' | 'Closed') => {
             const { data, error } = await supabase.from('leads').update({ status }).eq('id', id).select().single();
