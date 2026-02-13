@@ -3,6 +3,25 @@ import type { Banner, Project, Lead, Amenity } from '../lib/types';
 
 
 
+
+// Map DB IDs (short) to SEO IDs (long)
+const ID_TO_SLUG: Record<string, string> = {
+    'duet': 'kolte-patil-life-republic-duet-premium-2-bhk-flats-hinjewadi',
+    'arezo': 'kolte-patil-life-republic-arezo-efficient-2-bhk-flats-hinjewadi',
+    'canvas': 'kolte-patil-life-republic-canvas-luxury-3-4-bhk-flats-hinjewadi',
+    'atmos': 'kolte-patil-life-republic-atmos-modern-2-3-bhk-flats-hinjewadi',
+    '24k-espada': 'kolte-patil-life-republic-24k-espada-ultra-luxury-row-houses-hinjewadi',
+    'sound-of-soul': 'kolte-patil-life-republic-sound-of-soul-luxury-4-bhk-row-houses-hinjewadi',
+    'aros': 'kolte-patil-life-republic-aros-premium-2-3-bhk-flats-hinjewadi',
+    'qrious': 'kolte-patil-life-republic-qrious-smart-2-3-bhk-homes-hinjewadi'
+};
+
+// Map SEO IDs (long) to DB IDs (short)
+const SLUG_TO_ID: Record<string, string> = Object.entries(ID_TO_SLUG).reduce((acc, [key, value]) => {
+    acc[value] = key;
+    return acc;
+}, {} as Record<string, string>);
+
 export const api = {
     banners: {
         getAll: async () => {
@@ -36,17 +55,22 @@ export const api = {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return data.map((p: any) => ({
                 ...p,
+                id: ID_TO_SLUG[p.id] || p.id, // Use mapped slug if available, else original ID
                 masterLayout: p.master_layout,
                 floorPlans: p.floor_plans,
                 themeColor: p.theme_color
             })) as Project[];
         },
         getById: async (id: string) => {
-            const { data, error } = await supabase.from('projects').select('*').eq('id', id).single();
+            // Check if input is a slug that needs mapping to a short ID
+            const dbId = SLUG_TO_ID[id] || id;
+
+            const { data, error } = await supabase.from('projects').select('*').eq('id', dbId).single();
             if (error) throw error;
 
             return {
                 ...data,
+                id: ID_TO_SLUG[data.id] || data.id, // Ensure returned object has the long slug
                 masterLayout: data.master_layout,
                 floorPlans: data.floor_plans,
                 themeColor: data.theme_color

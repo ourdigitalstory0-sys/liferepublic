@@ -19,6 +19,7 @@ import { NRICorner } from './pages/NRICorner';
 import { Testimonials } from './pages/Testimonials';
 import { MediaCenter } from './pages/MediaCenter';
 import { AdminLogin } from './pages/admin/AdminLogin';
+import { AdminSignup } from './pages/admin/AdminSignup';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { ProtectedRoute } from './components/admin/ProtectedRoute';
 import { AdminLayout } from './components/admin/AdminLayout';
@@ -269,6 +270,7 @@ function App() {
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/signup" element={<AdminSignup />} />
           <Route path="/admin" element={<ProtectedRoute />}>
             <Route element={<AdminLayout />}>
               <Route index element={<Navigate to="/admin/dashboard" replace />} />
