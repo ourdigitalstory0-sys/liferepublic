@@ -35,9 +35,9 @@ const Projects: React.FC = () => {
         <div className="pt-24 pb-20 bg-gray-50 min-h-screen">
             <Breadcrumbs />
             <SEO
-                title="Projects in Kolte Patil Life Republic Township Hinjewadi"
-                description="Explore all residential projects in Kolte Patil Life Republic Township Hinjewadi. 1, 2, 3 BHK flats, row houses, and villas. Check current pricing and availability."
-                keywords="Kolte Patil Life Republic Projects, Kolte Patil Life Republic Township Hinjewadi, Flats in Hinjewadi, 2 BHK in Life Republic"
+                title="Projects in Kolte Patil Life Republic Township Hinjewadi | 1, 2, 3 BHK & Villas"
+                description="Explore all residential projects in Kolte Patil Life Republic Township Hinjewadi. Choose from 1, 2, 3 BHK flats, row houses, and luxury villas. Check current pricing, floor plans, and availability."
+                keywords="Kolte Patil Life Republic Projects, Kolte Patil Life Republic Township Hinjewadi, Flats in Hinjewadi, 2 BHK in Life Republic, 3 BHK Flats Pune, Row Houses in Hinjewadi, Villas in Pune, New Launch Projects Hinjewadi, Ready Possession Flats"
                 canonical="/projects"
             />
             <div className="container mx-auto px-4">

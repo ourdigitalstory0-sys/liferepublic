@@ -8,9 +8,11 @@ export const generateProjectSchema = (project: Project) => {
             project.image,
         ];
 
+    const bedrooms = parseInt(project.features[0].match(/\d+/)?.[0] || '0', 10);
+
     const productSchema = {
         '@context': 'https://schema.org',
-        '@type': 'Product', // Or 'RealEstateListing' or 'SingleFamilyResidence'
+        '@type': ['Product', 'RealEstateListing', 'Apartment'],
         name: `Kolte Patil Life Republic ${project.title}`,
         description: project.description,
         image: images,
@@ -36,6 +38,20 @@ export const generateProjectSchema = (project: Project) => {
             })(),
             availability: 'https://schema.org/InStock',
             url: `${DOMAIN}/projects/${project.id}`,
+            validFrom: new Date().toISOString(),
+        },
+        numberOfRooms: bedrooms > 0 ? bedrooms : undefined,
+        amenityFeature: project.amenities?.map((amenity) => ({
+            '@type': 'LocationFeatureSpecification',
+            name: amenity,
+            value: true,
+        })),
+        address: {
+            '@type': 'PostalAddress',
+            streetAddress: project.location,
+            addressLocality: 'Hinjewadi',
+            addressRegion: 'Pune',
+            addressCountry: 'IN',
         },
         additionalProperty: project.features.map((feature) => ({
             '@type': 'PropertyValue',
@@ -85,5 +101,31 @@ export const generateFAQSchema = (faqs: { question: string; answer: string }[]) 
                 text: faq.answer,
             },
         })),
+    };
+};
+
+export const generateCollectionSchema = (projects: Project[]) => {
+    return {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Kolte Patil Life Republic Projects",
+        "description": "Browse premium 1, 2, 3 BHK flats and villas in Life Republic Township, Hinjewadi.",
+        "url": `${DOMAIN}/projects`,
+        "mainEntity": {
+            "@type": "OfferCatalog",
+            "name": "Properties for Sale",
+            "itemListElement": projects.map((project, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "item": {
+                    "@type": "Offer",
+                    "name": project.title,
+                    "description": project.description,
+                    "url": `${DOMAIN}/projects/${project.id}`,
+                    "price": project.price,
+                    "priceCurrency": "INR"
+                }
+            }))
+        }
     };
 };

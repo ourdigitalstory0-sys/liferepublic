@@ -24,13 +24,23 @@ const SLUG_TO_ID: Record<string, string> = Object.entries(ID_TO_SLUG).reduce((ac
 
 export const api = {
     banners: {
-        getAll: async () => {
+        getAll: async (page = 1, limit = 50) => {
+            const start = (page - 1) * limit;
+            const end = start + limit - 1;
             const { data, error } = await supabase
                 .from('banners')
                 .select('*')
-                .order('order', { ascending: true });
+                .order('order', { ascending: true })
+                .range(start, end);
             if (error) throw error;
             return data as Banner[];
+        },
+        getCount: async () => {
+            const { count, error } = await supabase
+                .from('banners')
+                .select('*', { count: 'exact', head: true });
+            if (error) throw error;
+            return count || 0;
         },
         create: async (banner: Omit<Banner, 'id'>) => {
             const { data, error } = await supabase.from('banners').insert(banner).select().single();
@@ -48,8 +58,13 @@ export const api = {
         }
     },
     projects: {
-        getAll: async () => {
-            const { data, error } = await supabase.from('projects').select('*');
+        getAll: async (page = 1, limit = 50) => {
+            const start = (page - 1) * limit;
+            const end = start + limit - 1;
+            const { data, error } = await supabase
+                .from('projects')
+                .select('*')
+                .range(start, end);
             if (error) throw error;
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -58,6 +73,21 @@ export const api = {
                 id: ID_TO_SLUG[p.id] || p.id, // Use mapped slug if available, else original ID
                 masterLayout: p.master_layout,
                 floorPlans: p.floor_plans,
+                themeColor: p.theme_color
+            })) as Project[];
+        },
+        getFeatured: async (limit = 3) => {
+            const { data, error } = await supabase
+                .from('projects')
+                .select('id, title, category, location, price, image, overview, status, features, amenities, rera, theme_color')
+                .limit(limit);
+
+            if (error) throw error;
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return data.map((p: any) => ({
+                ...p,
+                id: ID_TO_SLUG[p.id] || p.id,
                 themeColor: p.theme_color
             })) as Project[];
         },
@@ -124,16 +154,33 @@ export const api = {
         delete: async (id: string) => {
             const { error } = await supabase.from('projects').delete().eq('id', id);
             if (error) throw error;
+        },
+        getCount: async () => {
+            const { count, error } = await supabase
+                .from('projects')
+                .select('*', { count: 'exact', head: true });
+            if (error) throw error;
+            return count || 0;
         }
     },
     leads: {
-        getAll: async () => {
+        getAll: async (page = 1, limit = 50) => {
+            const start = (page - 1) * limit;
+            const end = start + limit - 1;
             const { data, error } = await supabase
                 .from('leads')
                 .select('*, projects(title)')
-                .order('created_at', { ascending: false });
+                .order('created_at', { ascending: false })
+                .range(start, end);
             if (error) throw error;
             return data;
+        },
+        getCount: async () => {
+            const { count, error } = await supabase
+                .from('leads')
+                .select('*', { count: 'exact', head: true });
+            if (error) throw error;
+            return count || 0;
         },
         create: async (lead: Omit<Lead, 'id' | 'created_at' | 'status'>) => {
             const { error } = await supabase.from('leads').insert({ ...lead, status: 'New' });

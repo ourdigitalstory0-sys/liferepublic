@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 import type { Project, Amenity } from '../../lib/types';
 import { Button } from '../ui/Button';
-import { Plus, Trash2, Edit2, Save, X, Image as ImageIcon, Check, Star } from 'lucide-react';
+import { Plus, Trash2, Edit2, Save, X, Image as ImageIcon, Check, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const ProjectsManager: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
@@ -10,6 +10,9 @@ export const ProjectsManager: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState<'basic' | 'details' | 'media' | 'gallery' | 'plans' | 'amenities'>('basic');
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const LIMIT = 10;
 
     // Initial empty state for a new project
     const emptyProject: Partial<Project> = {
@@ -27,15 +30,18 @@ export const ProjectsManager: React.FC = () => {
 
     useEffect(() => {
         loadProjects();
-    }, []);
+    }, [page]);
 
     const loadProjects = async () => {
         try {
-            const [data, amenitiesData] = await Promise.all([
-                api.projects.getAll(),
+            setLoading(true);
+            const [data, count, amenitiesData] = await Promise.all([
+                api.projects.getAll(page, LIMIT),
+                api.projects.getCount(),
                 api.amenities.getAll()
             ]);
             setProjects(data);
+            setTotalPages(Math.ceil(count / LIMIT));
             setGlobalAmenities(amenitiesData);
         } catch (error) {
             console.error('Error loading projects:', error);
@@ -555,7 +561,10 @@ export const ProjectsManager: React.FC = () => {
     return (
         <div className="bg-white rounded-lg shadow p-6">
             <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold font-serif text-gray-800">Projects Directory</h2>
+                <div>
+                    <h2 className="text-xl font-bold font-serif text-gray-800">Projects Directory</h2>
+                    <p className="text-sm text-gray-500 mt-1">Page {page} of {totalPages}</p>
+                </div>
                 <Button onClick={handleCreateNew} size="sm" className="gap-2">
                     <Plus size={16} /> Add Project
                 </Button>
@@ -605,6 +614,29 @@ export const ProjectsManager: React.FC = () => {
                     <div className="text-center py-8 text-gray-500">No projects found. Add your first one!</div>
                 )}
             </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+                <div className="p-4 border-t border-gray-200 flex justify-between items-center mt-4">
+                    <button
+                        onClick={() => setPage(p => Math.max(1, p - 1))}
+                        disabled={page === 1}
+                        className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 text-gray-600"
+                    >
+                        <ChevronLeft size={20} /> Previous
+                    </button>
+                    <div className="text-sm text-gray-600">
+                        Page <span className="font-medium">{page}</span> of <span className="font-medium">{totalPages}</span>
+                    </div>
+                    <button
+                        onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                        disabled={page === totalPages}
+                        className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 text-gray-600"
+                    >
+                        Next <ChevronRight size={20} />
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

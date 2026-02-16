@@ -9,8 +9,8 @@ export const About: React.FC = () => {
             <Breadcrumbs />
             <SEO
                 title="About Kolte Patil Life Republic | 390+ Acre Township in Hinjewadi"
-                description="Learn about Life Republic, a 390-acre integrated township by Kolte Patil in Hinjewadi, Pune. Committed to sustainable living with world-class amenities."
-                keywords="Kolte Patil Developers, Life Republic Township Details, About Life Republic Hinjewadi"
+                description="Learn about Life Republic, a 390-acre integrated township by Kolte Patil in Hinjewadi, Pune. Committed to sustainable living with world-class amenities like 150ft wide roads, schools, and fire stations."
+                keywords="Kolte Patil Developers, Life Republic Township Details, About Life Republic Hinjewadi, Integrated Township Pune, Kolte Patil History, Township in West Pune"
                 canonical="/about"
             />
             <section className="bg-primary pt-20 pb-16">

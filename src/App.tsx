@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import { ProtectedRoute } from './components/admin/ProtectedRoute';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import Home from './pages/Home';
@@ -18,14 +20,22 @@ import { FourBHK } from './pages/landing/FourBHK';
 import { NRICorner } from './pages/NRICorner';
 import { Testimonials } from './pages/Testimonials';
 import { MediaCenter } from './pages/MediaCenter';
-import { AdminLogin } from './pages/admin/AdminLogin';
-import { AdminSignup } from './pages/admin/AdminSignup';
-import { AdminDashboard } from './pages/admin/AdminDashboard';
-import { ProtectedRoute } from './components/admin/ProtectedRoute';
-import { AdminLayout } from './components/admin/AdminLayout';
-import { ImageManager } from './components/admin/ImageManager';
+// Lazy load Admin components
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin').then(module => ({ default: module.AdminLogin })));
+const AdminSignup = lazy(() => import('./pages/admin/AdminSignup').then(module => ({ default: module.AdminSignup })));
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard').then(module => ({ default: module.AdminDashboard })));
+const AdminLayout = lazy(() => import('./components/admin/AdminLayout').then(module => ({ default: module.AdminLayout })));
+const ImageManager = lazy(() => import('./components/admin/ImageManager').then(module => ({ default: module.ImageManager })));
+
+// Loading Component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 import { ExitIntentModal } from './components/ui/ExitIntentModal';
 import { LocationLanding } from './pages/LocationLanding';
+import { NotFound } from './pages/NotFound';
 
 function App() {
   return (
@@ -269,18 +279,38 @@ function App() {
           } />
 
           {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/signup" element={<AdminSignup />} />
+          <Route path="/admin/login" element={
+            <Suspense fallback={<PageLoader />}>
+              <AdminLogin />
+            </Suspense>
+          } />
+          <Route path="/admin/signup" element={
+            <Suspense fallback={<PageLoader />}>
+              <AdminSignup />
+            </Suspense>
+          } />
           <Route path="/admin" element={<ProtectedRoute />}>
-            <Route element={<AdminLayout />}>
+            <Route element={
+              <Suspense fallback={<PageLoader />}>
+                <AdminLayout />
+              </Suspense>
+            }>
               <Route index element={<Navigate to="/admin/dashboard" replace />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="images" element={<div className="p-8"><h1 className="text-2xl font-bold font-serif mb-6">Image Manager</h1><ImageManager /></div>} />
+              <Route path="dashboard" element={
+                <Suspense fallback={<PageLoader />}>
+                  <AdminDashboard />
+                </Suspense>
+              } />
+              <Route path="images" element={
+                <Suspense fallback={<PageLoader />}>
+                  <div className="p-8"><h1 className="text-2xl font-bold font-serif mb-6">Image Manager</h1><ImageManager /></div>
+                </Suspense>
+              } />
             </Route>
           </Route>
 
           {/* Catch-all for 404 */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </SmoothScrolling>

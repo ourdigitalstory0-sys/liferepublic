@@ -1,10 +1,25 @@
-
 import fs from 'fs';
 import path from 'path';
-import { projects } from '../src/data/projects';
+import dotenv from 'dotenv';
+import { createClient } from '@supabase/supabase-js';
+
+// Load environment variables
+dotenv.config();
 
 const DOMAIN = 'https://life-republic.in';
 const PUBLIC_DIR = path.resolve(process.cwd(), 'public');
+
+// Initialize Supabase Client
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+    console.warn('⚠️  Missing Supabase credentials in .env. Sitemap will rely on static routes only.');
+}
+
+const supabase = (supabaseUrl && supabaseKey)
+    ? createClient(supabaseUrl, supabaseKey)
+    : null;
 
 const staticRoutes = [
     '/',
@@ -28,10 +43,44 @@ const staticRoutes = [
     '/location/flats-near-marunji',
 ];
 
-function generateSitemap() {
+const ID_TO_SLUG: Record<string, string> = {
+    'duet': 'kolte-patil-life-republic-duet-premium-2-bhk-flats-hinjewadi',
+    'arezo': 'kolte-patil-life-republic-arezo-efficient-2-bhk-flats-hinjewadi',
+    'canvas': 'kolte-patil-life-republic-canvas-luxury-3-4-bhk-flats-hinjewadi',
+    'atmos': 'kolte-patil-life-republic-atmos-modern-2-3-bhk-flats-hinjewadi',
+    '24k-espada': 'kolte-patil-life-republic-24k-espada-ultra-luxury-row-houses-hinjewadi',
+    'sound-of-soul': 'kolte-patil-life-republic-sound-of-soul-luxury-4-bhk-row-houses-hinjewadi',
+    'aros': 'kolte-patil-life-republic-aros-premium-2-3-bhk-flats-hinjewadi',
+    'qrious': 'kolte-patil-life-republic-qrious-smart-2-3-bhk-homes-hinjewadi'
+};
+
+async function generateSitemap() {
     console.log('🗺️  Generating Sitemap...');
 
-    const projectRoutes = projects.map(p => `/projects/${p.id}`);
+    let projectRoutes: string[] = [];
+
+    // Fetch projects from Supabase
+    if (supabase) {
+        try {
+            const { data, error } = await supabase
+                .from('projects')
+                .select('id');
+
+            if (error) throw error;
+
+            if (data) {
+                console.log(`📡 Fetched ${data.length} projects from database.`);
+                projectRoutes = data.map(p => {
+                    const slug = ID_TO_SLUG[p.id] || p.id;
+                    return `/projects/${slug}`;
+                });
+            }
+        } catch (error) {
+            console.error('❌ Error fetching projects from Supabase:', error);
+            // Fallback could be implemented here if needed, but for now we warn
+        }
+    }
+
     const allRoutes = [...staticRoutes, ...projectRoutes];
 
     const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
@@ -39,7 +88,7 @@ function generateSitemap() {
 ${allRoutes.map(route => `  <url>
     <loc>${DOMAIN}${route}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>${route === '/' ? 'daily' : 'weekly'}</changefreq>
     <priority>${route === '/' ? '1.0' : route.startsWith('/projects/') ? '0.9' : '0.8'}</priority>
   </url>`).join('\n')}
 </urlset>`;
@@ -62,7 +111,7 @@ try {
     if (!fs.existsSync(PUBLIC_DIR)) {
         fs.mkdirSync(PUBLIC_DIR, { recursive: true });
     }
-    generateSitemap();
+    await generateSitemap();
     generateRobots();
     console.log('✨ SEO assets updated successfully.');
 } catch (error) {

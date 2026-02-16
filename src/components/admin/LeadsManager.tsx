@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../../services/api';
-import { Trash2, Phone, Mail, CheckCircle, Clock } from 'lucide-react';
+import { Trash2, Phone, Mail, CheckCircle, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Lead {
     id: number;
@@ -17,12 +17,20 @@ interface Lead {
 export const LeadsManager: React.FC = () => {
     const [leads, setLeads] = useState<Lead[]>([]);
     const [loading, setLoading] = useState(true);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const LIMIT = 10;
 
     const fetchLeads = async () => {
         try {
-            const data = await api.leads.getAll();
+            setLoading(true);
+            const [data, count] = await Promise.all([
+                api.leads.getAll(page, LIMIT),
+                api.leads.getCount()
+            ]);
             // Cast or ensure type safety if needed, assuming API returns correct shape
             setLeads(data as unknown as Lead[]);
+            setTotalPages(Math.ceil(count / LIMIT));
         } catch (error) {
             console.error('Failed to fetch leads:', error);
         } finally {
@@ -32,7 +40,7 @@ export const LeadsManager: React.FC = () => {
 
     useEffect(() => {
         fetchLeads();
-    }, []);
+    }, [page]);
 
     const handleDelete = async (id: number) => {
         if (!confirm('Are you sure you want to delete this lead?')) return;
@@ -69,7 +77,7 @@ export const LeadsManager: React.FC = () => {
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div className="p-6 border-b border-gray-200 flex justify-between items-center">
                 <h2 className="text-xl font-semibold text-gray-800">Recent Inquiries</h2>
-                <div className="text-sm text-gray-500">Total Leads: {leads.length}</div>
+                <div className="text-sm text-gray-500">Page {page} of {totalPages}</div>
             </div>
 
             <div className="overflow-x-auto">
@@ -158,6 +166,25 @@ export const LeadsManager: React.FC = () => {
                         )}
                     </tbody>
                 </table>
+            </div>
+            <div className="p-4 border-t border-gray-200 flex justify-between items-center">
+                <button
+                    onClick={() => setPage(p => Math.max(1, p - 1))}
+                    disabled={page === 1}
+                    className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <ChevronLeft size={20} />
+                </button>
+                <div className="text-sm text-gray-600">
+                    Page <span className="font-medium">{page}</span> of <span className="font-medium">{totalPages}</span>
+                </div>
+                <button
+                    onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                    disabled={page === totalPages}
+                    className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <ChevronRight size={20} />
+                </button>
             </div>
         </div>
     );

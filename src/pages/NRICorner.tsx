@@ -67,6 +67,36 @@ export const NRICorner: React.FC = () => {
                 </div>
             </section>
 
+            {/* Remote Buying Process Step-by-Step */}
+            <section className="py-20 bg-secondary text-white">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-serif font-bold mb-4">Seamless Remote Buying Process</h2>
+                        <p className="text-gray-300">Own a home in India without stepping out of your country.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+                        {/* Connecting Line (Desktop) */}
+                        <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-700 -z-0 -translate-y-full"></div>
+
+                        {[
+                            { step: '01', title: 'Virtual Tour', desc: 'Schedule a video call with our sales expert for a live site tour.' },
+                            { step: '02', title: 'Unit Selection', desc: 'Select your preferred unit and view floor plans digitally.' },
+                            { step: '03', title: 'Documentation', desc: 'Complete KYC and booking formalities via secure email/portal.' },
+                            { step: '04', title: 'Payment', desc: 'Transfer booking amount via secure NRE/NRO transaction.' }
+                        ].map((item, idx) => (
+                            <div key={idx} className="relative z-10 bg-secondary border border-gray-700 p-6 rounded-xl text-center hover:border-accent transition-colors">
+                                <div className="w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center font-bold mx-auto mb-4 text-sm">
+                                    {item.step}
+                                </div>
+                                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                                <p className="text-gray-400 text-sm">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* FAQ */}
             <section className="py-20 bg-white">
                 <div className="container mx-auto px-4 max-w-4xl">

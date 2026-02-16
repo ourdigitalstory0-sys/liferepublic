@@ -72,9 +72,9 @@ export const AdminDashboard = () => {
         const fetchStats = async () => {
             try {
                 const [leads, projects, banners] = await Promise.all([
-                    api.leads.getAll().then(d => d?.length || 0).catch(() => 0),
-                    api.projects.getAll().then(d => d?.length || 0).catch(() => 0),
-                    api.banners.getAll().then(d => d?.length || 0).catch(() => 0),
+                    api.leads.getCount().catch(() => 0),
+                    api.projects.getCount().catch(() => 0),
+                    api.banners.getCount().catch(() => 0),
                 ]);
                 setStats({ leads, projects, banners });
             } catch (error) {

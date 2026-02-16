@@ -59,37 +59,103 @@ export const FourBHK: React.FC = () => {
 
             <section className="py-20 bg-gray-50">
                 <div className="container mx-auto px-4">
-                    <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-secondary">Luxury 4BHK Villas & Bungalows in Hinjewadi</h1>
-                    <div className="w-24 h-1 bg-accent mb-8"></div>
-                    <p className="text-gray-600 max-w-3xl text-lg mb-12">
-                        Experience the epitome of luxury with our exclusive collection of **4BHK Villas and Bungalows** in Kolte Patil Life Republic Township. Designed for those who seek grandeur and privacy.
-                    </p>
+                    {/* Hero */}
+                    <div className="text-center mb-16">
+                        <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-secondary">
+                            Luxury 4BHK Villas & Bungalows in Hinjewadi
+                        </h1>
+                        <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
+                        <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
+                            Experience the epitome of luxury with our exclusive collection of **4BHK Villas and Bungalows** in Kolte Patil Life Republic Township. Designed for those who seek grandeur and privacy.
+                        </p>
+                    </div>
 
-                    {loading ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {[1, 2].map((i) => (
-                                <div key={i} className="bg-white rounded-2xl h-96 animate-pulse">
-                                    <div className="h-48 bg-gray-200 rounded-t-2xl"></div>
-                                    <div className="p-6 space-y-4">
-                                        <div className="h-6 bg-gray-200 w-3/4 rounded"></div>
-                                        <div className="h-4 bg-gray-200 w-1/2 rounded"></div>
+                    {/* Listings */}
+                    <div className="mb-20">
+                        {loading ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {[1, 2].map((i) => (
+                                    <div key={i} className="bg-white rounded-2xl h-96 animate-pulse">
+                                        <div className="h-48 bg-gray-200 rounded-t-2xl"></div>
+                                        <div className="p-6 space-y-4">
+                                            <div className="h-6 bg-gray-200 w-3/4 rounded"></div>
+                                            <div className="h-4 bg-gray-200 w-1/2 rounded"></div>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <>
-                            {projects.length > 0 ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                    {projects.map((project) => (
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {projects.length > 0 ? (
+                                    projects.map((project) => (
                                         <ProjectCard key={project.id} project={project} />
-                                    ))}
+                                    ))
+                                ) : (
+                                    <div className="col-span-3 text-center py-12 bg-white rounded-xl border border-gray-100">
+                                        <p className="text-xl text-gray-500">Exclusive 4 BHK inventory coming soon. Please create an enquiry for early access.</p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Deep Content */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                        <div className="lg:col-span-2 space-y-12">
+                            {/* The Villa Life */}
+                            <section>
+                                <h2 className="text-3xl font-serif font-bold text-secondary mb-6">The Villa Life: Beyond Ordinary</h2>
+                                <p className="text-gray-600 mb-6 leading-relaxed">
+                                    Owning a **Bungalow or Row House in Hinjewadi** is a statement of prestige. At Life Republic, we offer limited-edition residences like **24K Espada** and **Sound of Soul**, where you own the land and the sky.
+                                </p>
+                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <li className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-sm">
+                                        <div className="w-2 h-2 rounded-full bg-accent"></div>
+                                        <span className="font-semibold text-gray-700">Private Garden & Terrace</span>
+                                    </li>
+                                    <li className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-sm">
+                                        <div className="w-2 h-2 rounded-full bg-accent"></div>
+                                        <span className="font-semibold text-gray-700">Exclusive Clubhouse Access</span>
+                                    </li>
+                                    <li className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-sm">
+                                        <div className="w-2 h-2 rounded-full bg-accent"></div>
+                                        <span className="font-semibold text-gray-700">Double Height Ceilings</span>
+                                    </li>
+                                    <li className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-sm">
+                                        <div className="w-2 h-2 rounded-full bg-accent"></div>
+                                        <span className="font-semibold text-gray-700">Gated Community Security</span>
+                                    </li>
+                                </ul>
+                            </section>
+
+                            {/* Investment ROI */}
+                            <section className="bg-primary/5 p-8 rounded-2xl border border-primary/10">
+                                <h2 className="text-2xl font-serif font-bold text-secondary mb-4">A Rare Asset Class</h2>
+                                <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                                    Land is a finite resource. Villas within a township offer the unique dual benefit of **Land Ownership Appreciation** combined with the **Safety & Amenities** of a gated community. This makes them a far superior asset compared to standalone apartments.
+                                </p>
+                                <div className="flex items-center gap-2 text-accent font-bold">
+                                    <span>Typically appreciates 2x faster than flats</span>
                                 </div>
-                            ) : (
-                                <p className="text-xl text-gray-500">Exclusive 4 BHK inventory coming soon. Please create an enquiry for early access.</p>
-                            )}
-                        </>
-                    )}
+                            </section>
+                        </div>
+
+                        {/* Exclusive Enquiry */}
+                        <div className="lg:col-span-1">
+                            <div className="bg-gray-900 text-white p-8 rounded-2xl sticky top-24 border border-gray-800 shadow-2xl">
+                                <h3 className="text-2xl font-serif font-bold mb-2">The 24K Circle</h3>
+                                <p className="text-gray-400 mb-6 text-sm">Join the waiting list for our most exclusive invite-only launches.</p>
+                                <form className="space-y-4">
+                                    <input type="text" placeholder="Name" className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors" />
+                                    <input type="tel" placeholder="Mobile Number" className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors" />
+                                    <input type="email" placeholder="Official Email ID" className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors" />
+                                    <button className="w-full bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-white font-bold py-3 rounded-lg transition-all shadow-lg">
+                                        Request Invitation
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Button } from '../components/ui/Button';
 import { ArrowRight, Briefcase, Plane, GraduationCap, HeartPulse, Dumbbell, Trees, Music, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -9,6 +9,7 @@ import { HeroSlider } from '../components/sections/HeroSlider';
 import { AmenitiesCarousel } from '../components/sections/AmenitiesCarousel';
 import { FAQ } from '../components/sections/FAQ';
 import { SEO } from '../components/seo/SEO';
+import { generateCollectionSchema } from '../utils/schemaGenerator';
 
 const Home: React.FC = () => {
     const [featuredProjects, setFeaturedProjects] = React.useState<Project[]>([]);
@@ -16,15 +17,13 @@ const Home: React.FC = () => {
     React.useEffect(() => {
         const loadProjects = async () => {
             try {
-                const data = await api.projects.getAll();
-                // Filter or pick top 3. For now just take first 3.
-                // If DB empty, we could fallback to static projects if we imported them, 
-                // but let's assume we want to switch to DB.
-                // However, to prevent broken UI if DB is empty, let's keep static as fallback or initial.
+                // Optimized fetch: only get 3 featured projects with light data
+                const data = await api.projects.getFeatured(3);
+
                 if (data && data.length > 0) {
-                    setFeaturedProjects(data.slice(0, 3));
+                    setFeaturedProjects(data);
                 } else {
-                    // Fallback to static if needed, or just import them
+                    // Fallback to static if needed
                     const { projects: staticProjects } = await import('../data/projects');
                     setFeaturedProjects(staticProjects.slice(0, 3));
                 }
@@ -37,81 +36,20 @@ const Home: React.FC = () => {
         loadProjects();
     }, []);
 
-    const schema = {
-        "@context": "https://schema.org",
-        "@type": "RealEstateAgent",
-        "name": "Kolte Patil Life Republic",
-        "image": "https://liferepublic.in/images/gallery/eros/master-layout.webp",
-        "description": "Kolte Patil Life Republic is a 390+ acre integrated township in Hinjewadi, Pune offering 1, 2, 3 BHK flats, villas, and row houses.",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Marunji, Hinjewadi",
-            "addressLocality": "Pune",
-            "addressRegion": "Maharashtra",
-            "postalCode": "411057",
-            "addressCountry": "IN"
-        },
-        "telephone": "+917744009295",
-        "url": "https://life-republic.in/",
-        "priceRange": "MNR 40 Lakhs - 3 Crores",
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "18.5913",
-            "longitude": "73.7212"
-        },
-        "openingHoursSpecification": [
-            {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-                "opens": "09:00",
-                "closes": "19:00"
-            }
-        ],
-        "sameAs": [
-            "https://www.facebook.com/koltepatildevelopers",
-            "https://twitter.com/koltepatil",
-            "https://www.instagram.com/koltepatil/"
-        ],
-        "makesOffer": [
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Product",
-                    "name": "2 BHK Flats in Hinjewadi",
-                    "description": "Spacious 2 BHK apartments in Life Republic Township"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Product",
-                    "name": "3 BHK Luxury Flats",
-                    "description": "Premium 3 BHK homes near Hinjewadi IT Park"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Product",
-                    "name": "4 BHK Villas & Bungalows",
-                    "description": "Exclusive 4 BHK Villas and Row Houses in Life Republic"
-                }
-            }
-        ],
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://life-republic.in/projects/{search_term_string}",
-            "query-input": "required name=search_term_string"
-        },
-        "video": {
-            "@type": "VideoObject",
-            "name": "Life Republic Township Overview",
-            "description": "Aerial view and master plan of Kolte Patil Life Republic Hinjewadi.",
-            "thumbnailUrl": "https://liferepublic.in/images/gallery/eros/master-layout.webp",
-            "uploadDate": "2024-01-01",
-            "contentUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    // Generate dynamic schema based on fetched projects
+    const schema = useMemo(() => {
+        if (featuredProjects.length > 0) {
+            return generateCollectionSchema(featuredProjects);
         }
-    };
+        // Fallback or initial schema
+        return {
+            "@context": "https://schema.org",
+            "@type": "RealEstateAgent",
+            "name": "Kolte Patil Life Republic",
+            "url": "https://life-republic.in/",
+            "description": "Kolte Patil Life Republic is a 390+ acre integrated township in Hinjewadi, Pune offering 1, 2, 3 BHK flats, villas, and row houses."
+        };
+    }, [featuredProjects]);
 
     return (
         <div className="w-full">
@@ -440,6 +378,47 @@ const Home: React.FC = () => {
                                 <h4 className="font-bold text-lg mb-2">Is water supply a problem in Life Republic?</h4>
                                 <p className="text-gray-600">No, unlike many standalone societies in Hinjewadi, Life Republic has a robust water management system with PMRDA water connection and dedicated treatment plants, ensuring consistent supply.</p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Internal Linking / Popular Searches */}
+            <section className="py-12 bg-gray-100 border-t border-gray-200">
+                <div className="container mx-auto px-4">
+                    <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6">Popular Searches</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div className="space-y-2">
+                            <h4 className="font-semibold text-gray-700">By Configuration</h4>
+                            <ul className="space-y-1">
+                                <li><a href="/2-bhk-flats-in-hinjewadi" className="text-gray-500 hover:text-accent">2 BHK Flats in Hinjewadi</a></li>
+                                <li><a href="/3-bhk-flats-in-hinjewadi" className="text-gray-500 hover:text-accent">3 BHK Flats in Hinjewadi</a></li>
+                                <li><a href="/4-bhk-flats-in-hinjewadi" className="text-gray-500 hover:text-accent">4 BHK Villas in Hinjewadi</a></li>
+                            </ul>
+                        </div>
+                        <div className="space-y-2">
+                            <h4 className="font-semibold text-gray-700">By Location</h4>
+                            <ul className="space-y-1">
+                                <li><a href="/location/flats-near-marunji" className="text-gray-500 hover:text-accent">Flats in Marunji</a></li>
+                                <li><a href="/location/flats-near-punawale" className="text-gray-500 hover:text-accent">Flats in Punawale</a></li>
+                                <li><a href="/location/flats-near-wakad" className="text-gray-500 hover:text-accent">Flats near Wakad</a></li>
+                            </ul>
+                        </div>
+                        <div className="space-y-2">
+                            <h4 className="font-semibold text-gray-700">Investment</h4>
+                            <ul className="space-y-1">
+                                <li><a href="/nri-corner" className="text-gray-500 hover:text-accent">NRI Investment Pune</a></li>
+                                <li><a href="/location-highlights" className="text-gray-500 hover:text-accent">Hinjewadi Location Analysis</a></li>
+                                <li><a href="/amenities" className="text-gray-500 hover:text-accent">Township Amenities</a></li>
+                            </ul>
+                        </div>
+                        <div className="space-y-2">
+                            <h4 className="font-semibold text-gray-700">Projects</h4>
+                            <ul className="space-y-1">
+                                {featuredProjects.slice(0, 3).map(p => (
+                                    <li key={p.id}><a href={`/projects/${p.id}`} className="text-gray-500 hover:text-accent">{p.title}</a></li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>
