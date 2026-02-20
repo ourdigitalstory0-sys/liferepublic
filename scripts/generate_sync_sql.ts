@@ -7,11 +7,33 @@ const outputFile = path.resolve(process.cwd(), 'supabase_migrations/sync_all_pro
 let sqlContent = `-- Synchronize all project images from local data\n\n`;
 
 for (const project of projects) {
-    // Escape single quotes in strings
-    const escape = (str: string | undefined) => str ? `'${str.replace(/'/g, "''")}'` : 'NULL';
-    const escapeArray = (arr: string[] | undefined) => {
+    // Image validation helper
+    const isValidImage = (imgPath: string | undefined): boolean => {
+        if (!imgPath) return false;
+        const decodedPath = decodeURIComponent(imgPath);
+        const fullPath = path.join(process.cwd(), 'public', decodedPath);
+        try {
+            const stats = fs.statSync(fullPath);
+            return stats.size > 0;
+        } catch (e) {
+            return false;
+        }
+    };
+
+    // Escape single quotes in strings and handle invalid images
+    const escape = (str: string | undefined) => {
+        if (!isValidImage(str)) return 'NULL';
+        return `'${str!.replace(/'/g, "''")}'`;
+    };
+
+    const escapeArray = (arr: (string | { url: string })[] | undefined) => {
         if (!arr || arr.length === 0) return "'[]'::jsonb";
-        return `'${JSON.stringify(arr).replace(/'/g, "''")}'::jsonb`;
+        const validArr = arr
+            .map(item => (typeof item === 'string' ? item : item.url))
+            .filter(isValidImage);
+
+        if (validArr.length === 0) return "'[]'::jsonb";
+        return `'${JSON.stringify(validArr).replace(/'/g, "''")}'::jsonb`;
     };
 
     sqlContent += `-- Updating ${project.title}\n`;
@@ -20,7 +42,7 @@ for (const project of projects) {
     sqlContent += `  image = ${escape(project.image)},\n`;
     sqlContent += `  master_layout = ${escape(project.masterLayout)},\n`;
     sqlContent += `  floor_plans = ${escapeArray(project.floorPlans)},\n`;
-    sqlContent += `  gallery = ${escapeArray(project.gallery ? project.gallery.map(g => typeof g === 'string' ? g : g.url) : [])}\n`;
+    sqlContent += `  gallery = ${escapeArray(project.gallery)}\n`;
     sqlContent += `WHERE id = '${project.id}';\n\n`;
 }
 
