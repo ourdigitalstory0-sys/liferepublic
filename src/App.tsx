@@ -20,6 +20,7 @@ import { FourBHK } from './pages/landing/FourBHK';
 import { NRICorner } from './pages/NRICorner';
 import { Testimonials } from './pages/Testimonials';
 import { MediaCenter } from './pages/MediaCenter';
+import { BlogPostPage } from './pages/BlogPost';
 // Lazy load Admin components
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin').then(module => ({ default: module.AdminLogin })));
 const AdminSignup = lazy(() => import('./pages/admin/AdminSignup').then(module => ({ default: module.AdminSignup })));
@@ -272,6 +273,16 @@ function App() {
               <Navbar />
               <main className="flex-grow pt-20" aria-label="Media Center">
                 <MediaCenter />
+              </main>
+              <Footer />
+              <FloatingContact />
+            </div>
+          } />
+          <Route path="/media-center/:slug" element={
+            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+              <Navbar />
+              <main className="flex-grow pt-20" aria-label="Blog Post">
+                <BlogPostPage />
               </main>
               <Footer />
               <FloatingContact />

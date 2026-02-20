@@ -98,13 +98,15 @@ export const api = {
             const { data, error } = await supabase.from('projects').select('*').eq('id', dbId).single();
             if (error) throw error;
 
-            return {
+            const project = {
                 ...data,
                 id: ID_TO_SLUG[data.id] || data.id, // Ensure returned object has the long slug
                 masterLayout: data.master_layout,
                 floorPlans: data.floor_plans,
                 themeColor: data.theme_color
             } as Project;
+
+            return project;
         },
         create: async (project: Project) => {
             // Transform frontend camelCase to DB snake_case

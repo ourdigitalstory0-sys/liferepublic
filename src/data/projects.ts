@@ -12,8 +12,8 @@ export const projects: Project[] = [
         features: ['2 BHK', 'Possession: Oct 2029', '34th Avenue'],
         overview: 'Duet at Life Republic is specifically designed for modern couples, young professionals, and small families who aspire to a lifestyle of convenience and class. These premium 2 BHK flats in Hinjewadi blend thoughtfully crafted living spaces with world-class amenities within Pune\'s most celebrated integrated township. The project focuses on providing a balanced lifestyle that integrates work, leisure, and community connection seamlessly. Residents enjoy proximity to the commercial hubs of Hinjewadi while retreating to a serene environment filled with lush greenery, dedicated sports zones, and social avenues.',
         amenities: ['Jogging Track', 'Gymnasium', 'Swimming Pool', 'Multi-sports Court', 'Kid\'s Play Zone', 'BBQ Area', 'Multipurpose Hall', 'Reflexology Path'],
-        masterLayout: 'https://assets.nobroker.in/media/building/8a9f8c839584e0bb0195852a30891ae3/images/8a9f8c839584e0bb0195852a30891ae3_site_plan_wVjNxK4sps1744805152917_4194_iris_original.jpg',
-        floorPlans: ['https://somanirealtors.com/storage/app/public/projects/169/1706684841_duet-floor-plan.jpg'],
+        masterLayout: '',
+        floorPlans: [],
         gallery: [
             '/images/project/gallery/1747221661duet%20interior%201.jpg',
             '/images/project/gallery/1747221668duet%20interior%202.jpg',
