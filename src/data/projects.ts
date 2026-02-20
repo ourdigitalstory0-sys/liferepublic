@@ -33,7 +33,7 @@ export const projects: Project[] = [
         overview: 'Qrious is an ode to the modern, inquisitive generation that seeks more from their living spaces. These smart 2 & 3 BHK homes in Sector R1 offer intelligent layouts, futuristic amenities, and integrated smart home features. It is a vibrant community where innovation meets everyday comfort, featuring the unique "Planet App" for seamless community management. With co-working spaces, digital libraries, and tech-enabled zones, Qrious is the perfect home for the forward-thinking professional.',
         amenities: ['Smart Home Automations', 'Co-working Space', 'Fitness Center', 'Rooftop Lounge', 'Library', 'Indoor Games'],
         masterLayout: '',
-        floorPlans: ['/images/gallery/qrious/2bhk-plan.webp', '/images/gallery/qrious/3bhk-plan.webp'],
+        floorPlans: [],
         themeColor: '#3498db' // Tech Blue
     },
     {
