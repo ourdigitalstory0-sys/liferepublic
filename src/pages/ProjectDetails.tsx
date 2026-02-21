@@ -48,17 +48,9 @@ const ProjectDetails: React.FC = () => {
                 if (projectData) {
                     setProject(projectData);
                     setGlobalAmenities(amenitiesData);
-                } else {
-                    // Fallback
-                    const { projects: staticProjects } = await import('../data/projects');
-                    const found = staticProjects.find(p => p.id === id);
-                    if (found) setProject(found);
                 }
             } catch (error) {
-                console.error('Failed to load project:', error);
-                const { projects: staticProjects } = await import('../data/projects');
-                const found = staticProjects.find(p => p.id === id);
-                if (found) setProject(found);
+                console.error('Failed to load project from API:', error);
             } finally {
                 setLoading(false);
             }

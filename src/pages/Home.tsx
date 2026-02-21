@@ -22,15 +22,9 @@ const Home: React.FC = () => {
 
                 if (data && data.length > 0) {
                     setFeaturedProjects(data);
-                } else {
-                    // Fallback to static if needed
-                    const { projects: staticProjects } = await import('../data/projects');
-                    setFeaturedProjects(staticProjects.slice(0, 3));
                 }
             } catch (error) {
-                console.error('Failed to load projects:', error);
-                const { projects: staticProjects } = await import('../data/projects');
-                setFeaturedProjects(staticProjects.slice(0, 3));
+                console.error('Failed to load projects from API:', error);
             }
         };
         loadProjects();

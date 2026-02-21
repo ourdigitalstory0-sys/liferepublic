@@ -1,10 +1,12 @@
+import React, { useEffect, useState } from 'react';
 import { Button } from '../components/ui/Button';
 import { ArrowRight, Navigation, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ProjectCard } from '../components/ui/ProjectCard';
 import { SEO } from '../components/seo/SEO';
 import { generateLocationKeywords } from '../lib/seo-utils';
-import { projects } from '../data/projects'; // Fallback / Static data for now
+import { api } from '../services/api';
+import type { Project } from '../lib/types';
 
 interface LocationLandingProps {
     locationName: string;
@@ -14,6 +16,21 @@ interface LocationLandingProps {
 }
 
 export const LocationLanding: React.FC<LocationLandingProps> = ({ locationName, distance = '10-15 mins', commuteTime = '15 mins', slug }) => {
+    const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
+
+    useEffect(() => {
+        const loadProjects = async () => {
+            try {
+                const data = await api.projects.getFeatured(3);
+                if (data && data.length > 0) {
+                    setFeaturedProjects(data);
+                }
+            } catch (error) {
+                console.error('Failed to load projects for location landing:', error);
+            }
+        };
+        loadProjects();
+    }, []);
 
     // SEO Logic
     const title = `Flats in ${locationName} near Life Republic | Premium Homes`;
@@ -148,7 +165,7 @@ export const LocationLanding: React.FC<LocationLandingProps> = ({ locationName, 
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-serif font-bold mb-10 text-center text-secondary">Recommended Projects for you</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {projects.slice(0, 3).map((project) => (
+                        {featuredProjects.map((project) => (
                             <ProjectCard key={project.id} project={project} />
                         ))}
                     </div>

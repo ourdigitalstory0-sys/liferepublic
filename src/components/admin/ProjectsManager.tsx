@@ -12,6 +12,7 @@ export const ProjectsManager: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'basic' | 'details' | 'media' | 'gallery' | 'plans' | 'amenities'>('basic');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [search, setSearch] = useState('');
     const LIMIT = 10;
 
     // Initial empty state for a new project
@@ -29,15 +30,18 @@ export const ProjectsManager: React.FC = () => {
     const [featuresInput, setFeaturesInput] = useState('');
 
     useEffect(() => {
-        loadProjects();
-    }, [page]);
+        const timer = setTimeout(() => {
+            loadProjects();
+        }, 300);
+        return () => clearTimeout(timer);
+    }, [page, search]);
 
     const loadProjects = async () => {
         try {
             setLoading(true);
             const [data, count, amenitiesData] = await Promise.all([
-                api.projects.getAll(page, LIMIT),
-                api.projects.getCount(),
+                api.projects.getAll(page, LIMIT, search),
+                api.projects.getCount(search),
                 api.amenities.getAll()
             ]);
             setProjects(data);
@@ -568,6 +572,16 @@ export const ProjectsManager: React.FC = () => {
                 <Button onClick={handleCreateNew} size="sm" className="gap-2">
                     <Plus size={16} /> Add Project
                 </Button>
+            </div>
+
+            <div className="mb-6">
+                <input
+                    type="text"
+                    placeholder="Search projects by title or location..."
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary/20 outline-none"
+                    value={search}
+                    onChange={e => { setSearch(e.target.value); setPage(1); }}
+                />
             </div>
 
             <div className="overflow-x-auto">

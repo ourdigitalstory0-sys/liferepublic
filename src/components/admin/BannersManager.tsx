@@ -10,15 +10,23 @@ export const BannersManager: React.FC = () => {
     const [editingId, setEditingId] = useState<number | null>(null);
     const [formData, setFormData] = useState<Partial<Banner>>({});
     const [uploading, setUploading] = useState(false);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const LIMIT = 10;
 
     useEffect(() => {
         loadBanners();
-    }, []);
+    }, [page]);
 
     const loadBanners = async () => {
         try {
-            const data = await api.banners.getAll();
+            setLoading(true);
+            const [data, count] = await Promise.all([
+                api.banners.getAll(page, LIMIT),
+                api.banners.getCount()
+            ]);
             setBanners(data);
+            setTotalPages(Math.ceil(count / LIMIT));
         } catch (error) {
             console.error('Error loading banners:', error);
         } finally {
@@ -180,6 +188,29 @@ export const BannersManager: React.FC = () => {
                     <div className="text-center py-8 text-gray-500">No banners found. Create one!</div>
                 )}
             </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+                <div className="p-4 border-t border-gray-200 flex justify-between items-center mt-4">
+                    <button
+                        onClick={() => setPage(p => Math.max(1, p - 1))}
+                        disabled={page === 1}
+                        className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 text-gray-600"
+                    >
+                        Previous
+                    </button>
+                    <div className="text-sm text-gray-600">
+                        Page <span className="font-medium">{page}</span> of <span className="font-medium">{totalPages}</span>
+                    </div>
+                    <button
+                        onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                        disabled={page === totalPages}
+                        className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 text-gray-600"
+                    >
+                        Next
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

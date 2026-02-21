@@ -21,8 +21,14 @@ for (const project of projects) {
     };
 
     // Escape single quotes in strings and handle invalid images
-    const escape = (str: string | undefined) => {
-        if (!isValidImage(str)) return 'NULL';
+    const escape = (str: string | undefined, isMandatory: boolean = false) => {
+        if (!isValidImage(str)) {
+            if (isMandatory && str) {
+                console.warn(`Warning: Mandatory image file is missing or empty: ${str}`);
+                return `'${str.replace(/'/g, "''")}'`;
+            }
+            return 'NULL';
+        }
         return `'${str!.replace(/'/g, "''")}'`;
     };
 
@@ -30,7 +36,13 @@ for (const project of projects) {
         if (!arr || arr.length === 0) return "'[]'::jsonb";
         const validArr = arr
             .map(item => (typeof item === 'string' ? item : item.url))
-            .filter(isValidImage);
+            .filter(img => {
+                if (!isValidImage(img)) {
+                    console.warn(`Warning: Gallery/FloorPlan image file is missing or empty: ${img}`);
+                    return false;
+                }
+                return true;
+            });
 
         if (validArr.length === 0) return "'[]'::jsonb";
         return `'${JSON.stringify(validArr).replace(/'/g, "''")}'::jsonb`;
@@ -39,7 +51,7 @@ for (const project of projects) {
     sqlContent += `-- Updating ${project.title}\n`;
     sqlContent += `UPDATE public.projects\n`;
     sqlContent += `SET\n`;
-    sqlContent += `  image = ${escape(project.image)},\n`;
+    sqlContent += `  image = ${escape(project.image, true)},\n`;
     sqlContent += `  master_layout = ${escape(project.masterLayout)},\n`;
     sqlContent += `  floor_plans = ${escapeArray(project.floorPlans)},\n`;
     sqlContent += `  gallery = ${escapeArray(project.gallery)}\n`;

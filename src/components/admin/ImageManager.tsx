@@ -20,6 +20,7 @@ export const ImageManager: React.FC = () => {
     const [hasMore, setHasMore] = useState(true);
     const [loadingMore, setLoadingMore] = useState(false);
     const [deleteId, setDeleteId] = useState<string | null>(null); // For confirmation dialog
+    const [search, setSearch] = useState('');
     const LIMIT = 12;
 
     useEffect(() => {
@@ -108,6 +109,10 @@ export const ImageManager: React.FC = () => {
         setTimeout(() => setCopiedId(null), 2000);
     };
 
+    const filteredImages = images.filter(img =>
+        img.name.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
         <div className="bg-white rounded-lg shadow p-6 relative">
             {/* Delete Confirmation Modal */}
@@ -135,32 +140,41 @@ export const ImageManager: React.FC = () => {
 
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold font-serif text-gray-800">Project Images</h2>
-                <div className="relative">
+                <div className="flex gap-4">
                     <input
-                        type="file"
-                        id="imageUpload"
-                        accept="image/*"
-                        onChange={handleUpload}
-                        disabled={uploading}
-                        className="hidden"
+                        type="text"
+                        placeholder="Search images..."
+                        className="px-3 py-2 border rounded-md text-sm outline-none focus:ring-2 focus:ring-accent/20"
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
                     />
-                    <label
-                        htmlFor="imageUpload"
-                        className="cursor-pointer bg-accent text-white px-4 py-2 rounded-md hover:bg-accent/90 transition-colors flex items-center gap-2"
-                    >
-                        <Upload size={18} />
-                        {uploading ? 'Uploading...' : 'Upload Image'}
-                    </label>
+                    <div className="relative">
+                        <input
+                            type="file"
+                            id="imageUpload"
+                            accept="image/*"
+                            onChange={handleUpload}
+                            disabled={uploading}
+                            className="hidden"
+                        />
+                        <label
+                            htmlFor="imageUpload"
+                            className="cursor-pointer bg-accent text-white px-4 py-2 rounded-md hover:bg-accent/90 transition-colors flex items-center gap-2"
+                        >
+                            <Upload size={18} />
+                            {uploading ? 'Uploading...' : 'Upload Image'}
+                        </label>
+                    </div>
                 </div>
             </div>
 
-            {images.length === 0 ? (
+            {filteredImages.length === 0 ? (
                 <div className="text-center py-12 text-gray-400 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
-                    <p>No images uploaded yet.</p>
+                    <p>{search ? 'No images match your search.' : 'No images uploaded yet.'}</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {images.map((file) => {
+                    {filteredImages.map((file) => {
                         const { data } = supabase.storage.from('projects').getPublicUrl(file.name);
                         return (
                             <div key={file.name} className="group relative bg-gray-50 rounded-lg overflow-hidden border border-gray-200 aspect-square">
@@ -194,7 +208,7 @@ export const ImageManager: React.FC = () => {
                 </div>
             )}
 
-            {hasMore && images.length > 0 && (
+            {hasMore && images.length > 0 && !search && (
                 <div className="mt-8 text-center border-t pt-6">
                     <p className="text-sm text-gray-500 mb-4">Showing {images.length} images</p>
                     <button

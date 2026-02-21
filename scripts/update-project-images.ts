@@ -39,8 +39,8 @@ async function updateProjectImages() {
     console.log('🔄 Starting project image update...');
 
     for (const project of projects) {
-        // Determine the DB ID
-        const dbId = SLUG_TO_ID[project.id] || project.id;
+        // Use the long slug ID directly
+        const dbId = project.id;
 
         console.log(`Processing project: ${project.title} (DB ID: ${dbId})`);
 

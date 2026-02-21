@@ -14,16 +14,9 @@ export const SimilarProjects: React.FC<SimilarProjectsProps> = ({ currentId }) =
     useEffect(() => {
         const loadProjects = async () => {
             try {
-                // Try API first
-                let allProjects = await api.projects.getAll();
+                const allProjects = await api.projects.getAll();
 
-                if (!allProjects || allProjects.length === 0) {
-                    // Fallback to static data
-                    const { projects: staticProjects } = await import('../../data/projects');
-                    allProjects = staticProjects;
-                }
-
-                if (allProjects) {
+                if (allProjects && allProjects.length > 0) {
                     // Filter out current project and pick random 3
                     const filtered = allProjects.filter(p => p.id !== currentId);
 
@@ -32,12 +25,8 @@ export const SimilarProjects: React.FC<SimilarProjectsProps> = ({ currentId }) =
 
                     setProjects(shuffled.slice(0, 3));
                 }
-
             } catch (error) {
-                console.error("Failed to load similar projects", error);
-                const { projects: staticProjects } = await import('../../data/projects');
-                const filtered = staticProjects.filter(p => p.id !== currentId);
-                setProjects(filtered.slice(0, 3));
+                console.error("Failed to load similar projects from API", error);
             } finally {
                 setLoading(false);
             }

@@ -18,24 +18,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 async function checkProject() {
     const slug = 'kolte-patil-life-republic-qrious-smart-2-3-bhk-homes-hinjewadi';
 
-    // Map slug to short ID if necessary (from api.ts logic)
-    const ID_TO_SLUG: Record<string, string> = {
-        'duet': 'kolte-patil-life-republic-duet-premium-2-bhk-flats-hinjewadi',
-        'arezo': 'kolte-patil-life-republic-arezo-efficient-2-bhk-flats-hinjewadi',
-        'canvas': 'kolte-patil-life-republic-canvas-luxury-3-4-bhk-flats-hinjewadi',
-        'atmos': 'kolte-patil-life-republic-atmos-modern-2-3-bhk-flats-hinjewadi',
-        '24k-espada': 'kolte-patil-life-republic-24k-espada-ultra-luxury-row-houses-hinjewadi',
-        'sound-of-soul': 'kolte-patil-life-republic-sound-of-soul-luxury-4-bhk-row-houses-hinjewadi',
-        'aros': 'kolte-patil-life-republic-aros-premium-2-3-bhk-flats-hinjewadi',
-        'qrious': 'kolte-patil-life-republic-qrious-smart-2-3-bhk-homes-hinjewadi'
-    };
-
-    const SLUG_TO_ID: Record<string, string> = Object.entries(ID_TO_SLUG).reduce((acc, [key, value]) => {
-        acc[value] = key;
-        return acc;
-    }, {} as Record<string, string>);
-
-    const dbId = SLUG_TO_ID[slug] || slug;
+    const dbId = slug;
     console.log(`Checking project with DB ID: ${dbId}`);
 
     const { data, error } = await supabase

@@ -4,24 +4,6 @@ import { emailService } from './email';
 
 
 
-// Map DB IDs (short) to SEO IDs (long)
-const ID_TO_SLUG: Record<string, string> = {
-    'duet': 'kolte-patil-life-republic-duet-premium-2-bhk-flats-hinjewadi',
-    'arezo': 'kolte-patil-life-republic-arezo-efficient-2-bhk-flats-hinjewadi',
-    'canvas': 'kolte-patil-life-republic-canvas-luxury-3-4-bhk-flats-hinjewadi',
-    'atmos': 'kolte-patil-life-republic-atmos-modern-2-3-bhk-flats-hinjewadi',
-    '24k-espada': 'kolte-patil-life-republic-24k-espada-ultra-luxury-row-houses-hinjewadi',
-    'sound-of-soul': 'kolte-patil-life-republic-sound-of-soul-luxury-4-bhk-row-houses-hinjewadi',
-    'aros': 'kolte-patil-life-republic-aros-premium-2-3-bhk-flats-hinjewadi',
-    'qrious': 'kolte-patil-life-republic-qrious-smart-2-3-bhk-homes-hinjewadi'
-};
-
-// Map SEO IDs (long) to DB IDs (short)
-const SLUG_TO_ID: Record<string, string> = Object.entries(ID_TO_SLUG).reduce((acc, [key, value]) => {
-    acc[value] = key;
-    return acc;
-}, {} as Record<string, string>);
-
 export const api = {
     banners: {
         getAll: async (page = 1, limit = 50) => {
@@ -58,19 +40,22 @@ export const api = {
         }
     },
     projects: {
-        getAll: async (page = 1, limit = 50) => {
-            const start = (page - 1) * limit;
-            const end = start + limit - 1;
-            const { data, error } = await supabase
-                .from('projects')
-                .select('*')
-                .range(start, end);
+        getAll: async (page?: number, limit?: number, search?: string) => {
+            let query = supabase.from('projects').select('*').order('id');
+            if (search) {
+                query = query.or(`title.ilike.%${search}%,location.ilike.%${search}%`);
+            }
+            if (page && limit) {
+                const from = (page - 1) * limit;
+                const to = from + limit - 1;
+                query = query.range(from, to);
+            }
+            const { data, error } = await query;
             if (error) throw error;
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return data.map((p: any) => ({
                 ...p,
-                id: ID_TO_SLUG[p.id] || p.id, // Use mapped slug if available, else original ID
                 masterLayout: p.master_layout,
                 floorPlans: p.floor_plans,
                 themeColor: p.theme_color
@@ -87,20 +72,15 @@ export const api = {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return data.map((p: any) => ({
                 ...p,
-                id: ID_TO_SLUG[p.id] || p.id,
                 themeColor: p.theme_color
             })) as Project[];
         },
         getById: async (id: string) => {
-            // Check if input is a slug that needs mapping to a short ID
-            const dbId = SLUG_TO_ID[id] || id;
-
-            const { data, error } = await supabase.from('projects').select('*').eq('id', dbId).single();
+            const { data, error } = await supabase.from('projects').select('*').eq('id', id).single();
             if (error) throw error;
 
             const project = {
                 ...data,
-                id: ID_TO_SLUG[data.id] || data.id, // Ensure returned object has the long slug
                 masterLayout: data.master_layout,
                 floorPlans: data.floor_plans,
                 themeColor: data.theme_color
@@ -136,15 +116,15 @@ export const api = {
             // Transform partial update
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const dbProject: any = { ...project };
-            if (project.masterLayout) {
+            if ('masterLayout' in project) {
                 dbProject.master_layout = project.masterLayout;
                 delete dbProject.masterLayout;
             }
-            if (project.floorPlans) {
+            if ('floorPlans' in project) {
                 dbProject.floor_plans = project.floorPlans;
                 delete dbProject.floorPlans;
             }
-            if (project.themeColor) {
+            if ('themeColor' in project) {
                 dbProject.theme_color = project.themeColor;
                 delete dbProject.themeColor;
             }
@@ -157,10 +137,12 @@ export const api = {
             const { error } = await supabase.from('projects').delete().eq('id', id);
             if (error) throw error;
         },
-        getCount: async () => {
-            const { count, error } = await supabase
-                .from('projects')
-                .select('*', { count: 'exact', head: true });
+        getCount: async (search?: string) => {
+            let query = supabase.from('projects').select('*', { count: 'exact', head: true });
+            if (search) {
+                query = query.or(`title.ilike.%${search}%,location.ilike.%${search}%`);
+            }
+            const { count, error } = await query;
             if (error) throw error;
             return count || 0;
         }

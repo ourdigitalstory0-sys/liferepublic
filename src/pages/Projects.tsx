@@ -17,15 +17,9 @@ const Projects: React.FC = () => {
                 const data = await api.projects.getAll();
                 if (data && data.length > 0) {
                     setAllProjects(data);
-                } else {
-                    // Fallback
-                    const { projects: staticProjects } = await import('../data/projects');
-                    setAllProjects(staticProjects);
                 }
             } catch (error) {
-                console.error('Failed to load projects:', error);
-                const { projects: staticProjects } = await import('../data/projects');
-                setAllProjects(staticProjects);
+                console.error('Failed to load projects from API:', error);
             }
         };
         loadProjects();
