@@ -2,6 +2,40 @@ import type { Project } from '../lib/types';
 
 const DOMAIN = 'https://life-republic.in';
 
+export const generateGlobalSchema = () => {
+    return {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'RealEstateAgent',
+                '@id': `${DOMAIN}/#organization`,
+                'name': 'Kolte Patil Developers',
+                'url': DOMAIN,
+                'logo': `${DOMAIN}/images/logo.png`,
+                'description': 'Real Estate Developer in Pune offering premium residential spaces like Life Republic.',
+                'telephone': '+91-7744009295',
+                'address': {
+                    '@type': 'PostalAddress',
+                    'streetAddress': 'Life Republic, Hinjewadi Marunji Road',
+                    'addressLocality': 'Hinjewadi, Pune',
+                    'addressRegion': 'Maharashtra',
+                    'postalCode': '411057',
+                    'addressCountry': 'IN'
+                }
+            },
+            {
+                '@type': 'WebSite',
+                '@id': `${DOMAIN}/#website`,
+                'url': DOMAIN,
+                'name': 'Kolte Patil Life Republic',
+                'publisher': {
+                    '@id': `${DOMAIN}/#organization`
+                }
+            }
+        ]
+    };
+};
+
 export const generateProjectSchema = (project: Project) => {
     const images =
         project.gallery?.map((g) => (typeof g === 'string' ? g : g.url)) || [
@@ -86,7 +120,7 @@ export const generateProjectSchema = (project: Project) => {
     };
 
     // Combining schemas
-    return [productSchema, breadcrumbSchema];
+    return [generateGlobalSchema(), productSchema, breadcrumbSchema];
 };
 
 export const generateFAQSchema = (faqs: { question: string; answer: string }[]) => {

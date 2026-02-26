@@ -32,7 +32,17 @@ export const generateSemanticKeywords = (ctx: SEOContext): string => {
         `Kolte Patil Life Republic Resale`, // Catch resale traffic and convert to new
         `Life Republic vs Godrej Woodsville`, // Competitor high volume
         `Hinjewadi Property Price Trends 2025`, // Trend based
-        `Rental Yield Hinjewadi` // Investor intent
+        `Rental Yield Hinjewadi`, // Investor intent
+
+        // --- NEWLY INJECTED FROM koltepatil.com AND liferepublic.in ---
+        `Flats for Sale in Pune Hinjewadi`,
+        `Township Projects in Pune`,
+        `Residential Projects in Hinjewadi`,
+        `Row House in Pune`,
+        `Integrated Townships in Pune`,
+        `Best Township Projects in Pune`,
+        `New Housing Projects in Hinjewadi Pune`,
+        `Pre Launch Projects in Hinjewadi Pune`
     ];
 
     // 3. Semantic Variations (Algorithm Friendly)
@@ -44,7 +54,12 @@ export const generateSemanticKeywords = (ctx: SEOContext): string => {
         `${ctx.title} Floor Plans`,
         `${ctx.title} Latest Price`,
         `${ctx.title} Brochure Download`,
-        `${ctx.title} Possession Date`
+        `${ctx.title} Possession Date`,
+        // --- NEWLY INJECTED FROM liferepublic.in ---
+        `400 Acres of Community Living`,
+        `Nature Community Sustainability in Pune`,
+        `Thriving Community Living Hinjewadi`,
+        `Better Living in Hinjewadi Pune`
     ];
 
     // 4. Authority Terms (Brand & Trust)
@@ -53,7 +68,11 @@ export const generateSemanticKeywords = (ctx: SEOContext): string => {
         "RERA Registered Projects",
         "Gated Community Pune",
         "Integrated Township West Pune",
-        "Kolte Patil Developers Reviews"
+        "Kolte Patil Developers Reviews",
+        // --- NEWLY INJECTED FROM koltepatil.com ---
+        "Real Estate Developer Company in Pune",
+        "Top Real Estate Developer in Pune",
+        "Sustainable & Progressive Spaces Pune"
     ];
 
     // Combine and deduplicate

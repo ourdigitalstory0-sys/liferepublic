@@ -89,7 +89,7 @@ ${allRoutes.map(route => `  <url>
     <loc>${DOMAIN}${route}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>${route === '/' ? 'daily' : 'weekly'}</changefreq>
-    <priority>${route === '/' ? '1.0' : route.startsWith('/projects/') ? '0.9' : '0.8'}</priority>
+    <priority>${route === '/' ? '1.0' : (route.startsWith('/projects/') || route.startsWith('/location/')) ? '0.9' : '0.8'}</priority>
   </url>`).join('\n')}
 </urlset>`;
 

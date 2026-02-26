@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ProjectCard } from '../components/ui/ProjectCard';
 import { SEO } from '../components/seo/SEO';
 import { generateLocationKeywords } from '../lib/seo-utils';
+import { generateGlobalSchema } from '../utils/schemaGenerator';
 import { api } from '../services/api';
 import type { Project } from '../lib/types';
 
@@ -37,20 +38,23 @@ export const LocationLanding: React.FC<LocationLandingProps> = ({ locationName, 
     const description = `Looking for flats in ${locationName}? Choose Kolte Patil Life Republic. Just ${commuteTime} drive. Premium 2 & 3 BHK homes with better amenities and ROI.`;
     const keywords = generateLocationKeywords(locationName);
 
-    const schema = {
-        "@context": "https://schema.org",
-        "@type": "Place",
-        "name": `Life Republic near ${locationName}`,
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Hinjewadi",
-            "addressRegion": "Maharashtra"
-        },
-        "containsPlace": {
-            "@type": "ApartmentComplex",
-            "name": "Life Republic Township"
+    const schema = [
+        generateGlobalSchema(),
+        {
+            "@context": "https://schema.org",
+            "@type": "Place",
+            "name": `Life Republic near ${locationName}`,
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Hinjewadi",
+                "addressRegion": "Maharashtra"
+            },
+            "containsPlace": {
+                "@type": "ApartmentComplex",
+                "name": "Life Republic Township"
+            }
         }
-    };
+    ];
 
     return (
         <div className="min-h-screen bg-gray-50 pt-20">

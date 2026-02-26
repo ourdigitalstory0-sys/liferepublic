@@ -9,7 +9,7 @@ import { HeroSlider } from '../components/sections/HeroSlider';
 import { AmenitiesCarousel } from '../components/sections/AmenitiesCarousel';
 import { FAQ } from '../components/sections/FAQ';
 import { SEO } from '../components/seo/SEO';
-import { generateCollectionSchema } from '../utils/schemaGenerator';
+import { generateCollectionSchema, generateGlobalSchema } from '../utils/schemaGenerator';
 
 const Home: React.FC = () => {
     const [featuredProjects, setFeaturedProjects] = React.useState<Project[]>([]);
@@ -32,24 +32,18 @@ const Home: React.FC = () => {
 
     // Generate dynamic schema based on fetched projects
     const schema = useMemo(() => {
+        const globalSchema = generateGlobalSchema();
         if (featuredProjects.length > 0) {
-            return generateCollectionSchema(featuredProjects);
+            return [globalSchema, generateCollectionSchema(featuredProjects)];
         }
-        // Fallback or initial schema
-        return {
-            "@context": "https://schema.org",
-            "@type": "RealEstateAgent",
-            "name": "Kolte Patil Life Republic",
-            "url": "https://life-republic.in/",
-            "description": "Kolte Patil Life Republic is a 390+ acre integrated township in Hinjewadi, Pune offering 1, 2, 3 BHK flats, villas, and row houses."
-        };
+        return globalSchema;
     }, [featuredProjects]);
 
     return (
         <div className="w-full">
             <SEO
-                description="Official Guide to Life Republic by Kolte Patil. Explore 2, 3, 4 BHK flats and villas in Hinjewadi. Check current pricing, floor plans, possession dates, and latest reviews."
-                keywords="Kolte Patil Life Republic Township Hinjewadi, Life Republic Price, Life Republic Hinjewadi Location, 2 BHK in Hinjewadi, 3 BHK in Hinjewadi, 4 BHK Villas in Pune, Life Republic Atmos, Life Republic Aros"
+                description="Discover Kolte Patil Life Republic in Hinjewadi, Pune. A 400-acre premium township offering luxury 1, 2, 3, and 4 BHK flats, villas, and commercial spaces. Thriving Community Living Hinjewadi."
+                keywords="Kolte Patil Life Republic, Life Republic Hinjewadi, Life Republic Township Pune, 2 BHK flats in Hinjewadi, 3 BHK flats in Hinjewadi, 4 BHK flats in Hinjewadi, Premium homes in Hinjewadi Pune, Best township project in Pune, 400 Acres of Community Living, Integrated Townships in Pune, Real Estate Developer Company in Pune"
                 canonical="/"
                 schema={schema}
             />
