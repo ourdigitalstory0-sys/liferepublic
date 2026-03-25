@@ -41,6 +41,7 @@ export const SEO: React.FC<SEOProps> = ({
         <Helmet>
             {/* Basic Metadata */}
             <title>{fullTitle}</title>
+            <meta name="google-site-verification" content="IAyC1c_sDzY_uqhpy2gKk-M0IlkQdxdM_UMA9ukAIWQ" />
             <meta name="description" content={metaDescription} />
             <meta name="keywords" content={metaKeywords} />
             <link rel="canonical" href={fullCanonical} />
