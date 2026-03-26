@@ -1,0 +1,158 @@
+{
+  "sectors": [
+    { 
+      "id": "r1", 
+      "name": "First Avenue (R1)", 
+      "branding": "First Avenue (OneNotchUp)",
+      "slug": "sector-r1-life-republic", 
+      "type": "Sector", 
+      "segment": "Affordable",
+      "target": "First-time buyers",
+      "usp": "OneNotchUp lifestyle with mature landscaping and established community.", 
+      "infrastructure": "Close to Main Entrance & Retail Hub", 
+      "distance": "2 mins from Spine Road",
+      "keywords": ["First Avenue price", "First Avenue resale", "First Avenue rent"]
+    },
+    { 
+      "id": "r3", 
+      "name": "3rd Avenue (R3)", 
+      "branding": "3rd Avenue Residences",
+      "slug": "sector-r3-life-republic", 
+      "type": "Sector", 
+      "segment": "Mid-segment",
+      "target": "Families",
+      "usp": "Centralized sector with excellent walkability to education hubs.", 
+      "infrastructure": "Walking distance to Anisha Global School", 
+      "distance": "5 mins from High Street",
+      "keywords": ["3rd Avenue Hinjewadi", "3rd Avenue flats"]
+    },
+    { 
+      "id": "r7", 
+      "name": "i-Towers (R7)", 
+      "branding": "i-Towers Smart Living",
+      "slug": "sector-r7-life-republic", 
+      "type": "Sector", 
+      "segment": "Smart",
+      "target": "IT professionals",
+      "usp": "Smart homes with active sports courts and tech-enabled living.", 
+      "infrastructure": "Adjacent to Sports Arena & Tech Park", 
+      "distance": "3 mins from Sports Hub",
+      "keywords": ["i Towers price", "i Towers review", "smart homes Hinjewadi"]
+    },
+    { 
+      "id": "r9", 
+      "name": "ORO Avenue (R9)", 
+      "branding": "ORO Smart Homes",
+      "slug": "sector-r9-life-republic", 
+      "type": "Sector", 
+      "segment": "Budget premium",
+      "target": "Investors",
+      "usp": "Optimal investment in ORO Smart Homes with efficient space usage.", 
+      "infrastructure": "Integrated Play Parks", 
+      "distance": "5 mins from High Street",
+      "keywords": ["ORO Avenue price", "ORO smart homes Pune", "ORO Avenue investment"]
+    },
+    { 
+      "id": "r10", 
+      "name": "Universe (R10)", 
+      "branding": "Universe Residences",
+      "slug": "sector-r10-life-republic", 
+      "type": "Sector", 
+      "segment": "Mid-segment",
+      "target": "Families",
+      "usp": "Planet-themed living with phased excellence (Phase 1, 2, 3).", 
+      "infrastructure": "Near Town Center & Metro Access", 
+      "distance": "2 mins from Metro",
+      "keywords": ["Universe price", "Universe 2 BHK", "Universe R10 flats"]
+    },
+    { 
+      "id": "r13", 
+      "name": "Aros (R13)", 
+      "branding": "Aros Premium Homes",
+      "slug": "sector-r13-life-republic", 
+      "type": "Sector", 
+      "segment": "Premium",
+      "target": "End users",
+      "usp": "Premium ecosystem with direct access to the 4km jogging spine.", 
+      "infrastructure": "On the Fitness Loop", 
+      "distance": "0 mins from Jogging Track",
+      "keywords": ["Aros price", "Aros Hinjewadi", "Aros premium flats"]
+    },
+    { 
+      "id": "r16", 
+      "name": "Arezo (R16)", 
+      "branding": "Arezo Residences",
+      "slug": "sector-r16-life-republic", 
+      "type": "Sector", 
+      "segment": "Premium",
+      "target": "End users",
+      "usp": "16th Avenue luxury with multi-tier security and Arezo Towers.", 
+      "infrastructure": "Multi-tier Guard Points", 
+      "distance": "4 mins from Town Plaza",
+      "keywords": ["Arezo price", "Arezo 2/3 BHK", "Arezo 16th Avenue"]
+    },
+    { 
+      "id": "r17a", 
+      "name": "Sound of Soul (R17A)", 
+      "branding": "Sound of Soul Villas",
+      "slug": "sector-r17a-life-republic", 
+      "type": "Sector", 
+      "segment": "Luxury",
+      "target": "HNI",
+      "usp": "Peaceful retreat with curated soundscapes and landscape design.", 
+      "infrastructure": "Near the township's primary water body", 
+      "distance": "6 mins from Club 2",
+      "keywords": ["Sound of Soul villas", "Life Republic luxury villas"]
+    },
+    { 
+      "id": "r17b", 
+      "name": "Nora (R17B)", 
+      "branding": "Nora Residences",
+      "slug": "sector-r17b-life-republic", 
+      "type": "Sector", 
+      "segment": "Premium",
+      "target": "Families",
+      "usp": "Modern architecture with expansive green vistas.", 
+      "infrastructure": "Adjacent to Parkland", 
+      "distance": "5 mins from Spine Road",
+      "keywords": ["Nora price", "Nora Hinjewadi"]
+    },
+    { 
+      "id": "r22", 
+      "name": "Atmos (R22)", 
+      "branding": "Atmos Premium Towers",
+      "slug": "sector-r22-life-republic", 
+      "type": "Sector", 
+      "segment": "Luxury towers",
+      "target": "Upgrade buyers",
+      "usp": "Elevated living in 22nd Avenue with superior ventilation and design.", 
+      "infrastructure": "Latest Infrastructure Phase", 
+      "distance": "10 mins from Hinjewadi Ph 1",
+      "keywords": ["Atmos price", "Atmos 22nd Avenue", "Atmos luxury flats"]
+    },
+    { 
+      "id": "r31", 
+      "name": "24K Espada (R31)", 
+      "branding": "24K Espada Villas",
+      "slug": "sector-r31-life-republic", 
+      "type": "Sector", 
+      "segment": "Ultra luxury",
+      "target": "HNI",
+      "usp": "The pinnacle of Life Republic - ultra-luxury villa living.", 
+      "infrastructure": "Private 24K Club", 
+      "distance": "1 min from Main Spine",
+      "keywords": ["24K Espada price", "luxury villas Hinjewadi", "premium villas Pune"]
+    }
+  ],
+  "avenues": [
+    { "id": "av1", "name": "1st Avenue", "slug": "1st-avenue-life-republic", "type": "Avenue", "usp": "The gateway to Life Republic's primary retail district.", "infrastructure": "Retail & Fine Dining Hub", "distance": "0 mins from Entry Gate" },
+    { "id": "av2", "name": "2nd Avenue", "slug": "2nd-avenue-life-republic", "type": "Avenue", "usp": "Dedicated to educational excellence and learning hubs.", "infrastructure": "Anisha Global School Zone", "distance": "2 mins from Main Spine" },
+    { "id": "av3", "name": "3rd Avenue", "slug": "3rd-avenue-life-republic", "type": "Avenue", "usp": "High-street retail and boutique lifestyle stores.", "infrastructure": "Commercial Plaza", "distance": "1 min from Town Center" },
+    { "id": "av4", "name": "4th Avenue", "slug": "4th-avenue-life-republic", "type": "Avenue", "usp": "Tranquil boulevard connecting secondary residential clusters.", "infrastructure": "Tree-lined Walkway", "distance": "4 mins from Gate 2" }
+  ],
+  "localities": [
+    { "id": "hinj-ph1", "name": "Hinjewadi Phase 1", "slug": "flats-near-hinjewadi-phase-1", "type": "Locality", "usp": "Global IT Hub with Fortune 500 companies.", "infrastructure": "Infosys, Wipro, TCS Campus", "distance": "5-7 mins Drive" },
+    { "id": "hinj-ph2", "name": "Hinjewadi Phase 2", "slug": "flats-near-hinjewadi-phase-2", "type": "Locality", "usp": "Critical IT corridor with high property demand.", "infrastructure": "Embassy Tech Zone", "distance": "10-12 mins Drive" },
+    { "id": "marunji", "name": "Marunji Pune", "slug": "flats-near-marunji", "type": "Locality", "usp": "Emerging growth corridor with high ROI potential.", "infrastructure": "Proposed Ring Road Connectivity", "distance": "0 mins (Direct Access)" }
+  ]
+}

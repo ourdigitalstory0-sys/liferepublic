@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const ROICalculator: React.FC = () => {
     const [propertyValue, setPropertyValue] = useState<number>(7500000); // 75 Lakhs
@@ -36,6 +37,19 @@ export const ROICalculator: React.FC = () => {
         }).format(amount);
     };
 
+    const priceTrends = [
+        { year: '2018', Price: 5200 },
+        { year: '2019', Price: 5500 },
+        { year: '2020', Price: 5800 },
+        { year: '2021', Price: 6300 },
+        { year: '2022', Price: 7000 },
+        { year: '2023', Price: 7800 },
+        { year: '2024', Price: 8500 },
+        { year: '2025', Price: 9200 }
+    ];
+
+    const maxPrice = Math.max(...priceTrends.map(t => t.Price));
+
     return (
         <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
             <div className="flex items-center gap-3 mb-6">
@@ -43,8 +57,28 @@ export const ROICalculator: React.FC = () => {
                     <TrendingUp size={24} />
                 </div>
                 <div>
-                    <h3 className="text-xl font-bold text-gray-800">ROI Estimator</h3>
-                    <p className="text-sm text-gray-500">Calculate Investment Potential</p>
+                    <h3 className="text-xl font-bold text-gray-800">ROI Analytics</h3>
+                    <p className="text-sm text-gray-500">Hinjewadi Historical Performance</p>
+                </div>
+            </div>
+
+            {/* Price Trend Chart (Phase 12) */}
+            <div className="mb-8 p-4 bg-gray-50 rounded-xl border border-gray-100">
+                <div className="flex items-end justify-between h-32 gap-1 px-2">
+                    {priceTrends.map((trend, idx) => (
+                        <div key={idx} className="flex flex-col items-center flex-1 group">
+                            <motion.div 
+                                initial={{ height: 0 }}
+                                animate={{ height: `${(trend.Price / maxPrice) * 100}%` }}
+                                className={`w-full max-w-[12px] rounded-t-sm transition-all ${idx === priceTrends.length - 1 ? 'bg-accent' : 'bg-secondary/40 group-hover:bg-secondary/60'}`}
+                            />
+                            <span className="text-[8px] text-gray-400 mt-2 font-bold">{trend.year}</span>
+                        </div>
+                    ))}
+                </div>
+                <div className="mt-4 flex justify-between items-center text-[10px] uppercase tracking-widest font-bold text-gray-500">
+                    <span>Hinjewadi Price Trend</span>
+                    <span className="text-accent">Avg. ₹9,200/sqft</span>
                 </div>
             </div>
 
@@ -52,7 +86,7 @@ export const ROICalculator: React.FC = () => {
                 {/* Property Value */}
                 <div>
                     <div className="flex justify-between mb-2">
-                        <label className="text-sm font-medium text-gray-700">Property Cost</label>
+                        <label className="text-sm font-medium text-gray-700">Investment Amount</label>
                         <span className="text-sm font-bold text-secondary">{formatCurrency(propertyValue)}</span>
                     </div>
                     <input
@@ -111,7 +145,7 @@ export const ROICalculator: React.FC = () => {
                         <p className="font-bold text-secondary text-lg">+{formatCurrency(totalROI)}</p>
                     </div>
                 </div>
-                <p className="text-[10px] text-gray-400 mt-2 text-center">*Estimates based on 8% annual appreciation.</p>
+                <p className="text-[10px] text-gray-400 mt-2 text-center">*Projections based on conservative 8% CAGR.</p>
             </div>
         </div>
     );

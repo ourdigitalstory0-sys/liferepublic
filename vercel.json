@@ -1,4 +1,24 @@
 {
+    "redirects": [
+        { "source": "/projects/duet", "destination": "/projects/kolte-patil-life-republic-duet-premium-2-bhk-flats-hinjewadi", "permanent": true },
+        { "source": "/projects/arezo", "destination": "/projects/kolte-patil-life-republic-arezo-efficient-2-bhk-flats-hinjewadi", "permanent": true },
+        { "source": "/projects/canvas", "destination": "/projects/kolte-patil-life-republic-canvas-luxury-3-4-bhk-flats-hinjewadi", "permanent": true },
+        { "source": "/projects/atmos", "destination": "/projects/kolte-patil-life-republic-atmos-modern-2-3-bhk-flats-hinjewadi", "permanent": true },
+        { "source": "/projects/24k-espada", "destination": "/projects/kolte-patil-life-republic-24k-espada-ultra-luxury-row-houses-hinjewadi", "permanent": true },
+        { "source": "/projects/sound-of-soul", "destination": "/projects/kolte-patil-life-republic-sound-of-soul-luxury-4-bhk-row-houses-hinjewadi", "permanent": true },
+        { "source": "/projects/aros", "destination": "/projects/kolte-patil-life-republic-aros-premium-2-3-bhk-flats-hinjewadi", "permanent": true }
+    ],
+    "headers": [
+        {
+            "source": "/(fonts|images|assets)/(.*)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        }
+    ],
     "rewrites": [
         {
             "source": "/(.*)",

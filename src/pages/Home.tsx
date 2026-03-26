@@ -1,25 +1,30 @@
 import React, { useMemo } from 'react';
 import { Button } from '../components/ui/Button';
-import { ArrowRight, Briefcase, Plane, GraduationCap, HeartPulse, Dumbbell, Trees, Music, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Briefcase, Plane, GraduationCap, HeartPulse, Dumbbell, Trees, Music, ShieldCheck, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { api } from '../services/api';
 import type { Project } from '../lib/types';
 import { ProjectCard } from '../components/ui/ProjectCard';
 import { HeroSlider } from '../components/sections/HeroSlider';
+import { MasterPlan } from '../components/sections/MasterPlan';
+import { BrochureEngine } from '../components/ui/BrochureEngine';
 import { AmenitiesCarousel } from '../components/sections/AmenitiesCarousel';
 import { FAQ } from '../components/sections/FAQ';
 import { SEO } from '../components/seo/SEO';
-import { generateCollectionSchema, generateGlobalSchema } from '../utils/schemaGenerator';
+import { ResidentPulse } from '../components/ui/ResidentPulse';
+import { generateCollectionSchema, generateGlobalSchema, generateLocalBusinessSchema } from '../utils/schemaGenerator';
+
+import { RecentlyViewed } from '../components/sections/RecentlyViewed';
+import { InfraTracker } from '../components/sections/InfraTracker';
 
 const Home: React.FC = () => {
     const [featuredProjects, setFeaturedProjects] = React.useState<Project[]>([]);
 
     React.useEffect(() => {
-        const loadProjects = async () => {
+        const loadData = async () => {
             try {
                 // Optimized fetch: only get 3 featured projects with light data
                 const data = await api.projects.getFeatured(3);
-
                 if (data && data.length > 0) {
                     setFeaturedProjects(data);
                 }
@@ -27,16 +32,19 @@ const Home: React.FC = () => {
                 console.error('Failed to load projects from API:', error);
             }
         };
-        loadProjects();
+        loadData();
     }, []);
 
     // Generate dynamic schema based on fetched projects
     const schema = useMemo(() => {
         const globalSchema = generateGlobalSchema();
+        const localBusinessSchema = generateLocalBusinessSchema();
+        const baseSchemas = [globalSchema, localBusinessSchema];
+        
         if (featuredProjects.length > 0) {
-            return [globalSchema, generateCollectionSchema(featuredProjects)];
+            return [...baseSchemas, generateCollectionSchema(featuredProjects)];
         }
-        return globalSchema;
+        return baseSchemas;
     }, [featuredProjects]);
 
     return (
@@ -49,6 +57,10 @@ const Home: React.FC = () => {
             />
             {/* Hero Section */}
             <HeroSlider />
+            <ResidentPulse />
+
+            {/* Interactive Master Plan Section (Phase 4) */}
+            <MasterPlan />
 
             {/* Featured Projects Section */}
             <section className="py-20 bg-gray-50">
@@ -85,7 +97,7 @@ const Home: React.FC = () => {
                     <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[100px]"></div>
                 </div>
 
-                <div className="absolute inset-0 bg-[url('https://liferepublic.in/images/gallery/eros/master-layout.webp')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
+                <div className="absolute inset-0 bg-[url('/images/gallery/eros/master-layout.webp')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
 
                 <div className="container mx-auto px-4 relative z-10">
                     <motion.div
@@ -97,7 +109,7 @@ const Home: React.FC = () => {
                         <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Hinjewadi: A Real Estate Investment Hotspot</h2>
                         <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-green-500 to-orange-500 mx-auto mb-6 rounded-full"></div>
                         <p className="text-gray-300 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-                            Connected to the world, yet a world of its own. Located in the heart of Hinjewadi, a prime real estate corridor, Kolte Patil Life Republic Township offers unmatched connectivity and property value appreciation.
+                            Connected to the world, yet a world of its own. Located in the heart of Hinjewadi, a prime real estate corridor, Kolte Patil Life Republic Township offers unmatched connectivity and property value appreciation. Request the <strong>Price List 2026</strong> today.
                         </p>
                     </motion.div>
 
@@ -182,6 +194,9 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
+            {/* Infrastructure & Growth Tracker (Phase 5 SEO) */}
+            <InfraTracker />
+
             {/* Life at Republic (Bento Grid) */}
             <section className="py-20 bg-gray-50">
                 <div className="container mx-auto px-4">
@@ -205,7 +220,7 @@ const Home: React.FC = () => {
                             className="md:col-span-2 bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between h-64 relative overflow-hidden group"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 to-secondary/50 z-10"></div>
-                            <img src="https://liferepublic.in/images/gallery/nature-nest.webp" alt="Nature" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <img src="/images/gallery/nature-nest.webp" alt="Nature" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             <div className="relative z-20 text-white">
                                 <div className="bg-white/20 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center mb-4">
                                     <Trees size={24} />
@@ -257,7 +272,7 @@ const Home: React.FC = () => {
                             className="md:col-span-2 bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between h-64 relative overflow-hidden group"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-accent/95 to-accent/50 z-10"></div>
-                            <img src="https://liferepublic.in/images/gallery/clubhouse.webp" alt="Clubhouse" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <img src="/images/gallery/clubhouse.webp" alt="Clubhouse" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             <div className="relative z-20 text-white">
                                 <div className="bg-white/20 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center mb-4">
                                     <ShieldCheck size={24} />
@@ -271,6 +286,9 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Recently Viewed Section (Personalization) */}
+            <RecentlyViewed />
 
             {/* Amenities Section */}
             <AmenitiesCarousel />
@@ -370,6 +388,42 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </section>
+            
+            {/* Community Hub CTA (Phase 14) */}
+            <section className="py-20 bg-secondary overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12">
+                        <div className="flex-1">
+                            <div className="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+                                <Users size={14} />
+                                12,000+ Families
+                            </div>
+                            <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">Join Pune's Most Vibrant Township Community</h2>
+                            <p className="text-lg text-white/60 mb-8 max-w-xl">
+                                From weekend organic markets to sunrise yoga in the 3.5-acre Urban Park, life at Life Republic is more than just a home—it's a movement. Explore our resident-only hubs and cultural avenues.
+                            </p>
+                            <a href="/community-hub" className="inline-flex items-center gap-2 bg-white text-secondary px-8 py-4 rounded-full font-bold hover:bg-accent hover:text-white transition-all group">
+                                Explore Resident Hub
+                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            </a>
+                        </div>
+                        <div className="flex-1 grid grid-cols-2 gap-4">
+                            <div className="bg-white/5 p-6 rounded-3xl border border-white/5 transform hover:-translate-y-1 transition-transform">
+                                <div className="text-2xl font-bold text-white mb-1">24/7</div>
+                                <div className="text-[10px] text-white/40 uppercase font-bold tracking-widest">Digital Hub</div>
+                            </div>
+                            <div className="bg-white/5 p-6 rounded-3xl border border-white/5 translate-y-8 transform hover:translate-y-7 transition-transform">
+                                <div className="text-2xl font-bold text-white mb-1">50+</div>
+                                <div className="text-[10px] text-white/40 uppercase font-bold tracking-widest">Groups</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Dynamic Brochure Engine (Phase 5) */}
+            <BrochureEngine />
 
             {/* Internal Linking / Popular Searches */}
             <section className="py-12 bg-gray-100 border-t border-gray-200">

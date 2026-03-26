@@ -8,6 +8,9 @@ import { projects } from '../src/data/projects';
 const DOMAIN = 'http://localhost:4173'; // Vite preview default port
 const OUT_DIR = path.resolve(process.cwd(), 'dist');
 
+// Load sectors data
+const sectorsData = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'src/data/sectors.json'), 'utf-8'));
+
 const staticRoutes = [
     '/',
     '/projects',
@@ -23,16 +26,23 @@ const staticRoutes = [
     '/nri-corner',
     '/testimonials',
     '/media-center',
-    '/location/flats-near-hinjewadi',
-    '/location/flats-near-tathawade',
-    '/location/flats-near-punawale',
-    '/location/flats-near-wakad',
-    '/location/flats-near-marunji',
+    '/township-intelligence',
+    '/nri-investment-guide',
+    '/lifestyle',
+    '/sustainability',
+    '/community-hub',
+];
+
+const sectorRoutes = [
+    ...sectorsData.sectors.map((s: any) => `/location/${s.slug}`),
+    ...sectorsData.avenues.map((a: any) => `/location/${a.slug}`),
+    ...sectorsData.localities.map((l: any) => `/location/${l.slug}`),
 ];
 
 const routes = [
     ...staticRoutes.filter(r => r !== '/'),
     ...projects.map((p) => `/projects/${p.id}`),
+    ...sectorRoutes,
     '/', // Render homepage last to preserve SPA shell for other routes
 ];
 

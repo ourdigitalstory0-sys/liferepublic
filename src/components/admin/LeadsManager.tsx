@@ -71,6 +71,16 @@ export const LeadsManager: React.FC = () => {
         }
     };
 
+    const getLeadSegment = (lead: Lead) => {
+        const msg = (lead.message || '').toLowerCase();
+        const projectId = (lead.project_id || '').toLowerCase();
+        
+        if (msg.includes('nri') || msg.includes('international') || msg.includes('gmt')) return { label: 'NRI', color: 'bg-purple-100 text-purple-700' };
+        if (projectId.includes('24k') || projectId.includes('canvas') || msg.includes('luxury')) return { label: 'Luxury', color: 'bg-amber-100 text-amber-700' };
+        if (projectId.includes('duet') || projectId.includes('arezo') || msg.includes('budget')) return { label: 'First-Time', color: 'bg-blue-100 text-blue-700' };
+        return { label: 'General', color: 'bg-gray-100 text-gray-600' };
+    };
+
     if (loading) return <div className="p-8 text-center text-gray-500">Loading leads...</div>;
 
     return (
@@ -89,6 +99,7 @@ export const LeadsManager: React.FC = () => {
                             <th className="px-6 py-4 font-medium">Contact</th>
                             <th className="px-6 py-4 font-medium">Interested In</th>
                             <th className="px-6 py-4 font-medium">Message</th>
+                            <th className="px-6 py-4 font-medium">Segment</th>
                             <th className="px-6 py-4 font-medium">Status</th>
                             <th className="px-6 py-4 font-medium text-right">Actions</th>
                         </tr>
@@ -126,6 +137,16 @@ export const LeadsManager: React.FC = () => {
                                     </td>
                                     <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate" title={lead.message}>
                                         {lead.message || '-'}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {(() => {
+                                            const segment = getLeadSegment(lead);
+                                            return (
+                                                <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-tighter ${segment.color}`}>
+                                                    {segment.label}
+                                                </span>
+                                            );
+                                        })()}
                                     </td>
                                     <td className="px-6 py-4">
                                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(lead.status)}`}>

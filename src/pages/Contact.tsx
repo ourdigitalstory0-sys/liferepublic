@@ -16,7 +16,7 @@ export const Contact: React.FC = () => {
         "@context": "https://schema.org",
         "@type": "RealEstateAgent",
         "name": "Kolte Patil Life Republic Sales Office",
-        "image": "https://liferepublic.in/images/gallery/eros/master-layout.webp",
+        "image": "/images/gallery/eros/master-layout.webp",
         "url": "https://life-republic.in/contact",
         "telephone": "+917744009295",
         "address": {
@@ -64,7 +64,7 @@ export const Contact: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-5xl md:text-6xl font-serif font-bold mb-6"
                     >
-                        Contact Us
+                        Contact Kolte Patil Life Republic Sales
                     </motion.h1>
                     <p className="text-xl max-w-2xl mx-auto text-gray-300">
                         Get in touch with us to find your dream home at Life Republic.

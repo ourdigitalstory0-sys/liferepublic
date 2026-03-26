@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { generateGlobalSchema, generateSiteNavigationSchema } from '../../utils/schemaGenerator';
 
 interface SEOProps {
     title?: string;
@@ -18,24 +19,51 @@ export const SEO: React.FC<SEOProps> = ({
     description,
     keywords,
     canonical,
-    image = 'https://liferepublic.in/images/gallery/eros/master-layout.webp',
+    image = '/images/gallery/eros/master-layout.webp',
     type = 'website',
     schema,
 }) => {
-    const siteTitle = 'Kolte Patil Life Republic Township Hinjewadi';
-    const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+    const siteTitle = 'Kolte Patil Life Republic';
+    const locationSuffix = 'Hinjewadi Pune';
+    const fullTitle = title 
+        ? `${siteTitle} | ${title} | ${locationSuffix}` 
+        : `${siteTitle} Township | ${locationSuffix} | Official Site`;
 
     const defaultDescription =
-        'Kolte Patil Life Republic Township Hinjewadi is a premium 390+ acre integrated township in Pune. Explore luxury 1, 2, 3 BHK flats, 4 BHK villas, and row houses near Rajiv Gandhi IT Park. Real Estate Projects in Hinjewadi.';
+        'Kolte Patil Life Republic Hinjewadi is a 390-acre integrated township in Pune. Explore RERA-registered 1, 2, 3 BHK flats, 4 BHK villas, and premium row houses near Rajiv Gandhi IT Park.';
     const metaDescription = description || defaultDescription;
 
-    // Fallback global keywords if not provided prop-wise
-    const defaultKeywords = "Kolte Patil Life Republic Township Hinjewadi, life republic hinjewadi, life republic township, kolte patil hinjewadi, hinjewadi properties, real estate projects in hinjewadi, luxury properties in hinjewadi, kolte patil township hinjewadi";
-    const metaKeywords = keywords || defaultKeywords;
+    const currentPath = window.location.pathname;
+    
+    // Configuration-intelligent Keyword Injection
+    const getPathSpecificKeywords = (path: string) => {
+        if (path.includes('2-bhk')) return "2 BHK flats Hinjewadi, 2 BHK in Life Republic, buy 2BHK Pune west, 2 BHK price list Hinjewadi";
+        if (path.includes('3-bhk')) return "3 BHK flats Hinjewadi, 3 BHK in Life Republic, luxury 3BHK Pune, 3 BHK price list Hinjewadi";
+        if (path.includes('4-bhk')) return "4 BHK luxury apartments Life Republic, 4 BHK villas Hinjewadi, ultra luxury 4BHK Pune";
+        if (path.includes('1-bhk')) return "1 BHK in Life Republic, small flats Hinjewadi, 1 BHK investment Pune";
+        if (path.includes('nri')) return "NRI investment Pune, buy property from USA, FEMA repatriation rules, Life Republic ROI";
+        return "";
+    };
+
+    const pathKeywords = getPathSpecificKeywords(currentPath);
+    const defaultKeywords = "Kolte Patil Life Republic, Life Republic Hinjewadi, Life Republic Township, Kolte Patil Hinjewadi, Hinjewadi properties, Pune integrated township, buy flat in hinjewadi, luxury villas pune, 2 bhk near hinjewadi phase 1, rera projects hinjewadi";
+    
+    const metaKeywords = keywords 
+        ? `${keywords}${pathKeywords ? `, ${pathKeywords}` : ''}` 
+        : `${defaultKeywords}${pathKeywords ? `, ${pathKeywords}` : ''}`;
+
+    const globalSchema = generateGlobalSchema(currentPath);
+    const navSchema = generateSiteNavigationSchema();
+
+    const allSchemas: any[] = [globalSchema, navSchema];
+    if (schema) {
+        if (Array.isArray(schema)) allSchemas.push(...schema);
+        else allSchemas.push(schema);
+    }
 
     const fullCanonical = canonical
-        ? `${DOMAIN}${canonical}`
-        : DOMAIN + window.location.pathname;
+        ? `${DOMAIN}${canonical.startsWith('/') ? '' : '/'}${canonical}`
+        : DOMAIN + currentPath;
 
     return (
         <Helmet>
@@ -45,27 +73,29 @@ export const SEO: React.FC<SEOProps> = ({
             <meta name="description" content={metaDescription} />
             <meta name="keywords" content={metaKeywords} />
             <link rel="canonical" href={fullCanonical} />
+            <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content={type} />
             <meta property="og:url" content={fullCanonical} />
+            <meta property="og:site_name" content="Kolte Patil Life Republic" />
             <meta property="og:title" content={fullTitle} />
             <meta property="og:description" content={metaDescription} />
-            <meta property="og:image" content={image} />
+            <meta property="og:image" content={DOMAIN + image} />
 
             {/* Twitter */}
             <meta property="twitter:card" content="summary_large_image" />
             <meta property="twitter:url" content={fullCanonical} />
             <meta property="twitter:title" content={fullTitle} />
             <meta property="twitter:description" content={metaDescription} />
-            <meta property="twitter:image" content={image} />
+            <meta property="twitter:image" content={DOMAIN + image} />
 
             {/* Structured Data (JSON-LD) */}
-            {schema && (
-                <script type="application/ld+json">
-                    {JSON.stringify(schema)}
+            {allSchemas.map((s, i) => (
+                <script key={i} type="application/ld+json">
+                    {JSON.stringify(s)}
                 </script>
-            )}
+            ))}
         </Helmet>
     );
 };

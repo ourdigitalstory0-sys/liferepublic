@@ -1,3 +1,15 @@
 User-agent: *
 Allow: /
 Sitemap: https://life-republic.in/sitemap.xml
+
+# Disallow sensitive paths
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+Disallow: /search?*
+Disallow: /?*
+Disallow: /*?utm_*
+Disallow: /*?fbclid*
+
+# Host
+Host: https://life-republic.in

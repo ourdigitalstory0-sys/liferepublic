@@ -15,6 +15,8 @@ export interface Project {
     gallery?: (string | { url: string; alt?: string })[]; // Added for DB
     rera?: string; // Added for RERA compliance
     themeColor?: string; // Added for UI Theme Logic
+    faqs?: { question: string; answer: string }[];
+    progress?: number; // Added for Phase 12 Construction Tracking
 }
 
 export interface Banner {

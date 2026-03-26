@@ -17,7 +17,7 @@ export const LocationHighlights: React.FC = () => {
 
             {/* Hero Section */}
             <section className="relative h-[50vh] flex items-center justify-center bg-primary-dark text-white overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://liferepublic.in/images/gallery/eros/master-layout.webp')] bg-cover bg-center opacity-40"></div>
+                <div className="absolute inset-0 bg-[url('/images/gallery/eros/master-layout.webp')] bg-cover bg-center opacity-40"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 <div className="container mx-auto px-4 relative z-10 text-center">
                     <motion.h1
@@ -25,7 +25,7 @@ export const LocationHighlights: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-4xl md:text-6xl font-serif font-bold mb-6"
                     >
-                        Hinjewadi: The Silicon Valley of Pune
+                        Hinjewadi: Kolte Patil Life Republic Location Advantages
                     </motion.h1>
                     <p className="text-xl max-w-3xl mx-auto text-gray-200 font-light">
                         Located in the strategic IT hub/Real Estate goldmine of Pune, Kolte Patil Life Republic Township offers the perfect blend of work-life balance and high investment returns.

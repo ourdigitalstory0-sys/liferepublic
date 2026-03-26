@@ -20,7 +20,7 @@ export const About: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-4xl md:text-5xl font-serif font-bold text-secondary mb-6"
                     >
-                        About Life Republic
+                        About Kolte Patil Life Republic Township Hinjewadi
                     </motion.h1>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                         A township that thinks about you.
@@ -38,10 +38,10 @@ export const About: React.FC = () => {
                             <strong>Transforming Hinjewadi Real Estate:</strong> Life Republic has redefined the property landscape in West Pune. By offering a mix of affordable luxury and premium residences, it has become a preferred choice for IT professionals and investors looking for long-term asset appreciation.
                         </p>
                         <p>
-                            As one of the most sought-after addresses, <strong>Kolte Patil Life Republic Township Hinjewadi</strong> offers a wide range of residential options including 1, 2, 3 BHK flats, villas, and row houses.
+                            As one of the most sought-after addresses, <strong>Kolte Patil Life Republic Township Hinjewadi</strong> offers a wide range of residential options including 1, 2, 3 BHK flats, villas, and row houses. It is widely regarded as the <strong>best township in Hinjewadi Pune for investment</strong> due to its consistent ROI and professional governance.
                         </p>
                         <p>
-                            Kolte Patil Life Republic Township is a project by Kolte-Patil Developers Ltd., one of the foremost real estate developer in Pune.
+                            Whether you are looking for <strong>ready to move flats in Hinjewadi township</strong> or a long-term <strong>rent vs buy analysis</strong>, Life Republic provides the data and infrastructure to support your decision. The township is a project by Kolte-Patil Developers Ltd., one of the foremost real estate developers in Pune, ensuring RERA-compliant delivery and transparency.
                         </p>
                     </div>
                 </div>

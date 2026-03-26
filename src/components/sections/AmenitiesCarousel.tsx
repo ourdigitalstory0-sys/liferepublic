@@ -31,27 +31,27 @@ export const AmenitiesCarousel: React.FC = () => {
 
     const displayAmenities = amenities.length > 0 ? amenities : [
         {
-            image_url: "https://liferepublic.in/images/gallery/clubhouse.webp",
+            image_url: "/images/gallery/clubhouse.webp",
             title: "Grand Clubhouse",
             description: "A sprawling clubhouse for social gatherings and recreation."
         },
         {
-            image_url: "https://liferepublic.in/images/homeaminities/aminities/1714995734Boulevard%201-%20DSC_2081-%20911%20x%20500%20copy.webp",
+            image_url: "/images/homeaminities/aminities/1714995734Boulevard%201-%20DSC_2081-%20911%20x%20500%20copy.webp",
             title: "Green Boulevards",
             description: "Lush green pathways for peaceful walks and nature connect."
         },
         {
-            image_url: "https://liferepublic.in/images/homeaminities/aminities/1714995818Swimming-pool.webp",
+            image_url: "/images/homeaminities/aminities/1714995818Swimming-pool.webp",
             title: "Infinity Pool",
             description: "Relax and rejuvenate in our temperature-controlled swimming pool."
         },
         {
-            image_url: "https://liferepublic.in/images/homeaminities/aminities/1714995633Boulevard%202-%20DSC_2109-%20911%20x%20500%20copy.webp",
+            image_url: "/images/homeaminities/aminities/1714995633Boulevard%202-%20DSC_2109-%20911%20x%20500%20copy.webp",
             title: "Landscaped Gardens",
             description: "Beautifully manicured gardens that soothe your senses."
         },
         {
-            image_url: "https://liferepublic.in/images/homeaminities/aminities/1708779581amenities-02.webp",
+            image_url: "/images/homeaminities/aminities/1708779581amenities-02.webp",
             title: "Sports Arena",
             description: "World-class facilities for tennis, basketball, and more."
         }

@@ -76,21 +76,21 @@ export const Footer: React.FC = () => {
                     </div>
 
                     <div className="lg:col-span-2">
-                        <h4 className="text-lg font-serif font-bold mb-8 text-white">Featured</h4>
+                        <h4 className="text-lg font-serif font-bold mb-8 text-white">Project Clusters</h4>
                         <ul className="space-y-4">
                             {[
-                                'Atmos - Premium',
-                                'Villas - Luxury',
-                                '24K Espada',
-                                'Aros - Smart',
-                                'Arezo - 2 & 3 BHK'
-                            ].map((project) => (
-                                <li key={project}>
+                                { name: 'Atmos (2 & 3 BHK)', path: '/projects/kolte-patil-life-republic-atmos-modern-2-3-bhk-flats-hinjewadi' },
+                                { name: 'Aros (Premium 2 & 3 BHK)', path: '/projects/kolte-patil-life-republic-aros-premium-2-3-bhk-flats-hinjewadi' },
+                                { name: 'Canvas (Ultra Luxury)', path: '/projects/kolte-patil-life-republic-canvas-luxury-3-4-bhk-flats-hinjewadi' },
+                                { name: 'Universe (Smart Homes)', path: '/projects/kolte-patil-life-republic-universe-luxury-1-2-bhk-flats-hinjewadi' },
+                                { name: '24K Espada (Row Houses)', path: '/projects/kolte-patil-life-republic-24k-espada-ultra-luxury-row-houses-hinjewadi' }
+                            ].map((link) => (
+                                <li key={link.name}>
                                     <Link
-                                        to="/projects"
+                                        to={link.path}
                                         className="text-gray-400 hover:text-white group flex items-center gap-2 transition-all duration-300"
                                     >
-                                        {project}
+                                        {link.name}
                                         <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300 text-accent" />
                                     </Link>
                                 </li>
@@ -99,14 +99,14 @@ export const Footer: React.FC = () => {
                     </div>
 
                     <div className="lg:col-span-2">
-                        <h4 className="text-lg font-serif font-bold mb-8 text-white">Locations</h4>
+                        <h4 className="text-lg font-serif font-bold mb-8 text-white">Location Index</h4>
                         <ul className="space-y-4">
                             {[
-                                { name: 'Near Hinjewadi', path: '/location/flats-near-hinjewadi' },
-                                { name: 'Near Tathawade', path: '/location/flats-near-tathawade' },
-                                { name: 'Near Punawale', path: '/location/flats-near-punawale' },
-                                { name: 'Near Wakad', path: '/location/flats-near-wakad' },
-                                { name: 'Near Marunji', path: '/location/flats-near-marunji' }
+                                { name: 'Near Hinjewadi Phase 1', path: '/location/flats-near-hinjewadi' },
+                                { name: 'Near Marunji Road', path: '/location/flats-near-marunji' },
+                                { name: 'Near Tathawade IT Hub', path: '/location/flats-near-tathawade' },
+                                { name: 'Near Punawale Sector', path: '/location/flats-near-punawale' },
+                                { name: 'Near Wakad Corridor', path: '/location/flats-near-wakad' }
                             ].map((link) => (
                                 <li key={link.name}>
                                     <Link

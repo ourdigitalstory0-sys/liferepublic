@@ -72,7 +72,7 @@ export const ExitIntentModal: React.FC = () => {
                                     className="absolute inset-0 w-full h-full object-cover"
                                     onError={(e) => {
                                         // Fallback if local image not yet ready
-                                        e.currentTarget.src = "https://liferepublic.in/images/gallery/eros/master-layout.webp";
+                                        e.currentTarget.src = "/images/gallery/eros/master-layout.webp";
                                     }}
                                 />
                                 <div className="absolute inset-0 bg-secondary/20 mix-blend-multiply" />

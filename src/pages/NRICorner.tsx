@@ -3,6 +3,9 @@ import { motion } from 'framer-motion';
 import { SEO } from '../components/seo/SEO';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { Globe, TrendingUp, Landmark, ShieldCheck } from 'lucide-react';
+import { NRIInvestorHub } from '../components/sections/NRIInvestorHub';
+import { ROICalculator } from '../components/sections/ROICalculator';
+import { BrochureEngine } from '../components/ui/BrochureEngine';
 
 export const NRICorner: React.FC = () => {
     return (
@@ -26,7 +29,7 @@ export const NRICorner: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-4xl md:text-5xl font-serif font-bold mb-4"
                     >
-                        NRI Investment Corner
+                        NRI Investment: Kolte Patil Life Republic
                     </motion.h1>
                     <p className="text-xl max-w-2xl mx-auto text-gray-300">
                         Secure your roots in India with Pune's most trusted township.
@@ -66,6 +69,15 @@ export const NRICorner: React.FC = () => {
                     </div>
                 </div>
             </section>
+
+            {/* NRI Specific Intelligence Hub (Phase 5) */}
+            <NRIInvestorHub />
+
+            {/* Investment Growth Calculator */}
+            <ROICalculator />
+
+            {/* Dynamic Brochure Engine */}
+            <BrochureEngine />
 
             {/* Remote Buying Process Step-by-Step */}
             <section className="py-20 bg-secondary text-white">

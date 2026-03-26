@@ -219,6 +219,19 @@ export const ProjectsManager: React.FC = () => {
                                     placeholder="e.g. P52100031799"
                                 />
                             </div>
+                            <div className="flex items-center gap-2 pt-6">
+                                <input
+                                    type="checkbox"
+                                    id="isNewLaunch"
+                                    className="w-4 h-4 text-primary rounded"
+                                    checked={formData.category === 'New Launch'}
+                                    onChange={e => {
+                                        if (e.target.checked) handleChange('category', 'New Launch');
+                                        else if (formData.category === 'New Launch') handleChange('category', 'Premium');
+                                    }}
+                                />
+                                <label htmlFor="isNewLaunch" className="text-sm font-medium">Mark as New Launch</label>
+                            </div>
                         </div>
                     )}
 

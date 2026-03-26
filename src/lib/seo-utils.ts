@@ -35,6 +35,7 @@ export const generateSemanticKeywords = (ctx: SEOContext): string => {
         `Rental Yield Hinjewadi`, // Investor intent
 
         // --- NEWLY INJECTED FROM koltepatil.com AND liferepublic.in ---
+        `Kolte Patil Life Republic Township Hinjewadi`,
         `Flats for Sale in Pune Hinjewadi`,
         `Township Projects in Pune`,
         `Residential Projects in Hinjewadi`,
@@ -42,7 +43,9 @@ export const generateSemanticKeywords = (ctx: SEOContext): string => {
         `Integrated Townships in Pune`,
         `Best Township Projects in Pune`,
         `New Housing Projects in Hinjewadi Pune`,
-        `Pre Launch Projects in Hinjewadi Pune`
+        `Pre Launch Projects in Hinjewadi Pune`,
+        `Kolte Patil Life Republic Hinjewadi price`,
+        `Life Republic Hinjewadi possession date`
     ];
 
     // 3. Semantic Variations (Algorithm Friendly)

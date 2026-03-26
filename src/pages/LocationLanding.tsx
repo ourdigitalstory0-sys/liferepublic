@@ -68,7 +68,7 @@ export const LocationLanding: React.FC<LocationLandingProps> = ({ locationName, 
 
             {/* Hero Section */}
             <section className="relative py-20 bg-slate-900 text-white overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://liferepublic.in/images/gallery/eros/master-layout.webp')] bg-cover bg-center opacity-10"></div>
+                <div className="absolute inset-0 bg-[url('/images/gallery/eros/master-layout.webp')] bg-cover bg-center opacity-10"></div>
                 <div className="container mx-auto px-4 relative z-10 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

@@ -38,7 +38,7 @@ export const ThreeBHK: React.FC = () => {
                 {/* Hero Section */}
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-secondary">
-                        Premium 3 BHK Flats in Hinjewadi
+                        3 BHK Flats in Kolte Patil Life Republic Township Hinjewadi
                     </h1>
                     <div className="w-24 h-1 bg-accent mx-auto mb-6" />
                     <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">

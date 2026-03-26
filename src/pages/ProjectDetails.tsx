@@ -15,7 +15,9 @@ import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { ShareButtons } from '../components/ui/ShareButtons';
 import { ImageModal } from '../components/ui/ImageModal';
 import { generateSemanticKeywords, generateSemanticDescription, generateSemanticTitle } from '../lib/seo-utils';
-import { generateProjectSchema } from '../utils/schemaGenerator';
+import { generateProjectSchema, generateBreadcrumbSchema, generateImageGallerySchema } from '../utils/schemaGenerator';
+
+import { SectorLinkMesh } from '../components/sections/SectorLinkMesh';
 
 const ProjectDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -82,17 +84,24 @@ const ProjectDetails: React.FC = () => {
 
     // Construct Schema using logic
     const projectSchema = generateProjectSchema(project);
+    const gallerySchema = generateImageGallerySchema(project);
+    const breadcrumbSchema = generateBreadcrumbSchema([
+        { name: 'Home', item: '/' },
+        { name: 'Projects', item: '/projects' },
+        { name: `${project.title} Hinjewadi`, item: `/projects/${project.id}` }
+    ]);
 
     const seoContext = {
         title: project.title,
         category: project.category,
-        location: 'Hinjewadi', // Hardcoded as primary target
-        price: project.price
+        location: project.location || 'Hinjewadi',
+        price: project.price,
+        phrase: `Premium ${project.category} near Hinjewadi IT Park Phase 1 & 2`
     };
 
     const dynamicTitle = generateSemanticTitle(seoContext);
     const dynamicDesc = generateSemanticDescription(seoContext);
-    const dynamicKeywords = generateSemanticKeywords(seoContext);
+    const dynamicKeywords = generateSemanticKeywords(seoContext) + ", flats near hinjewadi phase 1, property in marunji pune, kolte patil life republic " + project.id;
 
     return (
         <div className="pt-20">
@@ -103,13 +112,17 @@ const ProjectDetails: React.FC = () => {
                 keywords={dynamicKeywords}
                 image={project.image}
                 canonical={`/projects/${project.id}`}
-                schema={projectSchema}
+                schema={[
+                    ...(Array.isArray(projectSchema) ? projectSchema : [projectSchema]), 
+                    breadcrumbSchema,
+                    gallerySchema
+                ]}
             />
             {/* Project Hero */}
             <section className="relative h-[60vh] w-full">
                 <img
                     src={project.image}
-                    alt={`Kolte Patil Life Republic - ${project.title}`}
+                    alt={`Kolte Patil Life Republic ${project.title} - Luxury Flats in Hinjewadi Pune`}
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
@@ -123,11 +136,11 @@ const ProjectDetails: React.FC = () => {
                                 className="px-4 py-1 text-sm font-semibold rounded-full mb-4 inline-block shadow-lg border border-white/20 backdrop-blur-sm"
                                 style={{ backgroundColor: themeColor }}
                             >
-                                {project.category}
+                                {project.category} in Hinjewadi
                             </span>
                             <h1 className="text-5xl md:text-7xl font-serif font-bold mb-4 text-shadow-lg">{project.title}</h1>
                             <p className="text-xl md:text-2xl flex items-center justify-center gap-2 text-shadow">
-                                <MapPin size={24} style={{ color: themeColor }} /> {project.location}
+                                <MapPin size={24} style={{ color: themeColor }} /> {project.location || 'Life Republic, Hinjewadi'}
                             </p>
                         </motion.div>
                     </div>
@@ -139,12 +152,12 @@ const ProjectDetails: React.FC = () => {
                 <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-12">
                     {/* Main Content */}
                     <div className="lg:col-span-2">
-                        <h2 className="text-3xl font-serif font-bold mb-6 text-secondary">Overview</h2>
+                        <h2 className="text-3xl font-serif font-bold mb-6 text-secondary">Project Overview & Connectivity to Hinjewadi IT Park</h2>
                         <p className="text-gray-600 text-lg leading-relaxed mb-8">
                             {project.description}
                         </p>
 
-                        <h3 className="text-2xl font-serif font-bold mb-6 text-secondary">Key Features</h3>
+                        <h3 className="text-2xl font-serif font-bold mb-6 text-secondary">Key Features & Global Amenities</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                             {project.features.map((feature, index) => (
                                 <div key={index} className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
@@ -252,7 +265,7 @@ const ProjectDetails: React.FC = () => {
                                             <div key={index} className="relative h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
                                                 <img
                                                     src={url}
-                                                    alt={alt}
+                                                    alt={`${alt} - Near IT Park Hinjewadi Pune`}
                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 />
                                             </div>
@@ -281,6 +294,32 @@ const ProjectDetails: React.FC = () => {
                                 <EMICalculator />
                                 <ROICalculator />
                             </div>
+                        </div>
+
+                        {/* FAQ Section */}
+                        {project.faqs && project.faqs.length > 0 && (
+                            <div className="mt-16 border-t border-gray-100 pt-16">
+                                <h2 className="text-2xl font-serif font-bold text-gray-800 mb-8 text-center">Frequently Asked Questions</h2>
+                                <div className="space-y-4">
+                                    {project.faqs.map((faq, index) => (
+                                        <motion.div
+                                            key={index}
+                                            initial={{ opacity: 0, y: 10 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: index * 0.1 }}
+                                            className="bg-gray-50 p-6 rounded-2xl border border-gray-200"
+                                        >
+                                            <h3 className="text-lg font-bold text-secondary mb-2">{faq.question}</h3>
+                                            <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="mt-16">
+                            <SectorLinkMesh />
                         </div>
 
                         {/* Similar Projects Section */}

@@ -1,0 +1,41 @@
+{
+  "township": {
+    "name": "Kolte Patil Life Republic",
+    "total_area": "390 Acres",
+    "location": "Hinjewadi, Pune",
+    "total_residents": "20,000+",
+    "key_infrastructure": [
+      {
+        "name": "Crimson Anisha Global School",
+        "type": "School",
+        "distance": "Within Township",
+        "description": "Premium global school located inside the township."
+      },
+      {
+        "name": "Township Fire Station",
+        "type": "Emergency",
+        "distance": "Within Township",
+        "description": "Dedicated fire station for resident safety."
+      },
+      {
+        "name": "Spine Road",
+        "type": "Infrastructure",
+        "description": "Major connectivity road passing through the 390-acre township."
+      },
+      {
+        "name": "Upcoming IT Hub Connectivity",
+        "type": "Infrastructure",
+        "description": "Direct access to Hinjewadi Phase 1, 2, and 3."
+      }
+    ],
+    "hospitals_nearby": [
+      { "name": "Sahyadri Hospital", "distance": "15 mins" },
+      { "name": "Lifepoint Multispecialty", "distance": "10 mins" }
+    ],
+    "connectivity": {
+      "mumbai_pune_expressway": "10 mins",
+      "pune_airport": "45 mins",
+      "hinjewadi_metro": "Proposed/Upcoming"
+    }
+  }
+}

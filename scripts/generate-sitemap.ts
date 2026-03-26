@@ -9,13 +9,12 @@ dotenv.config();
 const DOMAIN = 'https://life-republic.in';
 const PUBLIC_DIR = path.resolve(process.cwd(), 'public');
 
+// Load sectors data
+const sectorsData = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'src/data/sectors.json'), 'utf-8'));
+
 // Initialize Supabase Client
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-    console.warn('⚠️  Missing Supabase credentials in .env. Sitemap will rely on static routes only.');
-}
 
 const supabase = (supabaseUrl && supabaseKey)
     ? createClient(supabaseUrl, supabaseKey)
@@ -30,17 +29,34 @@ const staticRoutes = [
     '/privacy',
     '/terms',
     '/location',
-    '/2-bhk-flats-in-hinjewadi',
-    '/3-bhk-flats-in-hinjewadi',
-    '/4-bhk-flats-in-hinjewadi',
     '/nri-corner',
     '/testimonials',
     '/media-center',
+    '/township-intelligence',
+    '/nri-investment-guide',
+    '/connectivity',
+    '/lifestyle',
+    '/sustainability',
+    '/community-hub',
+    '/2-bhk-flats-in-hinjewadi',
+    '/3-bhk-flats-in-hinjewadi',
+    '/4-bhk-flats-in-hinjewadi',
     '/location/flats-near-hinjewadi',
     '/location/flats-near-tathawade',
     '/location/flats-near-punawale',
     '/location/flats-near-wakad',
     '/location/flats-near-marunji',
+    '/1-bhk-flats-in-hinjewadi',
+    '/row-houses-in-life-republic',
+    '/luxury-villas-near-hinjewadi',
+    '/plots-in-hinjewadi',
+];
+
+// Add sector-based routes from sectors.json
+const sectorRoutes = [
+    ...sectorsData.sectors.map((s: any) => `/location/${s.slug}`),
+    ...sectorsData.avenues.map((a: any) => `/location/${a.slug}`),
+    ...sectorsData.localities.map((l: any) => `/location/${l.slug}`),
 ];
 
 const ID_TO_SLUG: Record<string, string> = {
@@ -51,6 +67,11 @@ const ID_TO_SLUG: Record<string, string> = {
     '24k-espada': 'kolte-patil-life-republic-24k-espada-ultra-luxury-row-houses-hinjewadi',
     'sound-of-soul': 'kolte-patil-life-republic-sound-of-soul-luxury-4-bhk-row-houses-hinjewadi',
     'aros': 'kolte-patil-life-republic-aros-premium-2-3-bhk-flats-hinjewadi',
+    'universe': 'kolte-patil-life-republic-universe-luxury-1-2-bhk-flats-hinjewadi',
+    'first-avenue': 'kolte-patil-life-republic-first-avenue-premium-2-3-bhk-hinjewadi',
+    'villas': 'kolte-patil-life-republic-villas-hinjewadi',
+    'bungalows': 'kolte-patil-life-republic-bungalows-hinjewadi',
+    'echoes': 'kolte-patil-life-republic-echoes-new-launch-2-2-5-bhk-hinjewadi',
     'qrious': 'kolte-patil-life-republic-qrious-smart-2-3-bhk-homes-hinjewadi'
 };
 
@@ -77,11 +98,10 @@ async function generateSitemap() {
             }
         } catch (error) {
             console.error('❌ Error fetching projects from Supabase:', error);
-            // Fallback could be implemented here if needed, but for now we warn
         }
     }
 
-    const allRoutes = [...staticRoutes, ...projectRoutes];
+    const allRoutes = [...staticRoutes, ...sectorRoutes, ...projectRoutes];
 
     const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -102,6 +122,18 @@ function generateRobots() {
     const robotsContent = `User-agent: *
 Allow: /
 Sitemap: ${DOMAIN}/sitemap.xml
+
+# Disallow sensitive paths
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+Disallow: /search?*
+Disallow: /?*
+Disallow: /*?utm_*
+Disallow: /*?fbclid*
+
+# Host
+Host: ${DOMAIN}
 `;
     fs.writeFileSync(path.join(PUBLIC_DIR, 'robots.txt'), robotsContent);
     console.log('✅ robots.txt generated.');

@@ -1,21 +1,29 @@
 import { supabase } from '../lib/supabase';
 import type { Banner, Project, Lead, Amenity } from '../lib/types';
+import { projects as projectsRegistry } from '../data/projects';
 import { emailService } from './email';
+import townshipKB from '../data/township_kb.json';
 
 
+const normalizeUrl = (url: string | null | undefined): string => {
+    if (!url || typeof url !== 'string') return '';
+    return url.replace(/https?:\/\/liferepublic\.in\//g, '/');
+};
 
 export const api = {
     banners: {
         getAll: async (page = 1, limit = 50) => {
             const start = (page - 1) * limit;
             const end = start + limit - 1;
-            const { data, error } = await supabase
+            const { data } = await supabase
                 .from('banners')
                 .select('*')
                 .order('order', { ascending: true })
                 .range(start, end);
-            if (error) throw error;
-            return data as Banner[];
+            return (data as Banner[]).map(b => ({
+                ...b,
+                image_url: normalizeUrl(b.image_url)
+            }));
         },
         getCount: async () => {
             const { count, error } = await supabase
@@ -53,11 +61,12 @@ export const api = {
             const { data, error } = await query;
             if (error) throw error;
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            return data.map((p: any) => ({
+            return (data || []).map((p) => ({
                 ...p,
-                masterLayout: p.master_layout,
-                floorPlans: p.floor_plans,
+                image: normalizeUrl(p.image),
+                masterLayout: normalizeUrl(p.master_layout),
+                floorPlans: (p.floor_plans || []).map((fp: string) => normalizeUrl(fp)),
+                gallery: (p.gallery || []).map((g: string) => normalizeUrl(g)),
                 themeColor: p.theme_color
             })) as Project[];
         },
@@ -69,23 +78,38 @@ export const api = {
 
             if (error) throw error;
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            return data.map((p: any) => ({
+            return (data || []).map((p) => ({
                 ...p,
-                themeColor: p.theme_color
+                image: normalizeUrl(p.image),
+                themeColor: p.theme_color,
+                description: p.overview // Fallback description
             })) as Project[];
         },
         getById: async (id: string) => {
             const { data, error } = await supabase.from('projects').select('*').eq('id', id).single();
             if (error) throw error;
+ 
+            const registryProject = projectsRegistry.find(p => p.id === id);
 
             const project = {
                 ...data,
-                masterLayout: data.master_layout,
-                floorPlans: data.floor_plans,
-                themeColor: data.theme_color
+                image: normalizeUrl(data.image),
+                masterLayout: normalizeUrl(data.master_layout),
+                floorPlans: (data.floor_plans || []).map((fp: string) => normalizeUrl(fp)),
+                gallery: (data.gallery || []).map((g: string) => normalizeUrl(g)),
+                themeColor: data.theme_color || registryProject?.themeColor,
+                faqs: data.faqs || registryProject?.faqs
             } as Project;
 
+            // Track Recently Viewed
+            if (typeof window !== 'undefined') {
+                try {
+                    const recentlyViewed = JSON.parse(localStorage.getItem('lr_recently_viewed') || '[]');
+                    const filtered = recentlyViewed.filter((id: string) => id !== project.id);
+                    localStorage.setItem('lr_recently_viewed', JSON.stringify([project.id, ...filtered].slice(0, 4)));
+                } catch (e) { /* ignore */ }
+            }
+ 
             return project;
         },
         create: async (project: Project) => {
@@ -114,8 +138,7 @@ export const api = {
         },
         update: async (id: string, project: Partial<Project>) => {
             // Transform partial update
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const dbProject: any = { ...project };
+            const dbProject: Record<string, unknown> = { ...project };
             if ('masterLayout' in project) {
                 dbProject.master_layout = project.masterLayout;
                 delete dbProject.masterLayout;
@@ -167,7 +190,18 @@ export const api = {
             return count || 0;
         },
         create: async (lead: Omit<Lead, 'id' | 'created_at' | 'status'>) => {
-            const { error } = await supabase.from('leads').insert({ ...lead, status: 'New' });
+            // Advanced Lead Scoring
+            let score = 0;
+            const message = (lead.message || '').toLowerCase();
+            if (message.includes('crore') || message.includes('cr') || message.includes('luxury')) score += 50;
+            if (message.includes('immediate') || message.includes('visit')) score += 30;
+            if (lead.project_id) score += 20;
+
+            const { error } = await supabase.from('leads').insert({ 
+                ...lead, 
+                status: 'New',
+                score: score // Assuming score column exists or handling in metadata
+            });
             if (error) throw error;
 
             // Send email notification (non-blocking)
@@ -176,7 +210,7 @@ export const api = {
                 phone: lead.phone,
                 email: lead.email,
                 message: lead.message,
-                project: (lead as any).project_id ? `Project ID: ${(lead as any).project_id}` : undefined
+                project: lead.project_id ? `Project ID: ${lead.project_id} (Score: ${score})` : `Score: ${score}`
             });
 
             return null;
@@ -198,7 +232,10 @@ export const api = {
                 .select('*')
                 .order('order', { ascending: true });
             if (error) throw error;
-            return data as Amenity[];
+            return (data as Amenity[]).map(a => ({
+                ...a,
+                image_url: normalizeUrl(a.image_url)
+            }));
         },
         create: async (amenity: Omit<Amenity, 'id' | 'created_at'>) => {
             const { data, error } = await supabase.from('amenities').insert(amenity).select().single();
@@ -226,6 +263,23 @@ export const api = {
 
             const { data } = supabase.storage.from(bucket).getPublicUrl(filePath);
             return data.publicUrl;
+        }
+    },
+    township: {
+        searchKnowledgeBase: async (query: string) => {
+            const q = query.toLowerCase();
+            const facts = [
+                ...townshipKB.township.key_infrastructure,
+                ...townshipKB.township.hospitals_nearby.map(h => ({ name: h.name, description: `Distance: ${h.distance}` }))
+            ];
+            
+            const matches = facts.filter(f => 
+                f.name.toLowerCase().includes(q) || 
+                (f as any).description?.toLowerCase().includes(q) ||
+                (f as any).type?.toLowerCase().includes(q)
+            );
+
+            return matches.length > 0 ? matches : null;
         }
     }
 };

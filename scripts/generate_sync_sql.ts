@@ -10,6 +10,7 @@ for (const project of projects) {
     // Image validation helper
     const isValidImage = (imgPath: string | undefined): boolean => {
         if (!imgPath) return false;
+        if (imgPath.startsWith('http')) return true;
         const decodedPath = decodeURIComponent(imgPath);
         const fullPath = path.join(process.cwd(), 'public', decodedPath);
         try {
@@ -54,7 +55,10 @@ for (const project of projects) {
     sqlContent += `  image = ${escape(project.image, true)},\n`;
     sqlContent += `  master_layout = ${escape(project.masterLayout)},\n`;
     sqlContent += `  floor_plans = ${escapeArray(project.floorPlans)},\n`;
-    sqlContent += `  gallery = ${escapeArray(project.gallery)}\n`;
+    sqlContent += `  gallery = ${escapeArray(project.gallery)},\n`;
+    sqlContent += `  amenities = '${JSON.stringify(project.amenities).replace(/'/g, "''")}'::jsonb,\n`;
+    sqlContent += `  faqs = '${JSON.stringify(project.faqs || []).replace(/'/g, "''")}'::jsonb,\n`;
+    sqlContent += `  theme_color = '${project.themeColor || '#1A2350'}'\n`;
     sqlContent += `WHERE id = '${project.id}';\n\n`;
 }
 

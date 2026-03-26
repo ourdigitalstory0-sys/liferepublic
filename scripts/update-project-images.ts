@@ -51,15 +51,15 @@ async function updateProjectImages() {
             gallery: project.gallery
         };
 
-        const { error } = await supabase
+        const { error, count, status, statusText } = await supabase
             .from('projects')
-            .update(updates)
+            .update(updates, { count: 'exact' })
             .eq('id', dbId);
 
         if (error) {
             console.error(`❌ Failed to update ${dbId}:`, error.message);
         } else {
-            console.log(`✅ Updated ${dbId} successfully.`);
+            console.log(`✅ Update result for ${dbId}: Status ${status} (${statusText}), Count: ${count}`);
         }
     }
 

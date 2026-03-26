@@ -57,7 +57,7 @@ export const MediaCenter: React.FC = () => {
 
             <section className="bg-primary-dark text-white py-20 text-center">
                 <div className="container mx-auto px-4">
-                    <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">Media Center</h1>
+                    <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">Life Republic Media Center</h1>
                     <p className="text-xl text-gray-300">Insights, Updates, and Stories from the Township</p>
                 </div>
             </section>
@@ -87,7 +87,7 @@ export const MediaCenter: React.FC = () => {
                                 >
                                     <Link to={`/media-center/${post.slug}`} className="block h-48 bg-gray-200 overflow-hidden">
                                         <img
-                                            src={post.image || 'https://liferepublic.in/images/gallery/eros/master-layout.webp'}
+                                            src={post.image || '/images/gallery/eros/master-layout.webp'}
                                             alt={post.title}
                                             className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                                             loading="lazy"

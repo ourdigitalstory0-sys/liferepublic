@@ -9,11 +9,13 @@ import { Amenities } from './pages/Amenities';
 import { Contact } from './pages/Contact';
 import ProjectDetails from './pages/ProjectDetails';
 import { FloatingContact } from './components/ui/FloatingContact';
+import { Layout } from './components/layout/Layout';
 import { SmoothScrolling } from './components/layout/SmoothScrolling';
 import { About } from './pages/About';
 import { Privacy } from './pages/Privacy';
 import { Terms } from './pages/Terms';
 import { LocationHighlights } from './pages/LocationHighlights';
+import { Lifestyle } from './pages/Lifestyle';
 import { TwoBHK } from './pages/landing/TwoBHK';
 import { ThreeBHK } from './pages/landing/ThreeBHK';
 import { FourBHK } from './pages/landing/FourBHK';
@@ -21,6 +23,11 @@ import { NRICorner } from './pages/NRICorner';
 import { Testimonials } from './pages/Testimonials';
 import { MediaCenter } from './pages/MediaCenter';
 import { BlogPostPage } from './pages/BlogPost';
+import { ConnectivityHub } from './pages/ConnectivityHub';
+import { TownshipIntelligence } from './pages/TownshipIntelligence';
+import { NRIInvestmentHub } from './pages/NRIInvestmentHub';
+import { Sustainability } from './pages/Sustainability';
+import { CommunityForum } from './pages/CommunityForum';
 // Lazy load Admin components
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin').then(module => ({ default: module.AdminLogin })));
 const AdminSignup = lazy(() => import('./pages/admin/AdminSignup').then(module => ({ default: module.AdminSignup })));
@@ -36,6 +43,7 @@ const PageLoader = () => (
 );
 import { ExitIntentModal } from './components/ui/ExitIntentModal';
 import { LocationLanding } from './pages/LocationLanding';
+import { SectorLanding } from './pages/SectorLanding';
 import { NotFound } from './pages/NotFound';
 
 function App() {
@@ -46,44 +54,24 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Kolte Patil Life Republic Township Hinjewadi">
-                <Home />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi">
+              <Home />
+            </Layout>
           } />
           <Route path="/projects" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Kolte Patil Life Republic Township Hinjewadi">
-                <Projects />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi">
+              <Projects />
+            </Layout>
           } />
           <Route path="/projects/:id" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Kolte Patil Life Republic Township Hinjewadi">
-                <ProjectDetails />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi">
+              <ProjectDetails />
+            </Layout>
           } />
           <Route path="/amenities" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Kolte Patil Life Republic Township Hinjewadi">
-                <Amenities />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi">
+              <Amenities />
+            </Layout>
           } />
           <Route path="/contact" element={
             <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
@@ -135,138 +123,108 @@ function App() {
               <FloatingContact />
             </div>
           } />
+          <Route path="/connectivity" element={
+            <Layout ariaLabel="Life Republic Connectivity & Infrastructure">
+              <ConnectivityHub />
+            </Layout>
+          } />
 
           {/* Micro-Landing Pages */}
           <Route path="/2-bhk-flats-in-hinjewadi" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="2 BHK Flats in Hinjewadi">
-                <TwoBHK />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="2 BHK Flats in Hinjewadi">
+              <TwoBHK />
+            </Layout>
           } />
           <Route path="/3-bhk-flats-in-hinjewadi" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="3 BHK Flats in Hinjewadi">
-                <ThreeBHK />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="3 BHK Flats in Hinjewadi">
+              <ThreeBHK />
+            </Layout>
           } />
           <Route path="/4-bhk-flats-in-hinjewadi" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="4 BHK Flats in Hinjewadi">
-                <FourBHK />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="4 BHK Flats in Hinjewadi">
+              <FourBHK />
+            </Layout>
           } />
 
           {/* Location SEO Landing Pages - Deep Web Data Implementation */}
           <Route path="/location/flats-near-hinjewadi" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20">
-                <LocationLanding
-                  locationName="Hinjewadi Phase 1"
-                  distance="5 mins"
-                  commuteTime="10 mins"
-                  slug="flats-near-hinjewadi"
-                />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout>
+              <LocationLanding
+                locationName="Hinjewadi Phase 1"
+                distance="5 mins"
+                commuteTime="10 mins"
+                slug="flats-near-hinjewadi"
+              />
+            </Layout>
           } />
           <Route path="/location/flats-near-tathawade" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20">
-                <LocationLanding
-                  locationName="Tathawade"
-                  distance="10 mins"
-                  commuteTime="15 mins"
-                  slug="flats-near-tathawade"
-                />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout>
+              <LocationLanding
+                locationName="Tathawade"
+                distance="10 mins"
+                commuteTime="15 mins"
+                slug="flats-near-tathawade"
+              />
+            </Layout>
           } />
           <Route path="/location/flats-near-punawale" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20">
-                <LocationLanding
-                  locationName="Punawale"
-                  distance="7 mins"
-                  commuteTime="12 mins"
-                  slug="flats-near-punawale"
-                />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout>
+              <LocationLanding
+                locationName="Punawale"
+                distance="7 mins"
+                commuteTime="12 mins"
+                slug="flats-near-punawale"
+              />
+            </Layout>
           } />
           <Route path="/location/flats-near-wakad" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20">
-                <LocationLanding
-                  locationName="Wakad"
-                  distance="12 mins"
-                  commuteTime="20 mins"
-                  slug="flats-near-wakad"
-                />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout>
+              <LocationLanding
+                locationName="Wakad"
+                distance="12 mins"
+                commuteTime="20 mins"
+                slug="flats-near-wakad"
+              />
+            </Layout>
           } />
           <Route path="/location/flats-near-marunji" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20">
-                <LocationLanding
-                  locationName="Marunji"
-                  distance="0 mins"
-                  commuteTime="Walking Distance"
-                  slug="flats-near-marunji"
-                />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout>
+              <LocationLanding
+                locationName="Marunji"
+                distance="0 mins"
+                commuteTime="Walking Distance"
+                slug="flats-near-marunji"
+              />
+            </Layout>
           } />
 
-
+          {/* Dynamic Sector/Locality Landing Pages (Phase 3) */}
+          <Route path="/location/:slug" element={
+            <Layout>
+              <SectorLanding />
+            </Layout>
+          } />
 
           {/* Phase 4 Routes */}
           <Route path="/nri-corner" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="NRI Corner">
-                <NRICorner />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="NRI Corner">
+              <NRICorner />
+            </Layout>
+          } />
+          <Route path="/township-intelligence" element={
+            <Layout ariaLabel="Hinjewadi Township Intelligence & Infrastructure Hub">
+              <TownshipIntelligence />
+            </Layout>
+          } />
+          <Route path="/nri-investment-guide" element={
+            <Layout ariaLabel="Kolte Patil Life Republic NRI Investment Guide">
+              <NRIInvestmentHub />
+            </Layout>
           } />
           <Route path="/testimonials" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Testimonials">
-                <Testimonials />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Testimonials">
+              <Testimonials />
+            </Layout>
           } />
           <Route path="/media-center" element={
             <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
@@ -288,7 +246,21 @@ function App() {
               <FloatingContact />
             </div>
           } />
-
+          <Route path="/lifestyle" element={
+            <Layout ariaLabel="Life at Life Republic">
+              <Lifestyle />
+            </Layout>
+          } />
+          <Route path="/sustainability" element={
+            <Layout ariaLabel="Sustainability & Green Initiatives at Life Republic">
+              <Sustainability />
+            </Layout>
+          } />
+          <Route path="/community-hub" element={
+            <Layout ariaLabel="Resident Hub & Community Forum at Life Republic">
+              <CommunityForum />
+            </Layout>
+          } />
           {/* Admin Routes */}
           <Route path="/admin/login" element={
             <Suspense fallback={<PageLoader />}>

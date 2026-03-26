@@ -62,7 +62,7 @@ export const FourBHK: React.FC = () => {
                     {/* Hero */}
                     <div className="text-center mb-16">
                         <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-secondary">
-                            Luxury 4BHK Villas & Bungalows in Hinjewadi
+                            4 BHK Villas & Bungalows: Kolte Patil Life Republic Hinjewadi
                         </h1>
                         <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
                         <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
