@@ -229,20 +229,21 @@ export const projects: Project[] = [
         title: 'Kolte Patil Life Republic Township Echoes',
         category: 'New Launch',
         location: 'Sector R17/R18',
-        price: '₹82 Lakhs*',
+        price: '₹83 Lakhs*',
         image: '/images/project/banner/echoes-main.jpg',
-        description: 'New launch by Hafeez Contractor. 2 & 2.5 BHK eco-chic homes in the heart of Life Republic.',
-        features: ['2 & 2.5 BHK', 'Possession: Dec 2028', 'Architect: Hafeez Contractor'],
+        description: 'New premium launch by Hafeez Contractor. 2 & 2.5 BHK timeless homes in the heart of Life Republic.',
+        features: ['2 & 2.5 BHK', 'Possession: June 2029', 'RERA: PM1261012502409'],
         progress: 5,
-        overview: 'Echoes is the newest architectural landmark within the 390-acre Life Republic Integrated Township. Designed by the legendary Hafeez Contractor, Echoes represents the future of eco-chic living. These smart 2 & 2.5 BHK residences are crafted for professionals who seek a harmonious balance between tech-enabled convenience and sustainable living. With over 40+ avant-garde amenities, including two grand clubhouses and an infinity pool, Echoes is designed to resonate with the modern urban spirit.',
-        amenities: ['2 Grand Clubhouses', 'Infinity Edge Pool', 'Work Pods', 'Gymnasium', 'Yoga Lawn', 'Amphitheatre', 'Cricket Net', 'BBQ Area'],
+        overview: 'Echoes is the latest premium milestone within the 390-acre Life Republic Integrated Township. Designed by the visionary Hafeez Contractor, Echoes offers timeless 2 & 2.5 BHK residences across Sector R17/R18. The project is centered around a massive 3.5-acre Urban Park and features over 40+ lifestyle amenities spread across three distinct levels. Residents benefit from two grand clubhouses, secure gated living, and the intuitive "Planet App" integration. Perfectly positioned for Hinjewadi professionals seeking a balance of luxury and ecosystem living.',
+        amenities: ['3.5-Acre Urban Park', '2 Grand Clubhouses', 'Infinity Edge Pool', '40+ Lifestyle Amenities', 'Yoga & Meditation Lawn', 'Cricket Net & Multipurpose Court', 'Work Pods', 'Reflexology Path'],
         masterLayout: '',
         floorPlans: [],
         gallery: [],
-        themeColor: '#1abc9c', // Echoes Teal
+        themeColor: '#00A89E', // Official Echoes Teal
         faqs: [
-            { question: "What is the starting price for Echoes?", answer: "Prices at Kolte Patil Life Republic Echoes start from ₹82 Lakhs* for premium 2 BHK residences." },
-            { question: "Who is the architect for Echoes?", answer: "Life Republic Echoes is designed by the world-renowned architect Hafeez Contractor." }
+            { question: "What is the RERA number for Life Republic Echoes?", answer: "The RERA registration number for Kolte Patil Life Republic Echoes is PM1261012502409." },
+            { question: "What are the configuration options in Echoes?", answer: "Echoes offers premium 2 BHK (~735 sq.ft.) and 2.5 BHK (~866 sq.ft.) timeless residences." },
+            { question: "What is the starting price for Echoes?", answer: "Prices for Echoes at Life Republic start from ₹83 Lakhs* plus govt taxes." }
         ]
     },
 ];

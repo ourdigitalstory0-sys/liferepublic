@@ -29,11 +29,11 @@
 		<link rel="icon" href="https://www.koltepatil.com/assets/dist/images/favicon.ico" type="image/x-icon">
 	<link rel="shortcut icon" href="https://www.koltepatil.com/assets/dist/images/favicon.ico" type="image/x-icon">
 
-	<!--<link rel="stylesheet" href="https://www.koltepatil.com/assets/dist/jquery-ui.css?=v360307770">-->
+	<!--<link rel="stylesheet" href="https://www.koltepatil.com/assets/dist/jquery-ui.css?=v287869557">-->
 	
-	<link rel="stylesheet" href="https://www.koltepatil.com/assets/dist/app.css?=v1693142512">
-	<!--<link rel="stylesheet" b-data-href="https://www.koltepatil.com/assets/dist/fancybox.css?=v1770441582">
-    <link rel="stylesheet" b-data-href="https://www.koltepatil.com/assets/dist/swiper.css?=v298113620">-->
+	<link rel="stylesheet" href="https://www.koltepatil.com/assets/dist/app.css?=v960957859">
+	<!--<link rel="stylesheet" b-data-href="https://www.koltepatil.com/assets/dist/fancybox.css?=v1156690365">
+    <link rel="stylesheet" b-data-href="https://www.koltepatil.com/assets/dist/swiper.css?=v1682702053">-->
 
 	<script src="https://www.koltepatil.com/assets/dist/vendor/jquery.min.js"></script>
 
@@ -1615,7 +1615,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	</a>
 
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="https://www.koltepatil.com/assets/dist/jquery-ui.min.css?=v1722752810">
+	<link rel="stylesheet" href="https://www.koltepatil.com/assets/dist/jquery-ui.min.css?=v1877655750">
 	<script src="https://www.koltepatil.com/assets/dist/all.min.js"></script>
 
 
