@@ -25,19 +25,26 @@ async function syncProjects() {
     for (const project of projects) {
         console.log(`Syncing ${project.title}...`);
         
-        const updateData: any = {
+        const insertData: any = {
+            id: project.id,
+            title: project.title,
+            category: project.category,
+            location: project.location,
+            price: project.price,
+            description: project.description,
+            overview: project.overview,
+            features: project.features,
             image: isValidImage(project.image) ? project.image : null,
             master_layout: isValidImage(project.masterLayout) ? project.masterLayout : null,
-            floor_plans: (project.floorPlans || []).map(fp => typeof fp === 'string' ? fp : fp.url).filter(img => isValidImage(img)),
-            gallery: (project.gallery || []).map(g => typeof g === 'string' ? g : g.url).filter(img => isValidImage(img)),
+            floor_plans: (project.floorPlans || []).map(fp => typeof fp === 'string' ? fp : (fp as any).url).filter(img => isValidImage(img)),
+            gallery: (project.gallery || []).map(g => typeof g === 'string' ? g : (g as any).url).filter(img => isValidImage(img)),
             amenities: project.amenities,
             theme_color: project.themeColor
         };
 
         const { error } = await supabase
             .from('projects')
-            .update(updateData)
-            .eq('id', project.id);
+            .upsert(insertData, { onConflict: 'id' });
 
         if (error) {
             console.error(`Error syncing ${project.id}:`, error.message);
