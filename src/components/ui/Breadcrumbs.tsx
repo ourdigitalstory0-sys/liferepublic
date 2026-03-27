@@ -2,7 +2,11 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
 
-export const Breadcrumbs: React.FC = () => {
+interface BreadcrumbsProps {
+    hideSchema?: boolean;
+}
+
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ hideSchema = false }) => {
     const location = useLocation();
     const pathnames = location.pathname.split('/').filter((x) => x);
 
@@ -23,6 +27,7 @@ export const Breadcrumbs: React.FC = () => {
         const schema = {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
+            "@id": `https://life-republic.in${location.pathname}#breadcrumb`,
             "itemListElement": [
                 {
                     "@type": "ListItem",
@@ -39,9 +44,11 @@ export const Breadcrumbs: React.FC = () => {
 
     return (
         <nav aria-label="Breadcrumb" className="bg-gray-100 py-3 px-4 border-b border-gray-200">
-            <script type="application/ld+json">
-                {generateBreadcrumbSchema()}
-            </script>
+            {!hideSchema && (
+                <script type="application/ld+json">
+                    {generateBreadcrumbSchema()}
+                </script>
+            )}
             <ol className="flex items-center space-x-2 text-sm text-gray-600 container mx-auto">
                 <li>
                     <Link to="/" className="hover:text-accent flex items-center">

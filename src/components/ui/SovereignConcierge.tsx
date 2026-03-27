@@ -50,15 +50,15 @@ export const SovereignConcierge: React.FC<SovereignConciergeProps> = ({ isOpen, 
 
     return (
         <AnimatePresence>
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-secondary/80 backdrop-blur-sm">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                    className="bg-white rounded-3xl shadow-2xl w-full max-w-xl overflow-hidden relative"
-                >
-                    {/* Header */}
-                    <div className="p-6 border-b border-gray-100 flex items-center justify-between">
+        <div className="fixed inset-0 z-[100] flex sm:items-center items-end justify-center sm:p-4 p-0 bg-secondary/80 backdrop-blur-sm">
+            <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 100 }}
+                className="bg-white rounded-t-[40px] sm:rounded-3xl shadow-2xl w-full sm:max-w-xl max-h-[95vh] overflow-hidden relative"
+            >
+                {/* Header */}
+                <div className="p-5 sm:p-6 border-b border-gray-100 flex items-center justify-between">
                         <div>
                             <span className="text-accent text-xs font-bold uppercase tracking-widest flex items-center gap-2">
                                 <Sparkles size={14} /> Township Intelligence
@@ -82,26 +82,26 @@ export const SovereignConcierge: React.FC<SovereignConciergeProps> = ({ isOpen, 
                         />
                     </div>
 
-                    <div className="p-8">
+                    <div className="sm:p-8 p-6 overflow-y-auto">
                         {step === 'intent' && (
                             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-                                <h4 className="text-2xl font-serif font-bold text-secondary mb-6">What is your primary goal {projectName ? `for ${projectName}` : ''}?</h4>
+                                <h4 className="sm:text-2xl text-xl font-serif font-bold text-secondary mb-6">What is your primary goal {projectName ? `for ${projectName}` : ''}?</h4>
                                 <div className="grid grid-cols-1 gap-4 font-bold">
                                     <button 
                                         onClick={() => { setFormData({...formData, intent: 'investment'}); setStep('config'); }}
-                                        className="p-6 text-left border-2 border-gray-100 rounded-2xl hover:border-accent hover:bg-accent/5 transition-all group"
+                                        className="sm:p-6 p-4 text-left border-2 border-gray-100 rounded-2xl hover:border-accent hover:bg-accent/5 transition-all group"
                                     >
                                         <div className="text-accent mb-2 group-hover:scale-110 transition-transform"><Sparkles size={24} /></div>
-                                        <p className="text-secondary">High ROI Investment</p>
-                                        <p className="text-gray-500 text-sm font-normal">I'm looking for capital appreciation and rental yield.</p>
+                                        <p className="text-secondary sm:text-base text-sm">High ROI Investment</p>
+                                        <p className="text-gray-500 text-xs sm:text-sm font-normal">I'm looking for capital appreciation and rental yield.</p>
                                     </button>
                                     <button 
                                         onClick={() => { setFormData({...formData, intent: 'self-use'}); setStep('config'); }}
-                                        className="p-6 text-left border-2 border-gray-100 rounded-2xl hover:border-accent hover:bg-accent/5 transition-all group"
+                                        className="sm:p-6 p-4 text-left border-2 border-gray-100 rounded-2xl hover:border-accent hover:bg-accent/5 transition-all group"
                                     >
                                         <div className="text-accent mb-2 group-hover:scale-110 transition-transform"><User size={24} /></div>
-                                        <p className="text-secondary">Self-Use (End User)</p>
-                                        <p className="text-gray-500 text-sm font-normal">I'm looking for a home to live in with my family.</p>
+                                        <p className="text-secondary sm:text-base text-sm">Self-Use (End User)</p>
+                                        <p className="text-gray-500 text-xs sm:text-sm font-normal">I'm looking for a home to live in with my family.</p>
                                     </button>
                                 </div>
                             </motion.div>
@@ -109,13 +109,13 @@ export const SovereignConcierge: React.FC<SovereignConciergeProps> = ({ isOpen, 
 
                         {step === 'config' && (
                             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-                                <h4 className="text-2xl font-serif font-bold text-secondary mb-6">Preferred Configuration?</h4>
-                                <div className="grid grid-cols-2 gap-4">
+                                <h4 className="sm:text-2xl text-xl font-serif font-bold text-secondary mb-6">Preferred Configuration?</h4>
+                                <div className="grid grid-cols-2 gap-3 sm:gap-4">
                                     {['1 BHK', '2 BHK', '3 BHK', '4 BHK', 'Villa/Plot'].map(item => (
                                         <button 
                                             key={item}
                                             onClick={() => { setFormData({...formData, config: item}); setStep('budget'); }}
-                                            className="p-4 border-2 border-gray-100 rounded-xl hover:border-accent hover:bg-accent/5 font-bold text-secondary transition-all"
+                                            className="p-3 sm:p-4 border-2 border-gray-100 rounded-xl hover:border-accent hover:bg-accent/5 font-bold text-secondary text-sm sm:text-base transition-all"
                                         >
                                             {item}
                                         </button>

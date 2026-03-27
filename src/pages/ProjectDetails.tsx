@@ -105,7 +105,7 @@ const ProjectDetails: React.FC = () => {
 
     return (
         <div className="pt-20">
-            <Breadcrumbs />
+            <Breadcrumbs hideSchema />
             <SEO
                 title={dynamicTitle}
                 description={dynamicDesc}
@@ -231,20 +231,20 @@ const ProjectDetails: React.FC = () => {
                         {project.amenities && project.amenities.length > 0 && (
                             <div className="mb-12">
                                 <h3 className="text-2xl font-serif font-bold mb-6 text-secondary">Amenities</h3>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                                     {project.amenities.map((amenityName, index) => {
                                         const originalAmenity = globalAmenities.find(a => a.title === amenityName);
                                         const IconComponent = originalAmenity?.icon ? ICON_MAP[originalAmenity.icon] : Star;
                                         return (
-                                            <div key={index} className="flex flex-col items-center justify-center p-4 bg-white rounded-xl shadow-sm border border-gray-100 text-center gap-2 hover:border-accent/30 transition-colors">
+                                            <div key={index} className="flex flex-col items-center justify-center p-3 sm:p-4 bg-white rounded-xl shadow-sm border border-gray-100 text-center gap-2 hover:border-accent/30 transition-colors min-h-[100px] sm:min-h-[120px]">
                                                 {originalAmenity?.image_url ? (
-                                                    <img src={originalAmenity.image_url} alt={amenityName} className="w-10 h-10 object-cover rounded-full" />
+                                                    <img src={originalAmenity.image_url} alt={amenityName} className="w-8 h-8 sm:w-10 sm:h-10 object-cover rounded-full" />
                                                 ) : (
-                                                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
-                                                        {IconComponent ? <IconComponent size={20} /> : <Star size={20} />}
+                                                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
+                                                        {IconComponent ? <IconComponent size={18} className="sm:size-[20px]" /> : <Star size={18} />}
                                                     </div>
                                                 )}
-                                                <span className="text-sm font-medium text-gray-700">{amenityName}</span>
+                                                <span className="text-[10px] sm:text-sm font-medium text-gray-700 leading-tight">{amenityName}</span>
                                             </div>
                                         );
                                     })}

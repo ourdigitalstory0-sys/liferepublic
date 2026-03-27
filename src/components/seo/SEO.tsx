@@ -25,9 +25,15 @@ export const SEO: React.FC<SEOProps> = ({
 }) => {
     const siteTitle = 'Kolte Patil Life Republic';
     const locationSuffix = 'Hinjewadi Pune';
+    
+    // De-duplicate branding and location more aggressively
+    const cleanTitle = title?.replace(/Kolte Patil|Life Republic|Hinjewadi|Pune/g, '').replace(/^[\s|:-]+|[\s|:-]+$/g, '');
     const fullTitle = title 
-        ? `${siteTitle} | ${title} | ${locationSuffix}` 
+        ? title.includes(siteTitle) ? title : `${siteTitle} | ${cleanTitle} | Official Site`
         : `${siteTitle} Township | ${locationSuffix} | Official Site`;
+
+    // Ensure it doesn't get too crazy long for Google
+    const finalTitle = fullTitle.length > 70 ? fullTitle.substring(0, 67) + '...' : fullTitle;
 
     const defaultDescription =
         'Kolte Patil Life Republic Hinjewadi is a 390-acre integrated township in Pune. Explore RERA-registered 1, 2, 3 BHK flats, 4 BHK villas, and premium row houses near Rajiv Gandhi IT Park.';
@@ -68,7 +74,7 @@ export const SEO: React.FC<SEOProps> = ({
     return (
         <Helmet>
             {/* Basic Metadata */}
-            <title>{fullTitle}</title>
+            <title>{finalTitle}</title>
             <meta name="google-site-verification" content="IAyC1c_sDzY_uqhpy2gKk-M0IlkQdxdM_UMA9ukAIWQ" />
             <meta name="description" content={metaDescription} />
             <meta name="keywords" content={metaKeywords} />
@@ -79,14 +85,14 @@ export const SEO: React.FC<SEOProps> = ({
             <meta property="og:type" content={type} />
             <meta property="og:url" content={fullCanonical} />
             <meta property="og:site_name" content="Kolte Patil Life Republic" />
-            <meta property="og:title" content={fullTitle} />
+            <meta property="og:title" content={finalTitle} />
             <meta property="og:description" content={metaDescription} />
             <meta property="og:image" content={DOMAIN + image} />
 
             {/* Twitter */}
             <meta property="twitter:card" content="summary_large_image" />
             <meta property="twitter:url" content={fullCanonical} />
-            <meta property="twitter:title" content={fullTitle} />
+            <meta property="twitter:title" content={finalTitle} />
             <meta property="twitter:description" content={metaDescription} />
             <meta property="twitter:image" content={DOMAIN + image} />
 

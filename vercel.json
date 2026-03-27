@@ -6,7 +6,13 @@
         { "source": "/projects/atmos", "destination": "/projects/kolte-patil-life-republic-atmos-modern-2-3-bhk-flats-hinjewadi", "permanent": true },
         { "source": "/projects/24k-espada", "destination": "/projects/kolte-patil-life-republic-24k-espada-ultra-luxury-row-houses-hinjewadi", "permanent": true },
         { "source": "/projects/sound-of-soul", "destination": "/projects/kolte-patil-life-republic-sound-of-soul-luxury-4-bhk-row-houses-hinjewadi", "permanent": true },
-        { "source": "/projects/aros", "destination": "/projects/kolte-patil-life-republic-aros-premium-2-3-bhk-flats-hinjewadi", "permanent": true }
+        { "source": "/projects/aros", "destination": "/projects/kolte-patil-life-republic-aros-premium-2-3-bhk-flats-hinjewadi", "permanent": true },
+        { "source": "/projects/universe", "destination": "/projects/kolte-patil-life-republic-universe-luxury-1-2-bhk-flats-hinjewadi", "permanent": true },
+        { "source": "/projects/qrious", "destination": "/projects/kolte-patil-life-republic-qrious-smart-2-3-bhk-homes-hinjewadi", "permanent": true },
+        { "source": "/projects/first-avenue", "destination": "/projects/kolte-patil-life-republic-first-avenue-premium-2-3-bhk-hinjewadi", "permanent": true },
+        { "source": "/projects/villas", "destination": "/projects/kolte-patil-life-republic-villas-hinjewadi", "permanent": true },
+        { "source": "/projects/bungalows", "destination": "/projects/kolte-patil-life-republic-bungalows-hinjewadi", "permanent": true },
+        { "source": "/projects/echoes", "destination": "/projects/kolte-patil-life-republic-echoes-new-launch-2-2-5-bhk-hinjewadi", "permanent": true }
     ],
     "headers": [
         {

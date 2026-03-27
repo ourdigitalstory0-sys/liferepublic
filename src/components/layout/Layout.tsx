@@ -10,14 +10,32 @@ interface LayoutProps {
 }
 
 import { SovereignConcierge } from '../ui/SovereignConcierge';
+import { EnquiryModal } from '../ui/EnquiryModal';
 
 export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
   const [isSovereignOpen, setIsSovereignOpen] = React.useState(false);
+  const [isEnquiryOpen, setIsEnquiryOpen] = React.useState(false);
 
   React.useEffect(() => {
     const handleOpen = () => setIsSovereignOpen(true);
+    const handleEnquiryOpen = () => setIsEnquiryOpen(true);
     window.addEventListener('open-sovereign-concierge', handleOpen);
-    return () => window.removeEventListener('open-sovereign-concierge', handleOpen);
+    window.addEventListener('open-enquiry-modal', handleEnquiryOpen);
+
+    // Auto-popup logic (10s delay, once per session)
+    const timer = setTimeout(() => {
+      const hasShownPopup = sessionStorage.getItem('enquiry_popup_shown_v2');
+      if (!hasShownPopup) {
+        setIsEnquiryOpen(true);
+        sessionStorage.setItem('enquiry_popup_shown_v2', 'true');
+      }
+    }, 10000);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('open-sovereign-concierge', handleOpen);
+      window.removeEventListener('open-enquiry-modal', handleEnquiryOpen);
+    };
   }, []);
 
   return (
@@ -32,6 +50,10 @@ export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
       <SovereignConcierge 
         isOpen={isSovereignOpen} 
         onClose={() => setIsSovereignOpen(false)} 
+      />
+      <EnquiryModal 
+        isOpen={isEnquiryOpen}
+        onClose={() => setIsEnquiryOpen(false)}
       />
     </div>
   );

@@ -210,18 +210,31 @@ export const SectorLanding: React.FC = () => {
             <section className="py-20 bg-white border-t border-gray-100">
                 <div className="container mx-auto px-4 max-w-4xl">
                     <div className="prose prose-lg max-w-none text-gray-600 leading-relaxed">
-                        <h3 className="text-2xl font-serif font-bold text-secondary mb-6">Real Estate Analysis: {sectorData.branding || data.name}</h3>
+                        <h3 className="text-2xl font-serif font-bold text-secondary mb-6">Sovereign Infrastructure Intelligence: {sectorData.branding || data.name}</h3>
                         <p className="mb-6">
-                            Investors and homebuyers looking at <strong>{data.name}</strong> are discovering that <strong>{sectorData.branding}</strong> within Life Republic offers a significantly higher ROI potential. 
+                            Home-seekers evaluating <strong>{data.name}</strong> often compare it to standalone developments in Hinjewadi. However, the <strong>{sectorData.branding}</strong> precinct within Kolte Patil Life Republic offers a distinct "Township Advantage" that is currently driving its high ROI potential.
                         </p>
-                        <p className="mb-6">
-                            As a <strong>{sectorData.segment}</strong> offering, it targets <strong>{sectorData.target}</strong> who value infrastructure resilience and community governance over standalone developments in Hinjewadi.
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100">
+                                <h4 className="font-bold text-secondary mb-2">Logistics Metrics</h4>
+                                <ul className="text-sm space-y-2">
+                                    <li>• <span className="text-gray-500">Distance:</span> {data.distance} from Main Spine</li>
+                                    <li>• <span className="text-gray-500">Infrastructure:</span> {data.infrastructure}</li>
+                                    <li>• <span className="text-gray-500">Access:</span> Automated Township Entry/Exit</li>
+                                </ul>
+                            </div>
+                            <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100">
+                                <h4 className="font-bold text-secondary mb-2">Demand Analysis</h4>
+                                <ul className="text-sm space-y-2">
+                                    <li>• <span className="text-gray-500">Segment:</span> {sectorData.segment} Sector</li>
+                                    <li>• <span className="text-gray-500">Target Group:</span> {sectorData.target}</li>
+                                    <li>• <span className="text-gray-500">Occupancy Trend:</span> High multi-generational demand</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p className="mb-6 italic text-sm text-gray-500">
+                            *This {sectorData.segment} cluster is strictly RERA compliant and integrated into the 400-acre managed ecosystem of Life Republic.
                         </p>
-                        <ul className="list-disc pl-5 space-y-4 mb-8">
-                            <li><strong>Positioning</strong>: Designed for {sectorData.target} seeking {sectorData.segment} living.</li>
-                            <li><strong>ROI Context</strong>: Strategically located to capture appreciation from the upcoming Metro Line 3.</li>
-                            <li><strong>Security</strong>: Part of a 400-acre managed and gated ecosystem.</li>
-                        </ul>
                     </div>
                     <div className="mt-12 p-8 bg-accent rounded-3xl text-secondary flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
                         <div>
