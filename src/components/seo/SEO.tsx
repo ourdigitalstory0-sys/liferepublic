@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 import { generateGlobalSchema, generateSiteNavigationSchema } from '../../utils/schemaGenerator';
 
 interface SEOProps {
@@ -39,7 +40,8 @@ export const SEO: React.FC<SEOProps> = ({
         'Kolte Patil Life Republic Hinjewadi is a 390-acre integrated township in Pune. Explore RERA-registered 1, 2, 3 BHK flats, 4 BHK villas, and premium row houses near Rajiv Gandhi IT Park.';
     const metaDescription = description || defaultDescription;
 
-    const currentPath = window.location.pathname;
+    const location = useLocation();
+    const currentPath = location.pathname;
     
     // Configuration-intelligent Keyword Injection
     const getPathSpecificKeywords = (path: string) => {
