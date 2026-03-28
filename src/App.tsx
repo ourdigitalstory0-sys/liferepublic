@@ -51,6 +51,7 @@ function App() {
     <SmoothScrolling>
       <Helmet>
         <title>Kolte Patil Life Republic Township Hinjewadi | Premium 1, 2, 3, 4 BHK Flats in Pune</title>
+        <meta name="google-site-verification" content="IAyC1c_sDzY_uqhpy2gKk-M0IlkQdxdM_UMA9ukAIWQ" />
         <meta name="description"
           content="Discover Kolte Patil Life Republic Township Hinjewadi, a 400-acre premium integrated township in Pune. Luxury 1, 2, 3, 4 BHK flats, villas, and commercial spaces with world-class amenities." />
         <meta name="keywords"
@@ -159,6 +160,26 @@ function App() {
           <Route path="/4-bhk-flats-in-hinjewadi" element={
             <Layout ariaLabel="4 BHK Flats in Hinjewadi">
               <FourBHK />
+            </Layout>
+          } />
+          <Route path="/1-bhk-flats-in-hinjewadi" element={
+            <Layout ariaLabel="1 BHK Flats in Hinjewadi">
+              <Projects />
+            </Layout>
+          } />
+          <Route path="/row-houses-in-life-republic" element={
+            <Layout ariaLabel="Row Houses in Life Republic">
+              <Projects />
+            </Layout>
+          } />
+          <Route path="/plots-in-hinjewadi" element={
+            <Layout ariaLabel="Plots in Hinjewadi">
+              <Projects />
+            </Layout>
+          } />
+          <Route path="/luxury-villas-near-hinjewadi" element={
+            <Layout ariaLabel="Luxury Villas near Hinjewadi">
+              <Projects />
             </Layout>
           } />
 

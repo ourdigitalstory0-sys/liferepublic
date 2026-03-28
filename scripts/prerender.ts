@@ -17,18 +17,22 @@ const staticRoutes = [
     '/privacy',
     '/terms',
     '/location',
-    '/connectivity',
-    '/2-bhk-flats-in-hinjewadi',
-    '/3-bhk-flats-in-hinjewadi',
-    '/4-bhk-flats-in-hinjewadi',
     '/nri-corner',
     '/testimonials',
     '/media-center',
     '/township-intelligence',
     '/nri-investment-guide',
+    '/connectivity',
     '/lifestyle',
     '/sustainability',
     '/community-hub',
+    '/2-bhk-flats-in-hinjewadi',
+    '/3-bhk-flats-in-hinjewadi',
+    '/4-bhk-flats-in-hinjewadi',
+    '/1-bhk-flats-in-hinjewadi',
+    '/row-houses-in-life-republic',
+    '/luxury-villas-near-hinjewadi',
+    '/plots-in-hinjewadi',
 ];
 
 const sectorRoutes = [
@@ -64,7 +68,6 @@ async function prerender() {
     const template = fs.readFileSync(path.join(OUT_DIR, 'index.html'), 'utf-8');
     
     // Dynamically import the SSR bundle
-    // Node.js requires an absolute path with file:// for dynamic imports in some environments
     const { render } = await import(`file://${SSR_BUNDLE_PATH}`);
 
     console.log(`🚀 Rendering ${routes.length} routes...`);

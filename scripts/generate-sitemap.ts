@@ -41,15 +41,15 @@ const staticRoutes = [
     '/2-bhk-flats-in-hinjewadi',
     '/3-bhk-flats-in-hinjewadi',
     '/4-bhk-flats-in-hinjewadi',
+    '/1-bhk-flats-in-hinjewadi',
+    '/row-houses-in-life-republic',
+    '/luxury-villas-near-hinjewadi',
+    '/plots-in-hinjewadi',
     '/location/flats-near-hinjewadi',
     '/location/flats-near-tathawade',
     '/location/flats-near-punawale',
     '/location/flats-near-wakad',
     '/location/flats-near-marunji',
-    '/1-bhk-flats-in-hinjewadi',
-    '/row-houses-in-life-republic',
-    '/luxury-villas-near-hinjewadi',
-    '/plots-in-hinjewadi',
 ];
 
 // Add sector-based routes from sectors.json
