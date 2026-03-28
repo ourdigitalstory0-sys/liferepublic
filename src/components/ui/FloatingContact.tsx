@@ -2,16 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { MessageSquare, Phone } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
-import { projects } from '../../data/projects';
 
 export const FloatingContact: React.FC = () => {
     const [isLive, setIsLive] = useState(false);
     const location = useLocation();
 
-    // Context Analysis
-    const isProjectPage = location.pathname.startsWith('/projects/');
-    const projectSlug = isProjectPage ? location.pathname.split('/').pop() : null;
-    const currentProject = projectSlug ? projects.find(p => p.id === projectSlug) : null;
 
     useEffect(() => {
         const hour = new Date().getHours();
