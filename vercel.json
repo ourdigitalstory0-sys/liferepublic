@@ -1,5 +1,16 @@
 {
     "redirects": [
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "(?!life-republic.in).*"
+                }
+            ],
+            "destination": "https://life-republic.in/$1",
+            "permanent": true
+        },
         { "source": "/projects/duet", "destination": "/projects/kolte-patil-life-republic-duet-premium-2-bhk-flats-hinjewadi", "permanent": true },
         { "source": "/projects/arezo", "destination": "/projects/kolte-patil-life-republic-arezo-efficient-2-bhk-flats-hinjewadi", "permanent": true },
         { "source": "/projects/canvas", "destination": "/projects/kolte-patil-life-republic-canvas-luxury-3-4-bhk-flats-hinjewadi", "permanent": true },

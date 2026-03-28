@@ -7,7 +7,7 @@ import townshipKB from '../data/township_kb.json';
 
 const normalizeUrl = (url: string | null | undefined): string => {
     if (!url || typeof url !== 'string') return '';
-    return url.replace(/https?:\/\/liferepublic\.in\//g, '/');
+    return url.replace(/https?:\/\/(life-republic\.in|liferepublic\.in)\//g, '/');
 };
 
 export const api = {
