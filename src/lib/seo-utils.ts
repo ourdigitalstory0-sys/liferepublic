@@ -34,7 +34,7 @@ export const generateSemanticKeywords = (ctx: SEOContext): string => {
         `Hinjewadi Property Price Trends 2025`, // Trend based
         `Rental Yield Hinjewadi`, // Investor intent
 
-        // --- NEWLY INJECTED FROM koltepatil.com AND liferepublic.in ---
+        // --- NEWLY INJECTED FROM koltepatil.com AND life-republic.in ---
         `Kolte Patil Life Republic Township Hinjewadi`,
         `Flats for Sale in Pune Hinjewadi`,
         `Township Projects in Pune`,
@@ -58,7 +58,7 @@ export const generateSemanticKeywords = (ctx: SEOContext): string => {
         `${ctx.title} Latest Price`,
         `${ctx.title} Brochure Download`,
         `${ctx.title} Possession Date`,
-        // --- NEWLY INJECTED FROM liferepublic.in ---
+        // --- NEWLY INJECTED FROM life-republic.in ---
         `400 Acres of Community Living`,
         `Nature Community Sustainability in Pune`,
         `Thriving Community Living Hinjewadi`,

@@ -22,7 +22,7 @@ export const Privacy: React.FC = () => {
 
                 <h3 className="text-xl font-bold text-gray-800">3. Contact Us</h3>
                 <p>
-                    If you have any questions about this Privacy Policy, please contact us at sales@liferepublic.in.
+                    If you have any questions about this Privacy Policy, please contact us at sales@life-republic.in.
                 </p>
             </div>
         </div>
