@@ -54,6 +54,28 @@ export const FourBHK: React.FC = () => {
                 description="Looking for a 4BHK Villa in Hinjewadi? Explore ultra-luxury 4BHK Bungalows and Row Houses in Kolte Patil Life Republic Township Hinjewadi. Exclusive 24K Espada & Atmos."
                 keywords="4bhk villa in hinjewadi, 4bhk bungalow in hinjewadi, luxury properties in hinjewadi, kolte patil life republic 24k espada, row houses in hinjewadi"
                 canonical="/4-bhk-flats-in-hinjewadi"
+                schema={{
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    "mainEntity": [
+                        {
+                            "@type": "Question",
+                            "name": "Are there 4 BHK row houses available in Hinjewadi?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Yes, Life Republic offers premium 4 BHK row houses in sectors like 24K Espada and Sound of Soul, providing the perfect blend of privacy and community living."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "What are the benefits of buying a villa in a township?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Benefits include 24/7 security, professional maintenance, access to large-scale amenities like schools and parks, and higher land appreciation potential within a managed ecosystem."
+                            }
+                        }
+                    ]
+                }}
             />
             <Breadcrumbs />
 

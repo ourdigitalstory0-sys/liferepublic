@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
                                     className="h-12 w-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-accent hover:border-accent hover:text-white transition-all duration-300 group"
                                     aria-label={label}
                                 >
-                                    <Icon size={20} className="text-gray-400 group-hover:text-white transition-colors" />
+                                    <Icon size={20} className="text-white/60 group-hover:text-white transition-colors" />
                                 </a>
                             ))}
                         </div>
@@ -57,6 +57,7 @@ export const Footer: React.FC = () => {
                         <ul className="space-y-4">
                             {[
                                 { name: 'Home', path: '/' },
+                                { name: 'Township Guide', path: '/township-guide' },
                                 { name: 'Projects', path: '/projects' },
                                 { name: 'Amenities', path: '/amenities' },
                                 { name: 'Contact', path: '/contact' },

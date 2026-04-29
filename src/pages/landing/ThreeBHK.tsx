@@ -33,6 +33,28 @@ export const ThreeBHK: React.FC = () => {
                 description="Find your dream 3 BHK in Hinjewadi at Kolte Patil Life Republic. Spacious luxury apartments with world-class amenities near IT Parks. Check floor plans and pricing."
                 keywords="3bhk in hinjewadi, life republic hinjewadi, kolte patil township hinjewadi, luxury properties in hinjewadi, kolte patil life republic atmos, 3 bhk price pune"
                 canonical="/3-bhk-flats-in-hinjewadi"
+                schema={{
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    "mainEntity": [
+                        {
+                            "@type": "Question",
+                            "name": "What is the carpet area of 3 BHK flats?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Our 3 BHKs range from efficient 850 sq.ft. to expansive 1200+ sq.ft. carpet areas, catering to different space needs."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "Are there corner apartments available?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Yes, sectors like Atmos and Canvas feature 3-side open corner apartments for maximum cross-ventilation and privacy."
+                            }
+                        }
+                    ]
+                }}
             />
             <div className="container mx-auto px-4">
                 {/* Hero Section */}

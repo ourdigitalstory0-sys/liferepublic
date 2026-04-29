@@ -10,7 +10,7 @@ import { SectorMesh } from '../components/sections/SectorMesh';
 import sectorsData from '../data/sectors.json';
 import { api } from '../services/api';
 import type { Project } from '../lib/types';
-import { generateGlobalSchema, generateSectorSchema } from '../utils/schemaGenerator';
+import { generateSectorSchema } from '../utils/schemaGenerator';
 
 import { SectorLinkMesh } from '../components/sections/SectorLinkMesh';
 import { InfraTracker } from '../components/sections/InfraTracker';
@@ -77,7 +77,6 @@ export const SectorLanding: React.FC = () => {
     ].join(', ');
 
     const schema = [
-        generateGlobalSchema(),
         generateSectorSchema(data as any)
     ];
 

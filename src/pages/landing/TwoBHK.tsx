@@ -33,6 +33,28 @@ export const TwoBHK: React.FC = () => {
                 description="Comprehensive guide to buying 2 BHK flats in Hinjewadi. Compare prices at Life Republic, check rental yields, and explore floor plans. Best ROI for 2 BHK in Pune."
                 keywords="2 BHK in hinjewadi price, 2 BHK flat layout, life republic 2 bhk price, investment in hinjewadi, 2 bhk rental yield pune, kolte patil 2 bhk"
                 canonical="/2-bhk-flats-in-hinjewadi"
+                schema={{
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    "mainEntity": [
+                        {
+                            "@type": "Question",
+                            "name": "What is the price of a 2 BHK in Life Republic?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Prices start from ₹72 Lakhs* for premium configurations like Arezo and Duet, offering best-in-class amenities."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "Are ready possession 2 BHKs available?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Yes, select sectors in Life Republic offer ready-to-move-in options. Contact our sales team for current inventory."
+                            }
+                        }
+                    ]
+                }}
             />
             <div className="container mx-auto px-4">
                 {/* Hero Section */}

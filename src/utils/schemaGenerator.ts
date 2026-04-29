@@ -135,6 +135,10 @@ export const generateProjectSchema = (project: Project) => {
                     'latitude': '18.5995',
                     'longitude': '73.7153'
                 },
+                'brand': {
+                    '@type': 'Brand',
+                    'name': 'Kolte Patil'
+                },
                 'itemListElement': [
                     {
                         '@type': 'Accommodation',
@@ -291,6 +295,26 @@ export const generateVideoSchema = (videos: { name: string; description: string;
             'uploadDate': v.uploadDate,
             'contentUrl': v.contentUrl
         }))
+    };
+};
+
+export const generateAboutPageSchema = () => {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'AboutPage',
+        'mainEntity': {
+            '@id': `${DOMAIN}/#organization`,
+            '@type': 'RealEstateAgent',
+            'name': 'Kolte Patil Life Republic',
+            'description': '390-Acre Integrated Township in Hinjewadi, Pune developed by Kolte Patil Developers.'
+        },
+        'breadcrumb': {
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+                { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': DOMAIN },
+                { '@type': 'ListItem', 'position': 2, 'name': 'About Us', 'item': `${DOMAIN}/about` }
+            ]
+        }
     };
 };
 

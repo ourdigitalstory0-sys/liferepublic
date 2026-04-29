@@ -96,9 +96,10 @@ export const HeroSlider: React.FC = () => {
                                 <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
                                     <motion.h1
                                         initial={{ opacity: 0, y: 30 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
+                                        animate={index === 0 ? { opacity: 1, y: 0 } : {}}
+                                        whileInView={index !== 0 ? { opacity: 1, y: 0 } : {}}
                                         viewport={{ once: true }}
-                                        transition={{ duration: 0.8, delay: 0.2 }}
+                                        transition={{ duration: 0.8, delay: 0.1 }}
                                         className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg tracking-tight"
                                     >
                                         {slide.title}

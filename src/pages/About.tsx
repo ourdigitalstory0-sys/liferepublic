@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { SEO } from '../components/seo/SEO';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
+import { generateAboutPageSchema } from '../utils/schemaGenerator';
 
 export const About: React.FC = () => {
     return (
@@ -12,6 +13,7 @@ export const About: React.FC = () => {
                 description="Learn about Life Republic, a 390-acre integrated township by Kolte Patil in Hinjewadi, Pune. Committed to sustainable living with world-class amenities like 150ft wide roads, schools, and fire stations."
                 keywords="Kolte Patil Developers, Life Republic Township Details, About Life Republic Hinjewadi, Integrated Township Pune, Kolte Patil History, Township in West Pune"
                 canonical="/about"
+                schema={generateAboutPageSchema()}
             />
             <section className="bg-primary pt-20 pb-16">
                 <div className="container mx-auto px-4 text-center">

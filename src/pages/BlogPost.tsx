@@ -75,6 +75,27 @@ export const BlogPostPage: React.FC = () => {
                 keywords={post.tags?.join(', ') || 'life republic, real estate blog'}
                 canonical={`/media-center/${post.slug}`}
                 image={post.image}
+                schema={{
+                    "@context": "https://schema.org",
+                    "@type": "BlogPosting",
+                    "headline": post.title,
+                    "description": post.meta_description || post.excerpt || post.content.substring(0, 160),
+                    "image": post.image,
+                    "author": {
+                        "@type": "Person",
+                        "name": post.author || "Life Republic Admin"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "Kolte Patil Life Republic",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://life-republic.in/logo.png"
+                        }
+                    },
+                    "datePublished": post.published_at || post.created_at,
+                    "dateModified": post.updated_at || post.published_at || post.created_at
+                }}
             />
             <Breadcrumbs />
 

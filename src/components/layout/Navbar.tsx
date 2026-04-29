@@ -84,6 +84,8 @@ export const Navbar: React.FC = () => {
                                     <Link
                                         key={link.name}
                                         to={link.path}
+                                        aria-label={`Go to ${link.name} page`}
+                                        aria-current={isActive ? 'page' : undefined}
                                         className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${isActive
                                             ? 'text-secondary bg-white shadow-sm'
                                             : isScrolled
@@ -103,7 +105,7 @@ export const Navbar: React.FC = () => {
                         <Button
                             variant={isScrolled ? 'primary' : 'outline'}
                             size={isScrolled ? 'sm' : 'md'}
-
+                            aria-label="Call our sales office"
                             className={`hidden md:flex items-center gap-2 rounded-full transition-all duration-300 ${!isScrolled && 'border-white/30 text-white hover:bg-white hover:text-secondary'
                                 }`}
                         >
@@ -117,7 +119,7 @@ export const Navbar: React.FC = () => {
                                 : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-md'
                                 }`}
                             onClick={() => setIsMobileMenuOpen(true)}
-                            aria-label="Open Menu"
+                            aria-label="Open navigation menu"
                         >
                             <Menu size={20} />
                         </button>
@@ -149,7 +151,7 @@ export const Navbar: React.FC = () => {
                                 <button
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500"
-                                    aria-label="Close Menu"
+                                    aria-label="Close navigation menu"
                                 >
                                     <X size={24} />
                                 </button>
@@ -160,6 +162,8 @@ export const Navbar: React.FC = () => {
                                     <Link
                                         key={link.name}
                                         to={link.path}
+                                        aria-label={`Go to ${link.name}`}
+                                        aria-current={location.pathname === link.path ? 'page' : undefined}
                                         onClick={() => setIsMobileMenuOpen(false)}
                                         className={`flex items-center justify-between p-4 rounded-xl transition-all ${location.pathname === link.path
                                             ? 'bg-primary/10 text-accent'

@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { ArrowRight, Briefcase, Plane, GraduationCap, HeartPulse, Dumbbell, Trees, Music, ShieldCheck, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -68,9 +69,14 @@ const Home: React.FC = () => {
                     <div className="text-center mb-16">
                         <h2 className="text-4xl font-serif font-bold mb-4 text-secondary">Kolte Patil Life Republic Township Hinjewadi</h2>
                         <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
-                        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
                             Experience the finest living at <strong>Kolte Patil Life Republic Township Hinjewadi</strong>. Discover our diverse range of 2, 3, 4 BHK flats and luxury villas, designed to offer a unique lifestyle in Pune's most integrated township.
                         </p>
+                        <div className="mb-10 flex justify-center">
+                            <Link to="/township-guide" className="inline-flex items-center gap-2 text-accent font-bold border-b-2 border-accent/20 hover:border-accent pb-1 transition-all group">
+                                Read the Ultimate Township Guide 2026 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

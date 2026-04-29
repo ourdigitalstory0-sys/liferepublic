@@ -3,7 +3,8 @@ import { EMICalculator } from '../components/tools/EMICalculator';
 import { ROICalculator } from '../components/tools/ROICalculator';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, CheckCircle, Phone, MessageSquare, ZoomIn } from 'lucide-react';
+import { MapPin, CheckCircle, Phone, MessageSquare, ZoomIn, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { api } from '../services/api';
 import type { Project, Amenity } from '../lib/types';
@@ -15,7 +16,7 @@ import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { ShareButtons } from '../components/ui/ShareButtons';
 import { ImageModal } from '../components/ui/ImageModal';
 import { generateSemanticKeywords, generateSemanticDescription, generateSemanticTitle } from '../lib/seo-utils';
-import { generateProjectSchema, generateBreadcrumbSchema, generateImageGallerySchema } from '../utils/schemaGenerator';
+import { generateProjectSchema, generateFAQSchema, generateImageGallerySchema } from '../utils/schemaGenerator';
 
 import { SectorLinkMesh } from '../components/sections/SectorLinkMesh';
 
@@ -85,11 +86,7 @@ const ProjectDetails: React.FC = () => {
     // Construct Schema using logic
     const projectSchema = generateProjectSchema(project);
     const gallerySchema = generateImageGallerySchema(project);
-    const breadcrumbSchema = generateBreadcrumbSchema([
-        { name: 'Home', item: '/' },
-        { name: 'Projects', item: '/projects' },
-        { name: `${project.title} Hinjewadi`, item: `/projects/${project.id}` }
-    ]);
+    const faqSchema = project.faqs ? generateFAQSchema(project.faqs) : null;
 
     const seoContext = {
         title: project.title,
@@ -105,7 +102,7 @@ const ProjectDetails: React.FC = () => {
 
     return (
         <div className="pt-20">
-            <Breadcrumbs hideSchema />
+            <Breadcrumbs />
             <SEO
                 title={dynamicTitle}
                 description={dynamicDesc}
@@ -114,8 +111,8 @@ const ProjectDetails: React.FC = () => {
                 canonical={`/projects/${project.id}`}
                 schema={[
                     ...(Array.isArray(projectSchema) ? projectSchema : [projectSchema]), 
-                    breadcrumbSchema,
-                    gallerySchema
+                    gallerySchema,
+                    ...(faqSchema ? [faqSchema] : [])
                 ]}
             />
             {/* Project Hero */}
@@ -240,7 +237,7 @@ const ProjectDetails: React.FC = () => {
                                                 {originalAmenity?.image_url ? (
                                                     <img src={originalAmenity.image_url} alt={amenityName} className="w-8 h-8 sm:w-10 sm:h-10 object-cover rounded-full" />
                                                 ) : (
-                                                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
+                                                    <div className="w-8 h-8 sm:size-[40px] rounded-full bg-accent/10 flex items-center justify-center text-accent">
                                                         {IconComponent ? <IconComponent size={18} className="sm:size-[20px]" /> : <Star size={18} />}
                                                     </div>
                                                 )}
@@ -251,6 +248,30 @@ const ProjectDetails: React.FC = () => {
                                 </div>
                             </div>
                         )}
+
+                        {/* Township Guide Nudge Banner */}
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            className="mb-16 bg-gradient-to-br from-secondary to-gray-900 rounded-[2.5rem] p-8 md:p-12 text-white relative overflow-hidden shadow-2xl border border-white/5"
+                        >
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full -mr-32 -mt-32 blur-3xl animate-pulse"></div>
+                            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                                <div className="max-w-xl text-center md:text-left">
+                                    <span className="text-accent font-bold tracking-widest uppercase text-xs mb-3 block">Sovereign Perspective</span>
+                                    <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">New to the Life Republic Ecosystem?</h2>
+                                    <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                                        Before choosing your cluster, understand the bigger picture. Read our <strong>Ultimate Township Guide</strong> to explore internal infrastructure, global schools, and the 2026 ROI roadmap.
+                                    </p>
+                                </div>
+                                <Link to="/township-guide">
+                                    <Button variant="primary" size="lg" className="rounded-full px-10 bg-accent hover:bg-white hover:text-accent border-none shadow-xl transition-all whitespace-nowrap">
+                                        Access Guide <ArrowRight size={18} className="ml-2" />
+                                    </Button>
+                                </Link>
+                            </div>
+                        </motion.div>
 
                         {/* Gallery Section */}
                         {project.gallery && project.gallery.length > 0 && (

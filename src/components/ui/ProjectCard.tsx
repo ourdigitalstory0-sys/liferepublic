@@ -44,6 +44,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                         src={project.image || 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif'}
                         alt={`Kolte Patil Life Republic Township - ${project.title} - ${project.category}`}
                         loading={priority ? "eager" : "lazy"}
+                        fetchPriority={priority ? "high" : "low"}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute top-4 left-4 z-20">

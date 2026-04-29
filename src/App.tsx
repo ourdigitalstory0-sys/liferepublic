@@ -21,6 +21,7 @@ import { ThreeBHK } from './pages/landing/ThreeBHK';
 import { FourBHK } from './pages/landing/FourBHK';
 import { NRICorner } from './pages/NRICorner';
 import { Testimonials } from './pages/Testimonials';
+import { TownshipGuide } from './pages/TownshipGuide';
 import { MediaCenter } from './pages/MediaCenter';
 import { BlogPostPage } from './pages/BlogPost';
 import { ConnectivityHub } from './pages/ConnectivityHub';
@@ -50,19 +51,7 @@ function App() {
   return (
     <SmoothScrolling>
       <Helmet>
-        <title>Kolte Patil Life Republic Township Hinjewadi | Premium 1, 2, 3, 4 BHK Flats in Pune</title>
         <meta name="google-site-verification" content="IAyC1c_sDzY_uqhpy2gKk-M0IlkQdxdM_UMA9ukAIWQ" />
-        <meta name="description"
-          content="Discover Kolte Patil Life Republic Township Hinjewadi, a 400-acre premium integrated township in Pune. Luxury 1, 2, 3, 4 BHK flats, villas, and commercial spaces with world-class amenities." />
-        <meta name="keywords"
-          content="Kolte Patil Life Republic Township Hinjewadi, Life Republic Hinjewadi, Life Republic Township Pune, 2 BHK flats in Hinjewadi, 3 BHK flats in Hinjewadi, 4 BHK flats in Hinjewadi, Premium homes in Hinjewadi Pune, Best township project in Pune, New residential projects in Hinjewadi, Flats for Sale in Pune Hinjewadi, Integrated Townships in Pune, Residential Projects in Hinjewadi, Row House in Pune, Best Township Projects in Pune, New Housing Projects in Hinjewadi Pune, Pre Launch Projects in Hinjewadi Pune, 400 Acres of Community Living, Nature Community Sustainability in Pune, Thriving Community Living Hinjewadi, Better Living in Hinjewadi Pune, Kolte Patil Township, RERA Registered Projects, Gated Community Pune, Integrated Township West Pune, Kolte Patil Developers Reviews, Top Real Estate Developer in Pune" />
-        <meta name="author" content="Kolte Patil Developers" />
-        <meta property="og:title" content="Kolte Patil Life Republic | Best Township Project in Hinjewadi, Pune" />
-        <meta property="og:description"
-          content="Explore Kolte Patil Life Republic, a 400-acre expansive township offering premium 1, 2, 3, 4 BHK apartments and villas in Hinjewadi, Pune." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://life-republic.in/" />
-        <meta property="og:site_name" content="Life Republic by Kolte Patil" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://life-republic.in" />
@@ -261,6 +250,11 @@ function App() {
           <Route path="/testimonials" element={
             <Layout ariaLabel="Testimonials">
               <Testimonials />
+            </Layout>
+          } />
+          <Route path="/township-guide" element={
+            <Layout ariaLabel="The Ultimate Guide to Kolte Patil Life Republic Hinjewadi">
+              <TownshipGuide />
             </Layout>
           } />
           <Route path="/media-center" element={

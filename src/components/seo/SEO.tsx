@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
-import { generateGlobalSchema, generateSiteNavigationSchema } from '../../utils/schemaGenerator';
+import { generateGlobalSchema, generateSiteNavigationSchema, generateBreadcrumbSchema } from '../../utils/schemaGenerator';
 
 interface SEOProps {
     title?: string;
@@ -11,6 +11,7 @@ interface SEOProps {
     image?: string;
     type?: 'website' | 'article' | 'product';
     schema?: Record<string, unknown> | Record<string, unknown>[];
+    breadcrumbItems?: { name: string; item: string }[];
 }
 
 const DOMAIN = 'https://life-republic.in';
@@ -23,6 +24,7 @@ export const SEO: React.FC<SEOProps> = ({
     image = '/images/gallery/eros/master-layout.webp',
     type = 'website',
     schema,
+    breadcrumbItems,
 }) => {
     const siteTitle = 'Kolte Patil Life Republic';
     const locationSuffix = 'Hinjewadi Pune';
@@ -30,14 +32,16 @@ export const SEO: React.FC<SEOProps> = ({
     // De-duplicate branding and location more aggressively
     const cleanTitle = title?.replace(/Kolte Patil|Life Republic|Hinjewadi|Pune/g, '').replace(/^[\s|:-]+|[\s|:-]+$/g, '');
     const fullTitle = title 
-        ? title.includes(siteTitle) ? title : `${siteTitle} | ${cleanTitle} | Official Site`
+        ? (title.includes(siteTitle) && title.includes(locationSuffix)) 
+            ? title 
+            : `${siteTitle} | ${cleanTitle || title} | ${locationSuffix}`
         : `${siteTitle} Township | ${locationSuffix} | Official Site`;
 
-    // Ensure it doesn't get too crazy long for Google
+    // Ensure it doesn't get too crazy long for Google (keep under 60-70 chars)
     const finalTitle = fullTitle.length > 70 ? fullTitle.substring(0, 67) + '...' : fullTitle;
 
     const defaultDescription =
-        'Kolte Patil Life Republic Hinjewadi is a 390-acre integrated township in Pune. Explore RERA-registered 1, 2, 3 BHK flats, 4 BHK villas, and premium row houses near Rajiv Gandhi IT Park.';
+        'Explore Kolte Patil Life Republic Hinjewadi, a 390-acre premium township in Pune. RERA-registered 1, 2, 3 BHK flats & 4 BHK villas near Rajiv Gandhi IT Park.';
     const metaDescription = description || defaultDescription;
 
     const location = useLocation();
@@ -45,25 +49,51 @@ export const SEO: React.FC<SEOProps> = ({
     
     // Configuration-intelligent Keyword Injection
     const getPathSpecificKeywords = (path: string) => {
+        const segments = path.split('/').filter(Boolean);
         if (path.includes('2-bhk')) return "2 BHK flats Hinjewadi, 2 BHK in Life Republic, buy 2BHK Pune west, 2 BHK price list Hinjewadi";
         if (path.includes('3-bhk')) return "3 BHK flats Hinjewadi, 3 BHK in Life Republic, luxury 3BHK Pune, 3 BHK price list Hinjewadi";
         if (path.includes('4-bhk')) return "4 BHK luxury apartments Life Republic, 4 BHK villas Hinjewadi, ultra luxury 4BHK Pune";
         if (path.includes('1-bhk')) return "1 BHK in Life Republic, small flats Hinjewadi, 1 BHK investment Pune";
         if (path.includes('nri')) return "NRI investment Pune, buy property from USA, FEMA repatriation rules, Life Republic ROI";
+        
+        // Auto-generate keywords for location pages
+        if (path.includes('/location/')) {
+            const place = segments[segments.length - 1].replace(/-/g, ' ');
+            return `flats in ${place}, apartments near ${place}, property in ${place} Pune, Hinjewadi real estate ${place}`;
+        }
         return "";
     };
 
     const pathKeywords = getPathSpecificKeywords(currentPath);
-    const defaultKeywords = "Kolte Patil Life Republic, Life Republic Hinjewadi, Life Republic Township, Kolte Patil Hinjewadi, Hinjewadi properties, Pune integrated township, buy flat in hinjewadi, luxury villas pune, 2 bhk near hinjewadi phase 1, rera projects hinjewadi";
+    const baseKeywords = "Kolte Patil Life Republic, Life Republic Hinjewadi, Pune integrated township, buy flat in hinjewadi, luxury villas pune, rera projects hinjewadi";
     
     const metaKeywords = keywords 
         ? `${keywords}${pathKeywords ? `, ${pathKeywords}` : ''}` 
-        : `${defaultKeywords}${pathKeywords ? `, ${pathKeywords}` : ''}`;
+        : `${baseKeywords}${pathKeywords ? `, ${pathKeywords}` : ''}`;
 
     const globalSchema = generateGlobalSchema(currentPath);
     const navSchema = generateSiteNavigationSchema();
+    
+    // Auto-generate Breadcrumb schema if items are provided
+    const breadcrumbSchema = breadcrumbItems 
+        ? generateBreadcrumbSchema(breadcrumbItems)
+        : currentPath !== '/' 
+            ? generateBreadcrumbSchema(
+                currentPath.split('/')
+                    .filter(Boolean)
+                    .reduce((acc, curr, idx, arr) => {
+                        const path = '/' + arr.slice(0, idx + 1).join('/');
+                        acc.push({ 
+                            name: curr.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()), 
+                            item: path 
+                        });
+                        return acc;
+                    }, [{ name: 'Home', item: '/' }])
+              )
+            : null;
 
     const allSchemas: any[] = [globalSchema, navSchema];
+    if (breadcrumbSchema) allSchemas.push(breadcrumbSchema);
     if (schema) {
         if (Array.isArray(schema)) allSchemas.push(...schema);
         else allSchemas.push(schema);
@@ -71,7 +101,7 @@ export const SEO: React.FC<SEOProps> = ({
 
     const fullCanonical = canonical
         ? `${DOMAIN}${canonical.startsWith('/') ? '' : '/'}${canonical}`
-        : DOMAIN + currentPath;
+        : DOMAIN + (currentPath === '/' ? '' : currentPath);
 
     return (
         <Helmet>
@@ -107,3 +137,4 @@ export const SEO: React.FC<SEOProps> = ({
         </Helmet>
     );
 };
+
