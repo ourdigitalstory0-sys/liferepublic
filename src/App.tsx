@@ -26,6 +26,7 @@ import { MediaCenter } from './pages/MediaCenter';
 import { BlogPostPage } from './pages/BlogPost';
 import { ConnectivityHub } from './pages/ConnectivityHub';
 import { TownshipIntelligence } from './pages/TownshipIntelligence';
+import { HyperLocalLanding } from './pages/HyperLocalLanding';
 import { NRIInvestmentHub } from './pages/NRIInvestmentHub';
 import { Sustainability } from './pages/Sustainability';
 import { CommunityForum } from './pages/CommunityForum';
@@ -42,12 +43,19 @@ const PageLoader = () => (
     <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
-import { ExitIntentModal } from './components/ui/ExitIntentModal';
+import { ExitIntentOffer } from './components/ui/ExitIntentOffer';
 import { LocationLanding } from './pages/LocationLanding';
-import { SectorLanding } from './pages/SectorLanding';
 import { NotFound } from './pages/NotFound';
 import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
+
 function App() {
+  useEffect(() => {
+    if (!sessionStorage.getItem('lr_entry_page')) {
+      sessionStorage.setItem('lr_entry_page', window.location.pathname);
+    }
+  }, []);
+
   return (
     <SmoothScrolling>
       <Helmet>
@@ -56,7 +64,7 @@ function App() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://life-republic.in" />
       </Helmet>
-      <ExitIntentModal />
+      <ExitIntentOffer />
       <Routes>
           {/* Public Routes */}
           <Route path="/" element={
@@ -227,7 +235,7 @@ function App() {
           {/* Dynamic Sector/Locality Landing Pages (Phase 3) */}
           <Route path="/location/:slug" element={
             <Layout>
-              <SectorLanding />
+              <HyperLocalLanding />
             </Layout>
           } />
 

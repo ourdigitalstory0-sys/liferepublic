@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, ArrowRight } from 'lucide-react';
-import { Button } from '../ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Navbar: React.FC = () => {
@@ -42,15 +41,14 @@ export const Navbar: React.FC = () => {
 
                 <div
                     className={`
-                        transition-all duration-500 ease-in-out
+                        transition-all duration-700 ease-[0.22, 1, 0.36, 1]
                         flex items-center justify-between
                         ${isScrolled
-                            ? 'w-[95%] md:w-[85%] lg:w-[70%] bg-white/95 backdrop-blur-md shadow-lg rounded-full px-6 py-3 border border-white/40' // Increased opacity
+                            ? 'w-[95%] md:w-[90%] lg:w-[85%] bg-white/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] rounded-full px-6 py-2.5 border border-white/20'
                             : 'w-full container px-4 py-6 bg-transparent border-transparent'
                         }
                     `}
                 >
-                    {/* Logo Section */}
                     {/* Logo Section */}
                     <Link to="/" className="flex items-center gap-3 group">
                         <img
@@ -58,7 +56,7 @@ export const Navbar: React.FC = () => {
                             alt="Kolte Patil Life Republic Township Logo"
                             width="160"
                             height="56"
-                            className={`object-contain transition-all duration-500 ${isScrolled ? 'h-10' : 'h-14'}`}
+                            className={`object-contain transition-all duration-700 ${isScrolled ? 'h-9 filter grayscale brightness-0' : 'h-14'}`}
                             onError={(e) => {
                                 e.currentTarget.style.display = 'none';
                                 e.currentTarget.nextElementSibling?.classList.remove('hidden');
@@ -66,7 +64,7 @@ export const Navbar: React.FC = () => {
                         />
                         {/* Fallback Text Logo */}
                         <div className="hidden flex flex-col items-start leading-none">
-                            <span className={`font-serif text-2xl tracking-wide transition-colors duration-300 ${isScrolled ? 'text-primary-dark' : 'text-white'}`}>
+                            <span className={`font-serif text-2xl tracking-wide transition-colors duration-300 ${isScrolled ? 'text-secondary' : 'text-white'}`}>
                                 Life
                             </span>
                             <span className={`font-sans text-[10px] tracking-[0.4em] uppercase font-bold transition-colors duration-300 ${isScrolled ? 'text-accent' : 'text-accent-light'}`}>
@@ -77,7 +75,7 @@ export const Navbar: React.FC = () => {
 
                     {/* Desktop Menu */}
                     <div className="hidden md:flex items-center gap-1">
-                        <div className={`flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-500 ${isScrolled ? 'bg-gray-100/50' : 'bg-black/20 backdrop-blur-sm'}`}>
+                        <div className={`flex items-center gap-1 px-1 py-1 rounded-full transition-all duration-700 ${isScrolled ? 'bg-secondary/5' : 'bg-white/10 backdrop-blur-md'}`}>
                             {navLinks.map((link) => {
                                 const isActive = location.pathname === link.path;
                                 return (
@@ -86,14 +84,21 @@ export const Navbar: React.FC = () => {
                                         to={link.path}
                                         aria-label={`Go to ${link.name} page`}
                                         aria-current={isActive ? 'page' : undefined}
-                                        className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${isActive
-                                            ? 'text-secondary bg-white shadow-sm'
+                                        className={`relative px-5 py-2 text-[13px] font-bold uppercase tracking-wider rounded-full transition-all duration-500 ${isActive
+                                            ? 'text-white bg-secondary shadow-md'
                                             : isScrolled
-                                                ? 'text-gray-600 hover:text-secondary hover:bg-white/50'
-                                                : 'text-white hover:bg-white/10 drop-shadow-md font-semibold' // Increased contrast
+                                                ? 'text-secondary/70 hover:text-secondary hover:bg-secondary/10'
+                                                : 'text-white/90 hover:bg-white/20'
                                             }`}
                                     >
                                         {link.name}
+                                        {isActive && (
+                                            <motion.div
+                                                layoutId="nav-active"
+                                                className="absolute inset-0 bg-secondary rounded-full -z-10"
+                                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                            />
+                                        )}
                                     </Link>
                                 );
                             })}
@@ -102,20 +107,11 @@ export const Navbar: React.FC = () => {
 
                     {/* CTA / Mobile Toggle */}
                     <div className="flex items-center gap-4">
-                        <Button
-                            variant={isScrolled ? 'primary' : 'outline'}
-                            size={isScrolled ? 'sm' : 'md'}
-                            aria-label="Call our sales office"
-                            className={`hidden md:flex items-center gap-2 rounded-full transition-all duration-300 ${!isScrolled && 'border-white/30 text-white hover:bg-white hover:text-secondary'
-                                }`}
-                        >
-                            <Phone size={16} />
-                            <span className="hidden lg:inline">+91 77440 09295</span>
-                        </Button>
+
 
                         <button
-                            className={`md:hidden p-2 rounded-full transition-colors ${isScrolled
-                                ? 'bg-gray-100 text-secondary hover:bg-gray-200'
+                            className={`md:hidden p-2.5 rounded-full transition-all duration-300 ${isScrolled
+                                ? 'bg-secondary text-white'
                                 : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-md'
                                 }`}
                             onClick={() => setIsMobileMenuOpen(true)}

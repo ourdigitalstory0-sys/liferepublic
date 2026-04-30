@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { EMICalculator } from '../components/tools/EMICalculator';
+import { EMICalculator } from '../components/ui/EMICalculator';
 import { ROICalculator } from '../components/tools/ROICalculator';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -312,7 +312,10 @@ const ProjectDetails: React.FC = () => {
                         <div className="mt-12 mb-16">
                             <h2 className="text-2xl font-serif font-bold text-gray-800 mb-8">Financial Planning Tools</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <EMICalculator />
+                                <EMICalculator 
+                                    basePrice={parseInt(project.price.replace(/[^\d]/g, '')) * (project.price.toLowerCase().includes('crore') || project.price.toLowerCase().includes('cr') ? 10000000 : 100000)} 
+                                    projectName={project.title}
+                                />
                                 <ROICalculator />
                             </div>
                         </div>

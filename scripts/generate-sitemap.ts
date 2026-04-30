@@ -50,6 +50,8 @@ const staticRoutes = [
     '/location/flats-near-punawale',
     '/location/flats-near-wakad',
     '/location/flats-near-marunji',
+    '/location/flats-near-marunji-road',
+    '/location/ready-possession-flats-hinjewadi',
 ];
 
 // Add sector-based routes from sectors.json

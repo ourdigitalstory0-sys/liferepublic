@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
-import { ArrowRight, Briefcase, Plane, GraduationCap, HeartPulse, Dumbbell, Trees, Music, ShieldCheck, Users } from 'lucide-react';
+import { ArrowRight, Briefcase, Plane, GraduationCap, HeartPulse, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { api } from '../services/api';
 import type { Project } from '../lib/types';
@@ -15,8 +15,10 @@ import { SEO } from '../components/seo/SEO';
 import { ResidentPulse } from '../components/ui/ResidentPulse';
 import { generateCollectionSchema, generateGlobalSchema, generateLocalBusinessSchema } from '../utils/schemaGenerator';
 
+import { RecommendedProjects } from '../components/personalization/RecommendedProjects';
 import { RecentlyViewed } from '../components/sections/RecentlyViewed';
 import { InfraTracker } from '../components/sections/InfraTracker';
+import { CommunityCalendar } from '../components/sections/CommunityCalendar';
 
 const Home: React.FC = () => {
     const [featuredProjects, setFeaturedProjects] = React.useState<Project[]>([]);
@@ -24,7 +26,6 @@ const Home: React.FC = () => {
     React.useEffect(() => {
         const loadData = async () => {
             try {
-                // Optimized fetch: only get 3 featured projects with light data
                 const data = await api.projects.getFeatured(3);
                 if (data && data.length > 0) {
                     setFeaturedProjects(data);
@@ -36,7 +37,6 @@ const Home: React.FC = () => {
         loadData();
     }, []);
 
-    // Generate dynamic schema based on fetched projects
     const schema = useMemo(() => {
         const globalSchema = generateGlobalSchema();
         const localBusinessSchema = generateLocalBusinessSchema();
@@ -97,7 +97,6 @@ const Home: React.FC = () => {
 
             {/* Location Advantages Section */}
             <section className="py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white relative overflow-hidden">
-                {/* Background Blobs for specific color splash */}
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                     <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[100px]"></div>
                     <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[100px]"></div>
@@ -183,7 +182,6 @@ const Home: React.FC = () => {
                                     hover:shadow-[0_0_30px_-5px_rgba(0,0,0,0.3)]
                                 `}
                             >
-                                {/* Hover Glow Effect */}
                                 <div className={`absolute -right-10 -top-10 w-32 h-32 rounded-full blur-[50px] transition-all duration-500 ${item.glow} ${item.glowHover}`}></div>
 
                                 <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 ${item.bgIcon}`}>
@@ -203,92 +201,110 @@ const Home: React.FC = () => {
             {/* Infrastructure & Growth Tracker (Phase 5 SEO) */}
             <InfraTracker />
 
-            {/* Life at Republic (Bento Grid) */}
-            <section className="py-20 bg-gray-50">
+            {/* Personalized Recommendations Layer */}
+            <RecommendedProjects />
+
+            {/* Township Volumes (Architectural Monograph Section) */}
+            <section className="py-32 bg-white overflow-hidden">
                 <div className="container mx-auto px-4">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-16"
-                    >
-                        <h2 className="text-4xl font-serif font-bold mb-4 text-secondary">Life at Kolte Patil Life Republic</h2>
-                        <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
-                        <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
-                            Discover a world beyond just a home. <strong>Life Republic Township</strong> offers an ecosystem designed for a holistic lifestyle, blending <strong>urban luxury</strong> with nature's tranquility in the heart of <strong>Hinjewadi, Pune</strong>.
-                        </p>
-                    </motion.div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                        {/* Large Item */}
-                        <motion.div
-                            whileHover={{ y: -5 }}
-                            className="md:col-span-2 bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between h-64 relative overflow-hidden group"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 to-secondary/50 z-10"></div>
-                            <img src="/images/gallery/nature-nest.webp" alt="Nature" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                            <div className="relative z-20 text-white">
-                                <div className="bg-white/20 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                                    <Trees size={24} />
-                                </div>
-                                <h3 className="text-2xl font-bold mb-2">3.5 Acre Urban Park</h3>
-                                <p className="text-gray-100 font-medium leading-relaxed">
-                                    Refresh your senses in our massive <strong>3.5-acre Urban Park</strong>, a green lung featuring over <strong>7,700 trees</strong>, botanical gardens, and jogging tracks. Perfect for morning walks and weekend family picnics within the township.
-                                </p>
-                            </div>
-                        </motion.div>
-
-                        {/* Standard Item */}
-                        <motion.div
-                            whileHover={{ y: -5 }}
-                            className="bg-secondary text-white rounded-2xl p-8 shadow-md border border-secondary flex flex-col justify-center h-64 group relative overflow-hidden"
-                        >
-                            {/* Decorative Background Element */}
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
-
-                            <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-4 text-accent">
-                                <Dumbbell size={24} />
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-2">World-Class Sports Arena</h3>
-                            <p className="text-gray-300 text-sm leading-relaxed">
-                                Stay active with our <strong>Olympic-size swimming pool</strong>, professional cricket pitch, tennis courts, and a 4km spine road dedicated to cycling and jogging enthusiasts.
+                    <div className="flex flex-col lg:flex-row gap-20 items-start">
+                        <div className="lg:w-1/3 lg:sticky lg:top-32">
+                            <motion.span 
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                className="text-accent text-[10px] font-bold uppercase tracking-[0.5em] block mb-6"
+                            >
+                                Foundation & Flow
+                            </motion.span>
+                            <h2 className="text-5xl md:text-6xl font-serif font-bold text-secondary leading-[1.1] mb-8">
+                                Township <br />Volumes
+                            </h2>
+                            <p className="text-gray-500 text-lg font-light leading-relaxed mb-10">
+                                A 390-acre masterplan designed around the principles of <strong>spatial harmony</strong>, <strong>tectonic integrity</strong>, and <strong>sustainable community flow</strong>.
                             </p>
-                        </motion.div>
-
-                        {/* Standard Item */}
-                        <motion.div
-                            whileHover={{ y: -5 }}
-                            className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 flex flex-col justify-center h-64 group relative overflow-hidden"
-                        >
-                            {/* Decorative Background Element */}
-                            <div className="absolute bottom-0 left-0 w-24 h-24 bg-accent/5 rounded-full blur-2xl -ml-5 -mb-5 pointer-events-none"></div>
-
-                            <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mb-4 text-accent">
-                                <Music size={24} />
+                            <div className="flex flex-col gap-8">
+                                {[
+                                    { label: '01', title: 'Macro Infrastructure', desc: 'A 150ft wide spine road connecting the entire ecosystem.' },
+                                    { label: '02', title: 'Micro Habitats', desc: 'Lush green clusters designed for intimate community living.' },
+                                    { label: '03', title: 'Neural Connectivity', desc: 'Seamless integration with Pune Metro and Mumbai-Pune Expressway.' }
+                                ].map((vol, idx) => (
+                                    <div key={idx} className="group cursor-pointer">
+                                        <div className="flex items-center gap-4 mb-2">
+                                            <span className="text-accent font-bold text-xs font-sans tracking-tighter">{vol.label}</span>
+                                            <h4 className="text-secondary font-bold uppercase text-xs tracking-widest group-hover:text-accent transition-colors">{vol.title}</h4>
+                                        </div>
+                                        <div className="w-full h-[1px] bg-gray-100 group-hover:bg-accent transition-colors"></div>
+                                    </div>
+                                ))}
                             </div>
-                            <h3 className="text-xl font-bold text-secondary mb-2">United Sky Theatre</h3>
-                            <p className="text-gray-600 text-sm leading-relaxed">
-                                Experience culture and community at the <strong>Open-Air Amphitheatre</strong>. From festive celebrations to cultural nights, it's the vibrant heart of social life at <strong>Life Republic</strong>.
-                            </p>
-                        </motion.div>
+                        </div>
 
-                        {/* Large Item */}
-                        <motion.div
-                            whileHover={{ y: -5 }}
-                            className="md:col-span-2 bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between h-64 relative overflow-hidden group"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-r from-accent/95 to-accent/50 z-10"></div>
-                            <img src="/images/gallery/clubhouse.webp" alt="Clubhouse" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                            <div className="relative z-20 text-white">
-                                <div className="bg-white/20 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                                    <ShieldCheck size={24} />
+                        <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {/* Volume I: Infrastructure */}
+                            <motion.div 
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                className="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden relative group"
+                            >
+                                <img src="/images/gallery/nature-nest.webp" alt="Infrastructure Volume" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                                <div className="absolute bottom-10 left-10 text-white">
+                                    <h3 className="text-3xl font-serif font-bold mb-2">The Park</h3>
+                                    <p className="text-xs uppercase tracking-[0.2em] font-medium text-white/70">3.5 Acre Urban Lung</p>
                                 </div>
-                                <h3 className="text-2xl font-bold mb-2">Smart & Secure Living</h3>
-                                <p className="text-gray-100 font-medium leading-relaxed">
-                                    Your safety is our priority. With <strong>multi-tier security</strong>, a dedicated fire station, and the smart <strong>'Planet App'</strong> for seamless community management, enjoy peace of mind in a secure <strong>gated community in Hinjewadi</strong>.
-                                </p>
-                            </div>
-                        </motion.div>
+                            </motion.div>
+
+                            {/* Volume II: Community */}
+                            <motion.div 
+                                initial={{ opacity: 0, y: 100 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                className="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden relative group md:mt-20"
+                            >
+                                <img src="/images/gallery/clubhouse.webp" alt="Community Volume" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                                <div className="absolute bottom-10 left-10 text-white">
+                                    <h3 className="text-3xl font-serif font-bold mb-2">The Club</h3>
+                                    <p className="text-xs uppercase tracking-[0.2em] font-medium text-white/70">Social Synthesis</p>
+                                </div>
+                            </motion.div>
+
+                            {/* Volume III: Education */}
+                            <motion.div 
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                className="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden relative group -mt-10 md:-mt-20"
+                            >
+                                <div className="absolute inset-0 bg-accent/90 mix-blend-multiply z-10 group-hover:bg-accent/40 transition-all duration-700"></div>
+                                <img src="/images/gallery/eros/master-layout.webp" alt="Education Volume" className="absolute inset-0 w-full h-full object-cover" />
+                                <div className="absolute inset-0 flex items-center justify-center z-20 p-12">
+                                    <div className="text-center">
+                                        <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest block mb-4 italic">Integrated Wisdom</span>
+                                        <h3 className="text-4xl font-serif font-bold text-white mb-6">Anisha Global School</h3>
+                                        <Button variant="outline" className="border-white/30 text-white hover:bg-white hover:text-accent rounded-full text-[10px] uppercase font-bold tracking-widest">
+                                            Inside Township
+                                        </Button>
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            {/* Volume IV: Security */}
+                            <motion.div 
+                                initial={{ opacity: 0, y: 100 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                className="aspect-[4/5] bg-secondary rounded-3xl overflow-hidden relative group p-12 flex flex-col justify-end"
+                            >
+                                <div className="mb-12">
+                                    <div className="w-16 h-1 bg-accent mb-6"></div>
+                                    <h3 className="text-4xl font-serif font-bold text-white mb-6">Sovereign <br />Security</h3>
+                                    <p className="text-white/60 text-sm leading-relaxed font-light">
+                                        A multi-tier digital and physical fortress including a dedicated fire station and township-wide surveillance.
+                                    </p>
+                                </div>
+                                <Link to="/contact" className="group/link flex items-center gap-4 text-white text-[10px] font-bold uppercase tracking-[0.3em]">
+                                    Book Visit <ArrowRight size={14} className="group-hover/link:translate-x-2 transition-transform" />
+                                </Link>
+                            </motion.div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -471,6 +487,8 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </section>
+            {/* Community Engagement Layer (Phase 4) */}
+            <CommunityCalendar />
         </div>
     );
 };

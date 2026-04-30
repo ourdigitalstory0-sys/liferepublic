@@ -1,24 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, CheckCircle, Sparkles } from 'lucide-react';
+import { X, Send, CheckCircle, Sparkles, Loader2 } from 'lucide-react';
 import { Button } from './Button';
+import { api } from '../../services/api';
 
 interface EnquiryModalProps {
     isOpen: boolean;
     onClose: () => void;
     projectName?: string;
+    projectId?: string;
 }
 
-export const EnquiryModal: React.FC<EnquiryModalProps> = ({ isOpen, onClose, projectName = "Life Republic" }) => {
+export const EnquiryModal: React.FC<EnquiryModalProps> = ({ 
+    isOpen, 
+    onClose, 
+    projectName = "Life Republic",
+    projectId
+}) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    
+    // Honeypot ref
+    const honeyRef = useRef<HTMLInputElement>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsSubmitted(true);
-        setTimeout(() => {
-            setIsSubmitted(false);
-            onClose();
-        }, 4000);
+        
+        // 1. Honeypot Check
+        if (honeyRef.current?.value) {
+            console.warn("Honeypot triggered");
+            setIsSubmitted(true); // Silent fail
+            return;
+        }
+
+        // 2. Client-side Rate Limiting
+        const lastSubmission = localStorage.getItem('lr_last_submission');
+        const now = Date.now();
+        if (lastSubmission && now - parseInt(lastSubmission) < 30000) { // 30 second limit
+            setError("Please wait a moment before submitting again.");
+            return;
+        }
+
+        setIsSubmitting(true);
+        setError(null);
+
+        const formData = new FormData(e.currentTarget);
+        const leadData = {
+            name: formData.get('name') as string,
+            email: formData.get('email') as string,
+            phone: formData.get('phone') as string,
+            project_id: projectId || projectName,
+            message: `Enquiry for ${projectName} via Digital Sales Desk`,
+            source: window.location.hostname
+        };
+
+        try {
+            await api.leads.create(leadData);
+            localStorage.setItem('lr_last_submission', now.toString());
+            setIsSubmitted(true);
+            setTimeout(() => {
+                setIsSubmitted(false);
+                onClose();
+            }, 4000);
+        } catch (err) {
+            console.error("Submission error:", err);
+            setError("Something went wrong. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -61,11 +111,23 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({ isOpen, onClose, pro
                                     </div>
 
                                     <form onSubmit={handleSubmit} className="space-y-4">
+                                        {/* Honeypot Field - Hidden from humans */}
+                                        <div className="hidden" aria-hidden="true">
+                                            <input 
+                                                type="text" 
+                                                name="website_url" 
+                                                ref={honeyRef} 
+                                                tabIndex={-1} 
+                                                autoComplete="off" 
+                                            />
+                                        </div>
+
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div className="space-y-1.5">
                                                 <label className="text-xs font-bold text-gray-500 uppercase ml-1">Full Name</label>
                                                 <input
                                                     type="text"
+                                                    name="name"
                                                     required
                                                     placeholder="Enter your name"
                                                     className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all outline-none text-secondary"
@@ -75,6 +137,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({ isOpen, onClose, pro
                                                 <label className="text-xs font-bold text-gray-500 uppercase ml-1">Mobile Number</label>
                                                 <input
                                                     type="tel"
+                                                    name="phone"
                                                     required
                                                     pattern="[0-9]{10}"
                                                     placeholder="10-digit mobile"
@@ -87,11 +150,16 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({ isOpen, onClose, pro
                                             <label className="text-xs font-bold text-gray-500 uppercase ml-1">Email Address</label>
                                             <input
                                                 type="email"
+                                                name="email"
                                                 required
                                                 placeholder="your@email.com"
                                                 className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all outline-none text-secondary"
                                             />
                                         </div>
+
+                                        {error && (
+                                            <p className="text-red-500 text-sm font-medium px-1">{error}</p>
+                                        )}
 
                                         <div className="bg-accent/5 p-4 rounded-xl border border-accent/10 mb-6">
                                             <p className="text-xs text-secondary/70 leading-relaxed">
@@ -99,9 +167,19 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({ isOpen, onClose, pro
                                             </p>
                                         </div>
 
-                                        <Button type="submit" className="w-full h-14 rounded-xl text-lg font-bold shadow-xl shadow-accent/20 flex items-center justify-center gap-2 group">
-                                            Unlock Official Pricing 
-                                            <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                        <Button 
+                                            type="submit" 
+                                            disabled={isSubmitting}
+                                            className="w-full h-14 rounded-xl text-lg font-bold shadow-xl shadow-accent/20 flex items-center justify-center gap-2 group"
+                                        >
+                                            {isSubmitting ? (
+                                                <Loader2 size={20} className="animate-spin" />
+                                            ) : (
+                                                <>
+                                                    Unlock Official Pricing 
+                                                    <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                                </>
+                                            )}
                                         </Button>
                                     </form>
                                 </>

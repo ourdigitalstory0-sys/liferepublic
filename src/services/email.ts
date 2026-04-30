@@ -15,12 +15,17 @@ export const emailService = {
                     "Accept": "application/json"
                 },
                 body: JSON.stringify({
-                    _subject: `New Lead: ${lead.name} - ${lead.project || 'General Inquiry'}`,
+                    _subject: `Official Lead: ${lead.name} | ${lead.project || 'Life Republic'}`,
                     _template: "table",
-                    _captcha: "false", // Disable captcha for API usage
-                    _autoresponse: "Thank you for your enquiry. Our team will contact you shortly.",
-                    ...lead,
-                    timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+                    _captcha: "false",
+                    _autoresponse: "Thank you for your enquiry for Life Republic. Our sales desk will contact you with the official price list and brochure shortly.",
+                    "Full Name": lead.name,
+                    "Mobile": lead.phone,
+                    "Email": lead.email || 'N/A',
+                    "Project/Segment": lead.project || 'General Inquiry',
+                    "Source Domain": lead.source || window.location.hostname,
+                    "Lead Message": lead.message || 'No message provided',
+                    "Timestamp": new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
                 })
             });
 
