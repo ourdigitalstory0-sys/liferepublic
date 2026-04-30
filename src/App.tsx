@@ -44,6 +44,7 @@ const PageLoader = () => (
   </div>
 );
 import { ExitIntentOffer } from './components/ui/ExitIntentOffer';
+import { TownshipAgent } from './components/sections/TownshipAgent';
 import { LocationLanding } from './pages/LocationLanding';
 import { NotFound } from './pages/NotFound';
 import { Helmet } from 'react-helmet-async';
@@ -65,6 +66,7 @@ function App() {
         <link rel="preconnect" href="https://life-republic.in" />
       </Helmet>
       <ExitIntentOffer />
+      <TownshipAgent />
       <Routes>
           {/* Public Routes */}
           <Route path="/" element={

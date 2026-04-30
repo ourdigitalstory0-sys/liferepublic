@@ -14,8 +14,11 @@
     "build:ssg": "npm run build"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@supabase/supabase-js": "^2.95.3",
     "framer-motion": "^12.33.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
     "lenis": "^1.3.17",
     "lucide-react": "^0.577.0",
     "react": "^19.2.0",

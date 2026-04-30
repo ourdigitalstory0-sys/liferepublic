@@ -19,6 +19,7 @@ import { RecommendedProjects } from '../components/personalization/RecommendedPr
 import { RecentlyViewed } from '../components/sections/RecentlyViewed';
 import { InfraTracker } from '../components/sections/InfraTracker';
 import { CommunityCalendar } from '../components/sections/CommunityCalendar';
+import { NeuralGallery } from '../components/sections/NeuralGallery';
 
 const Home: React.FC = () => {
     const [featuredProjects, setFeaturedProjects] = React.useState<Project[]>([]);
@@ -487,6 +488,22 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </section>
+            {/* Cinematic Neural Synthesis (Phase 5) */}
+            <section className="py-32 bg-gray-50 overflow-hidden">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-4xl mx-auto">
+                        <NeuralGallery 
+                            title="The Living Volume"
+                            images={{
+                                day: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif',
+                                sunset: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.123456789.avif', // Placeholder
+                                night: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.987654321.avif' // Placeholder
+                            }}
+                        />
+                    </div>
+                </div>
+            </section>
+
             {/* Community Engagement Layer (Phase 4) */}
             <CommunityCalendar />
         </div>

@@ -11,6 +11,7 @@ import type { Project, Amenity } from '../lib/types';
 import { Star } from 'lucide-react';
 import { ICON_MAP } from '../lib/icons';
 import { SimilarProjects } from '../components/sections/SimilarProjects';
+import { DemandHeatmap } from '../components/sections/DemandHeatmap';
 import { SEO } from '../components/seo/SEO';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { ShareButtons } from '../components/ui/ShareButtons';
@@ -371,6 +372,10 @@ const ProjectDetails: React.FC = () => {
                                     </Button>
                                 </div>
                             </div>
+                        </div>
+
+                        <div className="mt-8">
+                            <DemandHeatmap />
                         </div>
 
                         <div className="mt-6 pt-6 border-t border-gray-100">

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, FileCheck, Mail, Phone, ChevronRight, X, Sparkles } from 'lucide-react';
+import { Download, FileCheck, Mail, Phone, ChevronRight, X, Sparkles, Users } from 'lucide-react';
+import { brochureGenerator } from '../../services/brochureGenerator';
 
 export const BrochureEngine: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isGenerating, setIsGenerating] = useState(false);
     const [selections, setSelections] = useState<string[]>([]);
+    const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
     
     const options = [
         { id: 'master', label: 'Township Master Plan', icon: '🗺️' },
@@ -17,6 +20,23 @@ export const BrochureEngine: React.FC = () => {
         setSelections(prev => 
             prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
         );
+    };
+
+    const handleDeploy = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsGenerating(true);
+        
+        try {
+            // Generate Personalized PDF
+            await brochureGenerator.generateCustomBrochure(formData.name || 'Valued Partner');
+            setIsOpen(false);
+            alert('Your personalized portfolio has been generated and downloaded!');
+        } catch (error) {
+            console.error("Brochure Error:", error);
+            alert('Failed to generate portfolio. Please try again.');
+        } finally {
+            setIsGenerating(false);
+        }
     };
 
     return (
@@ -76,7 +96,7 @@ export const BrochureEngine: React.FC = () => {
                                 <motion.div 
                                     initial={{ scale: 0.9, y: 20 }}
                                     animate={{ scale: 1, y: 0 }}
-                                    className="bg-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl text-gray-900 overflow-hidden"
+                                    className="bg-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl text-gray-900"
                                 >
                                     <div className="bg-secondary p-8 text-white relative">
                                         <button onClick={() => setIsOpen(false)} className="absolute top-6 right-6 text-white/60 hover:text-white">
@@ -86,34 +106,57 @@ export const BrochureEngine: React.FC = () => {
                                         <p className="text-white/60 text-sm">Where should we send your {selections.length} selected documents?</p>
                                     </div>
 
-                                    <div className="p-10 space-y-6">
+                                    <form onSubmit={handleDeploy} className="p-10 space-y-6">
                                         <div className="space-y-4">
+                                            <div className="relative">
+                                                <Users className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                                <input 
+                                                    required
+                                                    type="text" 
+                                                    placeholder="Full Name"
+                                                    value={formData.name}
+                                                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                                    className="w-full pl-12 pr-6 py-4 bg-gray-50 rounded-xl focus:ring-2 focus:ring-accent outline-none border-none"
+                                                />
+                                            </div>
                                             <div className="relative">
                                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                                                 <input 
+                                                    required
                                                     type="email" 
                                                     placeholder="Email Address"
+                                                    value={formData.email}
+                                                    onChange={(e) => setFormData({...formData, email: e.target.value})}
                                                     className="w-full pl-12 pr-6 py-4 bg-gray-50 rounded-xl focus:ring-2 focus:ring-accent outline-none border-none"
                                                 />
                                             </div>
                                             <div className="relative">
                                                 <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                                                 <input 
+                                                    required
                                                     type="tel" 
                                                     placeholder="WhatsApp Number"
+                                                    value={formData.phone}
+                                                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
                                                     className="w-full pl-12 pr-6 py-4 bg-gray-50 rounded-xl focus:ring-2 focus:ring-accent outline-none border-none"
                                                 />
                                             </div>
                                         </div>
 
-                                        <button className="w-full py-5 bg-secondary text-white rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-accent hover:text-secondary transition-all">
-                                            <FileCheck size={20} /> Deploy Information Pack <ChevronRight size={18} />
+                                        <button 
+                                            disabled={isGenerating}
+                                            type="submit"
+                                            className="w-full py-5 bg-secondary text-white rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-accent hover:text-secondary transition-all disabled:opacity-50"
+                                        >
+                                            <FileCheck size={20} /> 
+                                            {isGenerating ? 'Synthesizing PDF...' : 'Generate & Download Portfolio'}
+                                            <ChevronRight size={18} />
                                         </button>
 
                                         <div className="flex items-center gap-2 justify-center text-[10px] text-gray-400 uppercase tracking-widest font-bold">
                                             <ShieldCheck size={12} className="text-green-500" /> Secure Transmission | Privacy Protected
                                         </div>
-                                    </div>
+                                    </form>
                                 </motion.div>
                             </motion.div>
                         )}
