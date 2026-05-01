@@ -145,7 +145,21 @@ export const ROICalculator: React.FC = () => {
                         <p className="font-bold text-secondary text-lg">+{formatCurrency(totalROI)}</p>
                     </div>
                 </div>
-                <p className="text-[10px] text-gray-400 mt-2 text-center">*Projections based on conservative 8% CAGR.</p>
+
+                <div className="mt-8 p-6 bg-secondary rounded-2xl text-white relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-accent/20 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                    <h4 className="text-lg font-serif font-bold mb-2 relative z-10">Want the full Investment Ledger?</h4>
+                    <p className="text-xs text-white/60 mb-4 relative z-10">Get a detailed PDF with year-on-year appreciation and rental growth metrics.</p>
+                    
+                    <button 
+                        onClick={() => window.dispatchEvent(new CustomEvent('open-sovereign-concierge', { detail: { project: 'ROI Ledger Report' } }))}
+                        className="w-full py-3 bg-accent text-secondary font-bold rounded-xl hover:bg-white hover:text-accent transition-all text-sm shadow-lg"
+                    >
+                        Email My Detailed Report
+                    </button>
+                </div>
+
+                <p className="text-[10px] text-gray-400 mt-4 text-center">*Projections based on conservative 8% CAGR.</p>
             </div>
         </div>
     );

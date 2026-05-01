@@ -11,7 +11,8 @@
     "build": "npx tsx scripts/generate-sitemap.ts && tsc -b && npm run build:client && npm run build:server && npm run prerender",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:ssg": "npm run build"
+    "build:ssg": "npm run build",
+    "index": "npx tsx scripts/ping-google.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

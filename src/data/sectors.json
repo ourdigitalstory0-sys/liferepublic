@@ -142,6 +142,32 @@
       "infrastructure": "Private 24K Club", 
       "distance": "1 min from Main Spine",
       "keywords": ["24K Espada price", "luxury villas Hinjewadi", "premium villas Pune"]
+    },
+    {
+      "id": "r17r18",
+      "name": "Echoes (R17/R18)",
+      "branding": "Echoes Life Republic",
+      "slug": "sector-r17-r18-life-republic",
+      "type": "Sector",
+      "segment": "Premium",
+      "target": "Experience Seekers",
+      "usp": "New launch designed by Hafeez Contractor near the 3.5-acre Urban Park.",
+      "infrastructure": "Directly adjacent to Urban Park",
+      "distance": "5 mins from High Street",
+      "keywords": ["Echoes Life Republic price", "Echoes Hinjewadi RERA", "Hafeez Contractor Pune"]
+    },
+    {
+      "id": "r10d",
+      "name": "Duet (R10)",
+      "branding": "Duet Life Republic",
+      "slug": "sector-r10-duet-life-republic",
+      "type": "Sector",
+      "segment": "Modern",
+      "target": "Young Professionals",
+      "usp": "Specifically designed for modern couples seeking class in R10.",
+      "infrastructure": "Near the upcoming Metro Hub",
+      "distance": "2 mins from Metro Access",
+      "keywords": ["Duet Life Republic price", "Duet Hinjewadi flats"]
     }
   ],
   "avenues": [
@@ -153,6 +179,8 @@
   "localities": [
     { "id": "hinj-ph1", "name": "Hinjewadi Phase 1", "slug": "flats-near-hinjewadi-phase-1", "type": "Locality", "usp": "Global IT Hub with Fortune 500 companies.", "infrastructure": "Infosys, Wipro, TCS Campus", "distance": "5-7 mins Drive" },
     { "id": "hinj-ph2", "name": "Hinjewadi Phase 2", "slug": "flats-near-hinjewadi-phase-2", "type": "Locality", "usp": "Critical IT corridor with high property demand.", "infrastructure": "Embassy Tech Zone", "distance": "10-12 mins Drive" },
-    { "id": "marunji", "name": "Marunji Pune", "slug": "flats-near-marunji", "type": "Locality", "usp": "Emerging growth corridor with high ROI potential.", "infrastructure": "Proposed Ring Road Connectivity", "distance": "0 mins (Direct Access)" }
+    { "id": "hinj-ph3", "name": "Hinjewadi Phase 3", "slug": "flats-near-hinjewadi-phase-3", "type": "Locality", "usp": "Massive IT SEZ area with major upcoming commercial hubs.", "infrastructure": "TCS Sahyadri Park, Tech Mahindra", "distance": "15 mins Drive" },
+    { "id": "marunji", "name": "Marunji Pune", "slug": "flats-near-marunji", "type": "Locality", "usp": "Emerging growth corridor with high ROI potential.", "infrastructure": "Proposed Ring Road Connectivity", "distance": "0 mins (Direct Access)" },
+    { "id": "punawale", "name": "Punawale Pune", "slug": "flats-near-punawale", "type": "Locality", "usp": "Rapidly developing residential hub with great connectivity to Expressway.", "infrastructure": "Upcoming Metro & Ring Road", "distance": "10 mins Drive" }
   ]
 }

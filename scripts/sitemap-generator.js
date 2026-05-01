@@ -10,16 +10,25 @@ import path from 'path';
 
 // Let's try to make it simple. I'll read projects.ts content and regex the IDs.
 
+// Read Projects
 const projectsFilePath = path.join(process.cwd(), 'src', 'data', 'projects.ts');
 const projectsContent = fs.readFileSync(projectsFilePath, 'utf-8');
-
-// Regex to find IDs: id: '...'
 const projectIds = [];
 const idRegex = /id:\s*'([^']+)'/g;
 let match;
 while ((match = idRegex.exec(projectsContent)) !== null) {
     projectIds.push(match[1]);
 }
+
+// Read Sectors, Avenues, Localities
+const sectorsFilePath = path.join(process.cwd(), 'src', 'data', 'sectors.json');
+const sectorsData = JSON.parse(fs.readFileSync(sectorsFilePath, 'utf-8'));
+
+const locationRoutes = [
+    ...sectorsData.sectors.map(s => `/location/${s.slug}`),
+    ...sectorsData.avenues.map(a => `/location/${a.slug}`),
+    ...sectorsData.localities.map(l => `/location/${l.slug}`)
+];
 
 const DOMAIN = 'https://life-republic.in';
 
@@ -38,11 +47,9 @@ const staticRoutes = [
     '/nri-corner',
     '/testimonials',
     '/media-center',
-    '/location/flats-near-hinjewadi',
-    '/location/flats-near-tathawade',
-    '/location/flats-near-punawale',
-    '/location/flats-near-wakad',
-    '/location/flats-near-marunji'
+    '/township-guide',
+    '/community-hub',
+    ...locationRoutes
 ];
 
 // Generate XML
