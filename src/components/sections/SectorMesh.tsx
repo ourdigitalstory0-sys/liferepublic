@@ -16,15 +16,18 @@ export const SectorMesh: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12">
                     {/* Residential Sectors */}
                     <div>
-                        <h3 className="font-bold text-accent uppercase tracking-widest text-xs mb-6">Residential Sectors (R)</h3>
-                        <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
+                        <h3 className="font-bold text-accent uppercase tracking-widest text-xs mb-6 px-3 border-l-2 border-accent">Residential Sectors (R)</h3>
+                        <ul className="grid grid-cols-2 gap-x-2 gap-y-2">
                             {sectorsData.sectors.map((s) => (
                                 <li key={s.id}>
                                     <Link 
                                         to={`/location/${s.slug}`} 
-                                        className="text-gray-500 hover:text-accent text-sm transition-colors"
+                                        className="block p-3 rounded-xl hover:bg-white hover:shadow-lg hover:shadow-accent/5 group transition-all border border-transparent hover:border-gray-100"
                                     >
-                                        {s.name}
+                                        <p className="text-gray-500 group-hover:text-secondary text-sm font-medium transition-colors">
+                                            {s.name.split('(')[0]}
+                                        </p>
+                                        <span className="text-[10px] text-gray-300 group-hover:text-accent font-bold uppercase tracking-wider">{s.id} Intelligence</span>
                                     </Link>
                                 </li>
                             ))}
@@ -33,15 +36,18 @@ export const SectorMesh: React.FC = () => {
 
                     {/* Avenue Mapping */}
                     <div>
-                        <h3 className="font-bold text-accent uppercase tracking-widest text-xs mb-6">Avenue Intelligence</h3>
-                        <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
+                        <h3 className="font-bold text-accent uppercase tracking-widest text-xs mb-6 px-3 border-l-2 border-accent">Avenue Intelligence</h3>
+                        <ul className="grid grid-cols-2 gap-x-2 gap-y-2">
                             {sectorsData.avenues.map((a) => (
                                 <li key={a.id}>
                                     <Link 
                                         to={`/location/${a.slug}`} 
-                                        className="text-gray-500 hover:text-accent text-sm transition-colors"
+                                        className="block p-3 rounded-xl hover:bg-white hover:shadow-lg hover:shadow-accent/5 group transition-all border border-transparent hover:border-gray-100"
                                     >
-                                        {a.name}
+                                        <p className="text-gray-500 group-hover:text-secondary text-sm font-medium transition-colors">
+                                            {a.name}
+                                        </p>
+                                        <span className="text-[10px] text-gray-300 group-hover:text-accent font-bold uppercase tracking-wider">Infrastructure Layer</span>
                                     </Link>
                                 </li>
                             ))}
@@ -50,15 +56,18 @@ export const SectorMesh: React.FC = () => {
 
                     {/* Regional Proximity */}
                     <div className="md:col-span-1 lg:col-span-2">
-                        <h3 className="font-bold text-accent uppercase tracking-widest text-xs mb-6">Hinjewadi Growth Localities</h3>
-                        <ul className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-2">
+                        <h3 className="font-bold text-accent uppercase tracking-widest text-xs mb-6 px-3 border-l-2 border-accent">Hinjewadi Growth Localities</h3>
+                        <ul className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-2">
                             {sectorsData.localities.map((l) => (
                                 <li key={l.id}>
                                     <Link 
                                         to={`/location/${l.slug}`} 
-                                        className="text-gray-500 hover:text-accent text-sm transition-colors"
+                                        className="block p-3 rounded-xl hover:bg-white hover:shadow-lg hover:shadow-accent/5 group transition-all border border-transparent hover:border-gray-100"
                                     >
-                                        {l.name}
+                                        <p className="text-gray-500 group-hover:text-secondary text-sm font-medium transition-colors">
+                                            {l.name}
+                                        </p>
+                                        <span className="text-[10px] text-gray-300 group-hover:text-accent font-bold uppercase tracking-wider">Contextual Sync</span>
                                     </Link>
                                 </li>
                             ))}

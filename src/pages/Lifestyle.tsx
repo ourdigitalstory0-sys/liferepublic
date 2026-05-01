@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Trees, Users, ShieldCheck, Sparkles, MapPin } from 'lucide-react';
 
 const stats = [
@@ -10,32 +10,35 @@ const stats = [
 ];
 
 export const Lifestyle: React.FC = () => {
+    const { scrollY } = useScroll();
+    const heroY = useTransform(scrollY, [0, 500], [0, 150]);
+    const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.3]);
+
     return (
         <div className="bg-white">
             {/* Hero Section */}
-            <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-                <img 
+            <section className="relative h-[75vh] flex items-center justify-center overflow-hidden">
+                <motion.img 
+                    style={{ y: heroY, opacity: heroOpacity }}
                     src="/images/home/urban-park.webp" 
                     alt="Life at Life Republic" 
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover scale-110"
                 />
-                <div className="absolute inset-0 bg-black/40"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-white"></div>
                 <div className="relative z-10 text-center text-white px-4">
-                    <motion.h1 
-                        initial={{ opacity: 0, y: 30 }}
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-5xl md:text-7xl font-serif font-bold mb-6"
+                        transition={{ duration: 1, ease: "easeOut" }}
                     >
-                        More Than a Home
-                    </motion.h1>
-                    <motion.p 
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-xl md:text-2xl font-light max-w-2xl mx-auto"
-                    >
-                        Experience the vibrant community and sustainable living of Kolte Patil Life Republic.
-                    </motion.p>
+                        <span className="inline-block px-4 py-1 bg-accent/20 backdrop-blur-md rounded-full text-accent font-bold tracking-[0.3em] uppercase text-[10px] mb-6">The Collective Spirit</span>
+                        <h1 className="text-5xl md:text-8xl font-serif font-bold mb-6 tracking-tight">
+                            More Than <br />A Home
+                        </h1>
+                        <p className="text-xl md:text-2xl font-light max-w-2xl mx-auto text-white/80 leading-relaxed">
+                            Experience the vibrant community and sustainable living of Kolte Patil Life Republic.
+                        </p>
+                    </motion.div>
                 </div>
             </section>
 
