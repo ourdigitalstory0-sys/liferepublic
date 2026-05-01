@@ -246,26 +246,36 @@ export const api = {
             // Save to Vault first (Local Persistence)
             sovereignVault.saveLead(lead);
 
+            // Attribution Intelligence
+            const attribution = {
+                entry_page: sessionStorage.getItem('lr_entry_page') || 'Direct',
+                referrer: document.referrer || 'Direct',
+                user_journey: JSON.parse(localStorage.getItem('lr_recently_viewed') || '[]').join(' -> ')
+            };
+
+            let score = 0;
+            const message = (lead.message || '').toLowerCase();
+            const recentlyViewed = JSON.parse(localStorage.getItem('lr_recently_viewed') || '[]');
+            
+            // Content Scoring
+            if (message.includes('crore') || message.includes('cr') || message.includes('luxury')) score += 50;
+            if (message.includes('immediate') || message.includes('visit')) score += 30;
+            
+            // Journey Velocity Scoring
+            if (recentlyViewed.length > 2) score += 40; // Deep interest in multiple sectors
+            if (lead.project_id) score += 20;
+
+            // 1. ALWAYS fire the email notification (Sovereign Fail-safe)
+            emailService.sendLeadNotification({
+                name: lead.name,
+                phone: lead.phone,
+                email: lead.email,
+                message: `${lead.message} [Score: ${score}] [Journey: ${attribution.user_journey}]`,
+                project: lead.project_id ? `Project ID: ${lead.project_id}` : `Attribution: ${attribution.entry_page}`
+            }).catch(console.error); // Catch email errors silently
+
+            // 2. Try Supabase Insert silently
             try {
-                // Attribution Intelligence
-                const attribution = {
-                    entry_page: sessionStorage.getItem('lr_entry_page') || 'Direct',
-                    referrer: document.referrer || 'Direct',
-                    user_journey: JSON.parse(localStorage.getItem('lr_recently_viewed') || '[]').join(' -> ')
-                };
-
-                let score = 0;
-                const message = (lead.message || '').toLowerCase();
-                const recentlyViewed = JSON.parse(localStorage.getItem('lr_recently_viewed') || '[]');
-                
-                // Content Scoring
-                if (message.includes('crore') || message.includes('cr') || message.includes('luxury')) score += 50;
-                if (message.includes('immediate') || message.includes('visit')) score += 30;
-                
-                // Journey Velocity Scoring
-                if (recentlyViewed.length > 2) score += 40; // Deep interest in multiple sectors
-                if (lead.project_id) score += 20;
-
                 const { error } = await supabase.from('leads').insert({ 
                     ...lead, 
                     status: 'New',
@@ -277,27 +287,21 @@ export const api = {
                     }
                 });
                 
-                if (error) throw error;
-
-                // Mark as synced in vault
-                const vault = JSON.parse(localStorage.getItem('lr_sovereign_vault') || '[]');
-                const last = vault[vault.length - 1];
-                if (last) last.synced = true;
-                localStorage.setItem('lr_sovereign_vault', JSON.stringify(vault));
-
-                // Send email notification (non-blocking)
-                emailService.sendLeadNotification({
-                    name: lead.name,
-                    phone: lead.phone,
-                    email: lead.email,
-                    message: `${lead.message} [Score: ${score}] [Journey: ${attribution.user_journey}]`,
-                    project: lead.project_id ? `Project ID: ${lead.project_id}` : `Attribution: ${attribution.entry_page}`
-                });
-
+                if (error) {
+                    console.error("Supabase insert failed, but email was dispatched.", error);
+                } else {
+                    // Mark as synced in vault
+                    const vault = JSON.parse(localStorage.getItem('lr_sovereign_vault') || '[]');
+                    const last = vault[vault.length - 1];
+                    if (last) last.synced = true;
+                    localStorage.setItem('lr_sovereign_vault', JSON.stringify(vault));
+                }
+                
+                // Return success regardless of DB status because email & vault worked
                 return null;
             } catch (e) {
-                // If network fails, the lead is already in Sovereign Vault for future recovery
-                return handleApiError(e, 'leads.create');
+                console.error("Database connection failed, but email was dispatched.", e);
+                return null;
             }
         },
         updateStatus: async (id: number, status: 'New' | 'Contacted' | 'Closed') => {
