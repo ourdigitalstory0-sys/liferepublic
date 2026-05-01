@@ -3,33 +3,44 @@ import { Suspense, lazy } from 'react';
 import { ProtectedRoute } from './components/admin/ProtectedRoute';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
-import Home from './pages/Home';
-import Projects from './pages/Projects';
-import { Amenities } from './pages/Amenities';
-import { Contact } from './pages/Contact';
-import ProjectDetails from './pages/ProjectDetails';
+// Lazy load public pages for Route-Level Code Splitting (Phase 8 Optimization)
+const Home = lazy(() => import('./pages/Home'));
+const Projects = lazy(() => import('./pages/Projects'));
+const Amenities = lazy(() => import('./pages/Amenities').then(module => ({ default: module.Amenities })));
+const Contact = lazy(() => import('./pages/Contact').then(module => ({ default: module.Contact })));
+const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
+const About = lazy(() => import('./pages/About').then(module => ({ default: module.About })));
+const Privacy = lazy(() => import('./pages/Privacy').then(module => ({ default: module.Privacy })));
+const Terms = lazy(() => import('./pages/Terms').then(module => ({ default: module.Terms })));
+const LocationHighlights = lazy(() => import('./pages/LocationHighlights').then(module => ({ default: module.LocationHighlights })));
+const Lifestyle = lazy(() => import('./pages/Lifestyle').then(module => ({ default: module.Lifestyle })));
+const TwoBHK = lazy(() => import('./pages/landing/TwoBHK').then(module => ({ default: module.TwoBHK })));
+const ThreeBHK = lazy(() => import('./pages/landing/ThreeBHK').then(module => ({ default: module.ThreeBHK })));
+const FourBHK = lazy(() => import('./pages/landing/FourBHK').then(module => ({ default: module.FourBHK })));
+const NRICorner = lazy(() => import('./pages/NRICorner').then(module => ({ default: module.NRICorner })));
+const Testimonials = lazy(() => import('./pages/Testimonials').then(module => ({ default: module.Testimonials })));
+const TownshipGuide = lazy(() => import('./pages/TownshipGuide').then(module => ({ default: module.TownshipGuide })));
+const MediaCenter = lazy(() => import('./pages/MediaCenter').then(module => ({ default: module.MediaCenter })));
+const BlogPostPage = lazy(() => import('./pages/BlogPost').then(module => ({ default: module.BlogPostPage })));
+const ConnectivityHub = lazy(() => import('./pages/ConnectivityHub').then(module => ({ default: module.ConnectivityHub })));
+const TownshipIntelligence = lazy(() => import('./pages/TownshipIntelligence').then(module => ({ default: module.TownshipIntelligence })));
+const HyperLocalLanding = lazy(() => import('./pages/HyperLocalLanding').then(module => ({ default: module.HyperLocalLanding })));
+const NRIInvestmentHub = lazy(() => import('./pages/NRIInvestmentHub').then(module => ({ default: module.NRIInvestmentHub })));
+const Sustainability = lazy(() => import('./pages/Sustainability').then(module => ({ default: module.Sustainability })));
+const CommunityForum = lazy(() => import('./pages/CommunityForum').then(module => ({ default: module.CommunityForum })));
+const LocationLanding = lazy(() => import('./pages/LocationLanding').then(module => ({ default: module.LocationLanding })));
+const NotFound = lazy(() => import('./pages/NotFound').then(module => ({ default: module.NotFound })));
+const HTMLSitemap = lazy(() => import('./pages/HTMLSitemap'));
+
+// Keep layout components static as they are used on every page
 import { FloatingContact } from './components/ui/FloatingContact';
 import { Layout } from './components/layout/Layout';
 import { SmoothScrolling } from './components/layout/SmoothScrolling';
-import { About } from './pages/About';
-import { Privacy } from './pages/Privacy';
-import { Terms } from './pages/Terms';
-import { LocationHighlights } from './pages/LocationHighlights';
-import { Lifestyle } from './pages/Lifestyle';
-import { TwoBHK } from './pages/landing/TwoBHK';
-import { ThreeBHK } from './pages/landing/ThreeBHK';
-import { FourBHK } from './pages/landing/FourBHK';
-import { NRICorner } from './pages/NRICorner';
-import { Testimonials } from './pages/Testimonials';
-import { TownshipGuide } from './pages/TownshipGuide';
-import { MediaCenter } from './pages/MediaCenter';
-import { BlogPostPage } from './pages/BlogPost';
-import { ConnectivityHub } from './pages/ConnectivityHub';
-import { TownshipIntelligence } from './pages/TownshipIntelligence';
-import { HyperLocalLanding } from './pages/HyperLocalLanding';
-import { NRIInvestmentHub } from './pages/NRIInvestmentHub';
-import { Sustainability } from './pages/Sustainability';
-import { CommunityForum } from './pages/CommunityForum';
+import { ExitIntentOffer } from './components/ui/ExitIntentOffer';
+import { TownshipAgent } from './components/sections/TownshipAgent';
+import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
+
 // Lazy load Admin components
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin').then(module => ({ default: module.AdminLogin })));
 const AdminSignup = lazy(() => import('./pages/admin/AdminSignup').then(module => ({ default: module.AdminSignup })));
@@ -37,19 +48,13 @@ const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard').then(mo
 const AdminLayout = lazy(() => import('./components/admin/AdminLayout').then(module => ({ default: module.AdminLayout })));
 const ImageManager = lazy(() => import('./components/admin/ImageManager').then(module => ({ default: module.ImageManager })));
 
-// Loading Component
-const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gray-50">
-    <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+// Premium Loading Component for Suspense Boundary
+export const PageLoader = () => (
+  <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 fixed inset-0 z-50">
+    <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mb-4"></div>
+    <div className="text-sm font-serif text-secondary tracking-widest uppercase animate-pulse">Loading Architecture</div>
   </div>
 );
-import { ExitIntentOffer } from './components/ui/ExitIntentOffer';
-import { TownshipAgent } from './components/sections/TownshipAgent';
-import { LocationLanding } from './pages/LocationLanding';
-import { NotFound } from './pages/NotFound';
-import { Helmet } from 'react-helmet-async';
-import { useEffect } from 'react';
-import HTMLSitemap from './pages/HTMLSitemap';
 
 function App() {
   useEffect(() => {
@@ -68,7 +73,8 @@ function App() {
       </Helmet>
       <ExitIntentOffer />
       <TownshipAgent />
-      <Routes>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
           {/* Public Routes */}
           <Route path="/" element={
             <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi">
@@ -349,6 +355,7 @@ function App() {
           {/* Catch-all for 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+      </Suspense>
     </SmoothScrolling>
   );
 }

@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { SEO } from '../components/seo/SEO';
 import { MapPin, Train, School, Stethoscope, ShoppingBag, Briefcase } from 'lucide-react';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
-import { SovereignMap } from '../components/ui/SovereignMap';
 
+const SovereignMap = React.lazy(() => import('../components/ui/SovereignMap').then(module => ({ default: module.SovereignMap })));
 export const LocationHighlights: React.FC = () => {
     return (
         <div className="pt-20">
@@ -37,7 +37,9 @@ export const LocationHighlights: React.FC = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.2 }}
                     >
-                        <SovereignMap />
+                        <React.Suspense fallback={<div className="h-[600px] w-full bg-gray-100 rounded-2xl animate-pulse flex items-center justify-center"><span className="text-gray-400 font-serif">Loading Map...</span></div>}>
+                            <SovereignMap />
+                        </React.Suspense>
                     </motion.div>
                 </div>
             </section>
