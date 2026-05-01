@@ -426,40 +426,12 @@ export const ProjectsManager: React.FC = () => {
                                 </div>
                             </div>
 
-                            {/* Floor Plans */}
+                            {/* Floor Plans v6.5 */}
                             <div className="border-t pt-6">
-                                <label className="block text-sm font-medium mb-4">Floor Plans</label>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {/* Existing Plans */}
-                                    {formData.floorPlans?.map((plan: string, index: number) => (
-                                        <div key={index} className="flex gap-4 p-3 border rounded-lg bg-gray-50">
-                                            <div className="w-24 h-24 bg-gray-200 rounded overflow-hidden flex-shrink-0">
-                                                {typeof plan === 'string' ? (
-                                                    <img src={plan} alt="" className="w-full h-full object-cover" />
-                                                ) : (
-                                                    /* Handle object structure if we migrate to that later, for now string urls */
-                                                    <img src={plan} alt="" className="w-full h-full object-cover" />
-                                                )}
-                                            </div>
-                                            <div className="flex-1 flex flex-col justify-between">
-                                                <div className="text-sm font-medium break-all">{typeof plan === 'string' ? plan.split('/').pop() : 'Plan'}</div>
-                                                <button
-                                                    onClick={() => {
-                                                        const newPlans = formData.floorPlans?.filter((_, i) => i !== index);
-                                                        handleChange('floorPlans', newPlans);
-                                                    }}
-                                                    className="self-end text-red-500 text-sm hover:underline flex items-center gap-1"
-                                                >
-                                                    <Trash2 size={14} /> Remove
-                                                </button>
-                                            </div>
-                                        </div>
-                                    ))}
-
-                                    {/* Add New Plan */}
-                                    <label className="border-2 border-dashed border-gray-300 rounded-lg h-36 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <Plus className="text-gray-400 mb-1" />
-                                        <span className="text-xs text-gray-500">Add Floor Plan</span>
+                                <div className="flex justify-between items-center mb-4">
+                                    <label className="block text-sm font-medium">Floor Plans</label>
+                                    <label className="bg-secondary text-white px-4 py-2 rounded-lg text-sm font-bold cursor-pointer hover:bg-accent transition-all flex items-center gap-2">
+                                        <Plus size={16} /> Add Floor Plan
                                         <input
                                             type="file"
                                             className="hidden"
@@ -470,10 +442,7 @@ export const ProjectsManager: React.FC = () => {
                                                     for (let i = 0; i < e.target.files.length; i++) {
                                                         try {
                                                             const url = await api.upload.image(e.target.files[i], 'projects');
-                                                            // Currently schema supports array of strings (URLs)
-                                                            // If we want titles, we need to change schema or use JSON object
-                                                            // For now assuming string URLs
-                                                            newPlans.push(url);
+                                                            newPlans.push({ type: 'New Unit', size: '0 sq.ft.', image: url, details: [] });
                                                         } catch (err) {
                                                             console.error(err);
                                                         }
@@ -484,6 +453,110 @@ export const ProjectsManager: React.FC = () => {
                                             accept="image/*"
                                         />
                                     </label>
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-6">
+                                    {formData.floorPlans?.map((plan: any, index: number) => (
+                                        <div key={index} className="flex flex-col md:flex-row gap-6 p-6 border rounded-[1.5rem] bg-gray-50 group hover:bg-white hover:shadow-xl transition-all">
+                                            <div className="w-full md:w-48 aspect-square bg-white rounded-xl overflow-hidden border flex-shrink-0 relative">
+                                                <img 
+                                                    src={typeof plan === 'string' ? plan : plan.image} 
+                                                    alt="" 
+                                                    className="w-full h-full object-contain p-4" 
+                                                />
+                                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                    <label className="cursor-pointer bg-white/90 p-2 rounded-full shadow-lg">
+                                                        <ImageIcon size={20} className="text-secondary" />
+                                                        <input 
+                                                            type="file" 
+                                                            className="hidden"
+                                                            onChange={async (e) => {
+                                                                if (e.target.files?.[0]) {
+                                                                    const url = await api.upload.image(e.target.files[0], 'projects');
+                                                                    const newPlans = [...(formData.floorPlans || [])];
+                                                                    if (typeof newPlans[index] === 'string') {
+                                                                        newPlans[index] = { type: 'New Unit', size: '0 sq.ft.', image: url, details: [] };
+                                                                    } else {
+                                                                        newPlans[index] = { ...newPlans[index], image: url };
+                                                                    }
+                                                                    handleChange('floorPlans', newPlans);
+                                                                }
+                                                            }}
+                                                        />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="flex-1 space-y-4">
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div>
+                                                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 block">Unit Type</label>
+                                                        <input 
+                                                            type="text"
+                                                            className="w-full px-3 py-2 border rounded-lg text-sm"
+                                                            value={typeof plan === 'string' ? 'Legacy Plan' : plan.type}
+                                                            onChange={(e) => {
+                                                                const newPlans = [...(formData.floorPlans || [])];
+                                                                if (typeof newPlans[index] === 'string') {
+                                                                    newPlans[index] = { type: e.target.value, size: '0 sq.ft.', image: plan, details: [] };
+                                                                } else {
+                                                                    newPlans[index] = { ...newPlans[index], type: e.target.value };
+                                                                }
+                                                                handleChange('floorPlans', newPlans);
+                                                            }}
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 block">Carpet Area</label>
+                                                        <input 
+                                                            type="text"
+                                                            className="w-full px-3 py-2 border rounded-lg text-sm"
+                                                            value={typeof plan === 'string' ? 'N/A' : plan.size}
+                                                            onChange={(e) => {
+                                                                const newPlans = [...(formData.floorPlans || [])];
+                                                                if (typeof newPlans[index] === 'string') {
+                                                                    newPlans[index] = { type: 'New Unit', size: e.target.value, image: plan, details: [] };
+                                                                } else {
+                                                                    newPlans[index] = { ...newPlans[index], size: e.target.value };
+                                                                }
+                                                                handleChange('floorPlans', newPlans);
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                
+                                                <div>
+                                                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 block">Specifications / Details (One per line)</label>
+                                                    <textarea 
+                                                        className="w-full px-3 py-2 border rounded-lg text-sm h-20"
+                                                        value={typeof plan === 'string' ? '' : plan.details?.join('\n') || ''}
+                                                        onChange={(e) => {
+                                                            const newPlans = [...(formData.floorPlans || [])];
+                                                            const details = e.target.value.split('\n').filter(Boolean);
+                                                            if (typeof newPlans[index] === 'string') {
+                                                                newPlans[index] = { type: 'New Unit', size: '0 sq.ft.', image: plan, details };
+                                                            } else {
+                                                                newPlans[index] = { ...newPlans[index], details };
+                                                            }
+                                                            handleChange('floorPlans', newPlans);
+                                                        }}
+                                                    />
+                                                </div>
+                                                
+                                                <div className="flex justify-end">
+                                                    <button
+                                                        onClick={() => {
+                                                            const newPlans = formData.floorPlans?.filter((_, i) => i !== index);
+                                                            handleChange('floorPlans', newPlans);
+                                                        }}
+                                                        className="text-red-500 text-xs font-bold uppercase tracking-widest hover:underline flex items-center gap-1"
+                                                    >
+                                                        <Trash2 size={14} /> Remove Plan
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>

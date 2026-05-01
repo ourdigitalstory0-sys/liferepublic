@@ -10,7 +10,16 @@ export interface Project {
     overview?: string;
     amenities?: string[];
     masterLayout?: string;
-    floorPlans?: string[];
+    floorPlans?: {
+        type: string;
+        size: string;
+        image: string;
+        details?: string[];
+    }[];
+    specifications?: {
+        title: string;
+        items: string[];
+    }[];
     status?: string; // Added for DB
     gallery?: (string | { url: string; alt?: string })[]; // Added for DB
     rera?: string; // Added for RERA compliance

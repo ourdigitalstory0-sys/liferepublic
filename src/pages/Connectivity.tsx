@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Train, Milestone, School, ShieldCheck, HeartPulse, Trees } from 'lucide-react';
+import { MapPin, Train, Milestone, School, ShieldCheck, HeartPulse, Trees, Route, Clock, Zap, ArrowRight } from 'lucide-react';
 import { SEO } from '../components/seo/SEO';
 import { SectorComparison } from '../components/sections/SectorComparison';
 
@@ -8,254 +8,148 @@ export const Connectivity: React.FC = () => {
     const [isPeakHour, setIsPeakHour] = React.useState(false);
 
     const landmarks = [
-        { name: "Phase 1 IT Park", distance: "4.5 km", offPeak: "10 mins", peak: "18 mins", type: "Work" },
-        { name: "Phase 2 IT Park", distance: "6.2 km", offPeak: "15 mins", peak: "25 mins", type: "Work" },
-        { name: "Blue Ridge School", distance: "3.8 km", offPeak: "8 mins", peak: "12 mins", type: "Education" },
-        { name: "Pheonix Marketcity (Upcoming)", distance: "5.5 km", offPeak: "12 mins", peak: "20 mins", type: "Retail" },
-        { name: "Mumbai-Pune Expressway", distance: "7.0 km", offPeak: "12 mins", peak: "15 mins", type: "Transit" },
-        { name: "Hinjewadi Metro Station", distance: "2.5 km", offPeak: "5 mins", peak: "8 mins", type: "Transit" }
+        { name: "Phase 1 IT Park", distance: "4.5 km", offPeak: "10 mins", peak: "18 mins", type: "Work", impact: "High" },
+        { name: "Phase 3 IT Cluster", distance: "2.1 km", offPeak: "5 mins", peak: "8 mins", type: "Work", impact: "Direct" },
+        { name: "Blue Ridge School", distance: "3.8 km", offPeak: "8 mins", peak: "12 mins", type: "Education", impact: "Stable" },
+        { name: "Metro Station R1", distance: "1.2 km", offPeak: "3 mins", peak: "5 mins", type: "Transit", impact: "2026 Delta" },
+        { name: "Mumbai-Pune Expressway", distance: "7.0 km", offPeak: "12 mins", peak: "15 mins", type: "Transit", impact: "Gateway" },
+        { name: "Pheonix Mall (Hinjewadi)", distance: "5.5 km", offPeak: "12 mins", peak: "18 mins", type: "Retail", impact: "Lifestyle" }
     ];
 
-    const connectivityData = [
-        {
-            icon: Milestone,
-            title: "150ft Wide Spine Road",
-            description: "The backbone of Life Republic, connecting the township directly to the Mumbai-Pune Expressway and Hinjewadi IT Park.",
-            detail: "Self-sufficient internal road network."
-        },
-        {
-            icon: Train,
-            title: "Pune Metro Line 3",
-            description: "The upcoming Hinjewadi-Shivajinagar Metro Line 3 will have a station just minutes away, ensuring rapid city-wide access.",
-            detail: "Connectivity to 23 metro stations."
-        },
-        {
-            icon: MapPin,
-            title: "Rajiv Gandhi IT Park",
-            description: "Strategically located within minutes of Hinjewadi Phase 1, 2, and 3, reducing commute time to the world's leading IT hubs.",
-            detail: "Walking distance for many sectors."
-        }
-    ];
-
-    const infrastructureData = [
-        {
-            icon: School,
-            title: "Anisha Global School",
-            description: "A world-class educational institution located right within the township, offering premium education for your children.",
-            category: "Education"
-        },
-        {
-            icon: ShieldCheck,
-            title: "Dedicated Fire Station",
-            description: "A fully functional fire station within the township ensures maximum safety and rapid emergency response 24/7.",
-            category: "Safety"
-        },
-        {
-            icon: HeartPulse,
-            title: "Healthcare Proximity",
-            description: "Leading hospitals like Ruby Hall Clinic and Sanjeevani Hospital are within a 15-minute radius of the township.",
-            category: "Healthcare"
-        },
-        {
-            icon: Trees,
-            title: "3.5 Acre Urban Park",
-            description: "One of Pune's largest township parks with 7,700+ trees, promoting a healthy and green living environment.",
-            category: "Environment"
-        }
+    const metroTimeline = [
+        { phase: "2024", milestone: "Pillar & Viaduct Completion", status: "Active" },
+        { phase: "2025", milestone: "Station Architectural Finish", status: "Upcoming" },
+        { phase: "2026", milestone: "Operational Launch: Ph 3 to Shivajinagar", status: "Strategic" }
     ];
 
     return (
         <div className="bg-white">
             <SEO 
-                title="Connectivity & Infrastructure | Kolte Patil Life Republic Township Hinjewadi"
-                description="Explore the world-class connectivity of Kolte Patil Life Republic. 150ft wide spine road, proximity to Hinjewadi Metro Line 3, and integrated township infrastructure."
-                keywords="Life Republic Connectivity, Hinjewadi Metro Line 3, Life Republic Spine Road, Flats near IT Park Hinjewadi, Hinjewadi Infrastructure"
+                title="Connectivity & Metro 2026 Roadmap | Life Republic Hinjewadi"
+                description="Experience the Sovereign Transit advantage. 150ft wide spine road, direct access to Hinjewadi Metro Line 3 (Operational 2026), and 10-minute commute to IT clusters."
+                keywords="Life Republic Metro 2026, Hinjewadi Metro Station, Life Republic Spine Road, Flats near Hinjewadi Phase 3, Pune Metro Line 3"
             />
 
             {/* Hero Section */}
-            <section className="relative py-20 bg-secondary overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/images/gallery/nature-nest.webp')] bg-cover bg-center opacity-20"></div>
-                <div className="container mx-auto px-4 relative z-10 text-center">
-                    <motion.h1 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-6xl font-serif font-bold text-white mb-6"
-                    >
-                        Connected to the Future
-                    </motion.h1>
-                    <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                        Kolte Patil Life Republic Township Hinjewadi is built on a foundation of smart connectivity and world-class infrastructure. Experience seamless travel and modern facilities within a 390+ acre ecosystem.
-                    </p>
+            <section className="relative py-32 bg-secondary overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center opacity-10 grayscale"></div>
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="inline-flex items-center gap-3 px-4 py-2 bg-accent/20 border border-accent/30 rounded-full mb-8"
+                        >
+                            <Route size={14} className="text-accent" />
+                            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Sovereign Transit Protocol</span>
+                        </motion.div>
+                        <h1 className="text-5xl md:text-8xl font-serif font-bold text-white mb-8 leading-tight">
+                            The Spine of <br /> <span className="text-accent italic">Future Mobility.</span>
+                        </h1>
+                        <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-medium">
+                            Life Republic is anchored by the 150ft Spine Road, directly syncing the 390-acre ecosystem with the 2026 Pune Metro network and global IT hubs.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            {/* Landmark Proximity Matrix (Phase 12) */}
-            <section className="py-20 bg-white">
+            {/* Metro 2026 Roadmap */}
+            <section className="py-24 bg-gray-50 overflow-hidden">
                 <div className="container mx-auto px-4">
-                    <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
-                        <div className="max-w-xl">
-                            <h2 className="text-3xl font-serif font-bold text-secondary mb-4">Landmark Proximity Matrix</h2>
-                            <p className="text-gray-600">Real-time travel estimates from the 390-acre township entrance to Hinjewadi's core hubs.</p>
+                    <div className="flex flex-col lg:flex-row gap-16 items-center">
+                        <div className="lg:w-1/2">
+                            <h2 className="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">Metro Line 3 <br /> <span className="text-accent italic">The Value Catalyst.</span></h2>
+                            <div className="space-y-8">
+                                {metroTimeline.map((item, idx) => (
+                                    <div key={idx} className="flex gap-6 relative group">
+                                        {idx !== metroTimeline.length - 1 && (
+                                            <div className="absolute left-[27px] top-12 bottom-0 w-px bg-gray-200 group-hover:bg-accent transition-colors"></div>
+                                        )}
+                                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border transition-all ${item.status === 'Active' ? 'bg-secondary text-white border-secondary' : 'bg-white text-gray-400 border-gray-100'}`}>
+                                            <span className="font-bold text-sm">{item.phase}</span>
+                                        </div>
+                                        <div className="pt-2">
+                                            <h4 className="font-bold text-secondary text-lg mb-1">{item.milestone}</h4>
+                                            <span className={`text-[10px] font-bold uppercase tracking-widest ${item.status === 'Active' ? 'text-green-500' : 'text-accent'}`}>{item.status} Status</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <div className="flex items-center gap-4 bg-gray-50 p-2 rounded-2xl border border-gray-100">
-                            <span className={`text-sm font-bold ${!isPeakHour ? 'text-accent' : 'text-gray-400'}`}>Off-Peak</span>
+                        <div className="lg:w-1/2 bg-secondary p-12 rounded-[3.5rem] text-white shadow-2xl relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-[100px]"></div>
+                            <div className="relative z-10">
+                                <Zap size={48} className="text-accent mb-8 animate-pulse" />
+                                <h3 className="text-3xl font-serif font-bold mb-6">Strategic Proximity Delta</h3>
+                                <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                                    Property values within a 1.5km radius of Metro Stations have historically seen a **25-40% premium**. Life Republic's gate is situated 1.2km from the upcoming Phase 3 station.
+                                </p>
+                                <div className="p-6 bg-white/5 rounded-3xl border border-white/10">
+                                    <div className="flex justify-between items-center mb-4">
+                                        <span className="text-xs font-bold text-gray-400 uppercase">Station Access</span>
+                                        <span className="text-accent font-bold">1.2 KM</span>
+                                    </div>
+                                    <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                        <motion.div initial={{ width: 0 }} whileInView={{ width: "90%" }} className="h-full bg-accent" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Proximity Matrix */}
+            <section className="py-24">
+                <div className="container mx-auto px-4">
+                    <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+                        <div>
+                            <h2 className="text-4xl md:text-6xl font-serif font-bold text-secondary mb-4">The Transit Matrix.</h2>
+                            <p className="text-gray-500 text-xl font-medium">Real-time travel synthesis for the 2026 infrastructure roadmap.</p>
+                        </div>
+                        <div className="flex items-center gap-4 bg-gray-50 p-3 rounded-2xl border border-gray-100 shadow-sm">
+                            <div className="flex items-center gap-2">
+                                <Clock size={16} className={!isPeakHour ? 'text-green-500' : 'text-gray-300'} />
+                                <span className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${!isPeakHour ? 'text-secondary' : 'text-gray-400'}`}>Normal</span>
+                            </div>
                             <button 
                                 onClick={() => setIsPeakHour(!isPeakHour)}
-                                className={`w-14 h-7 rounded-full relative transition-colors ${isPeakHour ? 'bg-orange-500' : 'bg-green-500'}`}
+                                className={`w-12 h-6 rounded-full relative transition-all duration-500 ${isPeakHour ? 'bg-accent' : 'bg-secondary'}`}
                             >
-                                <motion.div 
-                                    animate={{ x: isPeakHour ? 28 : 4 }}
-                                    className="absolute top-1 w-5 h-5 bg-white rounded-full shadow-sm"
-                                />
+                                <motion.div animate={{ x: isPeakHour ? 26 : 4 }} className="absolute top-1 w-4 h-4 bg-white rounded-full shadow-lg" />
                             </button>
-                            <span className={`text-sm font-bold ${isPeakHour ? 'text-orange-500' : 'text-gray-400'}`}>Peak Hour</span>
+                            <div className="flex items-center gap-2">
+                                <span className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${isPeakHour ? 'text-secondary' : 'text-gray-400'}`}>Peak</span>
+                                <Zap size={16} className={isPeakHour ? 'text-accent' : 'text-gray-300'} />
+                            </div>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {landmarks.map((landmark, idx) => (
                             <motion.div 
                                 key={idx}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.05 }}
-                                className="p-6 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-xl transition-all group"
-                            >
-                                <div className="flex justify-between items-start mb-4">
-                                    <span className="text-xs font-bold text-accent uppercase tracking-widest">{landmark.type}</span>
-                                    <span className="text-sm font-bold text-secondary">{landmark.distance}</span>
-                                </div>
-                                <h4 className="text-lg font-bold text-secondary mb-4 group-hover:text-accent transition-colors">{landmark.name}</h4>
-                                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                                    <span className="text-sm text-gray-500">Est. Travel Time</span>
-                                    <span className={`text-lg font-bold ${isPeakHour ? 'text-orange-500' : 'text-green-600'}`}>
-                                        {isPeakHour ? landmark.peak : landmark.offPeak}
-                                    </span>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Strategic Ecosystem Mapping (Phase 13) */}
-            <section className="py-20 bg-gray-50/30">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl font-serif font-bold text-secondary mb-4">Strategic Ecosystem Mapping</h2>
-                        <p className="text-gray-600">Spatial visualization of Life Republic's dominance in the Hinjewadi IT corridor.</p>
-                    </div>
-
-                    <div className="relative max-w-4xl mx-auto aspect-video bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden p-8 flex items-center justify-center">
-                        <svg viewBox="0 0 800 450" className="w-full h-full">
-                            {/* Connection Lines */}
-                            <motion.path 
-                                d="M 400 225 L 150 100" stroke="#C5A059" strokeWidth="1" strokeDasharray="4 4" 
-                                initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
-                            />
-                            <motion.path 
-                                d="M 400 225 L 650 100" stroke="#C5A059" strokeWidth="1" strokeDasharray="4 4"
-                                initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
-                            />
-                            <motion.path 
-                                d="M 400 225 L 150 350" stroke="#C5A059" strokeWidth="1" strokeDasharray="4 4"
-                                initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
-                            />
-                            <motion.path 
-                                d="M 400 225 L 650 350" stroke="#C5A059" strokeWidth="1" strokeDasharray="4 4"
-                                initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
-                            />
-
-                            {/* Center Point - Life Republic */}
-                            <g className="cursor-pointer">
-                                <motion.circle 
-                                    cx="400" cy="225" r="40" fill="#2c3e50" 
-                                    initial={{ scale: 0 }} animate={{ scale: 1 }} 
-                                />
-                                <motion.circle 
-                                    cx="400" cy="225" r="50" stroke="#C5A059" strokeWidth="2" fill="none"
-                                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
-                                    transition={{ duration: 3, repeat: Infinity }}
-                                />
-                                <text x="400" y="275" textAnchor="middle" className="text-[12px] font-bold fill-secondary uppercase tracking-widest">Life Republic</text>
-                            </g>
-
-                            {/* Landmark Points */}
-                            <g>
-                                <circle cx="150" cy="100" r="8" fill="#C5A059" />
-                                <text x="150" y="80" textAnchor="middle" className="text-[10px] font-bold fill-gray-500 uppercase">Phase 1 IT Park (10m)</text>
-                            </g>
-                            <g>
-                                <circle cx="650" cy="100" r="8" fill="#C5A059" />
-                                <text x="650" y="80" textAnchor="middle" className="text-[10px] font-bold fill-gray-500 uppercase">Metro Station (5m)</text>
-                            </g>
-                            <g>
-                                <circle cx="150" cy="350" r="8" fill="#C5A059" />
-                                <text x="150" y="380" textAnchor="middle" className="text-[10px] font-bold fill-gray-500 uppercase">Phase 2 IT Park (15m)</text>
-                            </g>
-                            <g>
-                                <circle cx="650" cy="350" r="8" fill="#C5A059" />
-                                <text x="650" y="380" textAnchor="middle" className="text-[10px] font-bold fill-gray-500 uppercase">Expressway (12m)</text>
-                            </g>
-                        </svg>
-                        
-                        <div className="absolute top-6 right-6 bg-secondary text-white px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-xl">
-                            Interactive Network
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Connectivity Grid */}
-            <section className="py-20 bg-gray-50">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {connectivityData.map((item, index) => (
-                            <motion.div 
-                                key={index}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                                transition={{ delay: idx * 0.05 }}
+                                className="p-10 rounded-[2.5rem] border border-gray-100 bg-white hover:border-accent hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-all group"
                             >
-                                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-accent mb-6">
-                                    <item.icon size={24} />
+                                <div className="flex justify-between items-center mb-8">
+                                    <span className="text-[10px] font-bold text-accent uppercase tracking-[0.3em]">{landmark.type}</span>
+                                    <div className="px-3 py-1 bg-gray-50 rounded-full text-[10px] font-bold text-secondary border border-gray-100">{landmark.impact}</div>
                                 </div>
-                                <h3 className="text-xl font-bold text-secondary mb-4">{item.title}</h3>
-                                <p className="text-gray-600 mb-6 leading-relaxed">{item.description}</p>
-                                <div className="text-sm font-bold text-accent uppercase tracking-wider">{item.detail}</div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Infrastructure Details */}
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-secondary mb-4">Integrated Infrastructure</h2>
-                        <p className="text-gray-600">A township designed for a self-sufficient and sustainable lifestyle.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {infrastructureData.map((item, index) => (
-                            <motion.div 
-                                key={index}
-                                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                className="flex gap-6 p-6 rounded-2xl border border-gray-100 hover:bg-gray-50 transition-colors"
-                            >
-                                <div className="flex-shrink-0 w-14 h-14 bg-secondary/5 rounded-full flex items-center justify-center text-secondary">
-                                    <item.icon size={28} />
-                                </div>
-                                <div>
-                                    <div className="text-xs font-bold text-accent uppercase tracking-widest mb-1">{item.category}</div>
-                                    <h3 className="text-xl font-bold text-secondary mb-2">{item.title}</h3>
-                                    <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                                <h4 className="text-2xl font-serif font-bold text-secondary mb-6 group-hover:text-accent transition-colors">{landmark.name}</h4>
+                                <div className="space-y-4">
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-gray-400 font-medium uppercase tracking-widest text-[10px]">Distance</span>
+                                        <span className="font-bold text-secondary">{landmark.distance}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-gray-400 font-medium uppercase tracking-widest text-[10px]">Est. Time</span>
+                                        <span className={`text-2xl font-serif font-bold ${isPeakHour ? 'text-accent' : 'text-secondary'}`}>
+                                            {isPeakHour ? landmark.peak : landmark.offPeak}
+                                        </span>
+                                    </div>
                                 </div>
                             </motion.div>
                         ))}
@@ -263,21 +157,22 @@ export const Connectivity: React.FC = () => {
                 </div>
             </section>
 
-            {/* Sector Comparison */}
             <SectorComparison />
 
-            {/* CTA Section */}
-            <section className="py-20 bg-primary/20">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-serif font-bold text-secondary mb-6">Experience the Township Lifestyle</h2>
-                    <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-                        Join 12,000+ happy families living in Pune's most celebrated integrated township.
+            {/* CTA */}
+            <section className="py-32 bg-secondary relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.056632375187106176.jpg')] bg-cover bg-center opacity-10"></div>
+                <div className="container mx-auto px-4 relative z-10 text-center">
+                    <h2 className="text-4xl md:text-6xl font-serif font-bold text-white mb-8">Synthesize Your Commute.</h2>
+                    <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-medium">
+                        Experience the frictionless mobility of Pune's most strategically located integrated township.
                     </p>
                     <a 
                         href="/contact" 
-                        className="inline-block bg-secondary text-white px-10 py-4 rounded-full font-bold hover:bg-secondary/90 transition-colors"
+                        className="inline-flex items-center gap-4 bg-white text-secondary px-12 py-6 rounded-full font-bold text-lg hover:bg-accent transition-all hover:scale-105 shadow-2xl"
                     >
-                        Book a Site Visit
+                        Schedule a Sovereign Tour
+                        <ArrowRight size={20} />
                     </a>
                 </div>
             </section>

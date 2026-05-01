@@ -27,11 +27,15 @@
     ],
     "headers": [
         {
-            "source": "/(fonts|images|assets)/(.*)",
+            "source": "/(fonts|images|assets|scripts)/(.*)",
             "headers": [
                 {
                     "key": "Cache-Control",
                     "value": "public, max-age=31536000, immutable"
+                },
+                {
+                    "key": "X-Sovereign-Edge",
+                    "value": "2026-v6.0"
                 }
             ]
         },
@@ -57,6 +61,10 @@
                 {
                     "key": "Permissions-Policy",
                     "value": "camera=(), microphone=(), geolocation=()"
+                },
+                {
+                    "key": "Strict-Transport-Security",
+                    "value": "max-age=63072000; includeSubDomains; preload"
                 }
             ]
         }

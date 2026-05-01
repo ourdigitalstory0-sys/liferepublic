@@ -1,125 +1,141 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, FileText, Globe, Gavel, Landmark, Info } from 'lucide-react';
+import { Shield, FileText, Globe, Gavel, Landmark, Info, Zap, Cpu, Network, ShieldCheck, ArrowUpRight, TrendingUp } from 'lucide-react';
 
 const guidelines = [
     {
-        title: 'RERA Compliance',
-        desc: 'All Life Republic projects are 100% RERA registered, ensuring transparency in carpet area and possession dates.',
-        icon: Shield,
+        title: 'RERA Compliance v6.0',
+        desc: 'All Life Republic sectors are 100% RERA synchronized, ensuring absolute transparency in carpet area and structural benchmarks.',
+        icon: ShieldCheck,
+        color: 'bg-emerald-50 text-emerald-600'
+    },
+    {
+        title: 'Global Capital Flow',
+        desc: 'FEMA-synchronized guidelines for repatriation of sale proceeds via NRE/NRO accounts for zero-latency capital mobility.',
+        icon: Network,
         color: 'bg-blue-50 text-blue-600'
     },
     {
-        title: 'FEMA Regulations',
-        desc: 'Guidelines on repatriation of sale proceeds and investment through NRE/NRO accounts for seamless capital flow.',
-        icon: Globe,
-        color: 'bg-green-50 text-green-600'
-    },
-    {
-        title: 'Taxation & TDS',
-        desc: 'Understanding Section 195 of the Income Tax Act for property acquisitions by non-residents in India.',
+        title: 'TDS & Tax Synthesis',
+        desc: 'Expert synthesis of Section 195 implications for property acquisitions by non-residents in the Hinjewadi corridor.',
         icon: Landmark,
         color: 'bg-amber-50 text-amber-600'
     },
     {
-        title: 'Power of Attorney',
-        desc: 'Simplified procedures for executing PoA for NRI home buyers who cannot be physically present for registration.',
+        title: 'Digital Authority (PoA)',
+        desc: 'Simplified remote registration protocols for global investors. Secure your asset without physical presence.',
         icon: Gavel,
-        color: 'bg-purple-50 text-purple-600'
+        color: 'bg-indigo-50 text-indigo-600'
     }
 ];
 
 export const NRIInvestorHub: React.FC = () => {
     return (
-        <section className="py-24 bg-white overflow-hidden">
-            <div className="container mx-auto px-4">
-                <div className="flex flex-col lg:flex-row gap-16 items-center">
+        <section className="py-40 bg-white overflow-hidden relative">
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-100 to-transparent"></div>
+            
+            <div className="container mx-auto px-4 relative z-10">
+                <div className="flex flex-col lg:flex-row gap-24 items-center">
                     <div className="lg:w-1/2">
-                        <motion.span 
-                            initial={{ opacity: 0, x: -20 }}
+                        <motion.div 
+                            initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            className="text-accent font-bold tracking-widest uppercase text-xs block mb-4"
+                            className="inline-flex items-center gap-4 px-6 py-3 bg-secondary text-white rounded-full mb-10 shadow-xl"
                         >
-                            Global Investment Authority
-                        </motion.span>
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-8 leading-tight">
-                            NRI Legal & Tax <br /> Intelligence Hub
+                            <Globe size={16} className="text-accent animate-pulse" />
+                            <span className="text-[10px] font-bold uppercase tracking-[0.6em]">Global Investment Authority v6.0</span>
+                        </motion.div>
+                        <h2 className="text-6xl md:text-[9rem] font-serif font-bold text-secondary mb-12 tracking-tighter leading-[0.8]">
+                            NRI Legal & <br /><span className="text-accent italic">Tax Synthesis.</span>
                         </h2>
-                        <p className="text-gray-600 text-lg mb-12 max-w-xl leading-relaxed">
-                            Investing in Indian real estate from abroad requires technical precision. Our dedicated NRI cell provides the legal and financial clarity needed for a secure investment at Life Republic.
+                        <p className="text-2xl text-gray-400 font-medium leading-relaxed mb-16 max-w-2xl">
+                            Investing in Indian real estate from abroad requires architectural precision. Our dedicated NRI cell provides the legal and financial clarity needed for secure capital placement at Life Republic.
                         </p>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {guidelines.map((item, idx) => (
                                 <motion.div
                                     key={idx}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ delay: idx * 0.1 }}
-                                    className="p-6 rounded-3xl border border-gray-100 hover:border-accent hover:shadow-xl transition-all group"
+                                    className="p-10 rounded-[3.5rem] border border-gray-100 hover:border-accent hover:bg-gray-50/50 transition-all group relative overflow-hidden"
                                 >
-                                    <div className={`w-12 h-12 ${item.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                                        <item.icon size={24} />
+                                    <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-125 transition-transform">
+                                        <item.icon size={60} />
                                     </div>
-                                    <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
-                                    <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                                    <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center mb-8 group-hover:rotate-12 transition-transform shadow-sm`}>
+                                        <item.icon size={32} strokeWidth={1.5} />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-secondary mb-3 tracking-tight">{item.title}</h3>
+                                    <p className="text-base text-gray-500 font-medium leading-relaxed italic">"{item.desc}"</p>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
                     
-                    <div className="lg:w-1/2 relative">
-                        <div className="bg-gray-900 rounded-[40px] p-8 md:p-12 text-white relative z-10 overflow-hidden shadow-2xl">
-                            {/* Decorative elements */}
-                            <div className="absolute -top-24 -right-24 w-64 h-64 bg-accent/20 rounded-full blur-[80px]"></div>
-                            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-500/20 rounded-full blur-[80px]"></div>
+                    <div className="lg:w-1/2 relative group">
+                        <motion.div 
+                            initial={{ scale: 0.95, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            className="bg-secondary rounded-[5rem] p-16 md:p-24 text-white relative z-10 overflow-hidden shadow-[0_100px_200px_-50px_rgba(0,0,0,0.6)] border border-white/5"
+                        >
+                            <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8818362083715893.avif')] bg-cover bg-center opacity-5 grayscale pointer-events-none group-hover:scale-110 transition-transform duration-[3s]"></div>
+                            <div className="absolute -top-32 -right-32 w-80 h-80 bg-accent/20 rounded-full blur-[100px]"></div>
                             
-                            <div className="flex items-center gap-3 mb-8">
-                                <div className="w-10 h-10 bg-accent text-secondary rounded-full flex items-center justify-center">
-                                    <FileText size={20} />
+                            <div className="flex items-center gap-6 mb-12">
+                                <div className="w-16 h-16 bg-accent text-secondary rounded-[2rem] flex items-center justify-center shadow-2xl">
+                                    <FileText size={32} />
                                 </div>
-                                <span className="font-bold tracking-tighter uppercase text-sm">Downloadable Guides</span>
+                                <span className="font-bold tracking-[0.5em] uppercase text-[11px] text-accent">Sovereign Knowledge Base</span>
                             </div>
                             
-                            <h3 className="text-3xl font-bold mb-6">Technical Resources</h3>
-                            <div className="space-y-4">
+                            <h3 className="text-4xl md:text-5xl font-serif font-bold mb-10 tracking-tighter">Technical Resources</h3>
+                            <div className="space-y-6">
                                 {[
-                                    'NRI Quick Investing Guide 2026',
-                                    'Repatriation Policy Overview',
-                                    'Life Republic RERA Certificates',
-                                    'Hinjewadi Infrastructure ROI Report'
+                                    'NRI Quick Investment Monograph 2026',
+                                    'Repatriation Policy Structural Overview',
+                                    'Life Republic RERA Master Registry',
+                                    'Hinjewadi Infrastructure ROI Synthesis'
                                 ].map((doc, i) => (
                                     <button 
                                         key={i}
-                                        className="w-full flex items-center justify-between p-5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all group text-left"
+                                        className="w-full flex items-center justify-between p-8 rounded-[2.5rem] bg-white/5 hover:bg-white/10 border border-white/10 transition-all group/btn text-left"
                                     >
-                                        <span className="text-sm font-medium">{doc}</span>
-                                        <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-accent group-hover:text-secondary transition-all">
-                                            <Info size={16} />
+                                        <span className="text-lg font-bold group-hover/btn:text-accent transition-colors">{doc}</span>
+                                        <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center group-hover/btn:bg-accent group-hover/btn:text-secondary transition-all shadow-xl">
+                                            <ArrowUpRight size={24} />
                                         </div>
                                     </button>
                                 ))}
                             </div>
                             
-                            <div className="mt-12 flex items-center gap-4 p-6 bg-accent/10 border border-accent/20 rounded-2xl">
-                                <div className="p-3 bg-accent/20 rounded-xl text-accent">
-                                    <Globe size={24} />
+                            <div className="mt-16 flex items-center gap-8 p-10 bg-accent/10 border border-accent/20 rounded-[3rem] relative z-10">
+                                <div className="p-5 bg-accent/20 rounded-2xl text-accent animate-pulse">
+                                    <Cpu size={36} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold uppercase tracking-wider text-accent mb-1">Expert Cell</p>
-                                    <p className="text-sm text-gray-400">Speak to our dedicated NRI Investment Consultant.</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-accent mb-2">Expert Concierge Cell</p>
+                                    <p className="text-lg text-white/60 font-medium">Speak to our dedicated Sovereign Global Investment Consultant.</p>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                         
-                        {/* Decorative floating stats */}
+                        {/* Decorative floating stats v6.0 */}
                         <motion.div 
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            className="absolute -bottom-6 -right-6 md:-right-12 bg-white p-6 rounded-3xl shadow-2xl z-20 border border-gray-50"
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            className="absolute -bottom-12 -right-12 bg-white p-12 rounded-[4rem] shadow-[0_60px_120px_-30px_rgba(0,0,0,0.3)] z-20 border border-gray-100 group/stat hover:scale-105 transition-transform"
                         >
-                            <div className="text-3xl font-bold text-gray-900 mb-1">1,800+</div>
-                            <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Global NRIs Invested</div>
+                            <div className="flex items-center gap-4 mb-3">
+                                <div className="w-2 h-2 rounded-full bg-accent animate-ping"></div>
+                                <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Global Synthesis</span>
+                            </div>
+                            <div className="text-6xl font-serif font-bold text-secondary mb-2 tracking-tighter italic">1,850+</div>
+                            <div className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.5em]">Global NRI Families</div>
+                            <div className="flex items-center gap-2 mt-6 text-emerald-500 font-bold text-[10px] uppercase tracking-widest">
+                                <TrendingUp size={14} /> +12% Growth YOY
+                            </div>
                         </motion.div>
                     </div>
                 </div>

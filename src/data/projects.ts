@@ -38,8 +38,16 @@ export const projects: Project[] = [
         progress: 10,
         overview: 'Qrious at Kolte Patil Life Republic Township Hinjewadi is an ode to the inquisitive generation seeking smart 2 & 3 BHK homes in Sector R1.',
         amenities: ['Smart Home Automations', 'Co-working Space', 'Fitness Center', 'Rooftop Lounge', 'Library', 'Indoor Games'],
-        masterLayout: '/images/gallery/qrious/master-layout.webp',
-        floorPlans: ['/images/gallery/qrious/2bhk-plan.webp', '/images/gallery/qrious/3bhk-plan.webp'],
+        masterLayout: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/life_republic_master_layout_demo_1777650635876.png',
+        floorPlans: [
+            { type: '2 BHK Smart', size: '750 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Planet App Integration', 'Voice Controlled Lighting', 'Smart Lock Entry'] },
+            { type: '3 BHK Smart', size: '1050 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Automated Climate Control', 'Smart Kitchen Hub', 'Neural Security Sync'] }
+        ],
+        specifications: [
+            { title: 'Smart Synthesis', items: ['Planet App Integration', 'Voice-controlled mood lighting', 'Automated curtains & climate sync'] },
+            { title: 'Tectonic Flooring', items: ['Vitrified tiles (800x800) in living & dining', 'Anti-skid ceramic tiles in balconies'] },
+            { title: 'Infrastructure', items: ['Concealed copper wiring with modular switches', 'Fiber-to-the-home (FTTH) ready'] }
+        ],
         themeColor: '#3498db',
         faqs: [
             { question: "What are Qrious Smart Homes in Life Republic?", answer: "Qrious at Life Republic offers tech-enabled 2 & 3 BHK smart homes with Planet App integration." },
@@ -58,8 +66,16 @@ export const projects: Project[] = [
         progress: 45,
         overview: 'Canvas at Kolte Patil Life Republic Township Hinjewadi represents the pinnacle of luxury with expansive 3 & 4 BHK residences in Sector R3.',
         amenities: ['Infinity Pool', 'Spa & Sauna', 'Private Theatre', 'Banquet Hall', 'Tennis Court', 'Landscaped Gardens'],
-        masterLayout: '/images/gallery/canvas/master-layout.webp',
-        floorPlans: ['/images/gallery/canvas/3bhk-plan.webp', '/images/gallery/canvas/4bhk-plan.webp'],
+        masterLayout: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/life_republic_master_layout_demo_1777650635876.png',
+        floorPlans: [
+            { type: '3 BHK Luxury', size: '1650 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Walk-in Wardrobe', 'Modular Kitchen', 'Expansive Deck'] },
+            { type: '4 BHK Presidential', size: '2250 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Servant Room Included', 'Private Foyer', 'Panoramic Views'] }
+        ],
+        specifications: [
+            { title: 'Interior Finishes', items: ['Italian marble flooring in living & dining', 'Wooden flooring in master bedroom', 'Lustre paint finish on internal walls'] },
+            { title: 'Gourmet Kitchen', items: ['Fully equipped modular kitchen', 'Hob and Chimney included', 'Granite platform with double bowl sink'] },
+            { title: 'Wellness Bath', items: ['Premium sanitary ware (Kohler/Toto)', 'Glass partitions in all bathrooms', 'Rain shower in master bath'] }
+        ],
         themeColor: '#9b59b6',
         faqs: [
             { question: "What is the price of 4 BHK in Kolte Patil Life Republic Canvas?", answer: "Canvas offers expansive 3 & 4 BHK luxury residences starting from ₹1.68 Cr*." },
@@ -78,8 +94,16 @@ export const projects: Project[] = [
         progress: 30,
         overview: 'Atmos at Kolte Patil Life Republic Township Hinjewadi brings you closer to nature with modern apartments in the premium Sector R22.',
         amenities: ['Yoga Deck', 'Open Air Gym', 'Meditation Zone', 'Cycling Track', 'Amphitheatre', 'Organic Garden'],
-        masterLayout: '/images/gallery/atmos/master-layout.webp',
-        floorPlans: ['/images/gallery/atmos/2bhk-plan.webp', '/images/gallery/atmos/3bhk-plan.webp'],
+        masterLayout: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/life_republic_master_layout_demo_1777650635876.png',
+        floorPlans: [
+            { type: '2 BHK Modern', size: '785 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Efficient Cross Ventilation', 'Utility Balcony', 'Optimized Floor Space'] },
+            { type: '3 BHK Modern', size: '1080 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Three-side Open View', 'Dedicated Study Space', 'L-shaped Living & Dining'] }
+        ],
+        specifications: [
+            { title: 'Structural Integrity', items: ['Earthquake resistant RCC structure', 'Aluform shuttering for superior finish'] },
+            { title: 'Atmospheric Flow', items: ['Large windows for maximum natural light', 'High ceilings (9.5 ft clear height)'] },
+            { title: 'Electrification', items: ['Provision for AC in all bedrooms', '100% DG backup for common areas'] }
+        ],
         themeColor: '#2ecc71',
         faqs: [
             { question: "What are the key features of Kolte Patil Life Republic Atmos?", answer: "Life Republic Atmos features maximum open spaces, ventilation, and direct connectivity to the spine road." },
@@ -98,8 +122,15 @@ export const projects: Project[] = [
         progress: 55,
         overview: 'Aros at Kolte Patil Life Republic Township Hinjewadi is built for community living with a massive central greenspace in Sector R13.',
         amenities: ['Community Hall', 'Sports Complex', 'Pet Park', 'Senior Citizen Zone', 'BBQ Area', 'Swimming Pool'],
-        masterLayout: '/images/gallery/aros/master-layout.webp',
-        floorPlans: ['/images/gallery/aros/2bhk-plan.webp', '/images/gallery/aros/3bhk-plan.webp'],
+        masterLayout: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/life_republic_master_layout_demo_1777650635876.png',
+        floorPlans: [
+            { type: '2 BHK Premium', size: '825 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Community Park View', 'Modern Kitchen Layout', 'Spacious Balcony'] },
+            { type: '3 BHK Premium', size: '1120 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Corner Unit Privacy', 'Three Balconies', 'Master Suite with Walk-in'] }
+        ],
+        specifications: [
+            { title: 'Community Comfort', items: ['Branded vitrified tiles in all rooms', 'Premium emulsion paint on all internal walls'] },
+            { title: 'Safety Synthesis', items: ['Video door phone in every apartment', 'Firefighting system in common areas'] }
+        ],
         themeColor: '#e67e22',
         faqs: [
             { question: "What kind of lifestyle does Aros Life Republic offer?", answer: "Aros focuses on community-centric living with social amenities and large open spaces." },
@@ -118,8 +149,16 @@ export const projects: Project[] = [
         progress: 60,
         overview: '24K Espada at Kolte Patil Life Republic Township Hinjewadi redefines opulence with limited-edition row houses in Sector R9.',
         amenities: ['Private Clubhouse', 'Concierge Service', 'Heated Pool', 'Golf Simulator', 'Fine Dining', 'Wellness Centre'],
-        masterLayout: '/images/gallery/24k-espada/master-layout.webp',
-        floorPlans: ['/images/gallery/24k-espada/4bhk-plan.webp', '/images/gallery/24k-espada/5bhk-plan.webp'],
+        masterLayout: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/life_republic_master_layout_demo_1777650635876.png',
+        floorPlans: [
+            { type: '4 Bed Row House', size: '2850 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Private Terrace', 'Internal Elevator', 'Double Height Living'] },
+            { type: '5 Bed Row House', size: '3450 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Home Theatre Room', 'Infinity Edge Balcony', '4 Car Parking'] }
+        ],
+        specifications: [
+            { title: 'Signature Finishes', items: ['Imported Statuario marble in living areas', 'Engineered wooden flooring in all suites', 'Customized false ceiling with cove lighting'] },
+            { title: 'Vertical Transit', items: ['Private hydraulic glass elevator', 'Teak wood staircase with designer railings'] },
+            { title: 'Home Automation', items: ['Full home automation (Lighting, AC, Security)', 'Smart video door phone with cloud sync'] }
+        ],
         themeColor: '#2c3e50'
     },
     {
@@ -134,8 +173,14 @@ export const projects: Project[] = [
         progress: 80,
         overview: 'Sound of Soul at Kolte Patil Life Republic Township Hinjewadi is a peaceful sanctuary offering luxury row houses in Sector R2.',
         amenities: ['Meditation Hall', 'Reflexology Path', 'Nature Trails', 'Acoustic Lounge', 'Library', 'Spa'],
-        masterLayout: '/images/gallery/sound-of-soul/master-layout.webp',
-        floorPlans: ['/images/gallery/sound-of-soul/4bhk-plan.webp'],
+        masterLayout: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/life_republic_master_layout_demo_1777650635876.png',
+        floorPlans: [
+            { type: '4 BHK Serenity', size: '2650 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Private Zen Garden', 'Yoga Balcony', 'Sky-lit Master Bath'] }
+        ],
+        specifications: [
+            { title: 'Tranquil Interiors', items: ['Anti-skid premium flooring in outdoor zones', 'Textured paint finishes for acoustic dampening', 'Large glass facades for nature integration'] },
+            { title: 'Eco Synthesis', items: ['Solar water heating system', 'Rainwater harvesting integration', 'Energy-efficient LED fixtures'] }
+        ],
         themeColor: '#16a085'
     },
     {
@@ -150,8 +195,13 @@ export const projects: Project[] = [
         progress: 90,
         overview: 'Arezo at Kolte Patil Life Republic Township Hinjewadi offers smart urban living with efficient space usage in Sector R1.',
         amenities: ['Gymnasium', 'Kids Play Area', 'Party Lawn', 'Walking Track', 'CCTV Surveillance', 'Power Backup'],
-        masterLayout: '/images/gallery/arezo/master-layout.webp',
-        floorPlans: ['/images/gallery/arezo/2bhk-plan.webp'],
+        masterLayout: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/life_republic_master_layout_demo_1777650635876.png',
+        floorPlans: [
+            { type: '2 BHK Efficient', size: '725 sq.ft.', image: '/Users/vikasyewle/.gemini/antigravity/brain/e9fb5a06-7d52-42c9-9dbe-372b343e206c/atmos_floor_plan_demo_1777650455440.png', details: ['Smart Space Optimization', 'Compact Modern Kitchen'] }
+        ],
+        specifications: [
+            { title: 'Efficient Engineering', items: ['Optimized room dimensions', 'Concealed plumbing and electricals'] }
+        ],
         themeColor: '#e74c3c'
     },
     {

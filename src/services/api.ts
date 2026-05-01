@@ -253,7 +253,13 @@ export const api = {
                 user_journey: JSON.parse(localStorage.getItem('lr_recently_viewed') || '[]').join(' -> ')
             };
 
-            let score = 0;
+            const personalHistory = typeof window !== 'undefined' 
+                ? JSON.parse(localStorage.getItem('lr_user_history') || '{}')
+                : {};
+            
+            const sessionIntentScore = personalHistory.intentScore || 0;
+
+            let score = sessionIntentScore;
             const message = (lead.message || '').toLowerCase();
             const recentlyViewed = JSON.parse(localStorage.getItem('lr_recently_viewed') || '[]');
             

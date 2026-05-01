@@ -2,9 +2,10 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, ArrowRight } from 'lucide-react';
+import { ChevronDown, ArrowRight, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/Button';
+import { personalizationStore } from '../../lib/personalizationStore';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
@@ -128,6 +129,19 @@ export const HeroSlider: React.FC = () => {
                                         >
                                             Explore Projects <ArrowRight size={20} />
                                         </Button>
+
+                                        {/* Intelligence Nudge */}
+                                        {personalizationStore.getHistory().searchQueries.length > 0 && (
+                                            <motion.button
+                                                initial={{ opacity: 0, x: 20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                onClick={() => window.dispatchEvent(new CustomEvent('open-neural-search'))}
+                                                className="flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-sm font-bold hover:bg-white hover:text-secondary transition-all group"
+                                            >
+                                                <Sparkles size={16} className="text-accent" />
+                                                Resume Search: "{personalizationStore.getHistory().searchQueries[0]}"
+                                            </motion.button>
+                                        )}
                                     </motion.div>
                                 </div>
                             </div>

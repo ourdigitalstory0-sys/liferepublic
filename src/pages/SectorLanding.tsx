@@ -187,6 +187,34 @@ export const SectorLanding: React.FC = () => {
                 </div>
             </section>
 
+            {/* Micro-Amenities Intelligence Layer */}
+            <section className="py-24 bg-secondary text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-[120px] -mr-48 -mt-48"></div>
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="max-w-2xl mb-16">
+                        <span className="text-accent text-xs font-bold uppercase tracking-[0.3em] block mb-4">Hyper-Local Radius</span>
+                        <h2 className="text-4xl font-serif font-bold mb-6">Localized Intelligence Hub</h2>
+                        <p className="text-gray-400">Deep-dive into the specific advantages of living in <strong>{data.name}</strong>. From walking distances to school gates to internal shuttle frequency.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {[
+                            { label: 'Education', val: 'Anisha Global', sub: '3-7 Mins Walk', icon: '🏫' },
+                            { label: 'Daily Needs', val: 'Retail Spine', sub: 'Walking Distance', icon: '🛒' },
+                            { label: 'Greenery', val: 'Urban Park', sub: 'Central Access', icon: '🌳' },
+                            { label: 'Security', val: 'Fire Station', sub: 'Township Internal', icon: '🛡️' }
+                        ].map((item, idx) => (
+                            <div key={idx} className="p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all group">
+                                <div className="text-3xl mb-6 grayscale group-hover:grayscale-0 transition-all">{item.icon}</div>
+                                <p className="text-accent text-[10px] font-bold uppercase tracking-widest mb-1">{item.label}</p>
+                                <h4 className="text-xl font-bold mb-1">{item.val}</h4>
+                                <p className="text-xs text-gray-500 font-medium">{item.sub}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* Recommendations */}
             <section className="py-24 bg-gray-50">
                 <div className="container mx-auto px-4">

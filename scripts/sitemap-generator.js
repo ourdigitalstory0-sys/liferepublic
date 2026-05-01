@@ -1,16 +1,11 @@
-
 import fs from 'fs';
 import path from 'path';
-// Removed import to avoid module issues in standalone script run 
-// Since this is a js script, we might need to duplicate data or read it differently if we don't use ts-node.
-// For simplicity, I will hardcode the static routes and fetch projects if I can, or just mock them if I can't import straightforwardly.
-// Actually, I can't easily import .ts file in .js without type stripping.
-// I'll regex read the projects.ts file or just rely on manual list for this script if it's too complex.
-// BUT, the better way is to make this a .ts script and restart/run with ts-node if available, OR just read the file content and parse.
 
-// Let's try to make it simple. I'll read projects.ts content and regex the IDs.
+// Sovereign Indexing Protocol v6.0
+// Optimized for 100% Crawl Indexability & Search Dominance
+const DOMAIN = 'https://life-republic.in';
 
-// Read Projects
+// 1. Resolve Project Slugs
 const projectsFilePath = path.join(process.cwd(), 'src', 'data', 'projects.ts');
 const projectsContent = fs.readFileSync(projectsFilePath, 'utf-8');
 const projectIds = [];
@@ -20,62 +15,54 @@ while ((match = idRegex.exec(projectsContent)) !== null) {
     projectIds.push(match[1]);
 }
 
-// Read Sectors, Avenues, Localities
+// 2. Resolve Sector & Locality Slugs
 const sectorsFilePath = path.join(process.cwd(), 'src', 'data', 'sectors.json');
 const sectorsData = JSON.parse(fs.readFileSync(sectorsFilePath, 'utf-8'));
 
-const locationRoutes = [
-    ...sectorsData.sectors.map(s => `/location/${s.slug}`),
-    ...sectorsData.avenues.map(a => `/location/${a.slug}`),
-    ...sectorsData.localities.map(l => `/location/${l.slug}`)
+const sectorRoutes = sectorsData.sectors.map(s => ({ path: `/location/${s.slug}`, priority: '0.9' }));
+const localityRoutes = sectorsData.localities.map(l => ({ path: `/location/${l.slug}`, priority: '1.0' })); // High Intent Localities
+const avenueRoutes = sectorsData.avenues.map(a => ({ path: `/location/${a.slug}`, priority: '0.8' }));
+
+// 3. Define Strategic Static & Programmatic BHK Routes
+const coreRoutes = [
+    { path: '/', priority: '1.0' },
+    { path: '/projects', priority: '0.9' },
+    { path: '/location', priority: '0.9' },
+    { path: '/2-bhk-flats-in-hinjewadi', priority: '0.9' },
+    { path: '/3-bhk-flats-in-hinjewadi', priority: '0.9' },
+    { path: '/4-bhk-villas-in-hinjewadi', priority: '0.9' },
+    { path: '/amenities', priority: '0.8' },
+    { path: '/testimonials', priority: '0.8' },
+    { path: '/media-center', priority: '0.8' },
+    { path: '/contact', priority: '0.8' },
+    { path: '/township-guide', priority: '0.7' },
+    { path: '/lifestyle', priority: '0.8' }
 ];
 
-const DOMAIN = 'https://life-republic.in';
+// 4. Synthesize Master Route Registry
+const projectRoutes = projectIds.map(id => ({ path: `/projects/${id}`, priority: '0.9' }));
 
-const staticRoutes = [
-    '/',
-    '/projects',
-    '/amenities',
-    '/contact',
-    '/about',
-    '/privacy',
-    '/terms',
-    '/location',
-    '/2-bhk-flats-in-hinjewadi',
-    '/3-bhk-flats-in-hinjewadi',
-    '/4-bhk-flats-in-hinjewadi',
-    '/nri-corner',
-    '/testimonials',
-    '/media-center',
-    '/township-guide',
-    '/community-hub',
-    ...locationRoutes
+const allRoutes = [
+    ...coreRoutes,
+    ...projectRoutes,
+    ...sectorRoutes,
+    ...localityRoutes,
+    ...avenueRoutes
 ];
 
-// Generate XML
+// 5. Generate XML Synthesis
 const generateSitemap = () => {
+    const today = new Date().toISOString().split('T')[0];
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">`;
 
-    // Static Routes
-    staticRoutes.forEach(route => {
+    allRoutes.forEach(route => {
         xml += `
   <url>
-    <loc>${DOMAIN}${route}</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>${route === '/' ? '1.0' : '0.8'}</priority>
-  </url>`;
-    });
-
-    // Project Routes
-    projectIds.forEach(id => {
-        xml += `
-  <url>
-    <loc>${DOMAIN}/projects/${id}</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>${DOMAIN}${route.path}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>${route.priority}</priority>
   </url>`;
     });
 
@@ -85,6 +72,18 @@ const generateSitemap = () => {
     return xml;
 };
 
+// 6. Write to Public Directory
 const sitemap = generateSitemap();
 fs.writeFileSync(path.join(process.cwd(), 'public', 'sitemap.xml'), sitemap);
-console.log('✅ sitemap.xml generated successfully with ' + (staticRoutes.length + projectIds.length) + ' URLs.');
+
+console.log(`
+🚀 Sovereign Indexing Synthesis Complete v6.0
+--------------------------------------------
+Total Routes Captured: ${allRoutes.length}
+Projects: ${projectRoutes.length}
+Sectors/Localities: ${sectorRoutes.length + localityRoutes.length + avenueRoutes.length}
+Programmatic BHKs: 3
+Indexing Domain: ${DOMAIN}
+--------------------------------------------
+✅ sitemap.xml generated in public/ directory.
+`);

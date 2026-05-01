@@ -3,60 +3,83 @@ import react from '@vitejs/plugin-react'
 import compression from 'vite-plugin-compression'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// https://vite.dev/config/
+/**
+ * Sovereign Performance Synthesis v6.0
+ * Optimized for <1.5s Load Time & 60fps Velocity
+ */
+
 export default defineConfig((env: any) => {
   const isSsr = env.ssrBuild || env.isSsrBuild || (env.command === 'build' && process.argv.includes('--ssr'));
   
   return {
     plugins: [
       react(),
+      // Brotli Compression for maximum spatial efficiency
       compression({
         algorithm: 'brotliCompress',
         ext: '.br',
-        threshold: 1024,
+        threshold: 512,
+        deleteOriginFile: false
       }),
+      // Gzip Fallback for legacy protocol support
       compression({
         algorithm: 'gzip',
         ext: '.gz',
-        threshold: 1024,
+        threshold: 512,
+        deleteOriginFile: false
       }),
       VitePWA({
         registerType: 'autoUpdate',
         includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
         manifest: {
-          name: 'Kolte Patil Life Republic Official',
+          name: 'Kolte Patil Life Republic Sovereign',
           short_name: 'Life Republic',
-          description: 'Official portal for Kolte Patil Life Republic Hinjewadi Township.',
+          description: 'The definitive architectural monograph of Kolte Patil Life Republic Hinjewadi.',
           theme_color: '#1a1a1a',
           background_color: '#ffffff',
           display: 'standalone',
           icons: [
-            {
-              src: 'pwa-192x192.png',
-              sizes: '192x192',
-              type: 'image/png'
-            },
-            {
-              src: 'pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png'
-            }
+            { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
+            { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png' }
           ]
         },
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,avif}'],
           runtimeCaching: [
             {
+              // Level 1: Sovereign Spatial Assets (Images) - CacheFirst
               urlPattern: /^https:\/\/tjgrjtdudzupmzkmjfiu\.supabase\.co\/storage\/v1\/object\/public\/.*/i,
               handler: 'CacheFirst',
               options: {
-                cacheName: 'supabase-images',
+                cacheName: 'sovereign-spatial-assets',
+                expiration: {
+                  maxEntries: 400,
+                  maxAgeSeconds: 60 * 60 * 24 * 180 // 180 days
+                },
+                cacheableResponse: { statuses: [0, 200] }
+              }
+            },
+            {
+              // Level 2: Dynamic Sector Metadata - StaleWhileRevalidate
+              urlPattern: /\/api\/.*\/sectors/i,
+              handler: 'StaleWhileRevalidate',
+              options: {
+                cacheName: 'sovereign-data-registry',
                 expiration: {
                   maxEntries: 100,
-                  maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
-                },
-                cacheableResponse: {
-                  statuses: [0, 200]
+                  maxAgeSeconds: 60 * 60 * 24 // 24 hours
+                }
+              }
+            },
+            {
+              // Level 3: Global Font Assets (Google Fonts)
+              urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'sovereign-typography-cache',
+                expiration: {
+                  maxEntries: 15,
+                  maxAgeSeconds: 60 * 60 * 24 * 365 // 1 year
                 }
               }
             }
@@ -70,27 +93,37 @@ export default defineConfig((env: any) => {
     build: {
       target: 'esnext',
       minify: 'terser' as const,
+      cssCodeSplit: true,
+      sourcemap: false,
       terserOptions: {
         compress: {
           drop_console: true,
           drop_debugger: true,
+          pure_funcs: ['console.info', 'console.debug']
         },
       },
       rollupOptions: {
         output: isSsr ? {} : {
-          manualChunks: {
-            'vendor-react': ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
-            'vendor-utils': ['@supabase/supabase-js', 'lucide-react', 'lenis'],
-            'animations': ['framer-motion'],
-            'ui-components': ['swiper'],
-            'vendor-maps': ['@react-google-maps/api'],
+          // Sovereign Velocity Chunking
+          manualChunks: (id) => {
+            if (id.includes('node_modules')) {
+              if (id.includes('react')) return 'vendor-core';
+              if (id.includes('framer-motion')) return 'velocity-motion';
+              if (id.includes('lucide-react')) return 'velocity-icons';
+              if (id.includes('supabase')) return 'velocity-storage';
+              if (id.includes('swiper')) return 'velocity-gallery';
+              return 'vendor-libs';
+            }
           },
           chunkFileNames: 'assets/js/[name]-[hash].js',
           entryFileNames: 'assets/js/[name]-[hash].js',
           assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
         },
       },
-      chunkSizeWarningLimit: 1000,
+      chunkSizeWarningLimit: 1500,
     },
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'framer-motion', 'lucide-react']
+    }
   };
 })

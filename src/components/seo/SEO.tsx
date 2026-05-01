@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { generateGlobalSchema, generateSiteNavigationSchema, generateBreadcrumbSchema } from '../../utils/schemaGenerator';
+import { generateCanonicalURL } from '../../lib/seo-utils';
 
 interface SEOProps {
     title?: string;
@@ -45,7 +46,8 @@ export const SEO: React.FC<SEOProps> = ({
     const metaDescription = description || defaultDescription;
 
     const location = useLocation();
-    const currentPath = location.pathname;
+    const currentPath = location.pathname + location.search;
+    const fullCanonical = generateCanonicalURL(canonical || currentPath);
     
     // Configuration-intelligent Keyword Injection
     const getPathSpecificKeywords = (path: string) => {
@@ -64,22 +66,22 @@ export const SEO: React.FC<SEOProps> = ({
         return "";
     };
 
-    const pathKeywords = getPathSpecificKeywords(currentPath);
+    const pathKeywords = getPathSpecificKeywords(location.pathname);
     const baseKeywords = "Kolte Patil Life Republic, Life Republic Hinjewadi, Pune integrated township, buy flat in hinjewadi, luxury villas pune, rera projects hinjewadi";
     
     const metaKeywords = keywords 
         ? `${keywords}${pathKeywords ? `, ${pathKeywords}` : ''}` 
         : `${baseKeywords}${pathKeywords ? `, ${pathKeywords}` : ''}`;
 
-    const globalSchema = generateGlobalSchema(currentPath);
+    const globalSchema = generateGlobalSchema(location.pathname);
     const navSchema = generateSiteNavigationSchema();
     
     // Auto-generate Breadcrumb schema if items are provided
     const breadcrumbSchema = breadcrumbItems 
         ? generateBreadcrumbSchema(breadcrumbItems)
-        : currentPath !== '/' 
+        : location.pathname !== '/' 
             ? generateBreadcrumbSchema(
-                currentPath.split('/')
+                location.pathname.split('/')
                     .filter(Boolean)
                     .reduce((acc, curr, idx, arr) => {
                         const path = '/' + arr.slice(0, idx + 1).join('/');
@@ -98,10 +100,6 @@ export const SEO: React.FC<SEOProps> = ({
         if (Array.isArray(schema)) allSchemas.push(...schema);
         else allSchemas.push(schema);
     }
-
-    const fullCanonical = canonical
-        ? `${DOMAIN}${canonical.startsWith('/') ? '' : '/'}${canonical}`
-        : DOMAIN + (currentPath === '/' ? '' : currentPath);
 
     return (
         <Helmet>

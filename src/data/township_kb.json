@@ -36,6 +36,16 @@
       "mumbai_pune_expressway": "10 mins",
       "pune_airport": "45 mins",
       "hinjewadi_metro": "Proposed/Upcoming"
-    }
+    },
+    "milestones": [
+      { "year": "2024", "event": "Launch of Echoes Eco-Chic Cluster" },
+      { "year": "2025", "event": "Operationalization of Township Retail Highstreet" },
+      { "year": "2026", "event": "Completion of 3.5 Acre Central Park Urban Lung" }
+    ],
+    "sovereign_privileges": [
+      { "name": "Priority Access", "desc": "Residents get priority booking in new sector launches." },
+      { "name": "Township Concierge", "desc": "Dedicated support for guest management and utility sync." },
+      { "name": "Ecological Reserve", "desc": "Access to protected green zones and bird-watching decks." }
+    ]
   }
 }

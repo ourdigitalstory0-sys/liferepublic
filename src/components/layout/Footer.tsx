@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { RERA_NUMBERS } from '../../data/rera';
+import { RERA_REGISTRY } from '../../data/rera';
 import { Facebook, Instagram, Twitter, Linkedin, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { pseoSlugs, pseoRegistry } from '../../data/pseo-registry';
 import { EnquiryModal } from '../ui/EnquiryModal';
@@ -180,7 +180,7 @@ export const Footer: React.FC = () => {
                 <div className="border-t border-white/5 py-8">
                     <h5 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">RERA Registration Numbers</h5>
                     <div className="flex flex-wrap gap-x-6 gap-y-2 text-[10px] text-gray-500">
-                        {RERA_NUMBERS.map((item, index) => (
+                        {RERA_REGISTRY.map((item: { title: string, rera: string }, index: number) => (
                             <span key={index} className="flex items-center gap-1">
                                 <span className="text-gray-400">{item.title}:</span>
                                 <span className="font-mono text-accent/80">{item.rera}</span>

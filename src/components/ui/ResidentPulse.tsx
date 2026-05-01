@@ -1,33 +1,48 @@
 import React from 'react';
-import { UserPlus, Home, Eye, MapPin } from 'lucide-react';
+import { UserPlus, Home, MapPin, ShieldCheck, Zap, Trees, Activity, Heart, Globe, Cpu } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const activities = [
-    { type: 'Booking', message: 'New 3 BHK booking in Echoes', time: '2 mins ago', icon: Home, color: 'text-green-600' },
-    { type: 'Visit', message: 'Site visit scheduled for Canvas', time: '15 mins ago', icon: MapPin, color: 'text-blue-600' },
-    { type: 'Move-in', message: '5 Families moved to Arezo', time: '1 hour ago', icon: UserPlus, color: 'text-accent' },
-    { type: 'View', message: '450+ views on Atmos Sector', time: 'Just now', icon: Eye, color: 'text-orange-500' }
+    { type: 'Live Pulse', message: '12,452+ Sovereign Families call this home', time: 'ACTIVE', icon: Heart, color: 'text-red-500', bg: 'bg-red-50' },
+    { type: 'Synthesis', message: 'New 3 BHK booking in Echoes Sector R22', time: '2 mins ago', icon: Home, color: 'text-accent', bg: 'bg-accent/10' },
+    { type: 'Global Tour', message: 'Digital walkthrough initiated from New Jersey, USA', time: '15 mins ago', icon: Globe, color: 'text-blue-500', bg: 'bg-blue-50' },
+    { type: 'Possession', message: 'Authority letter issued for Arezo Tower A', time: '1 hour ago', icon: ShieldCheck, color: 'text-indigo-600', bg: 'bg-indigo-50' },
+    { type: 'Infrastructure', message: 'Central Spine Road LED telemetry sync complete', time: '3 hours ago', icon: Zap, color: 'text-amber-500', bg: 'bg-amber-50' },
+    { type: 'Bio-Sovereignty', message: '15 native trees planted in Urban Park Sector R10', time: 'Today', icon: Trees, color: 'text-emerald-500', bg: 'bg-emerald-50' },
+    { type: 'Resident ROI', message: '12.4% average appreciation synthesized for Arezo residents', time: '2025 YTD', icon: Activity, color: 'text-accent', bg: 'bg-accent/10' }
 ];
 
 export const ResidentPulse: React.FC = () => {
     return (
-        <div className="bg-secondary/5 border-y border-secondary/10 py-3 overflow-hidden">
-            <div className="container mx-auto px-4">
-                <div className="flex items-center gap-8 whitespace-nowrap animate-marquee">
-                    {/* Duplicate for seamless loop */}
+        <div className="bg-white border-y border-gray-100 py-6 overflow-hidden relative group">
+            {/* Background Synthesis HUD Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-white z-10 pointer-events-none"></div>
+            
+            <div className="container mx-auto px-4 relative z-20">
+                <div className="flex items-center gap-12 whitespace-nowrap animate-marquee">
+                    {/* Duplicate for seamless loop synthesis */}
                     {[...activities, ...activities].map((activity, idx) => (
-                        <div key={idx} className="flex items-center gap-3 px-6 border-r border-secondary/10 last:border-r-0">
-                            <div className={`${activity.color} bg-white p-1.5 rounded-lg shadow-sm`}>
-                                <activity.icon size={14} />
+                        <motion.div 
+                            key={idx} 
+                            whileHover={{ scale: 1.05 }}
+                            className="flex items-center gap-6 px-10 border-r border-gray-100 last:border-r-0 group/item cursor-pointer"
+                        >
+                            <div className={`${activity.bg} ${activity.color} p-4 rounded-2xl shadow-sm group-hover/item:shadow-xl transition-all duration-500 border border-transparent group-hover/item:border-current/20`}>
+                                <activity.icon size={24} className="group-hover/item:rotate-12 transition-transform" />
                             </div>
-                            <div className="flex flex-col">
-                                <span className="text-[10px] font-bold text-secondary uppercase tracking-tighter leading-none mb-1">
-                                    {activity.type}
-                                </span>
-                                <span className="text-xs font-medium text-gray-600">
-                                    {activity.message} <span className="text-gray-400 font-normal ml-1">({activity.time})</span>
+                            <div className="flex flex-col gap-1">
+                                <div className="flex items-center gap-3">
+                                    <span className={`text-[10px] font-bold ${activity.color} uppercase tracking-[0.3em] leading-none`}>
+                                        {activity.type}
+                                    </span>
+                                    <div className="w-1 h-1 rounded-full bg-gray-200"></div>
+                                    <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{activity.time}</span>
+                                </div>
+                                <span className="text-sm font-bold text-secondary tracking-tight group-hover/item:text-accent transition-colors">
+                                    {activity.message}
                                 </span>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
@@ -40,7 +55,7 @@ export const ResidentPulse: React.FC = () => {
                 .animate-marquee {
                     display: flex;
                     width: fit-content;
-                    animation: marquee 40s linear infinite;
+                    animation: marquee 60s linear infinite;
                 }
                 .animate-marquee:hover {
                     animation-play-state: paused;

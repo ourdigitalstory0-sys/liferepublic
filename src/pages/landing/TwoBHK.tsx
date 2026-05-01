@@ -4,9 +4,12 @@ import type { Project } from '../../lib/types';
 import { ProjectCard } from '../../components/ui/ProjectCard';
 import { SEO } from '../../components/seo/SEO';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sparkles, TrendingUp, Target, Zap, Layout, ArrowUpRight, Calculator, Landmark, Shield } from 'lucide-react';
 
 export const TwoBHK: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadProjects = async () => {
@@ -20,146 +23,77 @@ export const TwoBHK: React.FC = () => {
                 setProjects(filtered);
             } catch (error) {
                 console.error('Failed to load projects', error);
+            } finally {
+                setLoading(false);
             }
         };
         loadProjects();
     }, []);
 
     return (
-        <div className="pt-24 pb-20 bg-gray-50 min-h-screen">
-            <Breadcrumbs />
+        <div className="bg-white">
             <SEO
-                title="2 BHK Flats in Hinjewadi | Price Trends & Best Projects 2025"
-                description="Comprehensive guide to buying 2 BHK flats in Hinjewadi. Compare prices at Life Republic, check rental yields, and explore floor plans. Best ROI for 2 BHK in Pune."
-                keywords="2 BHK in hinjewadi price, 2 BHK flat layout, life republic 2 bhk price, investment in hinjewadi, 2 bhk rental yield pune, kolte patil 2 bhk"
+                title="Sovereign 2 BHK Flats in Hinjewadi | Yield Synthesis 2026"
+                description="Discover premium 2 BHK residences at Kolte Patil Life Republic Hinjewadi. High-efficiency layouts, 4% rental yields, and IT Park proximity for young professionals."
+                keywords="2bhk in hinjewadi, life republic 2bhk price, kolte patil 2bhk flats, rental yield hinjewadi, 2 bhk investment pune"
                 canonical="/2-bhk-flats-in-hinjewadi"
-                schema={{
-                    "@context": "https://schema.org",
-                    "@type": "FAQPage",
-                    "mainEntity": [
-                        {
-                            "@type": "Question",
-                            "name": "What is the price of a 2 BHK in Life Republic?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Prices start from ₹72 Lakhs* for premium configurations like Arezo and Duet, offering best-in-class amenities."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "Are ready possession 2 BHKs available?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Yes, select sectors in Life Republic offer ready-to-move-in options. Contact our sales team for current inventory."
-                            }
-                        }
-                    ]
-                }}
             />
-            <div className="container mx-auto px-4">
-                {/* Hero Section */}
-                <div className="text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-secondary">
-                        2 BHK Flats in Kolte Patil Life Republic Township Hinjewadi
-                    </h1>
-                    <div className="w-24 h-1 bg-accent mx-auto mb-6" />
-                    <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
-                        Discover the perfect balance of comfort and investment. with <strong>Kolte Patil Life Republic</strong> offering the most value-for-money 2 BHK residences in Pune's IT hub.
-                    </p>
-                </div>
-
-                {/* Project Grid */}
-                <div className="mb-20">
-                    <h2 className="text-2xl font-serif font-bold text-secondary mb-8">Available 2 BHK Configurations</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {projects.length > 0 ? (
-                            projects.map((project) => (
-                                <ProjectCard key={project.id} project={project} />
-                            ))
-                        ) : (
-                            <p className="col-span-3 text-center text-gray-500 py-12 bg-white rounded-lg border border-gray-100">
-                                Loading premium 2 BHK options...
-                            </p>
-                        )}
+            <section className="relative pt-48 pb-32 bg-secondary overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-secondary z-10"></div>
+                <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8818362083715893.avif')] bg-cover bg-center opacity-30 grayscale blur-[1px]"></div>
+                <div className="container mx-auto px-4 relative z-20">
+                    <div className="max-w-5xl">
+                        <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="inline-flex items-center gap-4 px-6 py-3 bg-accent/20 border border-accent/30 rounded-full mb-12 backdrop-blur-xl">
+                            <Sparkles size={16} className="text-accent animate-pulse" />
+                            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-accent">The Efficiency Collection v5.5</span>
+                        </motion.div>
+                        <h1 className="text-6xl md:text-[10rem] font-serif font-bold text-white mb-10 tracking-tighter leading-[0.8]">Synthesizing <br /> <span className="text-accent italic">Efficiency.</span></h1>
+                        <p className="text-2xl md:text-3xl text-gray-400 max-w-4xl leading-relaxed font-medium">The Life Republic 2 BHK collection is engineered for the modern professional, synthesizing smart spatial flow with high-yield investment potential.</p>
                     </div>
                 </div>
-
-                {/* Market Analysis / Skyscraper Content */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-20">
-                    <div className="lg:col-span-2 space-y-12">
-                        {/* Why Buy 2 BHK Section */}
-                        <section className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                            <h2 className="text-3xl font-serif font-bold text-secondary mb-6">Why Invest in a 2 BHK in Hinjewadi?</h2>
-                            <p className="text-gray-600 mb-6 leading-relaxed">
-                                Hinjewadi is Pune's fastest-growing residential micro-market. For young IT professionals and nuclear families, a **2 BHK flat** represents the ideal entry point into real estate investment.
-                            </p>
-                            <ul className="space-y-4">
-                                <li className="flex gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold shrink-0">01</div>
-                                    <div>
-                                        <h3 className="font-bold text-lg">High Rental Demand</h3>
-                                        <p className="text-gray-600 text-sm">With over 3 Lakh employees in Rajiv Gandhi Infotech Park, 2 BHKs command the highest occupancy rates.</p>
-                                    </div>
-                                </li>
-                                <li className="flex gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold shrink-0">02</div>
-                                    <div>
-                                        <h3 className="font-bold text-lg">Appreciation Potential</h3>
-                                        <p className="text-gray-600 text-sm">Property prices in Hinjewadi have appreciated by ~25% in the last 3 years, outperforming the Pune average.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </section>
-
-                        {/* Lifestyle & User Persona */}
-                        <section>
-                            <h2 className="text-3xl font-serif font-bold text-secondary mb-6">Is a 2 BHK Right for You?</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="bg-orange-50 p-6 rounded-xl border border-orange-100">
-                                    <h3 className="font-bold text-xl mb-3 text-orange-800">For Young Couples</h3>
-                                    <p className="text-gray-700 text-sm">Extra room can serve as a Home Office or Guest Room. Perfect for hybrid work models.</p>
-                                </div>
-                                <div className="bg-purple-50 p-6 rounded-xl border border-purple-100">
-                                    <h3 className="font-bold text-xl mb-3 text-purple-800">For Investors</h3>
-                                    <p className="text-gray-700 text-sm">Sweet spot for rental yield (3-4%). Easier to liquidate than larger luxury apartments.</p>
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* FAQ Section */}
-                        <section>
-                            <h2 className="text-3xl font-serif font-bold text-secondary mb-6">Frequently Asked Questions</h2>
-                            <div className="space-y-4">
-                                <div className="border border-gray-200 rounded-lg p-5">
-                                    <h4 className="font-bold text-lg mb-2">What is the price of a 2 BHK in Life Republic?</h4>
-                                    <p className="text-gray-600">Prices start from ₹72 Lakhs* for premium configurations like Arezo and Duet, offering best-in-class amenities.</p>
-                                </div>
-                                <div className="border border-gray-200 rounded-lg p-5">
-                                    <h4 className="font-bold text-lg mb-2">Are ready possession 2 BHKs available?</h4>
-                                    <p className="text-gray-600">Yes, select sectors in Life Republic offer ready-to-move-in options. Contact our sales team for current inventory.</p>
-                                </div>
-                            </div>
-                        </section>
+            </section>
+            <div className="container mx-auto px-4 py-32">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-40">
+                    {[
+                        { title: 'Rental Yield Alpha', desc: 'Commanding 3-4.5% annual yields driven by 300,000+ IT professionals in proximity.', icon: TrendingUp },
+                        { title: 'Smart Efficiency', desc: 'Zero-wastage floor plans synthesized for hybrid-work and ergonomic living.', icon: Layout },
+                        { title: 'Managed Protocols', desc: 'End-to-end rental management for absentee owners and NRI investors.', icon: Shield }
+                    ].map((item, idx) => (
+                        <div key={idx} className="p-12 bg-gray-50 rounded-[3.5rem] border border-gray-100 hover:border-accent transition-all group shadow-sm">
+                            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-accent mb-10 shadow-md group-hover:scale-110 transition-transform"><item.icon size={32} /></div>
+                            <h3 className="text-2xl font-serif font-bold text-secondary mb-4 tracking-tight">{item.title}</h3>
+                            <p className="text-lg text-gray-500 font-medium leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+                <div className="mb-40">
+                    <div className="flex items-end justify-between mb-24 border-b border-gray-100 pb-12">
+                        <div className="max-w-2xl"><span className="text-[10px] font-bold text-accent uppercase tracking-[0.5em] mb-4 block">Volume Synthesis</span><h2 className="text-5xl md:text-7xl font-serif font-bold text-secondary tracking-tighter">The 2 BHK <span className="text-accent italic">Portfolio.</span></h2></div>
                     </div>
-
-                    {/* Sidebar / CTA */}
-                    <div className="lg:col-span-1">
-                        <div className="bg-secondary text-white p-8 rounded-2xl sticky top-24">
-                            <h3 className="text-2xl font-serif font-bold mb-4">Get Detailed Pricing</h3>
-                            <p className="text-gray-300 mb-6">Download the complete cost sheet with breakdown of government taxes and other charges.</p>
-                            <form className="space-y-4">
-                                <input type="text" placeholder="Name" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-accent" />
-                                <input type="tel" placeholder="Mobile Number" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-accent" />
-                                <button className="w-full bg-accent hover:bg-accent/90 text-white font-bold py-3 rounded-lg transition-colors">
-                                    Download Cost Sheet
-                                </button>
-                            </form>
-                            <p className="text-xs text-center text-gray-500 mt-4">
-                                *Instant download link via WhatsApp
-                            </p>
+                    {loading ? (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">{[1, 2, 3].map(i => (<div key={i} className="bg-gray-50 rounded-[3.5rem] h-[500px] animate-pulse" />))}</div>) : (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">{projects.map((project) => (<ProjectCard key={project.id} project={project} />))}</div>)}
+                </div>
+                <section className="mb-40 bg-secondary rounded-[5rem] p-16 md:p-32 text-white relative overflow-hidden group">
+                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
+                        <div className="lg:col-span-5 space-y-12">
+                            <h2 className="text-5xl md:text-7xl font-serif font-bold tracking-tighter leading-tight">The Yield <br /><span className="text-accent italic">Synthesis Delta.</span></h2>
+                            <p className="text-2xl text-gray-400 leading-relaxed font-medium">A 2 BHK residence at Life Republic isn't just a home; it's a high-liquidity financial asset positioned at the epicenter of Pune's IT growth.</p>
+                            <div className="p-8 bg-white/5 rounded-[2.5rem] border border-white/10"><div className="flex items-center gap-4 text-accent mb-3"><Target size={20} /><span className="text-[11px] font-bold uppercase tracking-[0.3em]">Market Scarcity</span></div><p className="text-lg font-bold text-white uppercase tracking-[0.1em]">Premium 2 BHK inventory in Hinjewadi Ph 3 is projected to face a 12% supply-gap by 2026.</p></div>
+                        </div>
+                        <div className="lg:col-span-7 bg-white/5 backdrop-blur-3xl rounded-[4rem] p-12 md:p-20 border border-white/10 shadow-2xl">
+                            <div className="space-y-12">
+                                <div className="flex items-center gap-8 p-8 bg-white/5 rounded-[2.5rem] border border-white/10"><div className="p-5 bg-accent text-secondary rounded-2xl"><Calculator size={32} /></div><div><p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.4em] mb-2">Average Rental Yield</p><p className="text-4xl font-serif font-bold text-white tracking-tighter">~4.2% p.a.</p></div></div>
+                                <div className="flex items-center gap-8 p-8 bg-white/5 rounded-[2.5rem] border border-white/10"><div className="p-5 bg-secondary text-accent rounded-2xl border border-accent/20"><Landmark size={32} /></div><div><p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.4em] mb-2">Projected Appreciation (2026)</p><p className="text-4xl font-serif font-bold text-accent tracking-tighter">+12.5% YoY</p></div></div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
+                <section className="text-center">
+                    <div className="max-w-5xl mx-auto p-20 bg-gray-50 rounded-[5rem] border border-gray-100 shadow-inner relative overflow-hidden">
+                        <h2 className="text-4xl md:text-7xl font-serif font-bold text-secondary mb-10 tracking-tighter">Secure Your <br /> <span className="text-accent italic">Sovereign Asset.</span></h2>
+                        <div className="flex flex-col md:flex-row gap-8 justify-center"><a href="/contact"><button className="bg-secondary text-white px-20 py-10 rounded-full font-bold text-2xl hover:bg-accent hover:text-secondary transition-all shadow-2xl flex items-center justify-center gap-4 group">Initiate Site Synthesis <ArrowUpRight size={32} /></button></a></div>
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.6em] mt-16 block">Secure Yield Access Protocol v5.5</p>
+                    </div>
+                </section>
             </div>
         </div>
     );
