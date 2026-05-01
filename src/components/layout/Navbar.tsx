@@ -39,8 +39,13 @@ export const Navbar: React.FC = () => {
             <div className="container mx-auto">
                 <div className={`relative flex items-center justify-between px-10 py-5 bg-secondary/80 backdrop-blur-3xl rounded-full border border-white/10 shadow-2xl transition-all ${scrolled ? 'shadow-accent/20 border-accent/20' : ''}`}>
                     <Link to="/" className="flex items-center gap-4 group">
-                        <div className={`w-12 h-12 ${getAccentBg()} rounded-2xl flex items-center justify-center text-secondary shadow-2xl group-hover:rotate-12 transition-transform duration-500`}><Building2 size={26} /></div>
-                        <div className="flex flex-col"><span className="text-2xl font-serif font-bold text-white tracking-tighter leading-none">Life Republic</span><span className={`text-[9px] font-bold uppercase tracking-[0.5em] mt-1.5 ${getAccentColor()} animate-pulse`}>Sovereign 2026</span></div>
+                        <div className={`w-14 h-14 bg-white rounded-2xl flex items-center justify-center p-2 shadow-2xl group-hover:rotate-6 transition-transform duration-500 overflow-hidden`}>
+                            <img src="/images/life-republic-logo-color.png" alt="Life Republic" className="w-full h-full object-contain" />
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-2xl font-serif font-bold text-white tracking-tighter leading-none">Life Republic</span>
+                            <span className={`text-[9px] font-bold uppercase tracking-[0.5em] mt-1.5 ${getAccentColor()} animate-pulse`}>Sovereign 2026</span>
+                        </div>
                     </Link>
                     <div className="hidden lg:flex items-center gap-12">
                         {[
@@ -77,7 +82,17 @@ export const Navbar: React.FC = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: '100%' }} className="fixed inset-0 bg-secondary z-[110] lg:hidden p-16 flex flex-col">
-                        <div className="flex justify-between items-center mb-24 relative z-10"><Link to="/" className="flex items-center gap-4"><div className="w-12 h-12 bg-accent rounded-2xl flex items-center justify-center text-secondary"><Building2 size={26} /></div><span className="text-2xl font-serif font-bold text-white tracking-tighter">Life Republic</span></Link><button onClick={() => setIsOpen(false)} className="p-5 bg-white/5 rounded-full text-white border border-white/10"><X size={36} /></button></div>
+                        <div className="flex justify-between items-center mb-24 relative z-10">
+                            <Link to="/" className="flex items-center gap-4">
+                                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-1.5 shadow-xl overflow-hidden">
+                                    <img src="/images/life-republic-logo-color.png" alt="Life Republic" className="w-full h-full object-contain" />
+                                </div>
+                                <span className="text-2xl font-serif font-bold text-white tracking-tighter">Life Republic</span>
+                            </Link>
+                            <button onClick={() => setIsOpen(false)} className="p-5 bg-white/5 rounded-full text-white border border-white/10">
+                                <X size={36} />
+                            </button>
+                        </div>
                         <div className="space-y-12 flex-1 relative z-10">{[
                             { name: 'The Sectors', path: '/sectors' },
                             { name: 'Luxury Monograph', path: '/projects/kolte-patil-life-republic-24k-espada-luxury-villas-hinjewadi' },

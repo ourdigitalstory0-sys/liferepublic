@@ -26,13 +26,18 @@ export const Footer: React.FC = () => {
 
                     {/* Brand Column (Span 3) */}
                     <div className="lg:col-span-3 space-y-8">
-                        <div className="flex flex-col">
-                            <span className="text-3xl font-serif font-bold tracking-wider text-white">
-                                LIFE REPUBLIC
-                            </span>
-                            <span className="text-xs uppercase tracking-[0.3em] text-accent/80 mt-1">
-                                By Kolte Patil
-                            </span>
+                        <div className="flex flex-col gap-6">
+                            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center p-2 shadow-2xl overflow-hidden group-hover:scale-110 transition-transform duration-500">
+                                <img src="/images/life-republic-logo-color.png" alt="Life Republic" className="w-full h-full object-contain" />
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-3xl font-serif font-bold tracking-wider text-white">
+                                    LIFE REPUBLIC
+                                </span>
+                                <span className="text-xs uppercase tracking-[0.3em] text-accent/80 mt-1">
+                                    By Kolte Patil
+                                </span>
+                            </div>
                         </div>
                         <p className="text-gray-400 leading-relaxed max-w-sm">
                             <strong>Kolte Patil Life Republic Township Hinjewadi</strong> is a premium 390+ acre integrated township. Offering 1, 2, 3 BHK flats and villas near Rajiv Gandhi IT Park.
