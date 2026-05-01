@@ -18,6 +18,9 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
+  const [isSovereignOpen, setIsSovereignOpen] = useState(false);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [enquiryProject, setEnquiryProject] = useState<string | undefined>(undefined);
 
   useEffect(() => {
