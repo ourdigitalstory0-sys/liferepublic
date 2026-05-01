@@ -49,6 +49,7 @@ import { LocationLanding } from './pages/LocationLanding';
 import { NotFound } from './pages/NotFound';
 import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
+import HTMLSitemap from './pages/HTMLSitemap';
 
 function App() {
   useEffect(() => {
@@ -239,6 +240,18 @@ function App() {
             <Layout>
               <HyperLocalLanding />
             </Layout>
+          } />
+
+          {/* HTML Sitemap */}
+          <Route path="/sitemap" element={
+            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+              <Navbar />
+              <main className="flex-grow pt-20" aria-label="Site Directory">
+                <HTMLSitemap />
+              </main>
+              <Footer />
+              <FloatingContact />
+            </div>
           } />
 
           {/* Phase 4 Routes */}

@@ -83,6 +83,7 @@ export default defineConfig((env: any) => {
             'vendor-utils': ['@supabase/supabase-js', 'lucide-react', 'lenis'],
             'animations': ['framer-motion'],
             'ui-components': ['swiper'],
+            'vendor-maps': ['@react-google-maps/api'],
           },
           chunkFileNames: 'assets/js/[name]-[hash].js',
           entryFileNames: 'assets/js/[name]-[hash].js',

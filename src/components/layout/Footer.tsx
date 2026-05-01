@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { RERA_NUMBERS } from '../../data/rera';
 import { Facebook, Instagram, Twitter, Linkedin, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { pseoSlugs, pseoRegistry } from '../../data/pseo-registry';
 
 export const Footer: React.FC = () => {
     return (
@@ -153,8 +154,25 @@ export const Footer: React.FC = () => {
 
 
 
+                {/* Massive SEO Silo - Popular Searches */}
+                <div className="border-t border-white/10 py-12 mt-12">
+                    <h5 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6">Popular Location Searches</h5>
+                    <div className="flex flex-wrap gap-x-4 gap-y-3">
+                        {pseoSlugs.map((slug) => (
+                            <Link
+                                key={slug}
+                                to={`/location/${slug}`}
+                                className="text-xs text-gray-500 hover:text-accent transition-colors"
+                                title={pseoRegistry[slug].title}
+                            >
+                                {pseoRegistry[slug].title.split('|')[0].trim()}
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+
                 {/* RERA Numbers Section */}
-                <div className="border-t border-white/5 py-8 mt-12">
+                <div className="border-t border-white/5 py-8">
                     <h5 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">RERA Registration Numbers</h5>
                     <div className="flex flex-wrap gap-x-6 gap-y-2 text-[10px] text-gray-500">
                         {RERA_NUMBERS.map((item, index) => (
@@ -169,13 +187,13 @@ export const Footer: React.FC = () => {
                     </p>
                 </div>
 
-                {/* Bottom Bar */}
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500/60">
                     <p>© 2025 Life Republic. Designed with precision.</p>
                     <div className="flex gap-8">
                         <Link to="/privacy" className="hover:text-accent transition-colors">Privacy Policy</Link>
                         <Link to="/terms" className="hover:text-accent transition-colors">Terms of Use</Link>
-                        <a href="/sitemap.xml" className="hover:text-accent transition-colors">Sitemap</a>
+                        <Link to="/sitemap" className="hover:text-accent transition-colors">HTML Sitemap</Link>
+                        <a href="/sitemap.xml" className="hover:text-accent transition-colors">XML Sitemap</a>
                     </div>
                 </div>
             </div>

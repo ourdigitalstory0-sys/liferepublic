@@ -38,6 +38,7 @@ const staticRoutes = [
     '/lifestyle',
     '/sustainability',
     '/community-hub',
+    '/sitemap',
     '/township-guide',
     // BHK & Property Type Landing Pages
     '/2-bhk-flats-in-hinjewadi',

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { SEO } from '../components/seo/SEO';
 import { MapPin, Train, School, Stethoscope, ShoppingBag, Briefcase } from 'lucide-react';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
+import { SovereignMap } from '../components/ui/SovereignMap';
 
 export const LocationHighlights: React.FC = () => {
     return (
@@ -15,26 +16,34 @@ export const LocationHighlights: React.FC = () => {
                 canonical="/location-highlights"
             />
 
-            {/* Hero Section */}
-            <section className="relative h-[50vh] flex items-center justify-center bg-primary-dark text-white overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/images/gallery/eros/master-layout.webp')] bg-cover bg-center opacity-40"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                <div className="container mx-auto px-4 relative z-10 text-center">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-6xl font-serif font-bold mb-6"
+            {/* Interactive Map Hero */}
+            <section className="py-12 bg-white">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-4xl mx-auto text-center mb-12">
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-4xl md:text-6xl font-serif font-bold mb-6 text-secondary"
+                        >
+                            Hinjewadi: The Strategic Epicenter
+                        </motion.h1>
+                        <p className="text-xl text-gray-600 font-light">
+                            Located in the strategic IT hub/Real Estate goldmine of Pune, Kolte Patil Life Republic Township offers the perfect blend of work-life balance and high investment returns.
+                        </p>
+                    </div>
+                    
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.2 }}
                     >
-                        Hinjewadi: Kolte Patil Life Republic Location Advantages
-                    </motion.h1>
-                    <p className="text-xl max-w-3xl mx-auto text-gray-200 font-light">
-                        Located in the strategic IT hub/Real Estate goldmine of Pune, Kolte Patil Life Republic Township offers the perfect blend of work-life balance and high investment returns.
-                    </p>
+                        <SovereignMap />
+                    </motion.div>
                 </div>
             </section>
 
             {/* Introduction */}
-            <section className="py-16 bg-white">
+            <section className="py-16 bg-gray-50">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto text-center">
                         <h2 className="text-3xl font-serif font-bold text-secondary mb-6">Why Invest in Hinjewadi Real Estate?</h2>

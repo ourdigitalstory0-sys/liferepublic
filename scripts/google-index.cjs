@@ -55,17 +55,14 @@ function parseSitemapUrls() {
 }
 
 async function indexUrls(keyPath) {
-    const key = JSON.parse(fs.readFileSync(keyPath, 'utf-8'));
+    const auth = new google.auth.GoogleAuth({
+        keyFile: keyPath,
+        scopes: ['https://www.googleapis.com/auth/indexing'],
+    });
 
-    const auth = new google.auth.JWT(
-        key.client_email,
-        null,
-        key.private_key,
-        ['https://www.googleapis.com/auth/indexing'],
-        null
-    );
-
-    const indexing = google.indexing({ version: 'v3', auth });
+    // Authorize before initializing the indexing client
+    const authClient = await auth.getClient();
+    const indexing = google.indexing({ version: 'v3', auth: authClient });
 
     const urls = parseSitemapUrls();
     console.log(`\n📡 Submitting ${urls.length} URLs to Google Indexing API...\n`);
