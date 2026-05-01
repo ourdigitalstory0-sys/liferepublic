@@ -128,11 +128,21 @@ export const api = {
         },
         getById: async (id: string) => {
             try {
+                // High-fidelity synthesis: Try DB first, then local registry fail-safe
                 const { data, error } = await supabase.from('projects').select('*').eq('id', id).single();
-                if (error) throw error;
-    
                 const registryProject = projectsRegistry.find(p => p.id === id);
 
+                if (error || !data) {
+                    if (registryProject) {
+                        console.log(`[Sovereign Fail-safe] Serving ${id} from local registry.`);
+                        return {
+                            ...registryProject,
+                            description: registryProject.description || registryProject.overview
+                        } as Project;
+                    }
+                    throw error || new Error('Project not found');
+                }
+    
                 const project = {
                     ...data,
                     image: normalizeUrl(data.image),
@@ -153,7 +163,12 @@ export const api = {
                 }
     
                 return project;
-            } catch (e) { return handleApiError(e, 'projects.getById'); }
+            } catch (e) { 
+                // Final level fail-safe for complete network failures
+                const registryProject = projectsRegistry.find(p => p.id === id);
+                if (registryProject) return registryProject as Project;
+                return handleApiError(e, 'projects.getById'); 
+            }
         },
         create: async (project: Project) => {
             try {

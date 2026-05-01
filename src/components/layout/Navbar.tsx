@@ -38,16 +38,13 @@ export const Navbar: React.FC = () => {
         <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 px-6 py-8 ${scrolled ? 'sm:py-4' : 'sm:py-8'}`}>
             <div className="container mx-auto">
                 <div className={`relative flex items-center justify-between px-10 py-5 bg-secondary/80 backdrop-blur-3xl rounded-full border border-white/10 shadow-2xl transition-all ${scrolled ? 'shadow-accent/20 border-accent/20' : ''}`}>
-                    <Link to="/" className="flex items-center gap-4 group">
-                        <div className={`w-14 h-14 bg-white rounded-2xl flex items-center justify-center p-2 shadow-2xl group-hover:rotate-6 transition-transform duration-500 overflow-hidden`}>
+                    <Link to="/" className="flex items-center group">
+                        <div className="w-11 h-11 bg-white rounded-xl flex items-center justify-center p-1.5 shadow-2xl group-hover:scale-105 transition-all duration-500 overflow-hidden">
                             <img src="/images/life-republic-logo-color.png" alt="Life Republic" className="w-full h-full object-contain" />
                         </div>
-                        <div className="flex flex-col">
-                            <span className="text-2xl font-serif font-bold text-white tracking-tighter leading-none">Life Republic</span>
-                            <span className={`text-[9px] font-bold uppercase tracking-[0.5em] mt-1.5 ${getAccentColor()} animate-pulse`}>Sovereign 2026</span>
-                        </div>
                     </Link>
-                    <div className="hidden lg:flex items-center gap-12">
+                    
+                    <div className="hidden lg:flex items-center gap-10">
                         {[
                             { name: 'Sectors', path: '/sectors', special: true },
                             { name: 'Lifestyle', path: '/lifestyle' },
@@ -55,15 +52,37 @@ export const Navbar: React.FC = () => {
                             { name: 'Investment', path: '/roi-calculator' }
                         ].map((link) => (
                             <div key={link.name} className="relative group">
-                                {link.special ? (<button onMouseEnter={() => setShowQuickSwitch(true)} onClick={() => setShowQuickSwitch(!showQuickSwitch)} className="flex items-center gap-2.5 text-[11px] font-bold text-white/60 uppercase tracking-[0.4em] hover:text-white transition-all">{link.name} <ChevronDown size={14} className={`transition-transform duration-500 ${showQuickSwitch ? 'rotate-180 text-accent' : ''}`} /></button>) : (<Link to={link.path} className={`text-[11px] font-bold uppercase tracking-[0.4em] transition-all ${location.pathname === link.path ? 'text-white' : 'text-white/60 hover:text-white'}`}>{link.name}</Link>)}
-                                <motion.div className={`absolute -bottom-3 left-0 h-[2px] ${getAccentBg()} w-0 group-hover:w-full transition-all duration-500 ${location.pathname === link.path ? 'w-full' : ''}`} />
+                                {link.special ? (
+                                    <button 
+                                        onMouseEnter={() => setShowQuickSwitch(true)} 
+                                        onClick={() => setShowQuickSwitch(!showQuickSwitch)} 
+                                        className="flex items-center gap-2 text-[10px] font-bold text-white/70 uppercase tracking-[0.3em] hover:text-white transition-all"
+                                    >
+                                        {link.name} 
+                                        <ChevronDown size={12} className={`transition-transform duration-500 ${showQuickSwitch ? 'rotate-180 text-accent' : ''}`} />
+                                    </button>
+                                ) : (
+                                    <Link to={link.path} className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all ${location.pathname === link.path ? 'text-white' : 'text-white/70 hover:text-white'}`}>
+                                        {link.name}
+                                    </Link>
+                                )}
+                                <motion.div className={`absolute -bottom-2 left-0 h-[1.5px] ${getAccentBg()} w-0 group-hover:w-full transition-all duration-500 ${location.pathname === link.path ? 'w-full' : ''}`} />
                             </div>
                         ))}
                     </div>
-                    <div className="flex items-center gap-8">
-                        <div className="hidden xl:flex items-center gap-6 border-r border-white/10 pr-8 mr-2"><a href="tel:+918010101010" className="w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-accent hover:text-secondary transition-all shadow-xl"><Phone size={20} /></a><button onClick={() => window.dispatchEvent(new CustomEvent('open-brochure-engine'))} className="flex items-center gap-3 text-[11px] font-bold text-white/40 uppercase tracking-widest hover:text-white transition-all"><Download size={16} /> Brochure</button></div>
-                        <Button variant="primary" size="sm" className="hidden sm:flex rounded-full px-10 py-4 font-bold text-[11px] tracking-[0.3em] uppercase gap-3 shadow-xl" onClick={() => window.dispatchEvent(new CustomEvent('openEnquiry'))}>Inquire <Sparkles size={16} /></Button>
-                        <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-3 bg-white/5 rounded-2xl text-white hover:text-accent transition-all border border-white/10">{isOpen ? <X size={32} /> : <Menu size={32} />}</button>
+
+                    <div className="flex items-center gap-6">
+                        <div className="hidden xl:flex items-center gap-6 border-r border-white/10 pr-6 mr-1">
+                            <a href="tel:+918010101010" className="text-white/60 hover:text-accent transition-all flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest">
+                                <Phone size={14} /> +91 8010 1010 10
+                            </a>
+                        </div>
+                        <Button variant="primary" size="sm" className="hidden sm:flex rounded-full px-8 py-3 font-bold text-[10px] tracking-[0.2em] uppercase gap-2 shadow-xl" onClick={() => window.dispatchEvent(new CustomEvent('openEnquiry'))}>
+                            Inquire <Sparkles size={14} />
+                        </Button>
+                        <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-2 bg-white/5 rounded-xl text-white hover:text-accent transition-all border border-white/10">
+                            {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
                     </div>
                 </div>
                 <AnimatePresence>
