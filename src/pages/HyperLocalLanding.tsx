@@ -8,43 +8,14 @@ import { ProjectCard } from '../components/ui/ProjectCard';
 import { api } from '../services/api';
 import type { Project } from '../lib/types';
 
-interface LandingConfig {
-    title: string;
-    description: string;
-    keywords: string;
-    infraScore: number;
-    rentalYield: string;
-    commutePhase1: string;
-    highlights: string[];
-}
-
-const landingData: Record<string, LandingConfig> = {
-    'flats-near-marunji-road': {
-        title: 'Premium Flats Near Marunji Road | Life Republic Hinjewadi',
-        description: 'Discover luxury 2 & 3 BHK flats near Marunji Road. Kolte Patil Life Republic offers seamless connectivity, world-class amenities, and high ROI potential in Hinjewadi.',
-        keywords: 'flats near marunji road, life republic marunji, kolte patil marunji road, property near marunji hinjewadi',
-        infraScore: 94,
-        rentalYield: '5.8% - 6.5%',
-        commutePhase1: '8 mins',
-        highlights: ['Immediate access to Spine Road', 'Proximity to Anisha Global School', 'High appreciation corridor']
-    },
-    'ready-possession-flats-hinjewadi': {
-        title: 'Ready Possession Flats in Hinjewadi Pune | Life Republic',
-        description: 'Looking for immediate move-in? Explore ready possession luxury flats in Kolte Patil Life Republic, Hinjewadi. 2, 3, 4 BHK premium apartments with OC.',
-        keywords: 'ready possession flats in hinjewadi, immediate possession flats pune, ready to move apartments life republic',
-        infraScore: 98,
-        rentalYield: '6.2% - 7.1%',
-        commutePhase1: '10 mins',
-        highlights: ['Zero GST benefits', 'Immediate rental income potential', 'Thriving community of 12,000+ families']
-    }
-};
+import { pseoRegistry } from '../data/pseo-registry';
 
 export const HyperLocalLanding: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const [projects, setProjects] = React.useState<Project[]>([]);
     
     const config = useMemo(() => {
-        return slug ? landingData[slug] : null;
+        return slug ? pseoRegistry[slug] : null;
     }, [slug]);
 
     React.useEffect(() => {

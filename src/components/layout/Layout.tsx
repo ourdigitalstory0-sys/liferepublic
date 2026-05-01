@@ -3,6 +3,7 @@ import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { FloatingContact } from '../ui/FloatingContact';
 import { Concierge } from '../ui/Concierge';
+import { Breadcrumbs } from '../seo/Breadcrumbs';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -42,6 +43,9 @@ export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       <Navbar />
       <main className="flex-grow pt-20" aria-label={ariaLabel}>
+        <div className="container mx-auto">
+          <Breadcrumbs />
+        </div>
         {children}
       </main>
       <Footer />
