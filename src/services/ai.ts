@@ -34,7 +34,7 @@ export const aiService = {
     async askTownshipAgent(query: string) {
         try {
             if (!import.meta.env.VITE_GEMINI_API_KEY) {
-                return "I am currently in 'Quiet Mode'. Please contact our physical concierge at +91 77440 09295 for immediate assistance.";
+                return "I am currently in 'Quiet Mode'. Please use the Enquiry Form on this page to request an instant callback from our human advisors.";
             }
 
             const result = await model.generateContent(query);

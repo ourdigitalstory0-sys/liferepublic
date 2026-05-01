@@ -361,7 +361,7 @@ const Home: React.FC = () => {
                             </p>
                         </div>
                         <div className="inline-block p-4 bg-white rounded-lg shadow-sm border border-gray-100 mt-8">
-                            <span className="text-accent font-bold">RERA Registered</span> | Award Winning Township | <span className="text-secondary font-bold">Call +91 77440 09295</span>
+                            <span className="text-accent font-bold">RERA Registered</span> | Award Winning Township | <span className="text-secondary font-bold">Enquire Now</span>
                         </div>
                     </motion.div>
                 </div>

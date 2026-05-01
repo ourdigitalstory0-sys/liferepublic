@@ -114,17 +114,7 @@ export const ExitIntentModal: React.FC = () => {
                                         <Download size={20} />
                                         {content.btn}
                                     </Button>
-+
-                                    <Button
-                                        variant="outline"
-                                        className="w-full gap-2 justify-center border-gray-200 hover:bg-gray-50 text-gray-600"
-                                        onClick={() => {
-                                            window.location.href = 'tel:+917744009295';
-                                        }}
-                                    >
-                                        <Phone size={18} />
-                                        Connect with Expert
-                                    </Button>
+
                                 </div>
 +
                                 <p className="text-center mt-4 text-xs text-gray-400">

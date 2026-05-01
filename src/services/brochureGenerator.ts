@@ -88,8 +88,7 @@ export const brochureGenerator = {
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(20);
         doc.text('READY FOR SPATIAL SYNTHESIS?', 105, 130, { align: 'center' });
-        doc.setFontSize(12);
-        doc.text('Contact your dedicated advisor at +91 77440 09295', 105, 145, { align: 'center' });
+        doc.text('Reply to our email or visit life-republic.in to book a site visit.', 105, 145, { align: 'center' });
         
         doc.save(`Life_Republic_Portfolio_${userName.replace(/\s/g, '_')}.pdf`);
     }

@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { EnquiryModal } from '../ui/EnquiryModal';
 
 export const Navbar: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
     const location = useLocation();
 
     useEffect(() => {
@@ -175,18 +177,31 @@ export const Navbar: React.FC = () => {
                             <div className="mt-auto">
                                 <div className="bg-gray-50 p-4 rounded-xl space-y-4">
                                     <p className="text-sm text-gray-500">Get in touch</p>
-                                    <a href="tel:+917744009295" className="flex items-center gap-3 text-secondary font-medium text-lg">
+                                    <button 
+                                        onClick={() => {
+                                            setIsMobileMenuOpen(false);
+                                            setIsEnquiryOpen(true);
+                                        }} 
+                                        className="w-full flex items-center gap-3 text-secondary font-medium text-lg text-left"
+                                        aria-label="Request Callback"
+                                    >
                                         <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
                                             <Phone size={20} />
                                         </div>
-                                        +91 77440 09295
-                                    </a>
+                                        Request Callback
+                                    </button>
                                 </div>
                             </div>
                         </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            <EnquiryModal 
+                isOpen={isEnquiryOpen} 
+                onClose={() => setIsEnquiryOpen(false)} 
+                projectName="Request Callback"
+            />
         </>
     );
 };

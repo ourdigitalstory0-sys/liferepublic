@@ -3,9 +3,13 @@ import { Link } from 'react-router-dom';
 import { RERA_NUMBERS } from '../../data/rera';
 import { Facebook, Instagram, Twitter, Linkedin, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { pseoSlugs, pseoRegistry } from '../../data/pseo-registry';
+import { EnquiryModal } from '../ui/EnquiryModal';
 
 export const Footer: React.FC = () => {
+    const [isEnquiryOpen, setIsEnquiryOpen] = React.useState(false);
+
     return (
+        <>
         <footer className="relative bg-primary-dark text-white pt-24 pb-12 overflow-hidden">
             {/* Fluid Curve Top */}
             <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
@@ -142,17 +146,18 @@ export const Footer: React.FC = () => {
                                     <Phone size={20} className="text-accent" />
                                 </div>
                                 <div>
-                                    <p className="text-gray-300 font-medium">Call Us</p>
-                                    <a href="tel:+917744009295" className="text-sm text-gray-500 hover:text-white transition-colors">+91 77440 09295</a>
+                                    <p className="text-gray-300 font-medium">Get in touch</p>
+                                    <button 
+                                        onClick={() => setIsEnquiryOpen(true)}
+                                        className="text-sm text-gray-500 hover:text-white transition-colors cursor-pointer"
+                                    >
+                                        Request Callback
+                                    </button>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
-
-
 
                 {/* Massive SEO Silo - Popular Searches */}
                 <div className="border-t border-white/10 py-12 mt-12">
@@ -197,8 +202,13 @@ export const Footer: React.FC = () => {
                     </div>
                 </div>
             </div>
-            {/* Brand Multi-color Strip */}
             <div className="absolute bottom-0 left-0 w-full h-1.5 bg-gradient-to-r from-yellow-400 via-red-500 pink-500 purple-500 blue-500 to-green-500"></div>
         </footer>
+        <EnquiryModal 
+            isOpen={isEnquiryOpen} 
+            onClose={() => setIsEnquiryOpen(false)} 
+            projectName="Request Callback"
+        />
+        </>
     );
 };

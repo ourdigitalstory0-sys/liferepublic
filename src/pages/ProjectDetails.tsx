@@ -360,18 +360,6 @@ const ProjectDetails: React.FC = () => {
                         <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 sticky top-24">
                             <h3 className="text-2xl font-serif font-bold mb-6 text-center">Enquire Now</h3>
                             <ProjectEnquiryForm project={project} themeColor={themeColor} />
-
-                            <div className="mt-8">
-                                <p className="text-center text-gray-500 mb-4 text-sm">Or connect instantly via</p>
-                                <div className="flex gap-4">
-                                    <Button variant="outline" className="flex-1 gap-2 border-green-500 text-green-600 hover:bg-green-50" onClick={() => window.open('https://wa.me/917744009295', '_blank')}>
-                                        <MessageSquare size={18} /> WhatsApp
-                                    </Button>
-                                    <Button variant="outline" className="flex-1 gap-2" onClick={() => window.location.href = 'tel:+917744009295'}>
-                                        <Phone size={18} /> Call
-                                    </Button>
-                                </div>
-                            </div>
                         </div>
 
                         <div className="mt-8">
@@ -448,7 +436,7 @@ const ProjectEnquiryForm: React.FC<{ project: Project; themeColor: string }> = (
                     type="tel"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
                     style={{ '--tw-ring-color': themeColor } as React.CSSProperties}
-                    placeholder="+91 77440 09295"
+                    placeholder="Enter your mobile number"
                     value={formData.phone}
                     onChange={e => setFormData({ ...formData, phone: e.target.value })}
                 />

@@ -50,8 +50,8 @@ export const Contact: React.FC = () => {
     return (
         <div className="pt-20">
             <SEO
-                title="Contact Kolte Patil Life Republic Sales Office | Hinjewadi | +91 77440 09295"
-                description="Get in touch with the official sales team for Life Republic by Kolte Patil. Schedule a VIP site visit, request a brochure, or call +91 77440 09295 for best deals."
+                title="Contact Kolte Patil Life Republic Sales Office | Hinjewadi"
+                description="Get in touch with the official sales team for Life Republic by Kolte Patil. Schedule a VIP site visit, request a brochure, or request a callback for best deals."
                 keywords="Life Republic Contact No, Kolte Patil Sales Office Hinjewadi, Life Republic Address, Site Visit Life Republic, Booking Office Hinjewadi, Kolte Patil Customer Care"
                 canonical="/contact"
                 schema={localBusinessSchema}
@@ -99,9 +99,9 @@ export const Contact: React.FC = () => {
                                     <Phone size={24} />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold text-secondary mb-2">Call Us</h3>
-                                    <p className="text-gray-600">+91 77440 09295</p>
-                                    <p className="text-gray-500 text-sm">Mon - Sun: 9:00 AM - 7:00 PM</p>
+                                    <h3 className="text-xl font-bold text-secondary mb-2">Digital Sales Desk</h3>
+                                    <p className="text-gray-600">Submit an enquiry to request an instant callback from our advisors.</p>
+                                    <p className="text-gray-500 text-sm mt-2">Mon - Sun: 9:00 AM - 7:00 PM</p>
                                 </div>
                             </div>
 
