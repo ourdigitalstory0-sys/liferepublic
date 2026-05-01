@@ -18,18 +18,19 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
-  const [isSovereignOpen, setIsSovereignOpen] = useState(false);
-  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [enquiryProject, setEnquiryProject] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     // Neural Hub Event Synchronization v6.0
     const handleSovereignOpen = () => setIsSovereignOpen(true);
-    const handleEnquiryOpen = () => setIsEnquiryOpen(true);
+    const handleEnquiryOpen = (e: any) => {
+        setEnquiryProject(e.detail?.projectName);
+        setIsEnquiryOpen(true);
+    };
     const handleSearchOpen = () => setIsSearchOpen(true);
     
     window.addEventListener('open-sovereign-concierge', handleSovereignOpen);
-    window.addEventListener('open-enquiry-modal', handleEnquiryOpen);
+    window.addEventListener('open-enquiry-modal', handleEnquiryOpen as any);
     window.addEventListener('open-neural-search', handleSearchOpen);
 
     // Global Command Logic: Command + K (Search) / Command + J (Concierge)
@@ -106,7 +107,11 @@ export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
       
       <EnquiryModal 
         isOpen={isEnquiryOpen}
-        onClose={() => setIsEnquiryOpen(false)}
+        onClose={() => {
+            setIsEnquiryOpen(false);
+            setEnquiryProject(undefined);
+        }}
+        projectName={enquiryProject}
       />
       
       <NeuralSearch 
