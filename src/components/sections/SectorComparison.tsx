@@ -1,57 +1,20 @@
 import React from 'react';
-import { Check, Shield, Zap, Heart, Sparkles, TrendingUp, Target, User, Star } from 'lucide-react';
+import { Check, Shield, Zap, Heart, Sparkles, TrendingUp, Target, User, Star, Activity, Timer } from 'lucide-react';
 import { motion } from 'framer-motion';
+import sectorsData from '../../data/sectors.json';
 
 export const SectorComparison: React.FC = () => {
-    const sectors = [
-        {
-            name: "Atmos",
-            type: "End-User",
-            stars: 5,
-            yield: "7.2%",
-            metro: "1.2km",
-            spine: "Direct",
-            status: "Fast Construction",
-            icon: Heart
-        },
-        {
-            name: "Qrious",
-            type: "Investor",
-            stars: 5,
-            yield: "8.5%",
-            metro: "0.8km",
-            spine: "Premium",
-            status: "New Launch",
-            icon: Shield
-        },
-        {
-            name: "Canvas",
-            type: "End-User",
-            stars: 4,
-            yield: "6.8%",
-            metro: "1.5km",
-            spine: "Integrated",
-            status: "Phase 1 Complete",
-            icon: Sparkles
-        },
-        {
-            name: "Arezo",
-            type: "Strategic",
-            stars: 4,
-            yield: "7.8%",
-            metro: "1.1km",
-            spine: "Sync",
-            status: "Ready Soon",
-            icon: Zap
-        }
-    ];
+    // Strategic Selection of high-velocity clusters for comparison
+    const comparisonSectors = sectorsData.sectors.filter(s => 
+        ['r22', 'r9', 'r13', 'r16', 'r10', 'r31'].includes(s.id)
+    ).slice(0, 4);
 
     const valueAnchors = [
         { label: "150ft Spine Road Sync", icon: Target },
-        { label: "Metro Line 3 Connectivity", icon: TrendingUp },
+        { label: "Metro Line 3 Proximity", icon: TrendingUp },
         { label: "Smart Home Framework", icon: Zap },
-        { label: "Rental Velocity Projection", icon: TrendingUp },
-        { label: "15-Minute City Access", icon: User }
+        { label: "High Yield Velocity", icon: Activity },
+        { label: "Occupancy Stability", icon: Timer }
     ];
 
     return (
@@ -59,12 +22,12 @@ export const SectorComparison: React.FC = () => {
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
                     <div className="max-w-3xl">
-                        <span className="text-[10px] font-bold text-accent uppercase tracking-[0.5em] mb-4 block">Product Intelligence</span>
+                        <span className="text-[10px] font-bold text-accent uppercase tracking-[0.5em] mb-4 block">Product Intelligence v6.5</span>
                         <h2 className="text-4xl md:text-7xl font-serif font-bold text-secondary mb-8 tracking-tighter leading-tight">
                             The Sector <br /> <span className="text-accent italic">Sovereign Matrix.</span>
                         </h2>
                         <p className="text-xl text-gray-500 font-medium leading-relaxed">
-                            A mathematically validated comparison of township clusters. Use the matrix to align your investment objective with the correct structural phase.
+                            A mathematically validated comparison of township clusters. Use the matrix to align your investment objective with the correct structural phase of the 390-acre monograph.
                         </p>
                     </div>
                 </div>
@@ -75,20 +38,20 @@ export const SectorComparison: React.FC = () => {
                             <thead>
                                 <tr className="bg-secondary text-white">
                                     <th className="p-10 font-bold text-[10px] uppercase tracking-[0.4em] border-r border-white/5">Synthesis / Cluster</th>
-                                    {sectors.map((s, i) => (
+                                    {comparisonSectors.map((s, i) => (
                                         <th key={i} className="p-10 text-center border-r border-white/5 last:border-r-0">
                                             <div className="flex flex-col items-center">
                                                 <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-accent mb-4">
-                                                    <s.icon size={24} />
+                                                    <Zap size={24} />
                                                 </div>
-                                                <span className="text-2xl font-serif font-bold">{s.name}</span>
+                                                <span className="text-2xl font-serif font-bold">{s.name.split(' (')[0]}</span>
                                                 <div className="flex gap-1 mt-2">
-                                                    {[...Array(s.stars)].map((_, i) => (
+                                                    {[...Array(5)].map((_, i) => (
                                                         <Star key={i} size={10} className="fill-accent text-accent" />
                                                     ))}
                                                 </div>
                                                 <span className="text-[9px] font-bold text-accent/60 uppercase tracking-[0.2em] mt-3 bg-white/5 px-3 py-1 rounded-full border border-white/10">
-                                                    {s.type}
+                                                    {s.segment}
                                                 </span>
                                             </div>
                                         </th>
@@ -97,26 +60,26 @@ export const SectorComparison: React.FC = () => {
                             </thead>
                             <tbody className="divide-y divide-gray-50">
                                 <tr>
-                                    <td className="p-10 font-bold text-secondary text-sm bg-gray-50/50 border-r border-gray-100">Projected Yield</td>
-                                    {sectors.map((s, i) => (
+                                    <td className="p-10 font-bold text-secondary text-sm bg-gray-50/50 border-r border-gray-100">Investment Velocity</td>
+                                    {comparisonSectors.map((s, i) => (
                                         <td key={i} className="p-10 text-center border-r border-gray-50 last:border-r-0">
-                                            <span className="text-2xl font-bold text-secondary">{s.yield}</span>
+                                            <span className="text-2xl font-bold text-secondary">{(s.investment_velocity * 10).toFixed(1)}/10</span>
                                         </td>
                                     ))}
                                 </tr>
                                 <tr>
                                     <td className="p-10 font-bold text-secondary text-sm bg-gray-50/50 border-r border-gray-100">Metro Proximity</td>
-                                    {sectors.map((s, i) => (
+                                    {comparisonSectors.map((s, i) => (
                                         <td key={i} className="p-10 text-center border-r border-gray-50 last:border-r-0">
-                                            <span className="text-sm font-bold text-gray-500">{s.metro}</span>
+                                            <span className="text-sm font-bold text-gray-500">{s.distance}</span>
                                         </td>
                                     ))}
                                 </tr>
                                 <tr>
-                                    <td className="p-10 font-bold text-secondary text-sm bg-gray-50/50 border-r border-gray-100">Spine Road Sync</td>
-                                    {sectors.map((s, i) => (
+                                    <td className="p-10 font-bold text-secondary text-sm bg-gray-50/50 border-r border-gray-100">RERA Possession</td>
+                                    {comparisonSectors.map((s, i) => (
                                         <td key={i} className="p-10 text-center border-r border-gray-50 last:border-r-0">
-                                            <span className="text-[10px] font-bold text-accent uppercase tracking-widest">{s.spine}</span>
+                                            <span className="text-[10px] font-bold text-accent uppercase tracking-widest">{s.rera_possession}</span>
                                         </td>
                                     ))}
                                 </tr>
@@ -126,11 +89,11 @@ export const SectorComparison: React.FC = () => {
                                             <anchor.icon size={16} className="text-accent" />
                                             {anchor.label}
                                         </td>
-                                        {sectors.map((s, i) => (
+                                        {comparisonSectors.map((s, i) => (
                                             <td key={i} className="p-10 text-center border-r border-gray-50 last:border-r-0">
                                                 <div className="flex justify-center">
-                                                    {/* Strategic check logic */}
-                                                    {(ai === 0 || (s.name === 'Qrious' && ai === 2) || (s.name === 'Atmos' && ai === 4)) ? (
+                                                    {/* Strategic check logic based on data v6.5 */}
+                                                    {(ai === 0 || (s.investment_velocity > 0.9 && ai === 3) || (s.occupancy !== 'Under Construction' && ai === 4)) ? (
                                                         <Check className="text-green-500" size={24} />
                                                     ) : (
                                                         <div className="w-1.5 h-1.5 bg-gray-200 rounded-full"></div>
@@ -141,11 +104,11 @@ export const SectorComparison: React.FC = () => {
                                     </tr>
                                 ))}
                                 <tr className="bg-secondary/5">
-                                    <td className="p-10 font-bold text-secondary text-sm border-r border-gray-100">Cluster Status</td>
-                                    {sectors.map((s, i) => (
+                                    <td className="p-10 font-bold text-secondary text-sm border-r border-gray-100">Occupancy Status</td>
+                                    {comparisonSectors.map((s, i) => (
                                         <td key={i} className="p-10 text-center border-r border-gray-50 last:border-r-0">
                                             <span className="text-[9px] font-bold text-secondary uppercase tracking-widest bg-white border border-gray-100 px-4 py-2 rounded-full shadow-sm">
-                                                {s.status}
+                                                {s.occupancy}
                                             </span>
                                         </td>
                                     ))}
@@ -158,3 +121,4 @@ export const SectorComparison: React.FC = () => {
         </section>
     );
 };
+
