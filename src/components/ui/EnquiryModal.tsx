@@ -74,15 +74,25 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
         };
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 4000)); // Synthesis Simulation
+            await new Promise(resolve => setTimeout(resolve, 3000)); // Synthesis Simulation
             await api.leads.create(leadData);
             personalizationStore.updateIntentScore(60);
             setIsSubmitting(false);
             setIsSubmitted(true);
             setTimeout(() => { setIsSubmitted(false); onClose(); }, 6000);
         } catch (err) {
-            setError("Dispatch Interrupted. Re-initiating Sovereign Protocol...");
-            setIsSubmitting(false);
+            console.error("Supabase Dispatch Failed. Activating WhatsApp Sovereign Fallback.");
+            setError("Standard Dispatch Interrupted. Activating Sovereign WhatsApp Protocol...");
+            
+            // Triple-Redundant Fallback: Direct WhatsApp Link
+            const whatsappMessage = `Sovereign Enquiry from Life Republic Portal\n\nProject: ${projectName}\nName: ${leadData.name}\nPhone: ${leadData.phone}\nEmail: ${leadData.email}\nIntent Score: ${history.intentScore}`;
+            const whatsappUrl = `https://wa.me/919579250011?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            setTimeout(() => {
+                setIsSubmitting(false);
+                window.open(whatsappUrl, '_blank');
+                setIsSubmitted(true);
+            }, 2000);
         }
     };
 
