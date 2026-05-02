@@ -23,7 +23,9 @@
         { "source": "/projects/first-avenue", "destination": "/projects/kolte-patil-life-republic-first-avenue-premium-2-3-bhk-hinjewadi", "permanent": true },
         { "source": "/projects/villas", "destination": "/projects/kolte-patil-life-republic-villas-hinjewadi", "permanent": true },
         { "source": "/projects/bungalows", "destination": "/projects/kolte-patil-life-republic-bungalows-hinjewadi", "permanent": true },
-        { "source": "/projects/echoes", "destination": "/projects/kolte-patil-life-republic-echoes-new-launch-2-2-5-bhk-hinjewadi", "permanent": true }
+        { "source": "/projects/echoes", "destination": "/projects/kolte-patil-life-republic-echoes-new-launch-2-2-5-bhk-hinjewadi", "permanent": true },
+        { "source": "/projects/oro-avenue", "destination": "/projects/kolte-patil-life-republic-oro-avenue-smart-1-2-bhk-hinjewadi", "permanent": true },
+        { "source": "/projects/i-towers", "destination": "/projects/kolte-patil-life-republic-i-towers-smart-homes-hinjewadi", "permanent": true }
     ],
     "headers": [
         {
