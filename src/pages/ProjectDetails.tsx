@@ -205,7 +205,12 @@ const ProjectDetails: React.FC = () => {
                                     </div>
                                     <div className="grid grid-cols-3 gap-4">
                                         {project.gallery?.slice(0, 3).map((img, i) => (
-                                            <img key={i} src={img} className="w-full h-32 object-cover rounded-2xl shadow-xl hover:scale-105 transition-transform" />
+                                            <img 
+                                                key={i} 
+                                                src={typeof img === 'string' ? img : img.url} 
+                                                className="w-full h-32 object-cover rounded-2xl shadow-xl hover:scale-105 transition-transform" 
+                                                alt={typeof img === 'string' ? `${project.title} Gallery ${i}` : img.alt || project.title}
+                                            />
                                         ))}
                                     </div>
                                 </div>
@@ -220,7 +225,7 @@ const ProjectDetails: React.FC = () => {
                                         <p className="text-gray-600 font-medium">Strategic cluster orientation within the 390-acre Life Republic ecosystem. Optimized for flow, privacy, and social synthesis.</p>
                                         <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-gray-100 group">
                                             {project.masterLayout ? (
-                                                <img src={project.masterLayout} className="w-full h-auto" />
+                                                <img src={project.masterLayout} className="w-full h-auto" alt="Master Layout" />
                                             ) : (
                                                 <div className="h-[400px] bg-gray-50 flex items-center justify-center flex-col gap-6">
                                                     <Layout size={64} className="text-gray-200" />
@@ -260,7 +265,7 @@ const ProjectDetails: React.FC = () => {
 
                         {activeTab === 'amenities' && (
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                                {project.amenities.map((a, i) => (
+                                {(project.amenities || []).map((a, i) => (
                                     <div key={i} className="p-10 bg-gray-50 rounded-3xl border border-gray-100 text-center space-y-6 hover:bg-white hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group">
                                         <div className="w-16 h-16 bg-white rounded-2xl mx-auto flex items-center justify-center text-accent shadow-lg group-hover:bg-accent group-hover:text-secondary transition-all"><Sparkles size={28} /></div>
                                         <span className="block text-[11px] font-bold text-secondary uppercase tracking-[0.2em]">{a}</span>
@@ -325,7 +330,7 @@ const ProjectDetails: React.FC = () => {
                                 <div className="space-y-6">
                                     <h5 className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400">Blueprint Analysis</h5>
                                     <div className="space-y-4">
-                                        {selectedFloorPlan.details?.map((d, i) => (
+                                        {selectedFloorPlan.details?.map((d: string, i: number) => (
                                             <div key={i} className="flex items-center gap-4 text-sm font-bold text-secondary uppercase tracking-tight"><div className="w-1.5 h-1.5 bg-accent rounded-full" /> {d}</div>
                                         ))}
                                     </div>
