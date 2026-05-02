@@ -239,5 +239,132 @@ export const projects: Project[] = [
             { title: 'Universe Tech', items: ['Concealed wiring for smart devices', 'Branded ceramic flooring in living'] }
         ],
         themeColor: '#8e44ad'
+    },
+    {
+        id: 'kolte-patil-life-republic-arezo-efficient-2-bhk-flats-hinjewadi',
+        title: 'Kolte Patil Life Republic Arezo Hinjewadi | Efficient 2 BHK Flats',
+        category: 'Residential',
+        location: 'Sector R1',
+        price: '₹72 Lakhs*',
+        image: '/images/home/arezo-thumb.jpg',
+        description: 'Invest in efficiency at Kolte Patil Life Republic Arezo Hinjewadi. Smartly designed 2 BHK flats in a thriving integrated township.',
+        features: ['2 BHK', 'Possession: Oct 2025', 'Efficient Design'],
+        progress: 90,
+        overview: 'Arezo at Kolte Patil Life Republic Township Hinjewadi offers smart urban living with efficient space usage in Sector R1.',
+        amenities: ['Gymnasium', 'Kids Play Area', 'Party Lawn', 'Walking Track', 'CCTV Surveillance', 'Power Backup'],
+        masterLayout: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/life_republic_master_layout_demo.png',
+        floorPlans: [
+            { type: '2 BHK Efficient', size: '725 sq.ft.', image: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/atmos_floor_plan_demo.png', details: ['Smart Space Optimization', 'Compact Modern Kitchen'] }
+        ],
+        specifications: [
+            { title: 'Efficient Engineering', items: ['Optimized room dimensions', 'Concealed plumbing and electricals'] }
+        ],
+        themeColor: '#e74c3c'
+    },
+    {
+        id: 'kolte-patil-life-republic-bungalows-hinjewadi',
+        title: 'Kolte Patil Life Republic Township Bungalows | Exclusive Private Estates',
+        category: 'Luxury',
+        location: 'Sector R2 & R9',
+        price: '₹2.5 Cr*',
+        image: '/images/home/sound-of-soul-thumb.jpg',
+        description: 'Bespoke luxury: Kolte Patil Life Republic Bungalows Hinjewadi. Independent private estates within a premium gated township.',
+        features: ['4 & 5 BHK', 'Private Garden', 'Gated Community'],
+        overview: 'Bungalows at Kolte Patil Life Republic Township Hinjewadi provide the ultimate privacy and luxury for high achievers in Pune.',
+        amenities: ['Private Pool', 'Clubhouse Access', 'Landscaped Gardens', '24/7 Security', 'Concierge'],
+        masterLayout: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/life_republic_master_layout_demo.png',
+        floorPlans: [
+            { type: '4 BHK Bungalow', size: '3200 sq.ft.', image: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/atmos_floor_plan_demo.png', details: ['Private Estate', 'Landscaped Grounds'] }
+        ],
+        specifications: [
+            { title: 'Estate Synthesis', items: ['Private boundary walls', 'Customizable internal finishes'] }
+        ],
+        themeColor: '#d35400'
+    },
+    {
+        id: 'kolte-patil-life-republic-villas-hinjewadi',
+        title: 'Kolte Patil Life Republic Township Villas | Ultra-Luxury Lifestyle Hinjewadi',
+        category: 'Ultra Luxury',
+        location: 'Sector R9',
+        price: '₹3.0 Cr*',
+        image: '/images/home/24k-espada-thumb.jpg',
+        description: 'Live lavishly at Kolte Patil Life Republic Villas Hinjewadi. Unmatched elegance in the most premium sector of Life Republic.',
+        features: ['4 & 5 BHK Villas', 'World-class Amenities', 'Premium Location'],
+        overview: 'Villas at Kolte Patil Life Republic Township Hinjewadi offer an extraordinary lifestyle with private elevators and automation.',
+        amenities: ['Luxury Clubhouse', 'Swimming Pool', 'Concierge', 'Spa', 'Golf Putting Green'],
+        masterLayout: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/life_republic_master_layout_demo.png',
+        floorPlans: [
+            { type: '5 BHK Villa', size: '4500 sq.ft.', image: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/atmos_floor_plan_demo.png', details: ['Triple Height Foyer', 'Private Lap Pool'] }
+        ],
+        specifications: [
+            { title: 'Villa Tech', items: ['Full home automation', 'Italian marble throughout'] }
+        ],
+        themeColor: '#2c3e50',
+        faqs: [
+            { question: "Where are the premium villas in Life Republic located?", answer: "The villas are located in the premium Sector R9 of Kolte Patil Life Republic Hinjewadi." },
+            { question: "Are villas in Kolte Patil Life Republic ready to move?", answer: "Possession dates for villas vary by cluster; please contact our team for current status." }
+        ]
+    },
+    {
+        id: 'kolte-patil-life-republic-first-avenue-premium-2-3-bhk-hinjewadi',
+        title: 'Kolte Patil Life Republic First Avenue | Premium 2 & 3 BHK Hinjewadi',
+        category: 'Premium',
+        location: 'Sector R1 (First Avenue)',
+        price: '₹75 Lakhs*',
+        image: '/images/project/banner/first-avenue-main.jpg',
+        description: 'The foundation of the township: Kolte Patil Life Republic First Avenue Hinjewadi. Premium 2 & 3 BHK homes with a proven community lifestyle.',
+        features: ['2 & 3 BHK', 'Ready Possession', 'Prime Sector R1'],
+        overview: 'First Avenue at Kolte Patil Life Republic Township Hinjewadi is one of the most established sectors, offering immediate possession and a vibrant community life.',
+        amenities: ['Clubhouse', 'Swimming Pool', 'Gymnasium', 'Landscaped Gardens', 'Children\'s Play Area', '24/7 Security'],
+        masterLayout: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/life_republic_master_layout_demo.png',
+        floorPlans: [
+            { type: '2 BHK Ready', size: '780 sq.ft.', image: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/atmos_floor_plan_demo.png', details: ['Ready to Move', 'Spacious Living Area'] },
+            { type: '3 BHK Ready', size: '1050 sq.ft.', image: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/atmos_floor_plan_demo.png', details: ['Immediate Possession', 'Premium Finishes'] }
+        ],
+        specifications: [
+            { title: 'Standard Synthesis', items: ['Vitrified flooring in all rooms', 'Granite kitchen platform', 'Branded sanitary ware'] }
+        ],
+        themeColor: '#2980b9'
+    },
+    {
+        id: 'kolte-patil-life-republic-oro-avenue-smart-1-2-bhk-hinjewadi',
+        title: 'Kolte Patil Life Republic ORO Avenue | Smart 1 & 2 BHK Hinjewadi',
+        category: 'Smart',
+        location: 'Sector R9 (ORO Avenue)',
+        price: '₹48 Lakhs*',
+        image: '/images/home/oro-thumb.jpg',
+        description: 'Smart living at ORO Avenue, Kolte Patil Life Republic Hinjewadi. Optimized 1 & 2 BHK apartments designed for high-yield investment and modern comfort.',
+        features: ['1 & 2 BHK', 'Investment Grade', 'Sector R9'],
+        overview: 'ORO Avenue at Kolte Patil Life Republic Township Hinjewadi offers smart urban apartments with high rental demand in the growing Sector R9.',
+        amenities: ['Gymnasium', 'Walking Track', 'Retail Plaza', 'CCTV Security', 'Power Backup', 'Landscaped Garden'],
+        masterLayout: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/life_republic_master_layout_demo.png',
+        floorPlans: [
+            { type: '1 BHK Smart', size: '525 sq.ft.', image: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/atmos_floor_plan_demo.png', details: ['Optimized Floor Space', 'Modern Kitchen Hub'] },
+            { type: '2 BHK Smart', size: '710 sq.ft.', image: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/atmos_floor_plan_demo.png', details: ['Dual Balcony', 'Smart Room Layout'] }
+        ],
+        specifications: [
+            { title: 'Smart Engineering', items: ['Vitrified tiles in all rooms', 'Concealed copper wiring', 'Quality CP fittings'] }
+        ],
+        themeColor: '#f39c12'
+    },
+    {
+        id: 'kolte-patil-life-republic-i-towers-smart-homes-hinjewadi',
+        title: 'Kolte Patil Life Republic i-Towers | Smart Tech Homes Hinjewadi',
+        category: 'Smart',
+        location: 'Sector R7 (i-Towers)',
+        price: '₹65 Lakhs*',
+        image: '/images/home/itowers-thumb.jpg',
+        description: 'Tech-enabled living at i-Towers, Kolte Patil Life Republic Hinjewadi. Smart 2 & 3 BHK homes with integrated multi-sport courts.',
+        features: ['2 & 3 BHK', 'Tech Enabled', 'Sector R7'],
+        overview: 'i-Towers at Kolte Patil Life Republic Township Hinjewadi is designed for the modern professional, featuring smart home features and active sports infrastructure.',
+        amenities: ['Sports Arena', 'Digital Clubhouse', 'Smart Security', 'Yoga Deck', 'Swimming Pool', 'Co-working Space'],
+        masterLayout: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/life_republic_master_layout_demo.png',
+        floorPlans: [
+            { type: '2 BHK Tech', size: '785 sq.ft.', image: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/atmos_floor_plan_demo.png', details: ['Smart Lock Integration', 'Voice Command Ready'] }
+        ],
+        specifications: [
+            { title: 'Digital Synthesis', items: ['Fiber-to-the-home connectivity', 'Modular switches with automation support'] }
+        ],
+        themeColor: '#2980b9'
     }
 ];

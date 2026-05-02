@@ -127,14 +127,15 @@ export const api = {
             } catch (e) { return handleApiError(e, 'projects.getFeatured'); }
         },
         getById: async (id: string) => {
+            const cleanId = id.trim().replace(/\/$/, '');
             try {
                 // High-fidelity synthesis: Try DB first, then local registry fail-safe
-                const { data, error } = await supabase.from('projects').select('*').eq('id', id).single();
-                const registryProject = projectsRegistry.find(p => p.id === id);
+                const { data, error } = await supabase.from('projects').select('*').eq('id', cleanId).single();
+                const registryProject = projectsRegistry.find(p => p.id === cleanId);
 
                 if (error || !data) {
                     if (registryProject) {
-                        console.log(`[Sovereign Fail-safe] Serving ${id} from local registry.`);
+                        console.log(`[Sovereign Fail-safe] Serving ${cleanId} from local registry.`);
                         return {
                             ...registryProject,
                             description: registryProject.description || registryProject.overview
@@ -164,10 +165,13 @@ export const api = {
     
                 return project;
             } catch (e) { 
-                // Final level fail-safe for complete network failures
-                const registryProject = projectsRegistry.find(p => p.id === id);
-                if (registryProject) return registryProject as Project;
-                return handleApiError(e, 'projects.getById'); 
+                // Final level fail-safe for complete network failures or DB anomalies
+                const registryProject = projectsRegistry.find(p => p.id === cleanId);
+                if (registryProject) {
+                    console.log(`[Sovereign Critical Fail-safe] Serving ${cleanId} after catch block.`);
+                    return registryProject as Project;
+                }
+                return handleApiError(e, `projects.getById(${cleanId})`); 
             }
         },
         create: async (project: Project) => {
