@@ -1,7 +1,7 @@
 import { personalizationStore } from '../lib/personalizationStore';
 
-const FORMSUBMIT_URL = "https://formsubmit.co/ajax/propsmartrealty@gmail.com";
-const WHATSAPP_NUMBER = "919579250011"; // Fallback WhatsApp
+const WEB3FORMS_KEY = "b28972bc-8e15-4fe5-86b7-82b12ee0e82b";
+const WEB3FORMS_URL = "https://api.web3forms.com/submit";
 
 export const emailService = {
     sendLeadNotification: async (lead: {
@@ -37,22 +37,23 @@ export const emailService = {
         const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
         const payload = {
-            _subject: `${subjectTag} Lead: ${lead.name} | ${lead.project || 'Life Republic'}`,
-            _template: "table",
-            _captcha: "false",
+            access_key: WEB3FORMS_KEY,
+            subject: `${subjectTag} Lead: ${lead.name} | ${lead.project || 'Life Republic'}`,
+            from_name: "Life Republic Portal",
             "Full Name": lead.name,
-            "Mobile": lead.phone,
-            "Email": lead.email || 'N/A',
+            "Mobile Number": lead.phone,
+            "Email Address": lead.email || 'N/A',
             "Project Interest": lead.project || 'Life Republic Township',
             "Source": lead.source || window.location.hostname,
-            "Timestamp": timestamp
+            "Timestamp": timestamp,
+            "Message/Details": lead.message || 'No additional message'
         };
 
         let emailSent = false;
 
-        // === TIER 1: FormSubmit.co ===
+        // === TIER 1: Web3Forms Instant Dispatch ===
         try {
-            const response = await fetch(FORMSUBMIT_URL, {
+            const response = await fetch(WEB3FORMS_URL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -65,15 +66,15 @@ export const emailService = {
                 const result = await response.json();
                 if (result.success) {
                     emailSent = true;
-                    console.log("[Email Tier 1] FormSubmit dispatch successful.");
+                    console.log("[Email Tier 1] Web3Forms dispatch successful.");
                 } else {
-                    console.warn("[Email Tier 1] FormSubmit returned non-success:", result);
+                    console.warn("[Email Tier 1] Web3Forms returned non-success:", result);
                 }
             } else {
-                console.warn("[Email Tier 1] FormSubmit HTTP error:", response.status);
+                console.warn("[Email Tier 1] Web3Forms HTTP error:", response.status);
             }
         } catch (error) {
-            console.error("[Email Tier 1] FormSubmit failed:", error);
+            console.error("[Email Tier 1] Web3Forms failed:", error);
         }
 
         return emailSent;
