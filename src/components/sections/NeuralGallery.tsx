@@ -5,11 +5,27 @@ import { Sun, Sunset, Moon, Sparkles } from 'lucide-react';
 interface NeuralGalleryProps {
     images: {
         day: string;
-        sunset: string;
-        night: string;
+        sunset?: string;
+        night?: string;
     };
     title: string;
 }
+
+const atmosphereStyles: Record<string, React.CSSProperties> = {
+    day: {},
+    sunset: {
+        filter: 'sepia(0.4) saturate(1.5) brightness(0.9) hue-rotate(-10deg)',
+    },
+    night: {
+        filter: 'brightness(0.35) saturate(0.6) contrast(1.2) hue-rotate(200deg)',
+    },
+};
+
+const overlayStyles: Record<string, string> = {
+    day: 'from-black/50 via-transparent to-transparent',
+    sunset: 'from-orange-900/60 via-amber-900/20 to-transparent',
+    night: 'from-indigo-950/80 via-blue-900/30 to-transparent',
+};
 
 export const NeuralGallery: React.FC<NeuralGalleryProps> = ({ images, title }) => {
     const [mode, setMode] = useState<'day' | 'sunset' | 'night'>('day');
@@ -20,25 +36,36 @@ export const NeuralGallery: React.FC<NeuralGalleryProps> = ({ images, title }) =
         { id: 'night', icon: Moon, label: 'Ambient Night' }
     ];
 
+    // Use dedicated image if available, otherwise fall back to day image with CSS filter
+    const currentSrc = (mode === 'sunset' && images.sunset) ? images.sunset 
+                     : (mode === 'night' && images.night) ? images.night 
+                     : images.day;
+    const useFilter = (mode === 'sunset' && !images.sunset) || (mode === 'night' && !images.night) || mode !== 'day';
+
     return (
         <div className="relative group">
             {/* Main Display */}
             <div className="aspect-[16/9] rounded-[2.5rem] overflow-hidden relative shadow-2xl bg-gray-900 border border-white/10">
                 <AnimatePresence mode="wait">
-                    <motion.img
+                    <motion.div
                         key={mode}
-                        src={images[mode]}
-                        alt={`${title} - ${mode} view`}
-                        initial={{ opacity: 0, scale: 1.1 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         transition={{ duration: 1.2, ease: [0.43, 0.13, 0.23, 0.96] }}
-                        className="absolute inset-0 w-full h-full object-cover"
-                    />
+                        className="absolute inset-0 w-full h-full"
+                    >
+                        <img
+                            src={currentSrc}
+                            alt={`${title} - ${mode} view`}
+                            className="w-full h-full object-cover transition-all duration-1000"
+                            style={useFilter ? atmosphereStyles[mode] : {}}
+                        />
+                    </motion.div>
                 </AnimatePresence>
 
                 {/* Ambient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className={`absolute inset-0 bg-gradient-to-t ${overlayStyles[mode]} pointer-events-none transition-all duration-1000`} />
 
                 {/* Atmospheric Controls */}
                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 p-2 bg-white/10 backdrop-blur-2xl rounded-full border border-white/20 shadow-xl z-20">
@@ -69,7 +96,7 @@ export const NeuralGallery: React.FC<NeuralGalleryProps> = ({ images, title }) =
                 </div>
             </div>
 
-            {/* Reflection Layer (Premium Detail) */}
+            {/* Reflection Layer */}
             <div className="mt-8 text-center">
                 <h4 className="text-secondary font-serif font-bold text-2xl mb-2">{title}</h4>
                 <p className="text-gray-400 text-xs uppercase tracking-[0.3em]">Experience the Tectonic Flow</p>
@@ -77,3 +104,4 @@ export const NeuralGallery: React.FC<NeuralGalleryProps> = ({ images, title }) =
         </div>
     );
 };
+
