@@ -18,7 +18,6 @@ export const Contact: React.FC = () => {
         "name": "Kolte Patil Life Republic Sales Office",
         "image": "/images/gallery/eros/master-layout.webp",
         "url": "https://life-republic.in/contact",
-        "telephone": "+917744009295",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "Life Republic Township, Marunji",
