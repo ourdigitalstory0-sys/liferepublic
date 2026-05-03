@@ -74,6 +74,8 @@ export const emailService = {
             }
         } catch (error) {
             console.error("[Email Tier 1] FormSubmit failed:", error);
+        }
+
         return emailSent;
     }
 };
