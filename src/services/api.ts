@@ -130,21 +130,42 @@ export const api = {
         getById: async (id: string) => {
             const rawId = id.trim().replace(/\/$/, '');
             
-            // Slug Resolution Logic: Find the real ID if a slug was provided
-            let cleanId = rawId;
-            const slugEntry = Object.entries(ID_TO_SLUG).find(([_, slug]) => slug === rawId);
-            if (slugEntry) {
-                cleanId = slugEntry[0];
-            }
-
             try {
-                // High-fidelity synthesis: Try DB first, then local registry fail-safe
-                const { data, error } = await supabase.from('projects').select('*').eq('id', cleanId).single();
-                const registryProject = projectsRegistry.find((p: Project) => p.id === cleanId);
+                // 1. Try fetching by rawId first (Handles semantic slugs directly)
+                let { data, error } = await supabase.from('projects').select('*').eq('id', rawId).single();
+                
+                // 2. If not found, try slug resolution
+                if (error || !data) {
+                    // Try looking up if rawId is a legacy ID
+                    const mappedSlug = ID_TO_SLUG[rawId];
+                    if (mappedSlug) {
+                        const { data: slugData, error: slugError } = await supabase.from('projects').select('*').eq('id', mappedSlug).single();
+                        if (!slugError && slugData) {
+                            data = slugData;
+                            error = null;
+                        }
+                    }
+
+                    // Try looking up if rawId is a slug that maps to a legacy ID (Backward compatibility)
+                    if (error || !data) {
+                        const slugEntry = Object.entries(ID_TO_SLUG).find(([_, slug]) => slug === rawId);
+                        if (slugEntry) {
+                            const legacyId = slugEntry[0];
+                            const { data: legacyData, error: legacyError } = await supabase.from('projects').select('*').eq('id', legacyId).single();
+                            if (!legacyError && legacyData) {
+                                data = legacyData;
+                                error = null;
+                            }
+                        }
+                    }
+                }
+
+                const registryProject = projectsRegistry.find((p: Project) => p.id === rawId) || 
+                                       projectsRegistry.find((p: Project) => ID_TO_SLUG[p.id] === rawId);
 
                 if (error || !data) {
                     if (registryProject) {
-                        console.log(`[Sovereign Fail-safe] Serving ${cleanId} from local registry.`);
+                        console.log(`[Sovereign Fail-safe] Serving ${rawId} from local registry.`);
                         return {
                             ...registryProject,
                             description: registryProject.description || registryProject.overview
@@ -175,12 +196,13 @@ export const api = {
                 return project;
             } catch (e) { 
                 // Final level fail-safe for complete network failures or DB anomalies
-                const registryProject = projectsRegistry.find((p: Project) => p.id === cleanId);
+                const registryProject = projectsRegistry.find((p: Project) => p.id === rawId) || 
+                                       projectsRegistry.find((p: Project) => ID_TO_SLUG[p.id] === rawId);
                 if (registryProject) {
-                    console.log(`[Sovereign Critical Fail-safe] Serving ${cleanId} after catch block.`);
+                    console.log(`[Sovereign Critical Fail-safe] Serving ${rawId} after catch block.`);
                     return registryProject as Project;
                 }
-                return handleApiError(e, `projects.getById(${cleanId})`); 
+                return handleApiError(e, `projects.getById(${rawId})`); 
             }
         },
         create: async (project: Project) => {

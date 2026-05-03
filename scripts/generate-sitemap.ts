@@ -112,8 +112,8 @@ export const ID_TO_SLUG: Record<string, string> = {
     'bungalows': 'kolte-patil-life-republic-bungalows-hinjewadi',
     'echoes': 'kolte-patil-life-republic-echoes-new-launch-2-2-5-bhk-hinjewadi',
     'qrious': 'kolte-patil-life-republic-qrious-smart-2-3-bhk-homes-hinjewadi',
-    'oro-avenue': 'kolte-patil-life-republic-oro-avenue-premium-1-2-bhk-hinjewadi',
-    'i-towers': 'kolte-patil-life-republic-i-towers-high-rise-living-hinjewadi'
+    'oro-avenue': 'kolte-patil-life-republic-oro-avenue-smart-1-2-bhk-hinjewadi',
+    'i-towers': 'kolte-patil-life-republic-i-towers-smart-homes-hinjewadi'
 };
 
 async function generateSitemap() {
