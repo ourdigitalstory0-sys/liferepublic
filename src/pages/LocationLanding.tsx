@@ -71,10 +71,10 @@ export const LocationLanding: React.FC<LocationLandingProps> = ({ locationName, 
                         </p>
                         <div className="flex flex-wrap gap-10">
                             <button 
-                                onClick={() => window.dispatchEvent(new CustomEvent('open-sovereign-concierge'))}
+                                onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}
                                 className="bg-white text-secondary px-20 py-10 rounded-full font-bold text-2xl shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)] hover:bg-accent hover:text-secondary transition-all flex items-center gap-6 group hover:scale-[1.05]"
                             >
-                                Secure Site Synthesis <ArrowUpRight size={32} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
+                                Enquire Now <ArrowUpRight size={32} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
                             </button>
                             <a href="#matrix" className="bg-transparent border-2 border-white/20 text-white hover:bg-white/5 rounded-full px-20 py-10 font-bold text-2xl flex items-center gap-6 transition-all group">
                                 View Transit Matrix <BarChart3 size={32} className="group-hover:rotate-12 transition-transform" />

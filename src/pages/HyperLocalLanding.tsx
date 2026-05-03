@@ -55,8 +55,8 @@ export const HyperLocalLanding: React.FC = () => {
                             A deep-dive analysis of real estate dynamics, infrastructure velocity, and investment potential for <strong>{slug?.replace(/-/g, ' ')}</strong>.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <Button variant="primary" className="rounded-full px-8 h-14">Get Price List 2026</Button>
-                            <Button variant="outline" className="rounded-full px-8 h-14">Download Area Report</Button>
+                            <Button variant="primary" className="rounded-full px-8 h-14" onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}>Enquire Now for Price List</Button>
+                            <Button variant="outline" className="rounded-full px-8 h-14" onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}>Download Area Report</Button>
                         </div>
                     </div>
 
