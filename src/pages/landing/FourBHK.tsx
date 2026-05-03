@@ -25,10 +25,10 @@ export const FourBHK: React.FC = () => {
                 if (filtered.length > 0) {
                     setProjects(filtered);
                 } else {
-                    const { projects: staticProjects } = await import('../../data/projects');
-                    const staticFiltered = staticProjects.filter(p =>
-                        p.features.some(f => f.includes('4 BHK') || f.includes('4 Bed')) ||
-                        p.title.includes('24K') ||
+                    const { projectsRegistry: staticProjects } = await import('../../data/projects');
+                    const staticFiltered = staticProjects.filter((p: Project) =>
+                        p.features.some((f: string) => f.includes('4 BHK') || f.includes('4 Bed')) ||
+                        p.title.includes('4 BHK') ||
                         p.description.includes('4 BHK')
                     );
                     setProjects(staticFiltered);

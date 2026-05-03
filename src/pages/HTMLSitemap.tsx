@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { SEO } from '../components/seo/SEO';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { pseoSlugs, pseoRegistry } from '../data/pseo-registry';
-import { projects } from '../data/projects';
+import { projectsRegistry as projects } from '../data/projects';
 
 export const HTMLSitemap: React.FC = () => {
     return (

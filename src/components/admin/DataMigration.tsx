@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../../lib/supabase';
-import { projects } from '../../data/projects';
+import { projectsRegistry as projects } from '../../data/projects';
 import { Button } from '../ui/Button';
 
 export const DataMigration = () => {

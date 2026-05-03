@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import { projects } from '../src/data/projects';
+import { projectsRegistry as projects } from '../src/data/projects';
 
 const OUT_DIR = path.resolve(process.cwd(), 'dist');
 const SSR_BUNDLE_PATH = path.join(OUT_DIR, 'server/entry-server.js');

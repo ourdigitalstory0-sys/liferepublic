@@ -1,6 +1,6 @@
 import { supabase } from '../lib/supabase';
 import type { Banner, Project, Lead, Amenity } from '../lib/types';
-import { projects as projectsRegistry } from '../data/projects';
+import { projectsRegistry } from '../data/projects';
 import { emailService } from './email';
 import townshipKB from '../data/township_kb.json';
 
@@ -131,7 +131,7 @@ export const api = {
             try {
                 // High-fidelity synthesis: Try DB first, then local registry fail-safe
                 const { data, error } = await supabase.from('projects').select('*').eq('id', cleanId).single();
-                const registryProject = projectsRegistry.find(p => p.id === cleanId);
+                const registryProject = projectsRegistry.find((p: Project) => p.id === cleanId);
 
                 if (error || !data) {
                     if (registryProject) {
@@ -166,7 +166,7 @@ export const api = {
                 return project;
             } catch (e) { 
                 // Final level fail-safe for complete network failures or DB anomalies
-                const registryProject = projectsRegistry.find(p => p.id === cleanId);
+                const registryProject = projectsRegistry.find((p: Project) => p.id === cleanId);
                 if (registryProject) {
                     console.log(`[Sovereign Critical Fail-safe] Serving ${cleanId} after catch block.`);
                     return registryProject as Project;

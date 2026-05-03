@@ -1,5 +1,6 @@
 import jsPDF from 'jspdf';
-import { projects } from '../data/projects';
+import { projectsRegistry as projects } from '../data/projects';
+import type { Project } from '../lib/types';
 
 export const brochureGenerator = {
     async generateCustomBrochure(userName: string = 'Valued Partner') {
@@ -7,7 +8,7 @@ export const brochureGenerator = {
         const viewedIds = JSON.parse(localStorage.getItem('lr_recently_viewed') || '[]');
         
         // Filter projects the user actually cared about
-        const interestedProjects = projects.filter(p => viewedIds.includes(p.id));
+        const interestedProjects = projects.filter((p: Project) => viewedIds.includes(p.id));
         
         // Cover Page
         doc.setFillColor(31, 41, 55); // Secondary color
@@ -72,7 +73,7 @@ export const brochureGenerator = {
             doc.setFont('helvetica', 'bold');
             doc.text('Key Features:', 20, 100);
             doc.setFont('helvetica', 'normal');
-            doc.text(project.features.slice(0, 5).map(f => `• ${f}`), 20, 110);
+            doc.text(project.features.slice(0, 5).map((f: string) => `• ${f}`), 20, 110);
             
             // Note: In a real production app, we would use html2canvas to capture 
             // the actual floor plans from hidden DOM elements for high-fidelity images.

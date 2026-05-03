@@ -143,8 +143,8 @@ async function generateSitemap() {
     // Self-healing fallback: Ensure all projects from local data are included
     if (projectRoutes.length < 13) {
         console.log('🛡️  Sitemap Health Check: Database count low. Merging local projects...');
-        const { projects: localProjects } = await import('../src/data/projects');
-        localProjects.forEach(lp => {
+        const { projectsRegistry: localProjects } = await import('../src/data/projects');
+        (localProjects || []).forEach(lp => {
             const route = `/projects/${lp.id}`;
             if (!projectRoutes.includes(route)) {
                 projectRoutes.push(route);
