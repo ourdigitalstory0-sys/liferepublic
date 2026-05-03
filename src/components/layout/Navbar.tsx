@@ -99,28 +99,28 @@ export const Navbar: React.FC = () => {
             </div>
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: '100%' }} className="fixed inset-0 bg-secondary z-[110] lg:hidden p-16 flex flex-col">
-                        <div className="flex justify-between items-center mb-24 relative z-10">
-                            <Link to="/" className="flex items-center gap-6 group">
-                                <div className="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center shadow-xl border border-white/20">
-                                    <img src="/images/life-republic-logo-color.png" alt="LR" className="w-full h-full object-contain p-2" />
+                    <motion.div initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: '100%' }} className="fixed inset-0 bg-secondary z-[110] lg:hidden p-6 sm:p-10 flex flex-col">
+                        <div className="flex justify-between items-center mb-16 relative z-10">
+                            <Link to="/" className="flex items-center gap-4 group">
+                                <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center shadow-xl border border-white/20">
+                                    <img src="/images/life-republic-logo-color.png" alt="LR" className="w-full h-full object-contain p-1.5" />
                                 </div>
                                 <div className="flex flex-col leading-none">
-                                    <span className="text-3xl font-serif font-bold text-white tracking-tighter uppercase">Life Republic</span>
-                                    <span className="text-accent text-[12px] font-bold uppercase tracking-[0.5em] mt-1">Sovereign Township</span>
+                                    <span className="text-xl font-serif font-bold text-white tracking-tighter uppercase">Life Republic</span>
+                                    <span className="text-accent text-[9px] font-bold uppercase tracking-[0.4em] mt-1">Sovereign Township</span>
                                 </div>
                             </Link>
-                            <button onClick={() => setIsOpen(false)} className="p-6 bg-white/5 rounded-full text-white border border-white/10">
-                                <X size={48} />
+                            <button onClick={() => setIsOpen(false)} className="p-3 sm:p-4 bg-white/5 rounded-full text-white border border-white/10 hover:bg-white/10 transition-colors">
+                                <X size={28} />
                             </button>
                         </div>
-                        <div className="space-y-10 flex-1 relative z-10">{[
+                        <div className="space-y-6 flex-1 relative z-10 overflow-y-auto">{[
                             { name: 'Sovereign Sectors', path: '/projects' },
                             { name: 'Luxury Villas', path: '/projects/kolte-patil-life-republic-24k-espada-ultra-luxury-row-houses-hinjewadi' },
                             { name: 'Infrastructure', path: '/location-highlights' },
                             { name: 'Investment Hub', path: '/nri-corner' }
-                        ].map((link) => (<Link key={link.name} to={link.path} className="block text-6xl font-serif font-bold text-white hover:text-accent transition-all tracking-tighter leading-tight">{link.name}</Link>))}</div>
-                        <div className="space-y-8 pt-16 border-t border-white/10 relative z-10"><div className="flex items-center gap-4 text-white/30 font-bold uppercase tracking-[0.5em] text-[10px]"><ShieldCheck size={20} className="text-accent" /> MahaRERA Synchronized</div><Button variant="primary" size="lg" className="w-full rounded-[2.5rem] py-8 font-bold text-xl shadow-2xl" onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}>Enquire Now</Button></div>
+                        ].map((link) => (<Link key={link.name} to={link.path} onClick={() => setIsOpen(false)} className="block text-3xl sm:text-4xl font-serif font-bold text-white hover:text-accent transition-all tracking-tight leading-tight">{link.name}</Link>))}</div>
+                        <div className="space-y-6 pt-8 border-t border-white/10 relative z-10 mt-auto"><div className="flex items-center gap-3 text-white/30 font-bold uppercase tracking-[0.4em] text-[9px]"><ShieldCheck size={16} className="text-accent" /> MahaRERA Synchronized</div><Button variant="primary" size="lg" className="w-full rounded-full py-4 font-bold text-lg shadow-2xl" onClick={() => { setIsOpen(false); window.dispatchEvent(new CustomEvent('open-enquiry-modal')); }}>Enquire Now</Button></div>
                     </motion.div>
                 )}
             </AnimatePresence>
