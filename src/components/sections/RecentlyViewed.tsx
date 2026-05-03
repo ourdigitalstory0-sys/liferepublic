@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { personalizationStore } from '../../lib/personalizationStore';
 import { api } from '../../services/api';
+import { ID_TO_SLUG } from '../../data/slug-registry';
 import type { Project } from '../../lib/types';
 
 export const RecentlyViewed: React.FC = () => {
@@ -17,7 +18,7 @@ export const RecentlyViewed: React.FC = () => {
             const history = personalizationStore.getHistory();
             
             // 1. Sentiment Synthesis v6.0
-            const sentiments = {
+            const sentiments: Record<string, string> = {
                 'curious': 'Discovery Path Synthesis',
                 'intent': 'Investment Synergy Flow',
                 'high-intent': 'Sovereign Thesis Active',
@@ -112,11 +113,12 @@ export const RecentlyViewed: React.FC = () => {
                                 transition={{ delay: index * 0.1 }}
                                 className="flex-none w-[350px] md:w-[500px] snap-start"
                             >
-                                <Link to={`/projects/${project.id}`} className="group block relative">
+                                <Link to={`/projects/${ID_TO_SLUG[project.id] || project.id}`} className="group block relative">
                                     <div className="relative aspect-[4/5] rounded-[4.5rem] overflow-hidden bg-gray-50 mb-10 shadow-2xl transition-all duration-1000 group-hover:shadow-[0_60px_120px_-30px_rgba(0,0,0,0.4)]">
                                         <img 
                                             src={project.image} 
                                             alt={project.title} 
+                                            loading="lazy"
                                             className="absolute inset-0 w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[1.5s] group-hover:scale-110"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/20 to-transparent opacity-80"></div>

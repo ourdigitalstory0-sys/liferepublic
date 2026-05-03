@@ -344,7 +344,7 @@ WhatsApp Opt-in: ${formData.whatsapp}`
                         <form onSubmit={handleChatSubmit} className="p-12 bg-white border-t border-gray-100 flex gap-8 shadow-[0_-20px_40px_-20px_rgba(0,0,0,0.05)]">
                             <input 
                                 type="text" value={input} onChange={e => setInput(e.target.value)}
-                                placeholder="Inquire about Metro, Spine Road, or 2026 ROI..."
+                                placeholder="Enquire about Metro, Spine Road, or 2026 ROI..."
                                 className="flex-1 px-12 py-8 bg-gray-50 border-none rounded-full outline-none font-bold text-secondary text-xl focus:ring-8 focus:ring-accent/10 transition-all placeholder:text-gray-300"
                             />
                             <button type="submit" className="w-24 h-24 bg-secondary text-white rounded-full flex items-center justify-center hover:bg-accent hover:text-secondary transition-all shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] hover:scale-105">

@@ -56,7 +56,7 @@ const staticRoutes = [
     '/location/flats-near-marunji',
     '/location/flats-near-marunji-road',
     '/location/ready-possession-flats-hinjewadi',
-    // Expanded PSEO Landing Pages (Phase 6 - Keyword Dominance)
+    // Phase 6 - Keyword Dominance
     '/location/affordable-flats-in-hinjewadi',
     '/location/luxury-apartments-hinjewadi',
     '/location/new-launch-projects-hinjewadi',
@@ -98,7 +98,7 @@ const sectorRoutes = [
     ...sectorsData.localities.map((l: any) => `/location/${l.slug}`),
 ];
 
-const ID_TO_SLUG: Record<string, string> = {
+export const ID_TO_SLUG: Record<string, string> = {
     'duet': 'kolte-patil-life-republic-duet-premium-2-bhk-flats-hinjewadi',
     'arezo': 'kolte-patil-life-republic-arezo-efficient-2-bhk-flats-hinjewadi',
     'canvas': 'kolte-patil-life-republic-canvas-luxury-3-4-bhk-flats-hinjewadi',
@@ -111,32 +111,33 @@ const ID_TO_SLUG: Record<string, string> = {
     'villas': 'kolte-patil-life-republic-villas-hinjewadi',
     'bungalows': 'kolte-patil-life-republic-bungalows-hinjewadi',
     'echoes': 'kolte-patil-life-republic-echoes-new-launch-2-2-5-bhk-hinjewadi',
-    'qrious': 'kolte-patil-life-republic-qrious-smart-2-3-bhk-homes-hinjewadi'
+    'qrious': 'kolte-patil-life-republic-qrious-smart-2-3-bhk-homes-hinjewadi',
+    'oro-avenue': 'kolte-patil-life-republic-oro-avenue-premium-1-2-bhk-hinjewadi',
+    'i-towers': 'kolte-patil-life-republic-i-towers-high-rise-living-hinjewadi'
 };
 
 async function generateSitemap() {
     console.log('🗺️  Generating Sitemap...');
 
     let projectRoutes: string[] = [];
+    let blogRoutes: string[] = [];
 
-    // Fetch projects from Supabase
+    // Fetch projects and blogs from Supabase
     if (supabase) {
         try {
-            const { data, error } = await supabase
-                .from('projects')
-                .select('id');
+            const { data: projects, error: pError } = await supabase.from('projects').select('id');
+            const { data: posts, error: bError } = await supabase.from('posts').select('slug').eq('published', true);
 
-            if (error) throw error;
-
-            if (data) {
-                console.log(`📡 Fetched ${data.length} projects from database.`);
-                projectRoutes = data.map(p => {
-                    const slug = ID_TO_SLUG[p.id] || p.id;
-                    return `/projects/${slug}`;
-                });
+            if (projects) {
+                console.log(`📡 Fetched ${projects.length} projects from database.`);
+                projectRoutes = projects.map(p => `/projects/${ID_TO_SLUG[p.id] || p.id}`);
+            }
+            if (posts) {
+                console.log(`📡 Fetched ${posts.length} blog posts from database.`);
+                blogRoutes = posts.map(p => `/media-center/${p.slug}`);
             }
         } catch (error) {
-            console.error('❌ Error fetching projects from Supabase:', error);
+            console.error('❌ Error fetching dynamic routes:', error);
         }
     }
 
@@ -145,14 +146,14 @@ async function generateSitemap() {
         console.log('🛡️  Sitemap Health Check: Database count low. Merging local projects...');
         const { projectsRegistry: localProjects } = await import('../src/data/projects');
         (localProjects || []).forEach(lp => {
-            const route = `/projects/${lp.id}`;
+            const route = `/projects/${ID_TO_SLUG[lp.id] || lp.id}`;
             if (!projectRoutes.includes(route)) {
                 projectRoutes.push(route);
             }
         });
     }
 
-    const allRoutes = [...staticRoutes, ...sectorRoutes, ...projectRoutes];
+    const allRoutes = [...staticRoutes, ...sectorRoutes, ...projectRoutes, ...blogRoutes];
 
     const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -160,7 +161,7 @@ ${allRoutes.map(route => `  <url>
     <loc>${DOMAIN}${route}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>${route === '/' ? 'daily' : 'weekly'}</changefreq>
-    <priority>${route === '/' ? '1.0' : (route.startsWith('/projects/') || route.startsWith('/location/')) ? '0.9' : '0.8'}</priority>
+    <priority>${route === '/' ? '1.0' : (route.startsWith('/projects/') || route.startsWith('/location/') || route.startsWith('/media-center/')) ? '0.9' : '0.8'}</priority>
   </url>`).join('\n')}
 </urlset>`;
 

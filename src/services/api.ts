@@ -1,6 +1,7 @@
 import { supabase } from '../lib/supabase';
 import type { Banner, Project, Lead, Amenity } from '../lib/types';
 import { projectsRegistry } from '../data/projects';
+import { ID_TO_SLUG } from '../data/slug-registry';
 import { emailService } from './email';
 import townshipKB from '../data/township_kb.json';
 
@@ -127,7 +128,15 @@ export const api = {
             } catch (e) { return handleApiError(e, 'projects.getFeatured'); }
         },
         getById: async (id: string) => {
-            const cleanId = id.trim().replace(/\/$/, '');
+            const rawId = id.trim().replace(/\/$/, '');
+            
+            // Slug Resolution Logic: Find the real ID if a slug was provided
+            let cleanId = rawId;
+            const slugEntry = Object.entries(ID_TO_SLUG).find(([_, slug]) => slug === rawId);
+            if (slugEntry) {
+                cleanId = slugEntry[0];
+            }
+
             try {
                 // High-fidelity synthesis: Try DB first, then local registry fail-safe
                 const { data, error } = await supabase.from('projects').select('*').eq('id', cleanId).single();
@@ -158,7 +167,7 @@ export const api = {
                 if (typeof window !== 'undefined') {
                     try {
                         const recentlyViewed = JSON.parse(localStorage.getItem('lr_recently_viewed') || '[]');
-                        const filtered = recentlyViewed.filter((id: string) => id !== project.id);
+                        const filtered = recentlyViewed.filter((vid: string) => vid !== project.id);
                         localStorage.setItem('lr_recently_viewed', JSON.stringify([project.id, ...filtered].slice(0, 4)));
                     } catch (e) { /* ignore */ }
                 }

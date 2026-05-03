@@ -13,6 +13,7 @@ import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { SEO } from '../components/seo/SEO';
 import { RecentlyViewed } from '../components/sections/RecentlyViewed';
 import { SectorMesh } from '../components/sections/SectorMesh';
+import { ID_TO_SLUG } from '../data/slug-registry';
 
 const ProjectDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -79,12 +80,14 @@ const ProjectDetails: React.FC = () => {
         }));
     };
 
+    const projectSlug = ID_TO_SLUG[project.id] || project.id;
+
     return (
         <div className="min-h-screen bg-white">
             <SEO 
                 title={`${project.title} | Kolte Patil Life Republic Hinjewadi`}
                 description={project.description}
-                canonical={`/projects/${project.id}`}
+                canonical={`/projects/${projectSlug}`}
             />
             <Breadcrumbs />
 
@@ -112,6 +115,14 @@ const ProjectDetails: React.FC = () => {
                         <div className="flex items-center gap-2 font-bold uppercase tracking-widest text-[10px]">
                             <ShieldCheck size={16} className="text-accent" /> Sovereign Verified
                         </div>
+                    </motion.div>
+                    <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="mt-12 flex justify-center gap-6">
+                        <Button variant="primary" size="lg" className="rounded-full px-12 py-6 font-bold text-sm tracking-[0.3em] uppercase shadow-2xl" onClick={openEnquiry}>
+                            Enquire Now <ArrowRight size={20} className="ml-2" />
+                        </Button>
+                        <Button variant="outline" size="lg" className="rounded-full px-12 py-6 font-bold text-sm tracking-[0.3em] uppercase border-white/20 text-white hover:bg-white hover:text-secondary shadow-2xl" onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}>
+                            Explore Monograph
+                        </Button>
                     </motion.div>
                 </div>
             </section>
@@ -147,7 +158,7 @@ const ProjectDetails: React.FC = () => {
                                         <span className="text-[10px] font-bold text-accent uppercase tracking-[0.5em]">Volume Value</span>
                                         <p className="text-4xl font-serif font-bold text-white tracking-tighter">{project.price}</p>
                                     </div>
-                                    <Button variant="primary" size="lg" className="rounded-2xl px-10 py-5 font-bold uppercase tracking-widest text-xs" onClick={openEnquiry}>Secure Unit</Button>
+                                    <Button variant="primary" size="lg" className="rounded-2xl px-10 py-5 font-bold uppercase tracking-widest text-xs" onClick={openEnquiry}>Enquire Now</Button>
                                 </div>
                             </div>
                         </div>
@@ -213,7 +224,7 @@ const ProjectDetails: React.FC = () => {
                                                     </div>
                                                 ))}
                                             </div>
-                                            <Button variant="primary" size="lg" className="w-full rounded-2xl py-8 font-bold text-xs uppercase tracking-[0.5em] shadow-2xl" onClick={openEnquiry}>Request Full Technical Packet</Button>
+                                            <Button variant="primary" size="lg" className="w-full rounded-2xl py-8 font-bold text-xs uppercase tracking-[0.5em] shadow-2xl" onClick={openEnquiry}>Enquire Now</Button>
                                         </div>
                                     </div>
                                 </motion.div>

@@ -164,8 +164,11 @@ export const ROICalculator: React.FC = () => {
                             </div>
 
                             <div className="pt-12">
-                                <button className="w-full py-6 px-10 bg-white text-secondary rounded-[2rem] flex items-center justify-between font-bold hover:bg-accent hover:scale-[1.02] transition-all shadow-[0_20px_50px_rgba(0,0,0,0.3)] group">
-                                    <span className="text-lg">Synthesize Detailed Investment Monograph</span>
+                                <button 
+                                    onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}
+                                    className="w-full py-6 px-10 bg-white text-secondary rounded-[2rem] flex items-center justify-between font-bold hover:bg-accent hover:scale-[1.02] transition-all shadow-[0_20px_50px_rgba(0,0,0,0.3)] group"
+                                >
+                                    <span className="text-lg">Enquire Now for Detailed Monograph</span>
                                     <div className="w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center group-hover:translate-x-1 transition-all">
                                         <ChevronRight size={24} />
                                     </div>

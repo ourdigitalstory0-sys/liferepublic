@@ -107,8 +107,8 @@ export const EMICalculator: React.FC<EMICalculatorProps> = ({ basePrice = 750000
                                 <span className="text-white/60">Total Interest Payable</span>
                                 <span className="font-bold">₹{Math.round(totalInterest / 100000).toFixed(2)} L</span>
                             </div>
-                            <Button variant="primary" className="w-full rounded-xl py-6 flex items-center justify-center gap-3 group">
-                                Inquire about this EMI <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                            <Button variant="primary" className="w-full rounded-xl py-6 flex items-center justify-center gap-3 group" onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}>
+                                Enquire Now <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
                             </Button>
                         </div>
                     </div>

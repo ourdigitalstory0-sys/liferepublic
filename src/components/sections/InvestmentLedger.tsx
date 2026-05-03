@@ -96,10 +96,10 @@ export const InvestmentLedger: React.FC = () => {
                     </div>
                     <div className="pb-10">
                         <button 
-                            onClick={() => window.dispatchEvent(new CustomEvent('open-sovereign-concierge'))}
+                            onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}
                             className="bg-secondary text-white px-16 py-10 rounded-full font-bold text-2xl shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] hover:bg-accent hover:text-secondary transition-all flex items-center gap-6 group hover:scale-[1.05]"
                         >
-                            Inquire for Yield Report <ArrowUpRight size={32} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
+                            Enquire Now <ArrowUpRight size={32} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
                         </button>
                     </div>
                 </div>

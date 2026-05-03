@@ -50,9 +50,17 @@ const ImageManager = lazy(() => import('./components/admin/ImageManager').then(m
 
 // Premium Loading Component for Suspense Boundary
 export const PageLoader = () => (
-  <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 fixed inset-0 z-50">
-    <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mb-4"></div>
-    <div className="text-sm font-serif text-secondary tracking-widest uppercase animate-pulse">Loading Architecture</div>
+  <div className="min-h-screen flex flex-col items-center justify-center bg-white fixed inset-0 z-[1000]">
+    <div className="relative">
+      <div className="w-32 h-32 border-[1px] border-accent/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-12 h-12 border-t-2 border-accent rounded-full animate-spin"></div>
+      </div>
+    </div>
+    <div className="mt-12 space-y-4 text-center">
+      <div className="text-[10px] font-bold text-secondary uppercase tracking-[0.8em] animate-pulse">Synthesizing Architecture</div>
+      <div className="text-[9px] font-medium text-gray-400 uppercase tracking-[0.4em]">Life Republic v5.5</div>
+    </div>
   </div>
 );
 
@@ -82,69 +90,44 @@ function App() {
             </Layout>
           } />
           <Route path="/projects" element={
-            <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi">
+            <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi Gallery">
               <Projects />
             </Layout>
           } />
           <Route path="/projects/:id" element={
-            <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi">
+            <Layout ariaLabel="Kolte Patil Life Republic Township Project Monograph">
               <ProjectDetails />
             </Layout>
           } />
           <Route path="/amenities" element={
-            <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi">
+            <Layout ariaLabel="Kolte Patil Life Republic Township Amenities">
               <Amenities />
             </Layout>
           } />
           <Route path="/contact" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Kolte Patil Life Republic Township Hinjewadi">
-                <Contact />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Contact Kolte Patil Life Republic">
+              <Contact />
+            </Layout>
           } />
           <Route path="/about" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Kolte Patil Life Republic Township Hinjewadi">
-                <About />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="About Kolte Patil Life Republic">
+              <About />
+            </Layout>
           } />
           <Route path="/privacy" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Kolte Patil Life Republic Township Hinjewadi">
-                <Privacy />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Privacy Policy | Life Republic">
+              <Privacy />
+            </Layout>
           } />
           <Route path="/terms" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Kolte Patil Life Republic Township Hinjewadi">
-                <Terms />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Terms & Conditions | Life Republic">
+              <Terms />
+            </Layout>
           } />
           <Route path="/location" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Hinjewadi Location Guide">
-                <LocationHighlights />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Hinjewadi Location Guide & Strategic Infrastructure">
+              <LocationHighlights />
+            </Layout>
           } />
           <Route path="/connectivity" element={
             <Layout ariaLabel="Life Republic Connectivity & Infrastructure">
@@ -189,9 +172,9 @@ function App() {
             </Layout>
           } />
 
-          {/* Location SEO Landing Pages - Deep Web Data Implementation */}
+          {/* Location SEO Landing Pages */}
           <Route path="/location/flats-near-hinjewadi" element={
-            <Layout>
+            <Layout ariaLabel="Flats near Hinjewadi Phase 1">
               <LocationLanding
                 locationName="Hinjewadi Phase 1"
                 distance="5 mins"
@@ -201,7 +184,7 @@ function App() {
             </Layout>
           } />
           <Route path="/location/flats-near-tathawade" element={
-            <Layout>
+            <Layout ariaLabel="Flats near Tathawade">
               <LocationLanding
                 locationName="Tathawade"
                 distance="10 mins"
@@ -211,7 +194,7 @@ function App() {
             </Layout>
           } />
           <Route path="/location/flats-near-punawale" element={
-            <Layout>
+            <Layout ariaLabel="Flats near Punawale">
               <LocationLanding
                 locationName="Punawale"
                 distance="7 mins"
@@ -221,7 +204,7 @@ function App() {
             </Layout>
           } />
           <Route path="/location/flats-near-wakad" element={
-            <Layout>
+            <Layout ariaLabel="Flats near Wakad Hinjewadi Road">
               <LocationLanding
                 locationName="Wakad"
                 distance="12 mins"
@@ -231,7 +214,7 @@ function App() {
             </Layout>
           } />
           <Route path="/location/flats-near-marunji" element={
-            <Layout>
+            <Layout ariaLabel="Flats near Marunji Road Hinjewadi">
               <LocationLanding
                 locationName="Marunji"
                 distance="0 mins"
@@ -241,28 +224,23 @@ function App() {
             </Layout>
           } />
 
-          {/* Dynamic Sector/Locality Landing Pages (Phase 3) */}
+          {/* Dynamic Sector/Locality Landing Pages */}
           <Route path="/location/:slug" element={
-            <Layout>
+            <Layout ariaLabel="Sovereign Sector Landing Page">
               <HyperLocalLanding />
             </Layout>
           } />
 
           {/* HTML Sitemap */}
           <Route path="/sitemap" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Site Directory">
-                <HTMLSitemap />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Sovereign Site Directory">
+              <HTMLSitemap />
+            </Layout>
           } />
 
           {/* Phase 4 Routes */}
           <Route path="/nri-corner" element={
-            <Layout ariaLabel="NRI Corner">
+            <Layout ariaLabel="NRI Corner & Global Investment Desk">
               <NRICorner />
             </Layout>
           } />
@@ -277,7 +255,7 @@ function App() {
             </Layout>
           } />
           <Route path="/testimonials" element={
-            <Layout ariaLabel="Testimonials">
+            <Layout ariaLabel="Resident Testimonials & Success Stories">
               <Testimonials />
             </Layout>
           } />
@@ -287,27 +265,17 @@ function App() {
             </Layout>
           } />
           <Route path="/media-center" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Media Center">
-                <MediaCenter />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Official Media Center & Press Monographs">
+              <MediaCenter />
+            </Layout>
           } />
           <Route path="/media-center/:slug" element={
-            <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-              <Navbar />
-              <main className="flex-grow pt-20" aria-label="Blog Post">
-                <BlogPostPage />
-              </main>
-              <Footer />
-              <FloatingContact />
-            </div>
+            <Layout ariaLabel="Sovereign Media Monograph">
+              <BlogPostPage />
+            </Layout>
           } />
           <Route path="/lifestyle" element={
-            <Layout ariaLabel="Life at Life Republic">
+            <Layout ariaLabel="Life at Life Republic - 390 Acre Township">
               <Lifestyle />
             </Layout>
           } />

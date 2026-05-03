@@ -147,7 +147,11 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                                     </span>
                                 </div>
                                 <h3 className="text-4xl md:text-5xl font-serif font-bold text-secondary tracking-tighter leading-none">
-                                    {isHighIntent ? 'Platinum Portfolio <br /> Synthesis.' : 'Secure Lead <br /> Authorization.'}
+                                    {isHighIntent ? (
+                                        <>Platinum Portfolio <br /> Synthesis.</>
+                                    ) : (
+                                        <>Secure Lead <br /> Authorization.</>
+                                    )}
                                 </h3>
                             </div>
                             <button onClick={onClose} className="p-4 bg-gray-50 hover:bg-red-50 hover:text-red-500 rounded-full transition-all text-gray-300">

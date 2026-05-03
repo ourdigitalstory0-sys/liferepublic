@@ -133,10 +133,18 @@ export const HeroSlider: React.FC = () => {
                                         <Button
                                             variant="primary"
                                             size="lg"
-                                            className="gap-2 bg-accent hover:bg-white hover:text-accent border-2 border-transparent"
+                                            className="gap-2 bg-accent hover:bg-white hover:text-accent border-2 border-transparent px-10 py-4 font-bold rounded-full shadow-2xl"
+                                            onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}
+                                        >
+                                            Enquire Now <Sparkles size={20} />
+                                        </Button>
+                                        <Button
+                                            variant="outline"
+                                            size="lg"
+                                            className="gap-2 bg-white/10 backdrop-blur-md border-2 border-white/20 text-white hover:bg-white hover:text-accent px-10 py-4 font-bold rounded-full transition-all"
                                             onClick={() => navigate('/projects')}
                                         >
-                                            Explore Projects <ArrowRight size={20} />
+                                            Explore Portfolio <ArrowRight size={20} />
                                         </Button>
 
                                         {/* Intelligence Nudge */}

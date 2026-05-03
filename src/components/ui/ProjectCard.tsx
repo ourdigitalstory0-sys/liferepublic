@@ -5,11 +5,12 @@ import {
     Layers, Sparkles, ShieldCheck, ChevronRight,
     ZoomIn, Info, CheckCircle2
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from './Button';
 import type { Project } from '../../lib/types';
 import { BrochureModal } from './BrochureModal';
-import { useNavigate } from 'react-router-dom';
 import { personalizationStore } from '../../lib/personalizationStore';
+import { ID_TO_SLUG } from '../../data/slug-registry';
 
 interface ProjectCardProps {
     project: Project;
@@ -27,7 +28,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
 
     const handleProjectClick = () => {
         personalizationStore.trackProjectView(project.id);
-        navigate(`/projects/${project.id}`);
+        const slug = ID_TO_SLUG[project.id] || project.id;
+        navigate(`/projects/${slug}`);
     };
 
     const openEnquiry = (e: React.MouseEvent) => {
@@ -230,10 +232,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                         <Button
                             variant="outline"
                             size="lg"
-                            className="w-full justify-center rounded-2xl py-6 font-bold uppercase tracking-widest text-[10px] border-gray-200 text-gray-600 hover:bg-gray-50"
-                            onClick={() => setIsModalOpen(true)}
+                            className="w-full justify-center rounded-2xl py-6 font-bold uppercase tracking-widest text-[10px] border-accent/20 text-accent hover:bg-accent hover:text-white shadow-xl transition-all"
+                            onClick={openEnquiry}
                         >
-                            Brochure
+                            Enquire Now
                         </Button>
                     </div>
                 </div>
