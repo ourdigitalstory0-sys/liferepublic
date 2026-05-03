@@ -74,32 +74,6 @@ export const emailService = {
             }
         } catch (error) {
             console.error("[Email Tier 1] FormSubmit failed:", error);
-        }
-
-        // === TIER 2: Direct WhatsApp Notification (Always fires as backup) ===
-        if (!emailSent) {
-            try {
-                const whatsappMessage = [
-                    `🏠 *New Lead - Life Republic*`,
-                    ``,
-                    `👤 *Name:* ${lead.name}`,
-                    `📱 *Phone:* ${lead.phone}`,
-                    `📧 *Email:* ${lead.email || 'N/A'}`,
-                    `🏗️ *Project:* ${lead.project || 'Life Republic'}`,
-                    `⏰ *Time:* ${timestamp}`,
-                    `📊 *Source:* ${lead.source || window.location.hostname}`
-                ].join('\n');
-
-                const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
-                
-                // Auto-open WhatsApp in a new tab
-                window.open(whatsappUrl, '_blank');
-                console.log("[Email Tier 2] WhatsApp fallback triggered.");
-            } catch (e) {
-                console.error("[Email Tier 2] WhatsApp fallback failed:", e);
-            }
-        }
-
         return emailSent;
     }
 };

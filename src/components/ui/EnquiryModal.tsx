@@ -83,15 +83,9 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
         } catch (err) {
             console.error("Supabase Dispatch Failed. Activating WhatsApp Sovereign Fallback.");
             setError("Standard Dispatch Interrupted. Activating Sovereign WhatsApp Protocol...");
-            
-            // Triple-Redundant Fallback: Direct WhatsApp Link
-            const whatsappMessage = `Sovereign Enquiry from Life Republic Portal\n\nProject: ${projectName}\nName: ${leadData.name}\nPhone: ${leadData.phone}\nEmail: ${leadData.email}\nIntent Score: ${history.intentScore}`;
-            const whatsappUrl = `https://wa.me/919579250011?text=${encodeURIComponent(whatsappMessage)}`;
-            
             setTimeout(() => {
                 setIsSubmitting(false);
-                window.open(whatsappUrl, '_blank');
-                setIsSubmitted(true);
+                setError("System error. Please try again later.");
             }, 2000);
         }
     };
