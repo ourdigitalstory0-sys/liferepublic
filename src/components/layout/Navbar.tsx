@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
     Menu, X, ArrowRight, Sparkles, Building2, ShieldCheck, 
-    MapPin, ChevronDown, Phone, Zap, ArrowUpRight, TrendingUp 
+    MapPin, ChevronDown, Zap, ArrowUpRight, TrendingUp 
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../ui/Button';
@@ -36,15 +36,14 @@ export const Navbar: React.FC = () => {
         <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 px-6 py-8 ${scrolled ? 'sm:py-4' : 'sm:py-8'}`}>
             <div className="container mx-auto">
                 <div className={`relative flex items-center justify-between px-10 py-5 bg-secondary/80 backdrop-blur-3xl rounded-full border border-white/10 shadow-2xl transition-all ${scrolled ? 'shadow-accent/20 border-accent/20' : ''}`}>
-                    <Link to="/" className="flex items-center gap-5 group">
-                        <div className="flex items-center gap-4">
-                            <div className="relative w-14 h-14 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center shadow-2xl group-hover:rotate-[10deg] transition-all duration-700 border border-white/20 overflow-hidden">
-                                <img src="/images/life-republic-logo-color.png" alt="LR" className="w-full h-full object-contain p-2 brightness-110 group-hover:scale-110 transition-transform duration-700" />
-                                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <Link to="/" className="flex items-center gap-3.5 group">
+                        <div className="flex items-center gap-3">
+                            <div className="relative w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center shadow-lg group-hover:bg-accent/20 transition-all duration-700 border border-white/10 overflow-hidden">
+                                <img src="/images/life-republic-logo-color.png" alt="LR" className="w-full h-full object-contain p-1 brightness-125 group-hover:scale-110 transition-transform duration-700" />
                             </div>
-                            <div className="flex flex-col leading-[1.1]">
-                                <span className="text-white font-serif font-bold text-2xl md:text-3xl tracking-tighter uppercase group-hover:text-accent transition-colors duration-500">Life Republic</span>
-                                <span className="text-accent/60 text-[9px] font-bold uppercase tracking-[0.6em] mt-1 group-hover:text-white transition-colors duration-500">Sovereign Township</span>
+                            <div className="flex flex-col leading-[1]">
+                                <span className="text-white/90 font-serif font-normal text-lg tracking-tight group-hover:text-white transition-colors duration-500">Life</span>
+                                <span className="text-white/50 text-[9px] font-medium uppercase tracking-[0.35em] group-hover:text-accent transition-colors duration-500">Republic</span>
                             </div>
                         </div>
                     </Link>
@@ -76,14 +75,9 @@ export const Navbar: React.FC = () => {
                         ))}
                     </div>
 
-                    <div className="flex items-center gap-8">
-                        <div className="hidden xl:flex items-center gap-8 border-r border-white/10 pr-8 mr-2">
-                            <a href="tel:+918010101010" className="text-white/60 hover:text-accent transition-all flex items-center gap-3 text-sm font-bold uppercase tracking-widest">
-                                <Phone size={16} className="text-accent" /> +91 8010 1010 10
-                            </a>
-                        </div>
-                        <Button variant="primary" size="lg" className="hidden sm:flex rounded-full px-10 py-4 font-bold text-sm tracking-[0.25em] uppercase gap-3 shadow-2xl shadow-accent/20 hover:scale-105 transition-all" onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}>
-                            Enquire Now <Sparkles size={16} />
+                    <div className="flex items-center gap-6">
+                        <Button variant="primary" size="lg" className="hidden sm:flex rounded-full px-8 py-3.5 font-bold text-xs tracking-[0.25em] uppercase gap-2.5 shadow-2xl shadow-accent/20 hover:scale-105 transition-all" onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}>
+                            Enquire Now <Sparkles size={14} />
                         </Button>
                         <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-3 bg-white/5 rounded-2xl text-white hover:text-accent transition-all border border-white/10">
                             {isOpen ? <X size={28} /> : <Menu size={28} />}
