@@ -37,10 +37,8 @@ export const ExitIntentModal: React.FC = () => {
 
     const handleClose = () => setIsVisible(false);
 
-    const handleWhatsAppRedirect = () => {
-        const priorityCode = `SOVEREIGN-ZENITH-${intentScore}-${Math.random().toString(36).substring(7).toUpperCase()}`;
-        const msg = encodeURIComponent(`Greetings. I have synthesized my ${lastSector} portfolio journey. Neural Score: ${intentScore}. Priority Code: ${priorityCode}. Please dispatch the 2026 Infrastructure Monograph and schedule a Sovereign Site Visit.`);
-        window.open(`https://wa.me/918010101010?text=${msg}`, '_blank');
+    const handleFastTrack = () => {
+        window.dispatchEvent(new Event('open-sovereign-concierge'));
         setIsVisible(false);
     };
 
@@ -123,11 +121,11 @@ export const ExitIntentModal: React.FC = () => {
 
                                 <div className="space-y-8">
                                     <button 
-                                        onClick={handleWhatsAppRedirect}
+                                        onClick={handleFastTrack}
                                         className="w-full py-10 bg-secondary text-white rounded-full font-bold text-2xl flex items-center justify-center gap-6 hover:bg-accent hover:text-secondary transition-all shadow-[0_60px_120px_-30px_rgba(0,0,0,0.5)] group hover:scale-[1.02]"
                                     >
-                                        <MessageSquare size={32} />
-                                        Fast-Track via WhatsApp
+                                        <ShieldCheck size={32} />
+                                        Synthesize Sovereign Portfolio
                                         <ArrowUpRight size={32} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
                                     </button>
                                     

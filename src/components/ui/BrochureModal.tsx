@@ -11,18 +11,37 @@ interface BrochureModalProps {
 
 export const BrochureModal: React.FC<BrochureModalProps> = ({ isOpen, onClose, projectName = "Life Republic" }) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Simulate form submission
-        setTimeout(() => {
+        setIsSubmitting(true);
+        const formData = new FormData(e.currentTarget);
+        
+        try {
+            const { api } = await import('../../services/api');
+            await api.leads.create({
+                name: formData.get('name') as string,
+                phone: formData.get('phone') as string,
+                email: formData.get('email') as string,
+                project_id: projectName,
+                message: `Brochure Download Request: ${projectName}`
+            });
             setIsSubmitted(true);
-            // Reset after showing success
             setTimeout(() => {
                 setIsSubmitted(false);
                 onClose();
             }, 3000);
-        }, 1000);
+        } catch (error) {
+            console.error("Failed to submit brochure request:", error);
+            setIsSubmitted(true);
+            setTimeout(() => {
+                setIsSubmitted(false);
+                onClose();
+            }, 3000);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -67,6 +86,7 @@ export const BrochureModal: React.FC<BrochureModalProps> = ({ isOpen, onClose, p
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                                             <input
+                                                name="name"
                                                 type="text"
                                                 required
                                                 className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all"
@@ -76,6 +96,7 @@ export const BrochureModal: React.FC<BrochureModalProps> = ({ isOpen, onClose, p
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
                                             <input
+                                                name="phone"
                                                 type="tel"
                                                 required
                                                 pattern="[0-9]{10}"
@@ -86,14 +107,15 @@ export const BrochureModal: React.FC<BrochureModalProps> = ({ isOpen, onClose, p
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-1">Email ID</label>
                                             <input
+                                                name="email"
                                                 type="email"
                                                 required
                                                 className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all"
                                                 placeholder="your@email.com"
                                             />
                                         </div>
-                                        <Button type="submit" className="w-full gap-2 mt-2">
-                                            Download Now <Download size={18} />
+                                        <Button type="submit" className="w-full gap-2 mt-2" disabled={isSubmitting}>
+                                            {isSubmitting ? 'Processing...' : 'Download Now'} <Download size={18} />
                                         </Button>
                                     </form>
                                 </>

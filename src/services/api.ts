@@ -322,7 +322,7 @@ export const api = {
             if (lead.project_id) score += 20;
 
             // 1. ALWAYS fire the email notification (Sovereign Fail-safe)
-            emailService.sendLeadNotification({
+            await emailService.sendLeadNotification({
                 name: lead.name,
                 phone: lead.phone,
                 email: lead.email,

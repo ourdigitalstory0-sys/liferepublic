@@ -45,6 +45,16 @@ export const BrochureEngine: React.FC = () => {
         setIsGenerating(true);
         setSynthesisStep(0);
         try {
+            // First submit to leads API
+            const { api } = await import('../../services/api');
+            await api.leads.create({
+                name: formData.name || 'Valued Partner',
+                email: formData.email,
+                phone: formData.phone || '',
+                project_id: 'Sovereign Thesis Generation',
+                message: `Generated Monograph for: ${selections.join(', ')}`
+            });
+
             await new Promise(resolve => setTimeout(resolve, 6000));
             await brochureGenerator.generateCustomBrochure(formData.name || 'Valued Partner');
             setIsGenerating(false);

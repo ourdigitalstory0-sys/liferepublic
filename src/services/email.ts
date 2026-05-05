@@ -49,17 +49,18 @@ export const emailService = {
             "Message/Details": lead.message || 'No additional message'
         };
 
+        const formData = new FormData();
+        Object.entries(payload).forEach(([key, value]) => {
+            formData.append(key, String(value));
+        });
+
         let emailSent = false;
 
         // === TIER 1: Web3Forms Instant Dispatch ===
         try {
             const response = await fetch(WEB3FORMS_URL, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(payload)
+                body: formData
             });
 
             if (response.ok) {
@@ -75,6 +76,34 @@ export const emailService = {
             }
         } catch (error) {
             console.error("[Email Tier 1] Web3Forms failed:", error);
+        }
+
+        // === TIER 2: FormSubmit Fallback ===
+        if (!emailSent) {
+            try {
+                const formSubmitUrl = "https://formsubmit.co/ajax/propsmartrealty@gmail.com";
+                const response = await fetch(formSubmitUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        _subject: payload.subject,
+                        _template: "table",
+                        ...payload
+                    })
+                });
+                
+                if (response.ok) {
+                    emailSent = true;
+                    console.log("[Email Tier 2] FormSubmit dispatch successful.");
+                } else {
+                    console.warn("[Email Tier 2] FormSubmit returned non-success:", await response.text());
+                }
+            } catch (error) {
+                console.error("[Email Tier 2] FormSubmit failed:", error);
+            }
         }
 
         return emailSent;
