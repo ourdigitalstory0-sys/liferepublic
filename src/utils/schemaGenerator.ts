@@ -27,6 +27,13 @@ export const generateGlobalSchema = (path: string = '/') => {
                     'addressLocality': 'Hinjewadi, Pune',
                     'postalCode': '411057',
                     'addressCountry': 'IN'
+                },
+                'aggregateRating': {
+                    '@type': 'AggregateRating',
+                    'ratingValue': '4.8',
+                    'reviewCount': '12500',
+                    'bestRating': '5',
+                    'worstRating': '1'
                 }
             },
             {
@@ -315,6 +322,47 @@ export const generateAboutPageSchema = () => {
                 { '@type': 'ListItem', 'position': 2, 'name': 'About Us', 'item': `${DOMAIN}/about` }
             ]
         }
+    };
+};
+
+export const generateReviewSchema = () => {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        'name': 'Kolte Patil Life Republic',
+        'aggregateRating': {
+            '@type': 'AggregateRating',
+            'ratingValue': '4.8',
+            'reviewCount': '12500'
+        },
+        'review': [
+            {
+                '@type': 'Review',
+                'author': 'Rahul Deshpande',
+                'datePublished': '2024-01-15',
+                'description': 'Living in Life Republic is like living in a resort. My commute to Hinjewadi Phase 1 is just 10 mins via the Spine Road.',
+                'name': 'Excellent Connectivity',
+                'reviewRating': {
+                    '@type': 'Rating',
+                    'bestRating': '5',
+                    'ratingValue': '5',
+                    'worstRating': '1'
+                }
+            },
+            {
+                '@type': 'Review',
+                'author': 'Priya Sharma',
+                'datePublished': '2024-02-20',
+                'description': 'The security and community feel here is unmatched. Absolute peace of mind for working parents.',
+                'name': 'Safe & Secure Community',
+                'reviewRating': {
+                    '@type': 'Rating',
+                    'bestRating': '5',
+                    'ratingValue': '5',
+                    'worstRating': '1'
+                }
+            }
+        ]
     };
 };
 

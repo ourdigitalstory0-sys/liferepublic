@@ -13,7 +13,7 @@ import { AmenitiesCarousel } from '../components/sections/AmenitiesCarousel';
 import { FAQ } from '../components/sections/FAQ';
 import { SEO } from '../components/seo/SEO';
 import { ResidentPulse } from '../components/ui/ResidentPulse';
-import { generateCollectionSchema, generateGlobalSchema, generateLocalBusinessSchema } from '../utils/schemaGenerator';
+import { generateCollectionSchema, generateGlobalSchema, generateLocalBusinessSchema, generateReviewSchema } from '../utils/schemaGenerator';
 
 import { RecommendedProjects } from '../components/personalization/RecommendedProjects';
 import { RecentlyViewed } from '../components/sections/RecentlyViewed';
@@ -47,7 +47,8 @@ const Home: React.FC = () => {
     const schema = useMemo(() => {
         const globalSchema = generateGlobalSchema();
         const localBusinessSchema = generateLocalBusinessSchema();
-        const baseSchemas = [globalSchema, localBusinessSchema];
+        const reviewSchema = generateReviewSchema();
+        const baseSchemas = [globalSchema, localBusinessSchema, reviewSchema];
         
         if (featuredProjects.length > 0) {
             return [...baseSchemas, generateCollectionSchema(featuredProjects)];

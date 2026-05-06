@@ -171,7 +171,19 @@ ${allRoutes.map(route => `  <url>
 
 function generateRobots() {
     console.log('🤖 Generating robots.txt...');
-    const robotsContent = `User-agent: *
+    const robotsContent = `# Block aggressive scraper bots
+User-agent: AhrefsBot
+Disallow: /
+User-agent: MJ12bot
+Disallow: /
+User-agent: Rogerbot
+Disallow: /
+User-agent: SemrushBot
+Disallow: /
+User-agent: DotBot
+Disallow: /
+
+User-agent: *
 Allow: /
 Sitemap: ${DOMAIN}/sitemap.xml
 
@@ -183,6 +195,7 @@ Disallow: /search?*
 Disallow: /?*
 Disallow: /*?utm_*
 Disallow: /*?fbclid*
+Disallow: /*_escaped_fragment_
 
 # Host
 Host: ${DOMAIN}

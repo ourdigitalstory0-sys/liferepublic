@@ -75,6 +75,8 @@ function App() {
     <SmoothScrolling>
       <Helmet>
         <meta name="google-site-verification" content="IAyC1c_sDzY_uqhpy2gKk-M0IlkQdxdM_UMA9ukAIWQ" />
+        <meta name="msvalidate.01" content="BING_VERIFICATION_PLACEHOLDER" />
+        <meta name="p:domain_verify" content="PINTEREST_VERIFICATION_PLACEHOLDER" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://life-republic.in" />
