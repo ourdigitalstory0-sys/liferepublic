@@ -21,24 +21,23 @@ export const FloatingContact: React.FC = () => {
         <>
             <div className="fixed sm:bottom-6 bottom-4 sm:right-6 right-4 z-50 flex flex-col items-end sm:gap-4 gap-2">
                 <div className="flex flex-col sm:gap-4 gap-3">
-                    <motion.button
-                        onClick={() => {
-                            setModalContext("Schedule Live Synthesis");
-                            setIsEnquiryOpen(true);
-                        }}
+                    <motion.a
+                        href={`https://wa.me/917744009295?text=${encodeURIComponent("Hi, I am interested in Kolte Patil Life Republic. Please share the brochure and project details.")}`}
+                        target="_blank"
+                        rel="noreferrer"
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         whileHover={{ scale: 1.1 }}
                         className={`sm:p-4 p-3 rounded-full shadow-2xl transition-all duration-300 flex items-center justify-center ${
-                            !isLive ? 'bg-accent text-white ring-4 ring-accent/20' : 'bg-white text-accent border border-gray-100 hover:bg-gray-50'
+                            !isLive ? 'bg-accent text-white ring-4 ring-accent/20' : 'bg-white text-[#25D366] border border-gray-100 hover:bg-gray-50'
                         }`}
-                        aria-label="Schedule Live Synthesis"
+                        aria-label="WhatsApp Enquiry"
                     >
                         <MessageSquare className="sm:size-[28px] size-[24px]" />
                         {!isLive && (
                              <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-20" />
                         )}
-                    </motion.button>
+                    </motion.a>
 
                     <motion.button
                         onClick={() => {
