@@ -6,7 +6,16 @@ import path from 'path';
 
 dotenv.config();
 
-const supabase = createClient(process.env.VITE_SUPABASE_URL!, process.env.VITE_SUPABASE_ANON_KEY!);
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl || !supabaseServiceKey) {
+    console.error("CRITICAL ERROR: Missing VITE_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY environment variables.");
+    process.exit(1);
+}
+
+// Security Hardening: Use the Service Role Key for backend administrative writes
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 const isValidImage = (imgPath: string | undefined): boolean => {
     if (!imgPath) return false;
@@ -21,7 +30,9 @@ const isValidImage = (imgPath: string | undefined): boolean => {
 };
 
 async function syncProjects() {
-    console.log('Starting Supabase Sync...');
+    console.log('Starting Supabase Sync with Service Role Privileges...');
+    let hasErrors = false;
+
     for (const project of projects) {
         console.log(`Syncing ${project.title}...`);
         
@@ -47,12 +58,19 @@ async function syncProjects() {
             .upsert(insertData, { onConflict: 'id' });
 
         if (error) {
-            console.error(`Error syncing ${project.id}:`, error.message);
+            console.error(`CRITICAL ERROR syncing ${project.id}:`, error.message);
+            hasErrors = true;
         } else {
             console.log(`Successfully synced ${project.id}`);
         }
     }
-    console.log('Sync Complete.');
+    
+    if (hasErrors) {
+        console.error('Sync failed for one or more projects. Failing the CI/CD pipeline.');
+        process.exit(1);
+    } else {
+        console.log('Sync Complete. All projects successfully securely written to database.');
+    }
 }
 
 syncProjects();
