@@ -178,7 +178,7 @@ export const ImageManager: React.FC = () => {
                         const { data } = supabase.storage.from('projects').getPublicUrl(file.name);
                         return (
                             <div key={file.name} className="group relative bg-gray-50 rounded-lg overflow-hidden border border-gray-200 aspect-square">
-                                <img
+                                <img loading="lazy"
                                     src={data.publicUrl}
                                     alt={file.name}
                                     className="w-full h-full object-cover"

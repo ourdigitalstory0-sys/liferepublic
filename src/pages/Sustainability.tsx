@@ -107,7 +107,7 @@ export const Sustainability: React.FC = () => {
                         </div>
                         
                         <div className="relative aspect-square rounded-[4rem] overflow-hidden border border-white/10 shadow-2xl">
-                            <img 
+                            <img loading="lazy" 
                                 src="https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8818362083715893.avif" 
                                 alt="Sovereign Greenery" 
                                 className="w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-[3s]"

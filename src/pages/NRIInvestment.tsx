@@ -53,7 +53,7 @@ export const NRIInvestment: React.FC = () => {
                         </div>
                         <div className="relative">
                             <div className="absolute inset-0 bg-accent/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
-                            <img 
+                            <img loading="lazy" 
                                 src="/images/home/nri-hero.webp" 
                                 alt="NRI Investment Opportunities at Life Republic" 
                                 className="w-full h-auto rounded-3xl shadow-2xl grayscale-20 hover:grayscale-0 transition-all duration-700"

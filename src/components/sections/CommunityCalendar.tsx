@@ -106,7 +106,7 @@ export const CommunityCalendar: React.FC = () => {
                             <div className="flex items-center gap-1">
                                 {[1, 2, 3].map(i => (
                                     <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 overflow-hidden -ml-2 first:ml-0">
-                                        <img src={`https://i.pravatar.cc/150?u=${idx}${i}`} alt="Attendee" className="w-full h-full object-cover" />
+                                        <img loading="lazy" src={`https://i.pravatar.cc/150?u=${idx}${i}`} alt="Attendee" className="w-full h-full object-cover" />
                                     </div>
                                 ))}
                                 <span className="text-[10px] font-bold text-gray-400 ml-2">+450 Residents</span>

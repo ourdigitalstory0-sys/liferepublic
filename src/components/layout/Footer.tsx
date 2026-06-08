@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
                     <div className="lg:col-span-3 space-y-8">
                         <div className="flex flex-col gap-6">
                             <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center p-2 shadow-2xl overflow-hidden group-hover:scale-110 transition-transform duration-500">
-                                <img src="/images/life-republic-logo-color.png" alt="Life Republic" className="w-full h-full object-contain" />
+                                <img loading="lazy" src="/images/life-republic-logo-color.png" alt="Life Republic" className="w-full h-full object-contain" />
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-3xl font-serif font-bold tracking-wider text-white">

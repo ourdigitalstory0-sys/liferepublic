@@ -135,7 +135,7 @@ export const MasterPlan: React.FC = () => {
                     )}
                     
                     <motion.div style={{ scale }} className="h-full w-full">
-                        <img 
+                        <img loading="lazy" 
                             src="https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif" 
                             alt="Life Republic Master Plan" 
                             onLoad={() => setImgLoaded(true)}

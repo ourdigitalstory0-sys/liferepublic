@@ -55,7 +55,7 @@ export const NeuralGallery: React.FC<NeuralGalleryProps> = ({ images, title }) =
                         transition={{ duration: 1.2, ease: [0.43, 0.13, 0.23, 0.96] }}
                         className="absolute inset-0 w-full h-full"
                     >
-                        <img
+                        <img loading="lazy"
                             src={currentSrc}
                             alt={`${title} - ${mode} view`}
                             className="w-full h-full object-cover transition-all duration-1000"

@@ -87,7 +87,7 @@ export const TestimonialCarousel: React.FC = () => {
                                         whileInView={{ scale: 1, opacity: 1 }}
                                         className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10"
                                     >
-                                        <img src={t.image} alt={t.name} className="absolute inset-0 w-full h-full object-cover" />
+                                        <img loading="lazy" src={t.image} alt={t.name} className="absolute inset-0 w-full h-full object-cover" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-60"></div>
                                     </motion.div>
                                 </div>

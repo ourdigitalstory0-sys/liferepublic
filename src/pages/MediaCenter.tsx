@@ -138,7 +138,7 @@ export const MediaCenter: React.FC = () => {
                                 >
                                     <Link to={`/media-center/${post.slug}`} className="relative block h-80 overflow-hidden bg-gray-200">
                                         <div className="absolute inset-0 bg-secondary/30 group-hover:bg-transparent transition-all z-10"></div>
-                                        <img
+                                        <img loading="lazy"
                                             src={post.image || 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif'}
                                             alt={post.title}
                                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"

@@ -20,7 +20,7 @@ export const AerialTour: React.FC = () => {
                     style={{ scale, filter: `blur(${blur}px)` }}
                     className="absolute inset-0"
                 >
-                    <img 
+                    <img loading="lazy" 
                         src="/images/aerial-sunset.png" 
                         alt="Life Republic Aerial Tour" 
                         className="w-full h-full object-cover"

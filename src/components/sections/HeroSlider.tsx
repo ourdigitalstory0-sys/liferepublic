@@ -87,7 +87,7 @@ export const HeroSlider: React.FC = () => {
                         <SwiperSlide key={slide.id}>
                             <div className="relative h-full w-full">
                                 <div className="absolute inset-0 bg-black/40 z-10" />
-                                <img
+                                <img loading="lazy"
                                     src={slide.image_url}
                                     alt={slide.title}
                                     loading={index === 0 ? "eager" : "lazy"}
@@ -102,7 +102,7 @@ export const HeroSlider: React.FC = () => {
                                         transition={{ duration: 1, delay: 0.2 }}
                                         className="mb-8 w-24 h-24 bg-white/10 backdrop-blur-xl rounded-3xl p-3 border border-white/20 shadow-2xl overflow-hidden"
                                     >
-                                        <img src="/images/life-republic-logo-color.png" alt="Life Republic" className="w-full h-full object-contain brightness-110" />
+                                        <img loading="lazy" src="/images/life-republic-logo-color.png" alt="Life Republic" className="w-full h-full object-contain brightness-110" />
                                     </motion.div>
                                     <motion.h1
                                         initial={{ opacity: 0, y: 30 }}

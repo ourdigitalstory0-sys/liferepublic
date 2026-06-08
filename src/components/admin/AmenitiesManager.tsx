@@ -140,7 +140,7 @@ export const AmenitiesManager: React.FC = () => {
                                 <label className="block text-sm font-medium mb-1">Image (Optional, for Carousel)</label>
                                 <div className="relative h-32 bg-gray-200 rounded-md overflow-hidden flex items-center justify-center border border-dashed border-gray-400">
                                     {formData.image_url ? (
-                                        <img src={formData.image_url} alt="Preview" className="w-full h-full object-cover" />
+                                        <img loading="lazy" src={formData.image_url} alt="Preview" className="w-full h-full object-cover" />
                                     ) : (
                                         <div className="text-center p-2">
                                             <ImageIcon className="text-gray-400 mx-auto mb-1" />
@@ -179,7 +179,7 @@ export const AmenitiesManager: React.FC = () => {
                 {amenities.map(amenity => (
                     <div key={amenity.id} className="flex flex-col md:flex-row items-start md:items-center gap-4 p-4 border rounded-lg hover:shadow-sm bg-white transition-all">
                         {amenity.image_url && (
-                            <img src={amenity.image_url} alt={amenity.title} className="w-16 h-16 object-cover rounded bg-gray-200" />
+                            <img loading="lazy" src={amenity.image_url} alt={amenity.title} className="w-16 h-16 object-cover rounded bg-gray-200" />
                         )}
                         {!amenity.image_url && amenity.icon && (
                             <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center text-gray-500">

@@ -94,7 +94,7 @@ const ProjectDetails: React.FC = () => {
             {/* Sovereign Hero Header */}
             <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
                 <motion.div initial={{ scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 1.5 }} className="absolute inset-0">
-                    <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                    <img loading="lazy" src={project.image} alt={project.title} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-white" />
                 </motion.div>
 
@@ -151,7 +151,7 @@ const ProjectDetails: React.FC = () => {
                         </div>
                         <div className="lg:w-1/2">
                             <div className="aspect-square rounded-[4rem] overflow-hidden shadow-2xl relative group">
-                                <img src={project.image} alt={project.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" />
+                                <img loading="lazy" src={project.image} alt={project.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent" />
                                 <div className="absolute bottom-16 left-16 right-16 flex justify-between items-end">
                                     <div className="space-y-2">
@@ -183,7 +183,7 @@ const ProjectDetails: React.FC = () => {
                                     onClick={() => setSelectedFloorPlan(plan)}
                                 >
                                     <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gray-50 p-6 mb-8 group">
-                                        <img src={plan.image} alt={plan.type} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700" />
+                                        <img loading="lazy" src={plan.image} alt={plan.type} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700" />
                                     </div>
                                     <div className="space-y-4">
                                         <div className="flex justify-between items-center">
@@ -204,7 +204,7 @@ const ProjectDetails: React.FC = () => {
                                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} className="bg-gray-50 rounded-[4rem] p-12 md:p-20 border border-gray-200">
                                     <div className="flex flex-col lg:flex-row gap-20 items-center">
                                         <div className="lg:w-1/2 p-10 bg-white rounded-[3rem] shadow-2xl border border-gray-100 group relative">
-                                            <img src={selectedFloorPlan.image} className="w-full h-auto mix-blend-multiply cursor-zoom-in" alt="Detailed Floor Plan" onClick={() => setIsZoomed(true)} />
+                                            <img loading="lazy" src={selectedFloorPlan.image} className="w-full h-auto mix-blend-multiply cursor-zoom-in" alt="Detailed Floor Plan" onClick={() => setIsZoomed(true)} />
                                             <div className="absolute top-10 right-10 p-3 bg-accent text-secondary rounded-full shadow-xl opacity-0 group-hover:opacity-100 transition-opacity"><ZoomIn size={20} /></div>
                                         </div>
                                         <div className="lg:w-1/2 space-y-12">
@@ -276,7 +276,7 @@ const ProjectDetails: React.FC = () => {
                             </div>
                             <div className="lg:w-1/2">
                                 <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white/10 group cursor-zoom-in">
-                                    <img src={project.masterLayout} className="w-full h-auto opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000" alt="Sovereign Master Plan" />
+                                    <img loading="lazy" src={project.masterLayout} className="w-full h-auto opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000" alt="Sovereign Master Plan" />
                                     <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <div className="p-8 bg-white/10 backdrop-blur-md rounded-full border border-white/20"><ZoomIn size={48} className="text-white" /></div>
                                     </div>

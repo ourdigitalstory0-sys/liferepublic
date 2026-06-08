@@ -83,6 +83,7 @@ function App() {
       </Helmet>
       <ExitIntentOffer />
       <TownshipAgent />
+      <FloatingContact />
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* Public Routes */}

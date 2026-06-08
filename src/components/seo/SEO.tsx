@@ -49,26 +49,54 @@ export const SEO: React.FC<SEOProps> = ({
     const currentPath = location.pathname + location.search;
     const fullCanonical = generateCanonicalURL(canonical || currentPath);
     
-    // Configuration-intelligent Keyword Injection
+    // Advanced Keyword Matrix Routing
     const getPathSpecificKeywords = (path: string) => {
         const segments = path.split('/').filter(Boolean);
-        if (path.includes('2-bhk')) return "2 BHK flats Hinjewadi, 2 BHK in Life Republic, buy 2BHK Pune west, 2 BHK price list Hinjewadi";
-        if (path.includes('3-bhk')) return "3 BHK flats Hinjewadi, 3 BHK in Life Republic, luxury 3BHK Pune, 3 BHK price list Hinjewadi";
-        if (path.includes('4-bhk')) return "4 BHK luxury apartments Life Republic, 4 BHK villas Hinjewadi, ultra luxury 4BHK Pune";
-        if (path.includes('1-bhk')) return "1 BHK in Life Republic, small flats Hinjewadi, 1 BHK investment Pune";
-        if (path.includes('nri')) return "NRI investment Pune, buy property from USA, FEMA repatriation rules, Life Republic ROI";
+        let cluster = [];
         
-        // Auto-generate keywords for location pages
+        // 1. Configuration Keywords
+        if (path.includes('1-bhk')) cluster.push("Life Republic 1 BHK, 1 BHK in Life Republic, small flats Hinjewadi, Life Republic Flats for Sale");
+        if (path.includes('2-bhk')) cluster.push("Life Republic 2 BHK, 2 BHK flats Hinjewadi, Hinjewadi 2 BHK, Life Republic Affordable Homes");
+        if (path.includes('3-bhk')) cluster.push("Life Republic 3 BHK, 3 BHK flats Hinjewadi, Hinjewadi 3 BHK, Premium 3 BHK in Hinjewadi Pune");
+        if (path.includes('4-bhk')) cluster.push("Life Republic 4 BHK, 4 BHK villas Hinjewadi, Life Republic Luxury Homes, Luxury Family Homes Pune");
+        
+        // 2. Project/Cluster Specific
+        if (path.includes('projects')) {
+            cluster.push("Life Republic Apartments, Life Republic New Launch, Life Republic Premium Residences, Hinjewadi Residential Projects, Best Residential Project Pune");
+            if (path.includes('atmos')) cluster.push("Life Republic Atmos, Life Republic Cluster Apartments");
+            if (path.includes('aros')) cluster.push("Life Republic Aros, Life Republic Premium Towers");
+            if (path.includes('universe')) cluster.push("Life Republic Universe, Life Republic Sector Homes");
+            if (path.includes('oro-avenue')) cluster.push("Life Republic Oro Avenue, Life Republic Township Clusters");
+            if (path.includes('first-avenue')) cluster.push("Life Republic First Avenue, Life Republic Township Clusters");
+            if (path.includes('24k-espada')) cluster.push("Life Republic 24K Espada, Luxury gated community in West Pune");
+        }
+
+        // 3. Location & IT Hub Keywords
         if (path.includes('/location/')) {
             const place = segments[segments.length - 1].replace(/-/g, ' ');
-            return `flats in ${place}, apartments near ${place}, property in ${place} Pune, Hinjewadi real estate ${place}`;
+            cluster.push(`Property Near Hinjewadi IT Park, Apartments Near Rajiv Gandhi Infotech Park, Homes Near Infosys Hinjewadi, Hinjewadi Real Estate Growth, flats near ${place}`);
+            if (path.includes('hinjewadi')) cluster.push("Hinjewadi Pune Real Estate, Hinjewadi Property Market, Hinjewadi Investment Opportunities");
+            if (path.includes('marunji')) cluster.push("Marunji Pune Real Estate, Marunji Property Market, Kolte Patil Life Republic Marunji");
+            if (path.includes('wakad') || path.includes('tathawade')) cluster.push("West Pune Real Estate, West Pune Property Market, West Pune Investment Properties");
         }
-        return "";
+
+        // 4. NRI & Investment Keywords
+        if (path.includes('nri')) {
+            cluster.push("Pune Real Estate Investment, Hinjewadi Property Investment, NRI investment Pune, High ROI Property Hinjewadi Pune, Pune Property Appreciation");
+        }
+
+        // 5. Township & Lifestyle Keywords
+        if (path.includes('lifestyle') || path.includes('amenities') || path.includes('township')) {
+            cluster.push("Life Republic Integrated Township, Life Republic Smart Township, Pune Smart City Real Estate, Best Township in Pune, Sustainable township in Pune");
+        }
+
+        return cluster.join(', ');
     };
 
     const pathKeywords = getPathSpecificKeywords(location.pathname);
-    const baseKeywords = "Kolte Patil Life Republic Hinjewadi, Kolte Patil Life Republic, Life Republic Hinjewadi, Kolte Patil Hinjewadi, Life Republic Pune, buy flat in hinjewadi, luxury villas pune";
+    const baseKeywords = "Kolte Patil Life Republic, Life Republic Hinjewadi, Life Republic Pune, Kolte Patil Township Pune, Kolte Patil Life Republic Township";
     
+    // De-duplicate and combine keywords
     const metaKeywords = keywords 
         ? `${keywords}${pathKeywords ? `, ${pathKeywords}` : ''}` 
         : `${baseKeywords}${pathKeywords ? `, ${pathKeywords}` : ''}`;

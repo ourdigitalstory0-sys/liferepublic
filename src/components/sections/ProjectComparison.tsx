@@ -82,7 +82,7 @@ export const ProjectComparison: React.FC = () => {
                                 className="bg-gray-50 rounded-[2.5rem] border border-gray-100 overflow-hidden group hover:shadow-2xl transition-all"
                             >
                                 <div className="relative h-48">
-                                    <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                    <img loading="lazy" src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                                         <h3 className="text-xl font-bold text-white">{p.title}</h3>
                                         <div className="text-accent text-sm font-bold uppercase tracking-widest">{p.category}</div>

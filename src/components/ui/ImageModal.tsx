@@ -40,7 +40,7 @@ export const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, imageSr
                             >
                                 <X size={24} />
                             </button>
-                            <img
+                            <img loading="lazy"
                                 src={imageSrc}
                                 alt={altText}
                                 className="max-w-full max-h-[85vh] object-contain rounded-md"

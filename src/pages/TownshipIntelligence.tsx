@@ -61,7 +61,7 @@ export const TownshipIntelligence: React.FC = () => {
                     <section className="flex flex-col lg:flex-row gap-20 items-center">
                         <div className="lg:w-1/2">
                             <div className="aspect-video bg-gray-100 rounded-[2rem] overflow-hidden relative shadow-2xl">
-                                <img src="/images/gallery/eros/master-layout.webp" alt="Infrastructure" className="absolute inset-0 w-full h-full object-cover" />
+                                <img loading="lazy" src="/images/gallery/eros/master-layout.webp" alt="Infrastructure" className="absolute inset-0 w-full h-full object-cover" />
                                 <div className="absolute inset-0 bg-secondary/20 mix-blend-multiply"></div>
                             </div>
                         </div>

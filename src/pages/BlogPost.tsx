@@ -101,7 +101,7 @@ export const BlogPostPage: React.FC = () => {
                         transition={{ duration: 1.5 }}
                         className="absolute inset-0"
                     >
-                        <img src={post.image} alt={post.title} className="w-full h-full object-cover grayscale" />
+                        <img loading="lazy" src={post.image} alt={post.title} className="w-full h-full object-cover grayscale" />
                     </motion.div>
                 )}
                 

@@ -39,7 +39,7 @@ export const Navbar: React.FC = () => {
                     <Link to="/" className="flex items-center gap-3.5 group">
                         <div className="flex items-center gap-3">
                             <div className="relative w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center shadow-lg group-hover:bg-accent/20 transition-all duration-700 border border-white/10 overflow-hidden">
-                                <img src="/images/life-republic-logo-color.png" alt="LR" className="w-full h-full object-contain p-1 brightness-125 group-hover:scale-110 transition-transform duration-700" />
+                                <img loading="lazy" src="/images/life-republic-logo-color.png" alt="LR" className="w-full h-full object-contain p-1 brightness-125 group-hover:scale-110 transition-transform duration-700" />
                             </div>
                             <div className="flex flex-col leading-[1]">
                                 <span className="text-white/90 font-serif font-normal text-lg tracking-tight group-hover:text-white transition-colors duration-500">Life</span>
@@ -103,7 +103,7 @@ export const Navbar: React.FC = () => {
                         <div className="flex justify-between items-center mb-16 relative z-10">
                             <Link to="/" className="flex items-center gap-4 group">
                                 <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center shadow-xl border border-white/20">
-                                    <img src="/images/life-republic-logo-color.png" alt="LR" className="w-full h-full object-contain p-1.5" />
+                                    <img loading="lazy" src="/images/life-republic-logo-color.png" alt="LR" className="w-full h-full object-contain p-1.5" />
                                 </div>
                                 <div className="flex flex-col leading-none">
                                     <span className="text-xl font-serif font-bold text-white tracking-tighter uppercase">Life Republic</span>

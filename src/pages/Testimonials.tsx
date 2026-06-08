@@ -166,7 +166,7 @@ export const Testimonials: React.FC = () => {
                                                 <PlayCircle size={64} className="text-white" />
                                             </div>
                                         </div>
-                                        <img 
+                                        <img loading="lazy" 
                                             src={review.img} 
                                             alt={`${review.name} Story`} 
                                             className="w-full h-full object-cover group-hover/video:scale-110 transition-transform duration-[2s] grayscale group-hover/video:grayscale-0"

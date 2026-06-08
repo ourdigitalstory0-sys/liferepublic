@@ -130,7 +130,7 @@ export const BannersManager: React.FC = () => {
                                 <label className="block text-sm font-medium mb-1">Image</label>
                                 <div className="relative flex-1 h-32 bg-gray-200 rounded-md overflow-hidden flex items-center justify-center border border-dashed border-gray-400">
                                     {formData.image_url ? (
-                                        <img src={formData.image_url} alt="Preview" className="w-full h-full object-cover" />
+                                        <img loading="lazy" src={formData.image_url} alt="Preview" className="w-full h-full object-cover" />
                                     ) : (
                                         <div className="text-center p-2">
                                             <ImageIcon className="text-gray-400 mx-auto mb-1" />
@@ -168,7 +168,7 @@ export const BannersManager: React.FC = () => {
             <div className="space-y-4">
                 {banners.map(banner => (
                     <div key={banner.id} className="flex flex-col md:flex-row items-start md:items-center gap-4 p-4 border rounded-lg hover:shadow-sm bg-white transition-all">
-                        <img src={banner.image_url} alt={banner.title} className="w-24 h-16 object-cover rounded bg-gray-200" />
+                        <img loading="lazy" src={banner.image_url} alt={banner.title} className="w-24 h-16 object-cover rounded bg-gray-200" />
                         <div className="flex-1">
                             <h3 className="font-bold">{banner.title}</h3>
                             <p className="text-sm text-gray-500">{banner.subtitle}</p>

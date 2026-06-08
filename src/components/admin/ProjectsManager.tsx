@@ -277,7 +277,7 @@ export const ProjectsManager: React.FC = () => {
                                 <div className="flex gap-4 items-start">
                                     <div className="relative w-64 h-40 bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
                                         {formData.image ? (
-                                            <img src={formData.image} alt="Hero" className="w-full h-full object-cover" />
+                                            <img loading="lazy" src={formData.image} alt="Hero" className="w-full h-full object-cover" />
                                         ) : (
                                             <div className="flex items-center justify-center h-full text-gray-400">
                                                 <ImageIcon size={32} />
@@ -325,7 +325,7 @@ export const ProjectsManager: React.FC = () => {
                                         return (
                                             <div key={index} className="relative group rounded-lg border bg-gray-50 p-2">
                                                 <div className="relative h-32 w-full overflow-hidden rounded mb-2 bg-gray-200">
-                                                    <img src={url} alt={alt} className="w-full h-full object-cover" />
+                                                    <img loading="lazy" src={url} alt={alt} className="w-full h-full object-cover" />
                                                     <button
                                                         onClick={() => {
                                                             const newGallery = formData.gallery?.filter((_, i) => i !== index);
@@ -395,7 +395,7 @@ export const ProjectsManager: React.FC = () => {
                                 <div className="flex gap-4 items-start">
                                     <div className="relative w-64 h-40 bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
                                         {formData.masterLayout ? (
-                                            <img src={formData.masterLayout} alt="Master Layout" className="w-full h-full object-cover" />
+                                            <img loading="lazy" src={formData.masterLayout} alt="Master Layout" className="w-full h-full object-cover" />
                                         ) : (
                                             <div className="flex items-center justify-center h-full text-gray-400">
                                                 <ImageIcon size={32} />
@@ -459,7 +459,7 @@ export const ProjectsManager: React.FC = () => {
                                     {formData.floorPlans?.map((plan: any, index: number) => (
                                         <div key={index} className="flex flex-col md:flex-row gap-6 p-6 border rounded-[1.5rem] bg-gray-50 group hover:bg-white hover:shadow-xl transition-all">
                                             <div className="w-full md:w-48 aspect-square bg-white rounded-xl overflow-hidden border flex-shrink-0 relative">
-                                                <img 
+                                                <img loading="lazy" 
                                                     src={typeof plan === 'string' ? plan : plan.image} 
                                                     alt="" 
                                                     className="w-full h-full object-contain p-4" 
@@ -686,7 +686,7 @@ export const ProjectsManager: React.FC = () => {
                         {projects.map(project => (
                             <tr key={project.id} className="border-b hover:bg-gray-50">
                                 <td className="p-3">
-                                    <img src={project.image} alt="" className="w-12 h-12 rounded object-cover bg-gray-200" />
+                                    <img loading="lazy" src={project.image} alt="" className="w-12 h-12 rounded object-cover bg-gray-200" />
                                 </td>
                                 <td className="p-3 font-medium">{project.title}</td>
                                 <td className="p-3 text-gray-500">{project.location}</td>

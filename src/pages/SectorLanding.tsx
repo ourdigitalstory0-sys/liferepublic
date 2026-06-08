@@ -172,7 +172,7 @@ export const SectorLanding: React.FC = () => {
                         </div>
                         <div className="relative">
                             <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
-                                <img 
+                                <img loading="lazy" 
                                     src="/images/home/master-layout-full.jpg" 
                                     alt={`${data.name} Layout`}
                                     className="w-full h-full object-cover opacity-80"

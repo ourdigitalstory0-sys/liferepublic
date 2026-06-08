@@ -165,7 +165,7 @@ export const TownshipGuide: React.FC = () => {
                             <div key={i} className="group relative bg-white border border-gray-100 rounded-3xl p-8 hover:border-accent/30 transition-all overflow-hidden flex flex-col md:flex-row gap-8 items-center">
                                 <div className="md:w-1/3">
                                     <div className="aspect-[4/3] bg-gray-100 rounded-2xl overflow-hidden">
-                                        <img 
+                                        <img loading="lazy" 
                                             src={`/images/home/${cluster.name.toLowerCase().replace(/\s/g, '-')}-thumb.jpg`} 
                                             alt={cluster.name}
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -311,7 +311,7 @@ export const TownshipGuide: React.FC = () => {
                                 { title: "Township Fire Station", status: "24/7 Response", img: "/images/home/canvas-thumb.jpg" }
                             ].map((item, i) => (
                                 <div key={i} className="relative group rounded-3xl overflow-hidden shadow-lg h-64">
-                                    <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onError={(e) => { e.currentTarget.src = 'https://life-republic.in/images/gallery/eros/master-layout.webp' }} />
+                                    <img loading="lazy" src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onError={(e) => { e.currentTarget.src = 'https://life-republic.in/images/gallery/eros/master-layout.webp' }} />
                                     <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent"></div>
                                     <div className="absolute bottom-6 left-6">
                                         <p className="text-xs font-bold text-accent uppercase tracking-widest mb-1">{item.status}</p>
@@ -403,7 +403,7 @@ export const TownshipGuide: React.FC = () => {
                                     className="group bg-white rounded-3xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full"
                                 >
                                     <div className="aspect-video relative overflow-hidden">
-                                        <img 
+                                        <img loading="lazy" 
                                             src={post.image || 'https://life-republic.in/images/gallery/eros/master-layout.webp'} 
                                             alt={post.title}
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"

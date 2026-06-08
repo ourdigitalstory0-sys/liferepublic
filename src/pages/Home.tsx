@@ -197,11 +197,11 @@ const Home: React.FC = () => {
                         </div>
                         <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
                             <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} className="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden relative group">
-                                <img src="/images/gallery/nature-nest.webp" alt="Infrastructure" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" />
+                                <img loading="lazy" src="/images/gallery/nature-nest.webp" alt="Infrastructure" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" />
                                 <div className="absolute bottom-10 left-10 text-white z-10"><h3 className="text-3xl font-serif font-bold mb-2">The Park</h3><p className="text-xs uppercase tracking-widest text-white/70">3.5 Acre Urban Lung</p></div>
                             </motion.div>
                             <motion.div initial={{ opacity: 0, y: 100 }} whileInView={{ opacity: 1, y: 0 }} className="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden relative group md:mt-20">
-                                <img src="/images/gallery/clubhouse.webp" alt="Community" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" />
+                                <img loading="lazy" src="/images/gallery/clubhouse.webp" alt="Community" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" />
                                 <div className="absolute bottom-10 left-10 text-white z-10"><h3 className="text-3xl font-serif font-bold mb-2">The Club</h3><p className="text-xs uppercase tracking-widest text-white/70">Social Synthesis</p></div>
                             </motion.div>
                         </div>

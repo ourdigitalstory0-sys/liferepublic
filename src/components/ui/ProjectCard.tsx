@@ -58,7 +58,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
             >
                 {/* Image Section */}
                 <div className="relative h-64 overflow-hidden cursor-pointer" onClick={handleProjectClick}>
-                    <img
+                    <img loading="lazy"
                         src={project.image || 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif'}
                         alt={`Kolte Patil Life Republic Township - ${project.title}`}
                         loading={priority ? "eager" : "lazy"}
@@ -158,7 +158,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                                     <div className="h-full flex flex-col gap-4">
                                         {project.masterLayout ? (
                                             <div className="relative rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 group/img cursor-pointer flex-grow h-32" onClick={handleProjectClick}>
-                                                <img src={project.masterLayout} className="w-full h-full object-cover opacity-80 group-hover/img:scale-105 transition-transform" />
+                                                <img loading="lazy" src={project.masterLayout} className="w-full h-full object-cover opacity-80 group-hover/img:scale-105 transition-transform" />
                                                 <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover/img:opacity-100 transition-opacity">
                                                     <ZoomIn size={24} className="text-white" />
                                                 </div>
@@ -179,7 +179,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                                             <div className="flex-grow h-32 overflow-hidden flex gap-2">
                                                 {project.floorPlans.slice(0, 2).map((fp, i) => (
                                                     <div key={i} className="flex-1 rounded-2xl bg-gray-50 border border-gray-100 p-2 flex flex-col items-center justify-center relative group/fp cursor-pointer" onClick={handleProjectClick}>
-                                                        <img src={fp.image} className="w-full h-12 object-contain mb-2" />
+                                                        <img loading="lazy" src={fp.image} className="w-full h-12 object-contain mb-2" />
                                                         <span className="text-[8px] font-bold text-secondary uppercase tracking-tighter">{fp.type}</span>
                                                         <div className="absolute inset-0 bg-accent/80 opacity-0 group-hover/fp:opacity-100 flex items-center justify-center transition-opacity rounded-2xl text-white">
                                                             <Layers size={16} />

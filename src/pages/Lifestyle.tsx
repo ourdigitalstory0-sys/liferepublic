@@ -93,7 +93,7 @@ export const Lifestyle: React.FC = () => {
             
             <section className="relative h-screen flex items-center justify-center overflow-hidden bg-secondary">
                 <motion.div style={{ scale: useTransform(smoothScroll, [0, 0.2], [1, 1.3]), y: useTransform(smoothScroll, [0, 0.2], [0, 100]) }} className="absolute inset-0">
-                    <img src={volumes[0].img} alt="Sovereign Life" className="w-full h-full object-cover grayscale opacity-20" />
+                    <img loading="lazy" src={volumes[0].img} alt="Sovereign Life" className="w-full h-full object-cover grayscale opacity-20" />
                 </motion.div>
                 <div className="absolute inset-0 bg-gradient-to-b from-secondary via-secondary/40 to-white"></div>
                 
