@@ -9,14 +9,14 @@ export const generateGlobalSchema = (path: string = '/') => {
             {
                 '@id': `${DOMAIN}/#organization`,
                 '@type': 'RealEstateAgent',
-                'name': 'Kolte Patil Life Republic',
+                'name': 'Kolte Patil Life Republic Hinjewadi',
                 'url': DOMAIN,
                 'logo': {
                     '@id': `${DOMAIN}/#logo`,
                     '@type': 'ImageObject',
                     'url': `${DOMAIN}/logo-theme.png`,
                     'contentUrl': `${DOMAIN}/logo-theme.png`,
-                    'caption': 'Kolte Patil Life Republic'
+                    'caption': 'Kolte Patil Life Republic Hinjewadi'
                 },
                 'image': { '@id': `${DOMAIN}/#logo` },
                 'telephone': '+91-7744009295',
@@ -27,6 +27,19 @@ export const generateGlobalSchema = (path: string = '/') => {
                     'addressLocality': 'Hinjewadi, Pune',
                     'postalCode': '411057',
                     'addressCountry': 'IN'
+                },
+                'sameAs': [
+                    'https://www.koltepatil.com/',
+                    'https://en.wikipedia.org/wiki/Kolte-Patil_Developers',
+                    'https://www.facebook.com/KoltePatilDevelopers/',
+                    'https://www.linkedin.com/company/kolte-patil-developers-limited/',
+                    'https://www.youtube.com/c/KoltePatilDevelopersLtd',
+                    'https://maps.google.com/?q=Kolte+Patil+Life+Republic+Hinjewadi'
+                ],
+                'parentOrganization': {
+                    '@type': 'Organization',
+                    'name': 'Kolte Patil Developers Ltd.',
+                    'url': 'https://www.koltepatil.com/'
                 },
                 'aggregateRating': {
                     '@type': 'AggregateRating',
@@ -53,11 +66,11 @@ export const generateGlobalSchema = (path: string = '/') => {
                 '@type': 'WebPage',
                 '@id': `${DOMAIN}${path}#webpage`,
                 'url': `${DOMAIN}${path}`,
-                'name': 'Kolte Patil Life Republic | Official Township Site',
+                'name': 'Kolte Patil Life Republic Hinjewadi | Official Township Site',
                 'isPartOf': { '@id': `${DOMAIN}/#website` },
                 'about': { '@id': `${DOMAIN}/#organization` },
                 'primaryImageOfPage': { '@id': `${DOMAIN}${path}#primaryimage` },
-                'description': 'Explore Kolte Patil Life Republic, a 390-acre integrated township in Hinjewadi, Pune with premium 1, 2, 3 BHK flats and luxury villas.'
+                'description': 'Explore Kolte Patil Life Republic Hinjewadi, a 390-acre integrated township in Pune with premium 1, 2, 3 BHK flats and luxury villas.'
             }
         ]
     };
@@ -239,10 +252,14 @@ export const generateLocalBusinessSchema = () => {
         '@context': 'https://schema.org',
         '@type': 'RealEstateAgent',
         '@id': `${DOMAIN}/#experience-centre`,
-        'name': 'Life Republic Experience Centre',
+        'name': 'Kolte Patil Life Republic Hinjewadi Experience Centre',
         'image': `${DOMAIN}/images/experience-centre.webp`,
         'telephone': '+91-7744009295',
         'priceRange': '₹40L - ₹3Cr',
+        'url': DOMAIN,
+        'sameAs': [
+            'https://maps.google.com/?q=Kolte+Patil+Life+Republic+Hinjewadi'
+        ],
         'address': {
             '@type': 'PostalAddress',
             'streetAddress': 'Life Republic Township, Marunji Road',
@@ -312,7 +329,7 @@ export const generateAboutPageSchema = () => {
         'mainEntity': {
             '@id': `${DOMAIN}/#organization`,
             '@type': 'RealEstateAgent',
-            'name': 'Kolte Patil Life Republic',
+            'name': 'Kolte Patil Life Republic Hinjewadi',
             'description': '390-Acre Integrated Township in Hinjewadi, Pune developed by Kolte Patil Developers.'
         },
         'breadcrumb': {
@@ -329,7 +346,7 @@ export const generateReviewSchema = () => {
     return {
         '@context': 'https://schema.org',
         '@type': 'Product',
-        'name': 'Kolte Patil Life Republic',
+        'name': 'Kolte Patil Life Republic Hinjewadi',
         'aggregateRating': {
             '@type': 'AggregateRating',
             'ratingValue': '4.8',

@@ -27,16 +27,16 @@ export const SEO: React.FC<SEOProps> = ({
     schema,
     breadcrumbItems,
 }) => {
-    const siteTitle = 'Kolte Patil Life Republic';
-    const locationSuffix = 'Hinjewadi Pune';
+    const siteTitle = 'Kolte Patil Life Republic Hinjewadi';
+    const locationSuffix = 'Pune';
     
     // De-duplicate branding and location more aggressively
-    const cleanTitle = title?.replace(/Kolte Patil|Life Republic|Hinjewadi|Pune/g, '').replace(/^[\s|:-]+|[\s|:-]+$/g, '');
+    const cleanTitle = title?.replace(/Kolte Patil|Life Republic|Hinjewadi|Pune/gi, '').replace(/^[\s|:-]+|[\s|:-]+$/g, '');
     const fullTitle = title 
-        ? (title.includes(siteTitle) && title.includes(locationSuffix)) 
+        ? (title.includes('Kolte Patil Life Republic') && title.includes('Hinjewadi')) 
             ? title 
             : `${siteTitle} | ${cleanTitle || title} | ${locationSuffix}`
-        : `${siteTitle} Township | ${locationSuffix} | Official Site`;
+        : `${siteTitle} | Official Premium Township | ${locationSuffix}`;
 
     // Ensure it doesn't get too crazy long for Google (keep under 60-70 chars)
     const finalTitle = fullTitle.length > 70 ? fullTitle.substring(0, 67) + '...' : fullTitle;
@@ -67,7 +67,7 @@ export const SEO: React.FC<SEOProps> = ({
     };
 
     const pathKeywords = getPathSpecificKeywords(location.pathname);
-    const baseKeywords = "Kolte Patil Life Republic, Life Republic Hinjewadi, Pune integrated township, buy flat in hinjewadi, luxury villas pune, rera projects hinjewadi";
+    const baseKeywords = "Kolte Patil Life Republic Hinjewadi, Kolte Patil Life Republic, Life Republic Hinjewadi, Kolte Patil Hinjewadi, Life Republic Pune, buy flat in hinjewadi, luxury villas pune";
     
     const metaKeywords = keywords 
         ? `${keywords}${pathKeywords ? `, ${pathKeywords}` : ''}` 
