@@ -34,7 +34,7 @@ export const generateGlobalSchema = (path: string = '/') => {
                     'https://www.facebook.com/KoltePatilDevelopers/',
                     'https://www.linkedin.com/company/kolte-patil-developers-limited/',
                     'https://www.youtube.com/c/KoltePatilDevelopersLtd',
-                    'https://maps.google.com/?q=Kolte+Patil+Life+Republic+Hinjewadi'
+                    'https://www.google.com/search?q=kolte+patil+life+republic&sca_esv=0cefd7cacdd99c8f&rlz=1C5CHFA_enIN1014IN1014&sxsrf=ANbL-n6cp4Yw7Z7Fh4G4LehvmcPQYTXMWQ:1780943573807&udm=1&lsack=1Qonau7-ML6WseMPr7iR6A4&sa=X&ved=2ahUKEwiuvdPoo_iUAxU-S2wGHS9cBO0QjGp6BAgpEAA&biw=1440&bih=778&dpr=2#sv=CAwSwgIKBmxjbF9wdhIbCgNwdnESFENnMHZaeTh4TVdoNlpERTVaRFV3EpABCgNscWkSiAFDaGxyYjJ4MFpTQndZWFJwYkNCc2FXWmxJSEpsY0hWaWJHbGpTS0RoMHNENXI0Q0FDRm9yRUFBUUFSQUNFQU1ZQUJnQkdBSVlBeUlaYTI5c2RHVWdjR0YwYVd3Z2JHbG1aU0J5WlhCMVlteHBZNUlCRVdGd1lYSjBiV1Z1ZEY5amIyMXdiR1Y0ElQKA3RicxJNbHJmOiEybTQhMWUxNSE0bTIhMTVtMSExc2hhc18xd2hlZWxjaGFpcl8xYWNjZXNzaWJsZV8xZW50cmFuY2UhMm0xITFlMyEzc0lBRT0SHgoBcRIZa29sdGUgcGF0aWwgbGlmZSByZXB1YmxpYxoSbG9jYWwtcGxhY2Utdmlld2VyGAoghsjQIg'
                 ],
                 'parentOrganization': {
                     '@type': 'Organization',
@@ -258,7 +258,7 @@ export const generateLocalBusinessSchema = () => {
         'priceRange': '₹40L - ₹3Cr',
         'url': DOMAIN,
         'sameAs': [
-            'https://maps.google.com/?q=Kolte+Patil+Life+Republic+Hinjewadi'
+            'https://www.google.com/search?q=kolte+patil+life+republic&sca_esv=0cefd7cacdd99c8f&rlz=1C5CHFA_enIN1014IN1014&sxsrf=ANbL-n6cp4Yw7Z7Fh4G4LehvmcPQYTXMWQ:1780943573807&udm=1&lsack=1Qonau7-ML6WseMPr7iR6A4&sa=X&ved=2ahUKEwiuvdPoo_iUAxU-S2wGHS9cBO0QjGp6BAgpEAA&biw=1440&bih=778&dpr=2#sv=CAwSwgIKBmxjbF9wdhIbCgNwdnESFENnMHZaeTh4TVdoNlpERTVaRFV3EpABCgNscWkSiAFDaGxyYjJ4MFpTQndZWFJwYkNCc2FXWmxJSEpsY0hWaWJHbGpTS0RoMHNENXI0Q0FDRm9yRUFBUUFSQUNFQU1ZQUJnQkdBSVlBeUlaYTI5c2RHVWdjR0YwYVd3Z2JHbG1aU0J5WlhCMVlteHBZNUlCRVdGd1lYSjBiV1Z1ZEY5amIyMXdiR1Y0ElQKA3RicxJNbHJmOiEybTQhMWUxNSE0bTIhMTVtMSExc2hhc18xd2hlZWxjaGFpcl8xYWNjZXNzaWJsZV8xZW50cmFuY2UhMm0xITFlMyEzc0lBRT0SHgoBcRIZa29sdGUgcGF0aWwgbGlmZSByZXB1YmxpYxoSbG9jYWwtcGxhY2Utdmlld2VyGAoghsjQIg'
         ],
         'address': {
             '@type': 'PostalAddress',
