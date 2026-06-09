@@ -69,6 +69,8 @@ export const generateGlobalSchema = (path: string = '/') => {
                 'name': 'Kolte Patil Life Republic Hinjewadi | Official Township Site',
                 'isPartOf': { '@id': `${DOMAIN}/#website` },
                 'about': { '@id': `${DOMAIN}/#organization` },
+                'provider': { '@id': `${DOMAIN}/#organization` },
+                'mainEntity': { '@id': `${DOMAIN}/#organization` },
                 'primaryImageOfPage': { '@id': `${DOMAIN}${path}#primaryimage` },
                 'description': 'Explore Kolte Patil Life Republic Hinjewadi, a 390-acre integrated township in Pune with premium 1, 2, 3 BHK flats and luxury villas.'
             }
