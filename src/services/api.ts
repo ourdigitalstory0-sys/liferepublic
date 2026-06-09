@@ -100,7 +100,7 @@ export const api = {
                 const { data, error } = await query;
                 if (error) throw error;
 
-                return (data || []).map((p) => ({
+                let results = (data || []).map((p) => ({
                     ...p,
                     image: normalizeUrl(p.image),
                     masterLayout: normalizeUrl(p.master_layout),
@@ -108,7 +108,18 @@ export const api = {
                     gallery: (p.gallery || []).map((g: string) => normalizeUrl(g)),
                     themeColor: p.theme_color
                 })) as Project[];
-            } catch (e) { return handleApiError(e, 'projects.getAll'); }
+
+                // Sovereign Fail-safe: If DB is empty, serve local registry
+                if (results.length === 0) {
+                    console.log('[Sovereign Fail-safe] Serving all projects from local registry.');
+                    results = projectsRegistry;
+                }
+
+                return results;
+            } catch (e) { 
+                console.log('[Sovereign Critical Fail-safe] Serving all projects from local registry after catch block.');
+                return projectsRegistry;
+            }
         },
         getFeatured: async (limit = 3) => {
             try {
@@ -119,13 +130,24 @@ export const api = {
 
                 if (error) throw error;
 
-                return (data || []).map((p) => ({
+                let results = (data || []).map((p) => ({
                     ...p,
                     image: normalizeUrl(p.image),
                     themeColor: p.theme_color,
                     description: p.overview // Fallback description
                 })) as Project[];
-            } catch (e) { return handleApiError(e, 'projects.getFeatured'); }
+
+                // Sovereign Fail-safe: If DB is empty, serve local registry
+                if (results.length === 0) {
+                    console.log('[Sovereign Fail-safe] Serving featured projects from local registry.');
+                    results = projectsRegistry.slice(0, limit);
+                }
+
+                return results;
+            } catch (e) { 
+                console.log('[Sovereign Critical Fail-safe] Serving featured projects from local registry after catch block.');
+                return projectsRegistry.slice(0, limit);
+            }
         },
         getById: async (id: string) => {
             const rawId = id.trim().replace(/\/$/, '');
