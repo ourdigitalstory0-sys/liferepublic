@@ -10,19 +10,33 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
-User-agent: *
-Allow: /
-Sitemap: https://life-republic.in/sitemap.xml
-
-# Disallow sensitive paths
+# Aggressive Crawl Budget Allocation for Major Bots
+User-agent: Googlebot
+Allow: /projects/
+Allow: /location/
+Allow: /assets/
+Allow: /images/
 Disallow: /admin
-Disallow: /admin/*
-Disallow: /api/*
-Disallow: /search?*
-Disallow: /?*
-Disallow: /*?utm_*
-Disallow: /*?fbclid*
+Disallow: /api/
+Disallow: /*?*
 Disallow: /*_escaped_fragment_
 
-# Host
+User-agent: Bingbot
+Allow: /projects/
+Allow: /location/
+Allow: /assets/
+Allow: /images/
+Disallow: /admin
+Disallow: /api/
+Disallow: /*?*
+
+# Default rules for all other crawlers
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /search?*
+Disallow: /?*
+
+Sitemap: https://life-republic.in/sitemap.xml
 Host: https://life-republic.in

@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { generateGlobalSchema, generateSiteNavigationSchema, generateBreadcrumbSchema } from '../../utils/schemaGenerator';
 import { generateCanonicalURL } from '../../lib/seo-utils';
+import seoMatrix from '../../data/seoMatrix.json';
 
 interface SEOProps {
     title?: string;
@@ -49,8 +50,6 @@ export const SEO: React.FC<SEOProps> = ({
     const currentPath = location.pathname + location.search;
     const fullCanonical = generateCanonicalURL(canonical || currentPath);
     
-import seoMatrix from '../../data/seoMatrix.json';
-
     // Advanced Keyword Matrix Routing using Data Layer
     const getPathSpecificKeywords = (path: string) => {
         const segments = path.split('/').filter(Boolean);
