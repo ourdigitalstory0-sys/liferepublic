@@ -87,7 +87,7 @@ export const HeroSlider: React.FC = () => {
                         <SwiperSlide key={slide.id}>
                             <div className="relative h-full w-full">
                                 <div className="absolute inset-0 bg-black/40 z-10" />
-                                <img loading="lazy"
+                                <img
                                     src={slide.image_url}
                                     alt={slide.title}
                                     loading={index === 0 ? "eager" : "lazy"}
