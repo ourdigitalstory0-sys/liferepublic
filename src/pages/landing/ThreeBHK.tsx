@@ -38,7 +38,7 @@ export const ThreeBHK: React.FC = () => {
             {/* Sovereign Hero */}
             <section className="relative pt-48 pb-32 bg-secondary overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-secondary z-10"></div>
-                <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8818362083715893.avif')] bg-cover bg-center opacity-30 grayscale blur-[1px]"></div>
+                <div className="absolute inset-0 bg-[url('/images/aerial-sunset.png')] bg-cover bg-center opacity-30 grayscale blur-[1px]"></div>
                 
                 <div className="container mx-auto px-4 relative z-20">
                     <div className="max-w-5xl">

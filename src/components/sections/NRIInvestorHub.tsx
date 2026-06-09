@@ -80,7 +80,7 @@ export const NRIInvestorHub: React.FC = () => {
                             whileInView={{ scale: 1, opacity: 1 }}
                             className="bg-secondary rounded-[5rem] p-16 md:p-24 text-white relative z-10 overflow-hidden shadow-[0_100px_200px_-50px_rgba(0,0,0,0.6)] border border-white/5"
                         >
-                            <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8818362083715893.avif')] bg-cover bg-center opacity-5 grayscale pointer-events-none group-hover:scale-110 transition-transform duration-[3s]"></div>
+                            <div className="absolute inset-0 bg-[url('/images/aerial-sunset.png')] bg-cover bg-center opacity-5 grayscale pointer-events-none group-hover:scale-110 transition-transform duration-[3s]"></div>
                             <div className="absolute -top-32 -right-32 w-80 h-80 bg-accent/20 rounded-full blur-[100px]"></div>
                             
                             <div className="flex items-center gap-6 mb-12">

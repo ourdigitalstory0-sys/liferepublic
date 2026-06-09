@@ -32,7 +32,7 @@ export const Connectivity: React.FC = () => {
 
             {/* Hero Section */}
             <section className="relative py-32 bg-secondary overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center opacity-10 grayscale"></div>
+                <div className="absolute inset-0 bg-[url('/images/aerial-night.png')] bg-cover bg-center opacity-10 grayscale"></div>
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-4xl mx-auto text-center">
                         <motion.div 
@@ -161,7 +161,7 @@ export const Connectivity: React.FC = () => {
 
             {/* CTA */}
             <section className="py-32 bg-secondary relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.056632375187106176.jpg')] bg-cover bg-center opacity-10"></div>
+                <div className="absolute inset-0 bg-[url('/images/aerial-night.png')] bg-cover bg-center opacity-10"></div>
                 <div className="container mx-auto px-4 relative z-10 text-center">
                     <h2 className="text-4xl md:text-6xl font-serif font-bold text-white mb-8">Synthesize Your Commute.</h2>
                     <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-medium">

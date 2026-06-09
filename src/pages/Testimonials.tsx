@@ -14,7 +14,7 @@ const reviews = [
         video: true,
         tenure: "2018",
         sector: "Arezo",
-        img: "https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif"
+        img: "/images/home/atmos-thumb.jpg"
     },
     {
         name: "Priya Sharma",
@@ -25,7 +25,7 @@ const reviews = [
         video: false,
         tenure: "2021",
         sector: "Nora",
-        img: "https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8818362083715893.avif"
+        img: "/images/home/atmos-thumb.jpg"
     },
     {
         name: "Amit Patel",
@@ -36,7 +36,7 @@ const reviews = [
         video: true,
         tenure: "2019",
         sector: "Aros",
-        img: "https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.05260177764445035.png"
+        img: "/images/home/atmos-thumb.jpg"
     },
     {
         name: "Sandeep Varma",
@@ -47,7 +47,7 @@ const reviews = [
         video: false,
         tenure: "2020",
         sector: "Atmos",
-        img: "https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.1777644472589.png"
+        img: "/images/home/atmos-thumb.jpg"
     }
 ];
 
@@ -70,7 +70,7 @@ export const Testimonials: React.FC = () => {
             {/* Community Pulse Header v6.5 */}
             <section className="bg-secondary text-white pt-56 pb-40 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-secondary via-secondary/60 to-white z-0"></div>
-                <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center grayscale opacity-10 blur-[2px] scale-110"></div>
+                <div className="absolute inset-0 bg-[url('/images/home/atmos-thumb.jpg')] bg-cover bg-center grayscale opacity-10 blur-[2px] scale-110"></div>
                 
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-7xl mx-auto text-center mb-32">

@@ -59,7 +59,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                 {/* Image Section */}
                 <div className="relative h-64 overflow-hidden cursor-pointer" onClick={handleProjectClick}>
                     <img
-                        src={project.image || 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif'}
+                        src={project.image || '/images/home/master-layout-full.jpg'}
                         alt={`Kolte Patil Life Republic Township - ${project.title}`}
                         loading={priority ? "eager" : "lazy"}
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"

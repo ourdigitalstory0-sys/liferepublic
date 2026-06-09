@@ -49,7 +49,7 @@ export const LocationLanding: React.FC<LocationLandingProps> = ({ locationName, 
             {/* Sovereign Location Hero v6.5 */}
             <section className="relative h-[80vh] flex items-center bg-secondary text-white overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/60 to-transparent z-10"></div>
-                <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center opacity-30 grayscale blur-[2px] scale-110"></div>
+                <div className="absolute inset-0 bg-[url('/images/aerial-night.png')] bg-cover bg-center opacity-30 grayscale blur-[2px] scale-110"></div>
                 <div className="absolute top-0 right-0 w-[1000px] h-full bg-accent/5 rounded-full blur-[200px] pointer-events-none -mr-96"></div>
                 
                 <div className="container mx-auto px-4 relative z-20">
@@ -190,7 +190,7 @@ export const LocationLanding: React.FC<LocationLandingProps> = ({ locationName, 
 
             {/* Hyper-Local SEO Content v6.5 */}
             <section className="py-64 bg-secondary text-white/40 text-2xl leading-[1.6] border-t border-white/5 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-full bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8818362083715893.avif')] bg-cover bg-center opacity-5 grayscale pointer-events-none"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/aerial-night.png')] bg-cover bg-center opacity-5 grayscale pointer-events-none"></div>
                 <div className="container mx-auto px-4 max-w-6xl text-center relative z-10 space-y-16">
                     <h3 className="text-4xl md:text-5xl font-serif font-bold text-white tracking-tighter italic">Property Market Synthesis: {locationName} vs Hinjewadi 2026</h3>
                     <p className="font-medium italic">

@@ -136,7 +136,7 @@ export const MasterPlan: React.FC = () => {
                     
                     <motion.div style={{ scale }} className="h-full w-full">
                         <img loading="lazy" 
-                            src="https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif" 
+                            src="/images/home/master-layout-full.jpg" 
                             alt="Life Republic Master Plan" 
                             onLoad={() => setImgLoaded(true)}
                             className={`w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-2000 ease-out ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}

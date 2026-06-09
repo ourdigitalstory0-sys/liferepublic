@@ -185,7 +185,7 @@ export const ROICalculator: React.FC = () => {
                 {/* Synthesis Card */}
                 <div className="lg:col-span-5 flex flex-col gap-8">
                     <div className="flex-1 bg-secondary rounded-[4rem] p-12 text-white relative overflow-hidden flex flex-col justify-between shadow-[0_60px_120px_-30px_rgba(0,0,0,0.5)] border border-white/5">
-                        <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center opacity-5 grayscale pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-[url('/images/aerial-sunset.png')] bg-cover bg-center opacity-5 grayscale pointer-events-none"></div>
                         
                         <div>
                             <div className="flex items-center justify-between mb-12">

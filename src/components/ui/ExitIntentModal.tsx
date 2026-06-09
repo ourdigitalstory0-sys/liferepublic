@@ -70,7 +70,7 @@ export const ExitIntentModal: React.FC = () => {
                         <div className="flex flex-col lg:flex-row min-h-[650px]">
                             {/* Visual Tectonic Side */}
                             <div className="w-full lg:w-[40%] bg-secondary p-16 md:p-20 text-white relative overflow-hidden flex flex-col justify-center">
-                                <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center grayscale opacity-10 scale-110 group-hover:scale-125 transition-transform duration-[2s]"></div>
+                                <div className="absolute inset-0 bg-[url('/images/aerial-sunset.png')] bg-cover bg-center grayscale opacity-10 scale-110 group-hover:scale-125 transition-transform duration-[2s]"></div>
                                 <div className="relative z-10 space-y-16">
                                     <div className="w-28 h-28 bg-accent/20 rounded-[3rem] flex items-center justify-center text-accent border border-accent/30 shadow-2xl relative">
                                         <div className="absolute inset-0 bg-accent/20 blur-2xl animate-pulse rounded-full"></div>

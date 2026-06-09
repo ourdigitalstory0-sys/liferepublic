@@ -12,7 +12,7 @@ const volumes = [
         desc: 'Within the Sovereign Republic, education is not a commute, but a tectonic stroll. The Anisha Global School sits at the heart of the township, fostering intellectual growth in a secure, zero-transit environment.',
         metrics: ['400m to Anisha Global', 'CBSE / IGCSE Curriculum', '5-Acre Sports Matrix'],
         icon: School,
-        img: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif',
+        img: '/images/aerial-sunset.png',
         color: 'from-blue-500/30 to-transparent'
     },
     {
@@ -22,7 +22,7 @@ const volumes = [
         desc: 'Escape the IT corridor’s density. Our 3.5-acre Urban Park and the surrounding 70% open spaces provide an atmospheric retreat for residents to disconnect and rejuvenate within nature.',
         metrics: ['7,700+ Native Trees', '12+ Theme Gardens', '3.5 Acre Urban Park Hub'],
         icon: Trees,
-        img: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.05260177764445035.png',
+        img: '/images/aerial-sunset.png',
         color: 'from-emerald-500/30 to-transparent'
     },
     {
@@ -32,7 +32,7 @@ const volumes = [
         desc: 'Life Republic is a living organism. With over 12,000 families in residence, the community pulse is felt in every festival, club meeting, and evening gathering at the 150ft Spine Road Hub.',
         metrics: ['12,000+ Verified Families', '25+ Resident Interests', 'Weekly Community Marquee'],
         icon: Users,
-        img: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.1777644472589.png',
+        img: '/images/aerial-sunset.png',
         color: 'from-accent/30 to-transparent'
     }
 ];
@@ -128,7 +128,7 @@ export const Lifestyle: React.FC = () => {
             </section>
 
             <section className="py-72 bg-secondary relative overflow-hidden group">
-                <div className="absolute inset-0 opacity-10 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center grayscale blur-[2px] group-hover:scale-110 transition-transform duration-[3s]"></div>
+                <div className="absolute inset-0 opacity-10 bg-[url('/images/aerial-sunset.png')] bg-cover bg-center grayscale blur-[2px] group-hover:scale-110 transition-transform duration-[3s]"></div>
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[200px] pointer-events-none -mr-48 -mt-48"></div>
                 
                 <div className="container mx-auto px-4 relative z-10 text-center">

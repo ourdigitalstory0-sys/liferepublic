@@ -306,7 +306,7 @@ export const TownshipGuide: React.FC = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {[
-                                { title: "Anisha Global School", status: "Fully Operational", img: "https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.0852377534066876.jpg" },
+                                { title: "Anisha Global School", status: "Fully Operational", img: "/images/aerial-sunset.png" },
                                 { title: "150ft Spine Road", status: "Zero Congestion", img: "https://life-republic.in/images/gallery/eros/master-layout.webp" },
                                 { title: "Township Fire Station", status: "24/7 Response", img: "/images/home/canvas-thumb.jpg" }
                             ].map((item, i) => (

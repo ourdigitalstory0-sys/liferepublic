@@ -249,7 +249,7 @@ const Home: React.FC = () => {
                         <NeuralGallery 
                             title="The Living Volume"
                             images={{
-                                day: 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif'
+                                day: '/images/aerial-night.png'
                             }}
                         />
                     </div>

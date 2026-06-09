@@ -63,7 +63,7 @@ export const MediaCenter: React.FC = () => {
             {/* Sovereign Hero */}
             <section className="relative pt-40 pb-32 bg-secondary overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-secondary z-10"></div>
-                <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center opacity-30 grayscale blur-[2px]"></div>
+                <div className="absolute inset-0 bg-[url('/images/aerial-sunset.png')] bg-cover bg-center opacity-30 grayscale blur-[2px]"></div>
                 
                 <div className="container mx-auto px-4 relative z-20 text-center">
                     <motion.div
@@ -145,7 +145,7 @@ export const MediaCenter: React.FC = () => {
                                     <Link to={`/media-center/${post.slug}`} className="relative block h-80 overflow-hidden bg-gray-200">
                                         <div className="absolute inset-0 bg-secondary/30 group-hover:bg-transparent transition-all z-10"></div>
                                         <img loading="lazy"
-                                            src={post.image || 'https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif'}
+                                            src={post.image || '/images/aerial-sunset.png'}
                                             alt={post.title}
                                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
                                         />

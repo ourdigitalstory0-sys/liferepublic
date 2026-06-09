@@ -49,7 +49,7 @@ export const LocationHighlights: React.FC = () => {
             {/* Sovereign Nexus Hero */}
             <section className="relative pt-40 pb-32 bg-secondary overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-secondary z-10"></div>
-                <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center opacity-30 grayscale blur-[1px]"></div>
+                <div className="absolute inset-0 bg-[url('/images/aerial-sunset.png')] bg-cover bg-center opacity-30 grayscale blur-[1px]"></div>
                 
                 <div className="container mx-auto px-4 relative z-20">
                     <div className="max-w-5xl">
@@ -207,7 +207,7 @@ export const LocationHighlights: React.FC = () => {
             <section className="py-40 bg-white">
                 <div className="container mx-auto px-4">
                     <div className="max-w-6xl mx-auto p-20 md:p-32 bg-secondary rounded-[5rem] text-center relative overflow-hidden shadow-2xl">
-                        <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center grayscale opacity-5"></div>
+                        <div className="absolute inset-0 bg-[url('/images/aerial-sunset.png')] bg-cover bg-center grayscale opacity-5"></div>
                         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px]"></div>
                         
                         <motion.div

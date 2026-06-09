@@ -137,7 +137,7 @@ export const CommunityForum: React.FC = () => {
                     {/* Sidebar Synthesis v6.0 */}
                     <div className="lg:col-span-4 space-y-12">
                         <div className="bg-secondary p-16 rounded-[5rem] text-white relative overflow-hidden shadow-2xl group">
-                            <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center opacity-10 grayscale pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
+                            <div className="absolute inset-0 bg-[url('/images/aerial-sunset.png')] bg-cover bg-center opacity-10 grayscale pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
                             <h3 className="text-4xl font-bold font-serif mb-12 flex items-center gap-6 relative z-10 tracking-tight">
                                 <Calendar size={40} className="text-accent" />
                                 Sovereign Events
@@ -211,7 +211,7 @@ export const CommunityForum: React.FC = () => {
                 </div>
 
                 <div className="mt-48 text-center bg-secondary p-32 md:p-48 rounded-[7rem] relative overflow-hidden group shadow-[0_120px_240px_-60px_rgba(0,0,0,0.6)] border border-white/5">
-                    <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8818362083715893.avif')] bg-cover bg-center opacity-10 grayscale pointer-events-none group-hover:scale-105 transition-transform duration-1000"></div>
+                    <div className="absolute inset-0 bg-[url('/images/aerial-sunset.png')] bg-cover bg-center opacity-10 grayscale pointer-events-none group-hover:scale-105 transition-transform duration-1000"></div>
                     <div className="relative z-10 max-w-5xl mx-auto">
                         <div className="w-32 h-32 bg-accent text-secondary rounded-[3.5rem] flex items-center justify-center mx-auto mb-16 shadow-2xl group-hover:scale-110 transition-transform">
                             <Heart size={64} className="animate-pulse" />

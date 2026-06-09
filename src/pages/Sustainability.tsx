@@ -78,7 +78,7 @@ export const Sustainability: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     className="bg-secondary rounded-[5rem] p-16 md:p-28 text-white relative overflow-hidden shadow-[0_80px_160px_-40px_rgba(0,0,0,0.5)] group"
                 >
-                    <div className="absolute inset-0 bg-[url('https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8122513965070959.avif')] bg-cover bg-center opacity-5 grayscale pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
+                    <div className="absolute inset-0 bg-[url('/images/aerial-sunset.png')] bg-cover bg-center opacity-5 grayscale pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
                     <div className="absolute top-0 right-0 w-1/2 h-full bg-emerald-500/5 skew-x-12 transform translate-x-32 group-hover:translate-x-24 transition-transform duration-[2s]"></div>
                     
                     <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
@@ -108,7 +108,7 @@ export const Sustainability: React.FC = () => {
                         
                         <div className="relative aspect-square rounded-[4rem] overflow-hidden border border-white/10 shadow-2xl">
                             <img loading="lazy" 
-                                src="https://tjgrjtdudzupmzkmjfiu.supabase.co/storage/v1/object/public/projects/0.8818362083715893.avif" 
+                                src="/images/aerial-sunset.png" 
                                 alt="Sovereign Greenery" 
                                 className="w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-[3s]"
                             />
