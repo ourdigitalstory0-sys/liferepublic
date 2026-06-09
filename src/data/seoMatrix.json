@@ -4,207 +4,426 @@
         "Life Republic Hinjewadi",
         "Life Republic Pune",
         "Kolte Patil Township Pune",
+        "Kolte Patil Life Republic Marunji",
+        "Life Republic Marunji",
+        "Kolte Patil Life Republic Phase 1",
+        "Kolte Patil Life Republic Phase 2",
         "Kolte Patil Life Republic Township",
-        "Life Republic Official Website",
-        "Premium Township in Pune"
+        "Life Republic Integrated Township",
+        "Life Republic Smart Township",
+        "Life Republic Residential Township",
+        "Life Republic Luxury Homes",
+        "Life Republic Premium Apartments",
+        "Life Republic New Launch",
+        "Life Republic Under Construction",
+        "Life Republic Ready Possession",
+        "Life Republic Investment Property",
+        "Life Republic Hinjewadi Pune",
+        "Life Republic Marunji Pune",
+        "Life Republic West Pune",
+        "Kolte Patil Life Republic Hinjewadi",
+        "Kolte Patil Life Republic Marunji",
+        "Kolte Patil Life Republic Pune"
     ],
     "configurations": {
         "1-bhk": [
             "Life Republic 1 BHK",
-            "1 BHK in Life Republic",
-            "1 BHK flats in Hinjewadi Pune",
-            "Small apartments Hinjewadi",
-            "1 BHK near Rajiv Gandhi IT Park",
-            "Life Republic affordable 1 BHK",
-            "Best 1 BHK in West Pune",
-            "1 BHK investment in Hinjewadi",
-            "Kolte Patil 1 BHK Life Republic",
-            "Ready possession 1 BHK Hinjewadi"
+            "1 BHK",
+            "1 bhk in west pune",
+            "1 bhk flats west pune",
+            "affordable 1 bhk west pune",
+            "investment 1 bhk west pune"
         ],
         "2-bhk": [
             "Life Republic 2 BHK",
-            "2 BHK flats Hinjewadi",
-            "Hinjewadi 2 BHK apartments",
-            "Life Republic Affordable Homes",
-            "2 BHK near Infosys Hinjewadi",
-            "Premium 2 BHK in Hinjewadi Pune",
-            "2 BHK flat price in Hinjewadi",
-            "Kolte Patil 2 BHK Life Republic",
-            "2 BHK with balcony Hinjewadi",
-            "Family 2 BHK apartments Pune West"
+            "2 BHK",
+            "2 bhk in west pune",
+            "2 bhk flats west pune",
+            "luxury 2 bhk west pune",
+            "premium 2 bhk west pune",
+            "2 bhk apartments west pune",
+            "buy 2 bhk west pune",
+            "Hinjewadi 2 BHK"
         ],
         "3-bhk": [
             "Life Republic 3 BHK",
-            "3 BHK flats Hinjewadi",
-            "Hinjewadi 3 BHK luxury apartments",
-            "Premium 3 BHK in Hinjewadi Pune",
-            "Spacious 3 BHK flats near Wakad",
-            "Kolte Patil 3 BHK Life Republic",
-            "3 BHK ready to move in Hinjewadi",
-            "Luxury 3 BHK with amenities Pune",
-            "3 BHK property for sale in Hinjewadi"
+            "3 BHK",
+            "3 bhk in west pune",
+            "3 bhk flats west pune",
+            "luxury 3 bhk west pune",
+            "premium 3 bhk west pune",
+            "spacious 3 bhk west pune",
+            "3 bhk apartments west pune",
+            "Hinjewadi 3 BHK",
+            "Premium 3 BHK in Hinjewadi Pune"
         ],
         "4-bhk": [
             "Life Republic 4 BHK",
-            "4 BHK villas Hinjewadi",
-            "Life Republic Luxury Homes",
-            "Luxury Family Homes Pune",
-            "4 BHK bungalows in Hinjewadi",
-            "Premium 4 BHK apartments West Pune",
-            "Kolte Patil 4 BHK Life Republic",
-            "Ultra luxury 4 BHK Pune",
-            "4 BHK independent house near IT Park"
+            "4 BHK",
+            "4 bhk in west pune",
+            "luxury 4 bhk west pune",
+            "premium 4 bhk west pune",
+            "ultra luxury 4 bhk west pune",
+            "4 bhk residences west pune",
+            "premium 4 bhk homes west pune"
+        ],
+        "5-bhk": [
+            "5 BHK",
+            "5 bhk luxury homes west pune",
+            "ultra luxury residences west pune",
+            "luxury villas west pune",
+            "luxury penthouses west pune"
+        ],
+        "general": [
+            "Life Republic Apartments",
+            "Life Republic Luxury Apartments",
+            "Life Republic Premium Homes",
+            "Life Republic Family Homes",
+            "Life Republic Flats for Sale",
+            "Life Republic New Flats",
+            "Life Republic Affordable Homes",
+            "Life Republic Premium Residences",
+            "Life Republic Township Homes",
+            "Life Republic Spacious Apartments",
+            "Life Republic Smart Homes",
+            "apartments in west pune",
+            "flats in west pune",
+            "buy flat in west pune",
+            "buy apartment in west pune",
+            "residential apartments west pune",
+            "premium apartments west pune",
+            "affordable apartments west pune",
+            "luxury apartments west pune",
+            "smart homes west pune",
+            "family apartments west pune",
+            "spacious apartments west pune",
+            "modern apartments west pune"
         ]
     },
     "projects": {
         "atmos": [
-            "Life Republic Atmos",
-            "Kolte Patil Atmos Hinjewadi",
-            "Life Republic Cluster Apartments",
-            "Modern 2 BHK at Atmos",
-            "Atmos 3 BHK flats Hinjewadi",
-            "Life Republic Atmos floor plan",
-            "Atmos Phase Life Republic"
+            "Life Republic Atmos"
         ],
         "aros": [
-            "Life Republic Aros",
-            "Kolte Patil Aros",
-            "Life Republic Premium Towers",
-            "Aros 2 BHK Hinjewadi",
-            "Aros 3 BHK premium apartments",
-            "Life Republic Aros brochure",
-            "Aros luxury living Pune"
+            "Life Republic Aros"
         ],
         "universe": [
-            "Life Republic Universe",
-            "Kolte Patil Universe",
-            "Life Republic Sector Homes",
-            "Universe 1 BHK Hinjewadi",
-            "Universe 2 BHK Life Republic",
-            "Universe smart homes Pune"
+            "Life Republic Universe"
         ],
         "oro-avenue": [
-            "Life Republic Oro Avenue",
-            "Kolte Patil Oro Avenue",
-            "Life Republic Township Clusters",
-            "Oro Avenue 1 BHK",
-            "Oro Avenue 2 BHK Hinjewadi",
-            "Life Republic Oro Avenue Phase"
+            "Life Republic Oro Avenue"
         ],
         "first-avenue": [
-            "Life Republic First Avenue",
-            "Kolte Patil First Avenue",
-            "Life Republic Township Clusters",
-            "First Avenue 2 BHK",
-            "First Avenue 3 BHK premium",
-            "First Avenue ready possession"
+            "Life Republic First Avenue"
         ],
         "24k-espada": [
-            "Life Republic 24K Espada",
-            "Kolte Patil 24K Espada",
-            "Luxury gated community in West Pune",
-            "Ultra luxury row houses Hinjewadi",
-            "24K Espada villas Pune",
-            "Life Republic premium row houses"
+            "Life Republic 24K Espada"
         ],
         "sound-of-soul": [
-            "Life Republic Sound of Soul",
-            "Sound of Soul row houses",
-            "Luxury 4 BHK row houses Hinjewadi",
-            "Kolte Patil Sound of Soul",
-            "Premium living in Life Republic"
+            "Life Republic Sound of Soul"
         ],
         "arezo": [
-            "Life Republic Arezo",
-            "Arezo 2 BHK efficient flats",
-            "Kolte Patil Arezo Hinjewadi",
-            "Arezo Life Republic price"
+            "Life Republic Arezo"
         ],
         "duet": [
-            "Life Republic Duet",
-            "Duet premium 2 BHK flats",
-            "Kolte Patil Duet Hinjewadi"
+            "Life Republic Duet"
         ],
         "canvas": [
-            "Life Republic Canvas",
-            "Canvas luxury 3 BHK flats",
-            "Canvas 4 BHK Hinjewadi",
-            "Kolte Patil Canvas Life Republic"
+            "Life Republic Canvas"
         ],
         "echoes": [
-            "Life Republic Echoes",
-            "Echoes new launch 2 BHK",
-            "Echoes 2.5 BHK Hinjewadi",
-            "Kolte Patil Echoes Life Republic"
+            "Life Republic Echoes"
         ],
         "villas": [
-            "Life Republic Villas",
-            "Luxury villas near Hinjewadi",
-            "Kolte Patil Villas Pune",
-            "Independent villas Life Republic"
+            "Life Republic Villas"
+        ],
+        "r-series": [
+            "Life Republic R Series"
+        ],
+        "clusters": [
+            "Life Republic Sector Homes",
+            "Life Republic Premium Towers",
+            "Life Republic Luxury Residences",
+            "Life Republic Cluster Apartments",
+            "Life Republic Township Clusters"
         ]
     },
     "locations": {
         "hinjewadi": [
-            "Hinjewadi Pune Real Estate",
+            "Hinjewadi Real Estate",
+            "Hinjewadi Property",
             "Hinjewadi Property Market",
+            "Hinjewadi Property Investment",
+            "Hinjewadi Residential Projects",
+            "Hinjewadi Luxury Projects",
+            "Hinjewadi Township Projects",
+            "Hinjewadi New Launch Projects",
+            "Hinjewadi Apartments",
+            "Hinjewadi Flats",
+            "Hinjewadi Premium Homes",
+            "Hinjewadi Luxury Homes",
             "Hinjewadi Investment Opportunities",
-            "Flats in Hinjewadi Phase 1",
-            "Flats in Hinjewadi Phase 2",
-            "Flats in Hinjewadi Phase 3",
-            "Property near Hinjewadi IT Park",
-            "Apartments near Rajiv Gandhi Infotech Park",
-            "Homes near Infosys Hinjewadi",
+            "Hinjewadi Property Appreciation",
             "Hinjewadi Real Estate Growth",
-            "Buy flat in Hinjewadi",
-            "Ready possession flats Hinjewadi"
+            "Hinjewadi IT Professionals Housing",
+            "Hinjewadi Smart Township",
+            "Hinjewadi Gated Communities",
+            "Hinjewadi Pune Real Estate",
+            "Hinjewadi West Pune Real Estate",
+            "hinjewadi luxury apartments",
+            "hinjewadi premium homes"
         ],
         "marunji": [
             "Marunji Pune Real Estate",
             "Marunji Property Market",
-            "Kolte Patil Life Republic Marunji",
-            "Flats near Marunji road",
-            "Marunji Hinjewadi property"
+            "Marunji Luxury Apartments",
+            "Marunji Township Projects",
+            "Marunji Investment Property",
+            "Marunji Residential Projects",
+            "Property for Sale in Marunji"
         ],
         "wakad": [
-            "West Pune Real Estate",
-            "Flats near Wakad",
-            "Wakad Hinjewadi road property",
-            "Premium apartments near Wakad"
+            "wakad west pune real estate",
+            "wakad luxury apartments",
+            "wakad premium property",
+            "wakad residential projects"
+        ],
+        "baner": [
+            "baner west pune luxury real estate",
+            "baner premium apartments",
+            "baner luxury homes",
+            "baner property investment"
+        ],
+        "balewadi": [
+            "balewadi luxury apartments",
+            "balewadi premium residences",
+            "balewadi real estate market"
         ],
         "tathawade": [
-            "Flats near Tathawade",
-            "Tathawade real estate market",
-            "Properties near Tathawade Pune"
+            "tathawade luxury apartments",
+            "tathawade premium homes",
+            "tathawade real estate investment"
         ],
         "punawale": [
-            "Flats near Punawale",
-            "Punawale property market",
-            "Residential projects near Punawale"
+            "punawale luxury apartments",
+            "punawale premium residences",
+            "punawale property investment"
+        ],
+        "bavdhan": [
+            "bavdhan luxury homes",
+            "bavdhan premium apartments",
+            "bavdhan real estate market"
+        ],
+        "mahalunge": [
+            "mahalunge luxury apartments",
+            "mahalunge township projects",
+            "mahalunge investment property"
+        ],
+        "bhugaon": [
+            "bhugaon luxury homes",
+            "bhugaon township projects",
+            "bhugaon premium residences"
+        ]
+    },
+    "regions": {
+        "pune": [
+            "Pune Real Estate",
+            "Pune Property Market",
+            "Pune Real Estate Investment",
+            "Pune Residential Projects",
+            "Pune Luxury Homes",
+            "Pune Apartments",
+            "Pune Flats for Sale",
+            "Pune New Launch Projects",
+            "Pune Township Projects",
+            "Pune Premium Real Estate",
+            "Pune Property Appreciation",
+            "Pune Real Estate Trends",
+            "Pune Property Investment Opportunities",
+            "Pune Housing Market",
+            "Pune Residential Market",
+            "Pune Smart City Real Estate",
+            "Pune Luxury Apartments",
+            "Pune High ROI Property",
+            "Pune Upcoming Projects",
+            "Pune Gated Communities"
+        ],
+        "west_pune": [
+            "West Pune Real Estate",
+            "West Pune Property Market",
+            "West Pune Luxury Homes",
+            "West Pune Apartments",
+            "West Pune Residential Projects",
+            "West Pune Township Projects",
+            "West Pune Investment Properties",
+            "West Pune Premium Real Estate",
+            "West Pune Property Appreciation",
+            "West Pune Luxury Apartments",
+            "West Pune New Launch Projects",
+            "West Pune Gated Communities",
+            "West Pune Smart Townships",
+            "West Pune Family Homes",
+            "West Pune Property Investment",
+            "west pune property",
+            "west pune real estate market",
+            "west pune flats",
+            "west pune homes",
+            "west pune premium residences",
+            "west pune upcoming projects",
+            "west pune under construction projects",
+            "west pune ready possession flats"
         ]
     },
     "investors": {
         "nri": [
-            "Pune Real Estate Investment",
-            "Hinjewadi Property Investment",
-            "NRI investment Pune",
-            "High ROI Property Hinjewadi Pune",
-            "Pune Property Appreciation",
-            "NRI corner Life Republic",
-            "Best investment property in West Pune",
-            "Rental income flats Hinjewadi"
+            "best investment property west pune",
+            "property investment west pune",
+            "real estate investment west pune",
+            "high roi property west pune",
+            "rental income property west pune",
+            "property appreciation west pune",
+            "future growth locations west pune",
+            "investment apartments west pune",
+            "investor friendly projects west pune",
+            "property near it park west pune",
+            "rental yield property west pune"
         ]
     },
+    "it_hub": [
+        "Property Near Hinjewadi IT Park",
+        "Apartments Near Rajiv Gandhi Infotech Park",
+        "Homes Near Infosys Hinjewadi",
+        "Homes Near Wipro Hinjewadi",
+        "Homes Near Cognizant Hinjewadi",
+        "Homes Near TCS Hinjewadi",
+        "Homes Near Tech Mahindra Hinjewadi",
+        "IT Professional Housing Pune",
+        "IT Employee Homes Hinjewadi",
+        "Investment Near IT Park Pune",
+        "Rental Property Hinjewadi",
+        "Rental Yield Property Pune",
+        "Rental Income Apartments Hinjewadi",
+        "property near hinjewadi it park",
+        "homes near it hub pune",
+        "apartments near it companies pune",
+        "homes for software professionals pune",
+        "flats near rajiv gandhi infotech park",
+        "investment property near it park",
+        "homes near tech parks west pune",
+        "residential projects near hinjewadi"
+    ],
+    "luxury": [
+        "Luxury Apartments Hinjewadi",
+        "Luxury Homes Pune",
+        "Luxury Township Pune",
+        "Premium Residences West Pune",
+        "Premium Apartments Hinjewadi",
+        "Luxury Property Investment Pune",
+        "Luxury Real Estate Pune",
+        "Luxury Gated Community Pune",
+        "Luxury Family Homes Pune",
+        "Premium Lifestyle Homes Pune",
+        "west pune luxury real estate",
+        "luxury apartments west pune",
+        "luxury homes west pune",
+        "luxury property west pune",
+        "premium apartments west pune",
+        "ultra luxury apartments west pune",
+        "luxury penthouses west pune",
+        "luxury residences west pune",
+        "luxury gated community west pune",
+        "branded residences west pune",
+        "premium township west pune",
+        "luxury investment property west pune",
+        "high end homes west pune"
+    ],
+    "buyer_intent": [
+        "Buy Flat in Life Republic",
+        "Buy Property in Hinjewadi",
+        "Buy Apartment in Pune",
+        "Best Township in Pune",
+        "Best Property Investment Pune",
+        "Best Apartments Near Hinjewadi",
+        "Best Residential Project Pune",
+        "Best Luxury Apartment Pune",
+        "Flats for Sale in Hinjewadi",
+        "Ready to Move Flats Hinjewadi",
+        "Under Construction Projects Pune",
+        "New Launch Property Pune",
+        "Premium Homes Pune",
+        "buy property in west pune",
+        "buy flat in west pune",
+        "best residential project west pune",
+        "best township west pune",
+        "best luxury apartment west pune",
+        "property for sale west pune",
+        "flats for sale west pune",
+        "apartments for sale west pune",
+        "luxury homes for sale west pune",
+        "premium property west pune",
+        "ready to move flats west pune",
+        "new launch flats west pune"
+    ],
     "lifestyle": {
-        "amenities": [
-            "Life Republic Integrated Township",
-            "Life Republic Smart Township",
-            "Pune Smart City Real Estate",
-            "Best Township in Pune",
+        "township": [
+            "township projects west pune",
+            "integrated township west pune",
+            "smart township west pune",
+            "premium township west pune",
+            "luxury township west pune",
+            "mixed use township west pune",
+            "gated township west pune",
+            "family township west pune",
+            "township apartments west pune"
+        ],
+        "long_tail": [
+            "Best township near Hinjewadi IT Park",
+            "Best investment property in West Pune",
+            "Luxury apartments near Hinjewadi Phase 1",
+            "Township projects near Hinjewadi IT Park",
+            "Family homes in West Pune",
+            "High appreciation property in Hinjewadi",
+            "Apartments with amenities in Hinjewadi",
+            "Gated community homes in Pune",
+            "Smart township projects in Pune",
             "Sustainable township in Pune",
-            "Life Republic amenities",
-            "Life Republic club house",
-            "Township with school in Pune"
+            "Integrated township near Hinjewadi",
+            "Luxury gated community in West Pune",
+            "Property investment near Pune Metro",
+            "Future growth locations in Pune",
+            "best luxury apartments in west pune",
+            "best township project in west pune",
+            "premium homes near hinjewadi it park",
+            "luxury apartments near metro west pune",
+            "high appreciation property in west pune",
+            "gated community homes in west pune",
+            "family friendly residential projects west pune",
+            "luxury homes with clubhouse west pune",
+            "investment property near it hub pune",
+            "luxury 3 bhk apartments west pune",
+            "ready possession luxury apartments west pune",
+            "new launch luxury projects west pune",
+            "top real estate projects west pune",
+            "best residential investment in west pune"
+        ],
+        "mega_combinations": [
+            "Kolte Patil Life Republic Hinjewadi Pune",
+            "Kolte Patil Life Republic West Pune",
+            "Life Republic Hinjewadi Real Estate",
+            "Life Republic Pune Property Market",
+            "Life Republic Investment Opportunity Pune",
+            "Life Republic Luxury Township Pune",
+            "Life Republic Premium Apartments Hinjewadi",
+            "Hinjewadi Pune Luxury Real Estate",
+            "West Pune Luxury Property Market",
+            "Pune Real Estate Investment Hinjewadi",
+            "Pune Luxury Apartments Near IT Park",
+            "Hinjewadi Township Property Investment",
+            "Best Township Project West Pune",
+            "Integrated Township Near Pune IT Hub",
+            "Luxury Homes Near Hinjewadi Phase 2",
+            "Premium Residential Project West Pune",
+            "High ROI Property Hinjewadi Pune"
         ]
     }
 }

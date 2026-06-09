@@ -78,23 +78,43 @@ import seoMatrix from '../../data/seoMatrix.json';
             if (path.includes('villas')) cluster.push(...seoMatrix.projects.villas);
         }
 
-        // 3. Location & IT Hub Keywords
-        if (path.includes('location')) {
+        // 3. Location & Region Keywords
+        if (path.includes('location') || path.includes('projects')) {
+            // Micro-markets
             if (path.includes('hinjewadi')) cluster.push(...seoMatrix.locations.hinjewadi);
             if (path.includes('marunji')) cluster.push(...seoMatrix.locations.marunji);
             if (path.includes('wakad')) cluster.push(...seoMatrix.locations.wakad);
             if (path.includes('tathawade')) cluster.push(...seoMatrix.locations.tathawade);
             if (path.includes('punawale')) cluster.push(...seoMatrix.locations.punawale);
+            if (path.includes('baner')) cluster.push(...seoMatrix.locations.baner);
+            if (path.includes('balewadi')) cluster.push(...seoMatrix.locations.balewadi);
+            if (path.includes('bavdhan')) cluster.push(...seoMatrix.locations.bavdhan);
+            if (path.includes('mahalunge')) cluster.push(...seoMatrix.locations.mahalunge);
+            if (path.includes('bhugaon')) cluster.push(...seoMatrix.locations.bhugaon);
+
+            // Macro-regions
+            cluster.push(...seoMatrix.regions.west_pune);
+            cluster.push(...seoMatrix.regions.pune);
         }
 
         // 4. NRI & Investment Keywords
         if (path.includes('nri') || path.includes('investment')) {
             cluster.push(...seoMatrix.investors.nri);
+            cluster.push(...seoMatrix.buyer_intent);
         }
 
-        // 5. Township & Lifestyle Keywords
+        // 5. Township, Lifestyle, Luxury & IT Hub Keywords
         if (path.includes('lifestyle') || path.includes('amenities') || path.includes('township')) {
-            cluster.push(...seoMatrix.lifestyle.amenities);
+            cluster.push(...seoMatrix.lifestyle.township);
+        }
+        
+        // 6. Global Injectors (Applied to almost all core pages to maximize long-tail hits)
+        if (path === '/' || path.includes('projects') || path.includes('location')) {
+            cluster.push(...seoMatrix.it_hub);
+            cluster.push(...seoMatrix.luxury);
+            cluster.push(...seoMatrix.lifestyle.long_tail);
+            cluster.push(...seoMatrix.lifestyle.mega_combinations);
+            cluster.push(...seoMatrix.configurations.general);
         }
 
         // Deduplicate and return
