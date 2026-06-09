@@ -33,7 +33,9 @@ jobs:
         VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         
     - name: Ping Google Indexing API
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: npm run google-sync
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push' && env.GOOGLE_CREDENTIALS != ''
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      run: |
+        echo "$GOOGLE_CREDENTIALS" > service-account.json
+        npm run index
