@@ -2,28 +2,9 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 
-const faqs = [
-    {
-        question: "What is the starting price of flats in Kolte Patil Life Republic Hinjewadi?",
-        answer: "The starting price for 2 BHK flats in Life Republic is approximately ₹72 Lakhs* in the Arezo sector. Premium 3 BHK units start from ₹1.05 Cr*, while luxury 4 BHK villas and row houses range from ₹2.0 Cr to ₹3.0 Cr* depending on the sector."
-    },
-    {
-        question: "Where is Kolte Patil Life Republic located exactly?",
-        answer: "Kolte Patil Life Republic is strategically located in Marunji, Hinjewadi, Pune (411057). It is just 4.5 km from Hinjewadi Phase 1 IT Park and offers seamless connectivity to the Mumbai-Pune Expressway and the upcoming Metro Line."
-    },
-    {
-        question: "When is the possession date for Life Republic Atmos and Arezo?",
-        answer: "Possession dates vary by project universe: Life Republic Arezo is expected by December 2025, while Life Republic Atmos is scheduled for possession in December 2027. Some sectors like First Avenue and Oro Avenue already have ready-to-move units."
-    },
-    {
-        question: "What amenities are available in the township?",
-        answer: "The 390+ acre township features world-class amenities including a 3.5-acre Urban Park, Anisha Global School, a fire station, 150ft wide spine roads, multiple clubhouses, swimming pools, gymnasiums, and a dedicated sports arena."
-    },
-    {
-        question: "Is Kolte Patil Life Republic RERA registered?",
-        answer: "Yes, all active projects within Kolte Patil Life Republic are RERA registered. Specific RERA numbers for projects like Atmos, Aros, and Arezo can be found on the official MahaRERA website or our project details page."
-    }
-];
+import seoFaqs from '../../data/seo-faqs.json';
+
+const faqs = seoFaqs;
 
 const faqSchema = {
     "@context": "https://schema.org",

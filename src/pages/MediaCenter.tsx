@@ -8,6 +8,7 @@ import { Button } from '../components/ui/Button';
 import { ShareButtons } from '../components/ui/ShareButtons';
 import { supabase } from '../lib/supabase';
 import type { BlogPost } from '../lib/types';
+import localBlogs from '../data/blogs.json';
 
 export const MediaCenter: React.FC = () => {
     const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -23,11 +24,16 @@ export const MediaCenter: React.FC = () => {
                     .eq('published', true)
                     .order('published_at', { ascending: false });
 
-                if (error) throw error;
-                setPosts(data || []);
+                if (error || !data || data.length === 0) {
+                    console.log('Falling back to highly optimized local SEO blogs');
+                    setPosts(localBlogs as any);
+                } else {
+                    // Combine DB posts with local SEO posts
+                    setPosts([...data, ...localBlogs] as any);
+                }
             } catch (err: any) {
                 console.error('Error fetching posts:', err.message);
-                setError('Failed to load posts. Please try again later.');
+                setPosts(localBlogs as any);
             } finally {
                 setLoading(false);
             }

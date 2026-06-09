@@ -8,6 +8,7 @@ import { ShareButtons } from '../components/ui/ShareButtons';
 import { supabase } from '../lib/supabase';
 import type { BlogPost } from '../lib/types';
 import { motion } from 'framer-motion';
+import localBlogs from '../data/blogs.json';
 
 export const BlogPostPage: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -22,24 +23,41 @@ export const BlogPostPage: React.FC = () => {
 
             try {
                 // Fetch Main Post
+                let postData;
                 const { data, error } = await supabase
                     .from('posts')
                     .select('*')
                     .eq('slug', slug)
                     .single();
 
-                if (error) throw error;
-                setPost(data);
+                if (error || !data) {
+                    // Fallback to local SEO blogs
+                    const localPost = localBlogs.find(b => b.slug === slug);
+                    if (localPost) {
+                        postData = localPost;
+                    } else {
+                        throw new Error('Post not found locally or in DB');
+                    }
+                } else {
+                    postData = data;
+                }
+                
+                setPost(postData as any);
 
-                // Fetch Related Posts (Excluding current)
+                // Fetch Related Posts
                 const { data: relatedData } = await supabase
                     .from('posts')
                     .select('*')
                     .eq('published', true)
-                    .neq('id', data.id)
+                    .neq('id', postData.id)
                     .limit(3);
                 
-                setRelated(relatedData || []);
+                if (!relatedData || relatedData.length === 0) {
+                    const localRelated = localBlogs.filter(b => b.slug !== slug).slice(0, 3);
+                    setRelated(localRelated as any);
+                } else {
+                    setRelated(relatedData as any);
+                }
 
             } catch (err: any) {
                 console.error('Error fetching post:', err.message);

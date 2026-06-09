@@ -11,6 +11,7 @@ const PUBLIC_DIR = path.resolve(process.cwd(), 'public');
 
 // Load sectors data
 const sectorsData = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'src/data/sectors.json'), 'utf-8'));
+const localBlogsData = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'src/data/blogs.json'), 'utf-8'));
 
 // Initialize Supabase Client
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
@@ -149,6 +150,17 @@ async function generateSitemap() {
             const route = `/projects/${ID_TO_SLUG[lp.id] || lp.id}`;
             if (!projectRoutes.includes(route)) {
                 projectRoutes.push(route);
+            }
+        });
+    }
+
+    // Self-healing fallback: Ensure local blogs are included
+    if (blogRoutes.length < 3) {
+        console.log('🛡️  Sitemap Health Check: Merging local SEO blogs...');
+        (localBlogsData || []).forEach((lb: any) => {
+            const route = `/media-center/${lb.slug}`;
+            if (!blogRoutes.includes(route)) {
+                blogRoutes.push(route);
             }
         });
     }
