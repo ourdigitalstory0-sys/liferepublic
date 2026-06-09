@@ -1,0 +1,210 @@
+{
+    "base": [
+        "Kolte Patil Life Republic",
+        "Life Republic Hinjewadi",
+        "Life Republic Pune",
+        "Kolte Patil Township Pune",
+        "Kolte Patil Life Republic Township",
+        "Life Republic Official Website",
+        "Premium Township in Pune"
+    ],
+    "configurations": {
+        "1-bhk": [
+            "Life Republic 1 BHK",
+            "1 BHK in Life Republic",
+            "1 BHK flats in Hinjewadi Pune",
+            "Small apartments Hinjewadi",
+            "1 BHK near Rajiv Gandhi IT Park",
+            "Life Republic affordable 1 BHK",
+            "Best 1 BHK in West Pune",
+            "1 BHK investment in Hinjewadi",
+            "Kolte Patil 1 BHK Life Republic",
+            "Ready possession 1 BHK Hinjewadi"
+        ],
+        "2-bhk": [
+            "Life Republic 2 BHK",
+            "2 BHK flats Hinjewadi",
+            "Hinjewadi 2 BHK apartments",
+            "Life Republic Affordable Homes",
+            "2 BHK near Infosys Hinjewadi",
+            "Premium 2 BHK in Hinjewadi Pune",
+            "2 BHK flat price in Hinjewadi",
+            "Kolte Patil 2 BHK Life Republic",
+            "2 BHK with balcony Hinjewadi",
+            "Family 2 BHK apartments Pune West"
+        ],
+        "3-bhk": [
+            "Life Republic 3 BHK",
+            "3 BHK flats Hinjewadi",
+            "Hinjewadi 3 BHK luxury apartments",
+            "Premium 3 BHK in Hinjewadi Pune",
+            "Spacious 3 BHK flats near Wakad",
+            "Kolte Patil 3 BHK Life Republic",
+            "3 BHK ready to move in Hinjewadi",
+            "Luxury 3 BHK with amenities Pune",
+            "3 BHK property for sale in Hinjewadi"
+        ],
+        "4-bhk": [
+            "Life Republic 4 BHK",
+            "4 BHK villas Hinjewadi",
+            "Life Republic Luxury Homes",
+            "Luxury Family Homes Pune",
+            "4 BHK bungalows in Hinjewadi",
+            "Premium 4 BHK apartments West Pune",
+            "Kolte Patil 4 BHK Life Republic",
+            "Ultra luxury 4 BHK Pune",
+            "4 BHK independent house near IT Park"
+        ]
+    },
+    "projects": {
+        "atmos": [
+            "Life Republic Atmos",
+            "Kolte Patil Atmos Hinjewadi",
+            "Life Republic Cluster Apartments",
+            "Modern 2 BHK at Atmos",
+            "Atmos 3 BHK flats Hinjewadi",
+            "Life Republic Atmos floor plan",
+            "Atmos Phase Life Republic"
+        ],
+        "aros": [
+            "Life Republic Aros",
+            "Kolte Patil Aros",
+            "Life Republic Premium Towers",
+            "Aros 2 BHK Hinjewadi",
+            "Aros 3 BHK premium apartments",
+            "Life Republic Aros brochure",
+            "Aros luxury living Pune"
+        ],
+        "universe": [
+            "Life Republic Universe",
+            "Kolte Patil Universe",
+            "Life Republic Sector Homes",
+            "Universe 1 BHK Hinjewadi",
+            "Universe 2 BHK Life Republic",
+            "Universe smart homes Pune"
+        ],
+        "oro-avenue": [
+            "Life Republic Oro Avenue",
+            "Kolte Patil Oro Avenue",
+            "Life Republic Township Clusters",
+            "Oro Avenue 1 BHK",
+            "Oro Avenue 2 BHK Hinjewadi",
+            "Life Republic Oro Avenue Phase"
+        ],
+        "first-avenue": [
+            "Life Republic First Avenue",
+            "Kolte Patil First Avenue",
+            "Life Republic Township Clusters",
+            "First Avenue 2 BHK",
+            "First Avenue 3 BHK premium",
+            "First Avenue ready possession"
+        ],
+        "24k-espada": [
+            "Life Republic 24K Espada",
+            "Kolte Patil 24K Espada",
+            "Luxury gated community in West Pune",
+            "Ultra luxury row houses Hinjewadi",
+            "24K Espada villas Pune",
+            "Life Republic premium row houses"
+        ],
+        "sound-of-soul": [
+            "Life Republic Sound of Soul",
+            "Sound of Soul row houses",
+            "Luxury 4 BHK row houses Hinjewadi",
+            "Kolte Patil Sound of Soul",
+            "Premium living in Life Republic"
+        ],
+        "arezo": [
+            "Life Republic Arezo",
+            "Arezo 2 BHK efficient flats",
+            "Kolte Patil Arezo Hinjewadi",
+            "Arezo Life Republic price"
+        ],
+        "duet": [
+            "Life Republic Duet",
+            "Duet premium 2 BHK flats",
+            "Kolte Patil Duet Hinjewadi"
+        ],
+        "canvas": [
+            "Life Republic Canvas",
+            "Canvas luxury 3 BHK flats",
+            "Canvas 4 BHK Hinjewadi",
+            "Kolte Patil Canvas Life Republic"
+        ],
+        "echoes": [
+            "Life Republic Echoes",
+            "Echoes new launch 2 BHK",
+            "Echoes 2.5 BHK Hinjewadi",
+            "Kolte Patil Echoes Life Republic"
+        ],
+        "villas": [
+            "Life Republic Villas",
+            "Luxury villas near Hinjewadi",
+            "Kolte Patil Villas Pune",
+            "Independent villas Life Republic"
+        ]
+    },
+    "locations": {
+        "hinjewadi": [
+            "Hinjewadi Pune Real Estate",
+            "Hinjewadi Property Market",
+            "Hinjewadi Investment Opportunities",
+            "Flats in Hinjewadi Phase 1",
+            "Flats in Hinjewadi Phase 2",
+            "Flats in Hinjewadi Phase 3",
+            "Property near Hinjewadi IT Park",
+            "Apartments near Rajiv Gandhi Infotech Park",
+            "Homes near Infosys Hinjewadi",
+            "Hinjewadi Real Estate Growth",
+            "Buy flat in Hinjewadi",
+            "Ready possession flats Hinjewadi"
+        ],
+        "marunji": [
+            "Marunji Pune Real Estate",
+            "Marunji Property Market",
+            "Kolte Patil Life Republic Marunji",
+            "Flats near Marunji road",
+            "Marunji Hinjewadi property"
+        ],
+        "wakad": [
+            "West Pune Real Estate",
+            "Flats near Wakad",
+            "Wakad Hinjewadi road property",
+            "Premium apartments near Wakad"
+        ],
+        "tathawade": [
+            "Flats near Tathawade",
+            "Tathawade real estate market",
+            "Properties near Tathawade Pune"
+        ],
+        "punawale": [
+            "Flats near Punawale",
+            "Punawale property market",
+            "Residential projects near Punawale"
+        ]
+    },
+    "investors": {
+        "nri": [
+            "Pune Real Estate Investment",
+            "Hinjewadi Property Investment",
+            "NRI investment Pune",
+            "High ROI Property Hinjewadi Pune",
+            "Pune Property Appreciation",
+            "NRI corner Life Republic",
+            "Best investment property in West Pune",
+            "Rental income flats Hinjewadi"
+        ]
+    },
+    "lifestyle": {
+        "amenities": [
+            "Life Republic Integrated Township",
+            "Life Republic Smart Township",
+            "Pune Smart City Real Estate",
+            "Best Township in Pune",
+            "Sustainable township in Pune",
+            "Life Republic amenities",
+            "Life Republic club house",
+            "Township with school in Pune"
+        ]
+    }
+}

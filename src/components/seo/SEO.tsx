@@ -49,57 +49,64 @@ export const SEO: React.FC<SEOProps> = ({
     const currentPath = location.pathname + location.search;
     const fullCanonical = generateCanonicalURL(canonical || currentPath);
     
-    // Advanced Keyword Matrix Routing
+import seoMatrix from '../../data/seoMatrix.json';
+
+    // Advanced Keyword Matrix Routing using Data Layer
     const getPathSpecificKeywords = (path: string) => {
         const segments = path.split('/').filter(Boolean);
-        let cluster = [];
+        let cluster: string[] = [...seoMatrix.base];
         
         // 1. Configuration Keywords
-        if (path.includes('1-bhk')) cluster.push("Life Republic 1 BHK, 1 BHK in Life Republic, small flats Hinjewadi, Life Republic Flats for Sale");
-        if (path.includes('2-bhk')) cluster.push("Life Republic 2 BHK, 2 BHK flats Hinjewadi, Hinjewadi 2 BHK, Life Republic Affordable Homes");
-        if (path.includes('3-bhk')) cluster.push("Life Republic 3 BHK, 3 BHK flats Hinjewadi, Hinjewadi 3 BHK, Premium 3 BHK in Hinjewadi Pune");
-        if (path.includes('4-bhk')) cluster.push("Life Republic 4 BHK, 4 BHK villas Hinjewadi, Life Republic Luxury Homes, Luxury Family Homes Pune");
+        if (path.includes('1-bhk')) cluster.push(...seoMatrix.configurations["1-bhk"]);
+        if (path.includes('2-bhk')) cluster.push(...seoMatrix.configurations["2-bhk"]);
+        if (path.includes('3-bhk')) cluster.push(...seoMatrix.configurations["3-bhk"]);
+        if (path.includes('4-bhk')) cluster.push(...seoMatrix.configurations["4-bhk"]);
         
         // 2. Project/Cluster Specific
         if (path.includes('projects')) {
-            cluster.push("Life Republic Apartments, Life Republic New Launch, Life Republic Premium Residences, Hinjewadi Residential Projects, Best Residential Project Pune");
-            if (path.includes('atmos')) cluster.push("Life Republic Atmos, Life Republic Cluster Apartments");
-            if (path.includes('aros')) cluster.push("Life Republic Aros, Life Republic Premium Towers");
-            if (path.includes('universe')) cluster.push("Life Republic Universe, Life Republic Sector Homes");
-            if (path.includes('oro-avenue')) cluster.push("Life Republic Oro Avenue, Life Republic Township Clusters");
-            if (path.includes('first-avenue')) cluster.push("Life Republic First Avenue, Life Republic Township Clusters");
-            if (path.includes('24k-espada')) cluster.push("Life Republic 24K Espada, Luxury gated community in West Pune");
+            if (path.includes('atmos')) cluster.push(...seoMatrix.projects.atmos);
+            if (path.includes('aros')) cluster.push(...seoMatrix.projects.aros);
+            if (path.includes('universe')) cluster.push(...seoMatrix.projects.universe);
+            if (path.includes('oro-avenue')) cluster.push(...seoMatrix.projects["oro-avenue"]);
+            if (path.includes('first-avenue')) cluster.push(...seoMatrix.projects["first-avenue"]);
+            if (path.includes('24k-espada')) cluster.push(...seoMatrix.projects["24k-espada"]);
+            if (path.includes('sound-of-soul')) cluster.push(...seoMatrix.projects["sound-of-soul"]);
+            if (path.includes('arezo')) cluster.push(...seoMatrix.projects.arezo);
+            if (path.includes('duet')) cluster.push(...seoMatrix.projects.duet);
+            if (path.includes('canvas')) cluster.push(...seoMatrix.projects.canvas);
+            if (path.includes('echoes')) cluster.push(...seoMatrix.projects.echoes);
+            if (path.includes('villas')) cluster.push(...seoMatrix.projects.villas);
         }
 
         // 3. Location & IT Hub Keywords
-        if (path.includes('/location/')) {
-            const place = segments[segments.length - 1].replace(/-/g, ' ');
-            cluster.push(`Property Near Hinjewadi IT Park, Apartments Near Rajiv Gandhi Infotech Park, Homes Near Infosys Hinjewadi, Hinjewadi Real Estate Growth, flats near ${place}`);
-            if (path.includes('hinjewadi')) cluster.push("Hinjewadi Pune Real Estate, Hinjewadi Property Market, Hinjewadi Investment Opportunities");
-            if (path.includes('marunji')) cluster.push("Marunji Pune Real Estate, Marunji Property Market, Kolte Patil Life Republic Marunji");
-            if (path.includes('wakad') || path.includes('tathawade')) cluster.push("West Pune Real Estate, West Pune Property Market, West Pune Investment Properties");
+        if (path.includes('location')) {
+            if (path.includes('hinjewadi')) cluster.push(...seoMatrix.locations.hinjewadi);
+            if (path.includes('marunji')) cluster.push(...seoMatrix.locations.marunji);
+            if (path.includes('wakad')) cluster.push(...seoMatrix.locations.wakad);
+            if (path.includes('tathawade')) cluster.push(...seoMatrix.locations.tathawade);
+            if (path.includes('punawale')) cluster.push(...seoMatrix.locations.punawale);
         }
 
         // 4. NRI & Investment Keywords
-        if (path.includes('nri')) {
-            cluster.push("Pune Real Estate Investment, Hinjewadi Property Investment, NRI investment Pune, High ROI Property Hinjewadi Pune, Pune Property Appreciation");
+        if (path.includes('nri') || path.includes('investment')) {
+            cluster.push(...seoMatrix.investors.nri);
         }
 
         // 5. Township & Lifestyle Keywords
         if (path.includes('lifestyle') || path.includes('amenities') || path.includes('township')) {
-            cluster.push("Life Republic Integrated Township, Life Republic Smart Township, Pune Smart City Real Estate, Best Township in Pune, Sustainable township in Pune");
+            cluster.push(...seoMatrix.lifestyle.amenities);
         }
 
-        return cluster.join(', ');
+        // Deduplicate and return
+        return [...new Set(cluster)].join(', ');
     };
 
     const pathKeywords = getPathSpecificKeywords(location.pathname);
-    const baseKeywords = "Kolte Patil Life Republic, Life Republic Hinjewadi, Life Republic Pune, Kolte Patil Township Pune, Kolte Patil Life Republic Township";
     
-    // De-duplicate and combine keywords
+    // De-duplicate and combine keywords from props and matrix
     const metaKeywords = keywords 
-        ? `${keywords}${pathKeywords ? `, ${pathKeywords}` : ''}` 
-        : `${baseKeywords}${pathKeywords ? `, ${pathKeywords}` : ''}`;
+        ? `${keywords}, ${pathKeywords}` 
+        : pathKeywords;
 
     const globalSchema = generateGlobalSchema(location.pathname);
     const navSchema = generateSiteNavigationSchema();
