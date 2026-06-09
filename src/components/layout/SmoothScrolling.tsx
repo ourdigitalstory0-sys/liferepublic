@@ -6,6 +6,10 @@ interface SmoothScrollingProps {
 }
 
 export const SmoothScrolling = ({ children }: SmoothScrollingProps) => {
+    if (typeof window === 'undefined') {
+        return <>{children}</>;
+    }
+
     return (
         <ReactLenis root>
             {children}

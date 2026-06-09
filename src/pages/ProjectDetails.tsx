@@ -14,12 +14,19 @@ import { SEO } from '../components/seo/SEO';
 import { RecentlyViewed } from '../components/sections/RecentlyViewed';
 import { SectorMesh } from '../components/sections/SectorMesh';
 import { ID_TO_SLUG } from '../data/slug-registry';
+import { projectsRegistry } from '../data/projects';
 
 const ProjectDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const [project, setProject] = useState<Project | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [project, setProject] = useState<Project | null>(() => {
+        if (!id) return null;
+        const rawId = id.trim().replace(/\/$/, '');
+        const p = projectsRegistry.find((p: Project) => p.id === rawId) || 
+                  projectsRegistry.find((p: Project) => ID_TO_SLUG[p.id] === rawId);
+        return p || null;
+    });
+    const [loading, setLoading] = useState(!project);
     const [activeTab, setActiveTab] = useState<'overview' | 'layouts' | 'amenities' | 'specifications' | 'faqs'>('overview');
     const [selectedFloorPlan, setSelectedFloorPlan] = useState<any>(null);
     const [isZoomed, setIsZoomed] = useState(false);

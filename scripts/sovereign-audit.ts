@@ -24,7 +24,10 @@ function walkDir(dir: string, callback: (filepath: string) => void) {
 // Validation Regexes
 const titleRegex = /<title>(.*?)<\/title>/i;
 const descRegex = /<meta name="description" content="(.*?)"/i;
+const canonicalRegex = /<link rel="canonical" href="(.*?)"/i;
+const schemaRegex = /<script\s+[^>]*type=["']application\/ld\+json["'][^>]*>/i;
 const supabaseBrokenRegex = /https:\/\/tjgrjtdudzupmzkmjfiu\.supabase\.co\/storage\/v1\/object\/public\/projects\/[^'"\s`]+/i;
+const lazyImageRegex = /<img\b(?![^>]*\bloading=["']lazy["'])[^>]*>/gi;
 
 // Audit HTML files
 walkDir(DIST_DIR, (filepath) => {
@@ -45,6 +48,8 @@ walkDir(DIST_DIR, (filepath) => {
     // 1. Check SEO Metadata
     const titleMatch = content.match(titleRegex);
     const descMatch = content.match(descRegex);
+    const canonicalMatch = content.match(canonicalRegex);
+    const hasSchema = schemaRegex.test(content);
 
     if (!titleMatch || !titleMatch[1] || titleMatch[1].trim() === '') {
         console.error(`❌ [Anomaly: SEO] Missing or empty <title> in ${relativePath}`);
@@ -53,6 +58,16 @@ walkDir(DIST_DIR, (filepath) => {
 
     if (!descMatch || !descMatch[1] || descMatch[1].trim() === '') {
         console.error(`❌ [Anomaly: SEO] Missing or empty meta description in ${relativePath}`);
+        errorCount++;
+    }
+
+    if (!canonicalMatch || !canonicalMatch[1] || canonicalMatch[1].trim() === '') {
+        console.error(`❌ [Anomaly: SEO] Missing canonical URL in ${relativePath}`);
+        errorCount++;
+    }
+
+    if (!hasSchema) {
+        console.error(`❌ [Anomaly: SEO] Missing JSON-LD Schema (application/ld+json) in ${relativePath}`);
         errorCount++;
     }
 
@@ -66,6 +81,13 @@ walkDir(DIST_DIR, (filepath) => {
     if (content.includes('<div id="root"></div>') || content.includes('<div id="root" data-reactroot=""></div>')) {
         console.warn(`⚠️  [Anomaly Warning] Empty React root detected in ${relativePath}. Check SSR rendering.`);
         // We won't strictly fail the build for this yet unless it's a known gap
+    }
+
+    // 4. Core Web Vitals Simulation (Structural Checks)
+    // Find all images without lazy loading (we allow up to 3 non-lazy images per page for LCP heroes)
+    const nonLazyImages = [...content.matchAll(lazyImageRegex)];
+    if (nonLazyImages.length > 3) {
+        console.warn(`⚠️  [Core Web Vitals Warning] ${nonLazyImages.length} images found without loading="lazy" in ${relativePath}. High risk for LCP/Network inflation.`);
     }
 });
 

@@ -14,7 +14,8 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({ url, title, classNam
     // Sovereign Clean URL Synthesis v6.5: Strips PII while maintaining 2026 intent attribution
     const getCleanUrl = (rawUrl: string) => {
         try {
-            const base = rawUrl.startsWith('http') ? rawUrl : `${window.location.origin}${rawUrl}`;
+            const domain = typeof window !== 'undefined' ? window.location.origin : 'https://life-republic.in';
+            const base = rawUrl.startsWith('http') ? rawUrl : `${domain}${rawUrl}`;
             const urlObj = new URL(base);
             // Remove common session/tracking parameters for structural privacy
             ['session', 'uid', 'utm_source', 'utm_medium', 'fbclid', 'gclid', 'msclkid'].forEach(p => urlObj.searchParams.delete(p));

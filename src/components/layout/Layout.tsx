@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { FloatingContact } from '../ui/FloatingContact';
@@ -18,6 +19,7 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
+  const location = useLocation();
   const [isSovereignOpen, setIsSovereignOpen] = useState(false);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -83,7 +85,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
         
         <AnimatePresence mode="wait">
           <motion.div
-            key={window.location.pathname}
+            key={location.pathname}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}

@@ -1,8 +1,14 @@
 import React from 'react';
+import { SEO } from '../components/seo/SEO';
 
 export const Privacy: React.FC = () => {
     return (
         <div className="pt-32 pb-20 container mx-auto px-4 max-w-4xl">
+            <SEO 
+                title="Privacy Policy | Kolte Patil Life Republic"
+                description="Privacy Policy for Kolte Patil Life Republic Hinjewadi."
+                canonical="/privacy"
+            />
             <h1 className="text-4xl font-serif font-bold mb-8 text-secondary">Privacy Policy</h1>
             <div className="prose max-w-none text-gray-600 space-y-6">
                 <p>Last updated: {new Date().toLocaleDateString()}</p>

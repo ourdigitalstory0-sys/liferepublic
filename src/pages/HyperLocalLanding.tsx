@@ -26,7 +26,16 @@ export const HyperLocalLanding: React.FC = () => {
         loadProjects();
     }, []);
 
-    if (!config) return <div className="pt-40 text-center">Loading Authority Data...</div>;
+    if (!config) return (
+        <div className="pt-40 text-center">
+            <SEO 
+                title={`${slug?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} | Kolte Patil Life Republic`}
+                description={`Premium real estate and investment opportunities in ${slug?.replace(/-/g, ' ')}. Kolte Patil Life Republic Hinjewadi.`}
+                canonical={`/location/${slug}`}
+            />
+            Loading Authority Data...
+        </div>
+    );
 
     return (
         <div className="pt-32 pb-20 bg-white">
