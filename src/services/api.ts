@@ -88,33 +88,22 @@ export const api = {
     projects: {
         getAll: async (page?: number, limit?: number, search?: string) => {
             try {
-                let query = supabase.from('projects').select('*').order('id');
+                // FORCE Sovereign Local Registry for SEO-perfect image paths and schema compliance
+                let results = [...projectsRegistry];
+                
                 if (search) {
-                    query = query.or(`title.ilike.%${search}%,location.ilike.%${search}%`);
+                    const searchLower = search.toLowerCase();
+                    results = results.filter(p => 
+                        p.title.toLowerCase().includes(searchLower) || 
+                        p.location.toLowerCase().includes(searchLower)
+                    );
                 }
+                
                 if (page && limit) {
-                    const from = (page - 1) * limit;
-                    const to = from + limit - 1;
-                    query = query.range(from, to);
+                    const start = (page - 1) * limit;
+                    results = results.slice(start, start + limit);
                 }
-                const { data, error } = await query;
-                if (error) throw error;
-
-                let results = (data || []).map((p) => ({
-                    ...p,
-                    image: normalizeUrl(p.image),
-                    masterLayout: normalizeUrl(p.master_layout),
-                    floorPlans: (p.floor_plans || []).map((fp: string) => normalizeUrl(fp)),
-                    gallery: (p.gallery || []).map((g: string) => normalizeUrl(g)),
-                    themeColor: p.theme_color
-                })) as Project[];
-
-                // Sovereign Fail-safe: If DB is empty, serve local registry
-                if (results.length === 0) {
-                    console.log('[Sovereign Fail-safe] Serving all projects from local registry.');
-                    results = projectsRegistry;
-                }
-
+                
                 return results;
             } catch (e) { 
                 console.log('[Sovereign Critical Fail-safe] Serving all projects from local registry after catch block.');
@@ -123,27 +112,8 @@ export const api = {
         },
         getFeatured: async (limit = 3) => {
             try {
-                const { data, error } = await supabase
-                    .from('projects')
-                    .select('id, title, category, location, price, image, overview, status, features, amenities, rera, theme_color')
-                    .limit(limit);
-
-                if (error) throw error;
-
-                let results = (data || []).map((p) => ({
-                    ...p,
-                    image: normalizeUrl(p.image),
-                    themeColor: p.theme_color,
-                    description: p.overview // Fallback description
-                })) as Project[];
-
-                // Sovereign Fail-safe: If DB is empty, serve local registry
-                if (results.length === 0) {
-                    console.log('[Sovereign Fail-safe] Serving featured projects from local registry.');
-                    results = projectsRegistry.slice(0, limit);
-                }
-
-                return results;
+                // FORCE Sovereign Local Registry
+                return projectsRegistry.slice(0, limit);
             } catch (e) { 
                 console.log('[Sovereign Critical Fail-safe] Serving featured projects from local registry after catch block.');
                 return projectsRegistry.slice(0, limit);
@@ -153,78 +123,24 @@ export const api = {
             const rawId = id.trim().replace(/\/$/, '');
             
             try {
-                // 1. Try fetching by rawId first (Handles semantic slugs directly)
-                let { data, error } = await supabase.from('projects').select('*').eq('id', rawId).single();
+                const mappedId = ID_TO_SLUG[rawId] || rawId;
+                const localProject = projectsRegistry.find((p: Project) => p.id === mappedId) || 
+                                     projectsRegistry.find((p: Project) => ID_TO_SLUG[p.id] === mappedId);
                 
-                // 2. If not found, try slug resolution
-                if (error || !data) {
-                    // Try looking up if rawId is a legacy ID
-                    const mappedSlug = ID_TO_SLUG[rawId];
-                    if (mappedSlug) {
-                        const { data: slugData, error: slugError } = await supabase.from('projects').select('*').eq('id', mappedSlug).single();
-                        if (!slugError && slugData) {
-                            data = slugData;
-                            error = null;
-                        }
-                    }
-
-                    // Try looking up if rawId is a slug that maps to a legacy ID (Backward compatibility)
-                    if (error || !data) {
-                        const slugEntry = Object.entries(ID_TO_SLUG).find(([_, slug]) => slug === rawId);
-                        if (slugEntry) {
-                            const legacyId = slugEntry[0];
-                            const { data: legacyData, error: legacyError } = await supabase.from('projects').select('*').eq('id', legacyId).single();
-                            if (!legacyError && legacyData) {
-                                data = legacyData;
-                                error = null;
-                            }
-                        }
-                    }
-                }
-
-                const registryProject = projectsRegistry.find((p: Project) => p.id === rawId) || 
-                                       projectsRegistry.find((p: Project) => ID_TO_SLUG[p.id] === rawId);
-
-                if (error || !data) {
-                    if (registryProject) {
-                        console.log(`[Sovereign Fail-safe] Serving ${rawId} from local registry.`);
-                        return {
-                            ...registryProject,
-                            description: registryProject.description || registryProject.overview
-                        } as Project;
-                    }
-                    throw error || new Error('Project not found');
-                }
-    
-                const project = {
-                    ...data,
-                    image: normalizeUrl(data.image),
-                    masterLayout: normalizeUrl(data.master_layout),
-                    floorPlans: (data.floor_plans || []).map((fp: string) => normalizeUrl(fp)),
-                    gallery: (data.gallery || []).map((g: string) => normalizeUrl(g)),
-                    themeColor: data.theme_color || registryProject?.themeColor,
-                    faqs: data.faqs || registryProject?.faqs
-                } as Project;
-
+                if (!localProject) throw new Error('Project not found');
+                
                 // Track Recently Viewed
                 if (typeof window !== 'undefined') {
                     try {
                         const recentlyViewed = JSON.parse(localStorage.getItem('lr_recently_viewed') || '[]');
-                        const filtered = recentlyViewed.filter((vid: string) => vid !== project.id);
-                        localStorage.setItem('lr_recently_viewed', JSON.stringify([project.id, ...filtered].slice(0, 4)));
+                        const filtered = recentlyViewed.filter((vid: string) => vid !== localProject.id);
+                        localStorage.setItem('lr_recently_viewed', JSON.stringify([localProject.id, ...filtered].slice(0, 4)));
                     } catch (e) { /* ignore */ }
                 }
-    
-                return project;
-            } catch (e) { 
-                // Final level fail-safe for complete network failures or DB anomalies
-                const registryProject = projectsRegistry.find((p: Project) => p.id === rawId) || 
-                                       projectsRegistry.find((p: Project) => ID_TO_SLUG[p.id] === rawId);
-                if (registryProject) {
-                    console.log(`[Sovereign Critical Fail-safe] Serving ${rawId} after catch block.`);
-                    return registryProject as Project;
-                }
-                return handleApiError(e, `projects.getById(${rawId})`); 
+
+                return localProject;
+            } catch (e) {
+                return handleApiError(e, `projects.getById(${rawId})`);
             }
         },
         create: async (project: Project) => {
