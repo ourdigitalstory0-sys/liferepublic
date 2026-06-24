@@ -6,7 +6,6 @@ import { Footer } from './Footer';
 import { FloatingContact } from '../ui/FloatingContact';
 import { Concierge } from '../ui/Concierge';
 import { Breadcrumbs } from '../seo/Breadcrumbs';
-import { SovereignConcierge } from '../ui/SovereignConcierge';
 import { EnquiryModal } from '../ui/EnquiryModal';
 import { NeuralSearch } from '../ui/NeuralSearch';
 import { ResidentPulse } from '../ui/ResidentPulse';
@@ -20,21 +19,18 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
   const location = useLocation();
-  const [isSovereignOpen, setIsSovereignOpen] = useState(false);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [enquiryProject, setEnquiryProject] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     // Neural Hub Event Synchronization v6.0
-    const handleSovereignOpen = () => setIsSovereignOpen(true);
     const handleEnquiryOpen = (e: any) => {
         setEnquiryProject(e.detail?.projectName);
         setIsEnquiryOpen(true);
     };
     const handleSearchOpen = () => setIsSearchOpen(true);
     
-    window.addEventListener('open-sovereign-concierge', handleSovereignOpen);
     window.addEventListener('open-enquiry-modal', handleEnquiryOpen as any);
     window.addEventListener('open-neural-search', handleSearchOpen);
 
@@ -45,26 +41,11 @@ export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
                 e.preventDefault();
                 setIsSearchOpen(prev => !prev);
             }
-            if (e.key === 'j') {
-                e.preventDefault();
-                setIsSovereignOpen(prev => !prev);
-            }
         }
     };
     window.addEventListener('keydown', handleKeyDown);
 
-    // Strategic Engagement Trigger (Context-Aware)
-    const timer = setTimeout(() => {
-      const hasShownPopup = sessionStorage.getItem('lr_sovereign_engagement_v6');
-      if (!hasShownPopup) {
-        setIsSovereignOpen(true); // Default to Concierge for 2026 AI-first UX
-        sessionStorage.setItem('lr_sovereign_engagement_v6', 'true');
-      }
-    }, 15000); // 15s dwell time trigger
-
     return () => {
-      clearTimeout(timer);
-      window.removeEventListener('open-sovereign-concierge', handleSovereignOpen);
       window.removeEventListener('open-enquiry-modal', handleEnquiryOpen);
       window.removeEventListener('open-neural-search', handleSearchOpen);
       window.removeEventListener('keydown', handleKeyDown);
@@ -104,11 +85,6 @@ export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
       {/* Global UI Hardening Layer */}
       <FloatingContact />
       <Concierge />
-      
-      <SovereignConcierge 
-        isOpen={isSovereignOpen} 
-        onClose={() => setIsSovereignOpen(false)} 
-      />
       
       <EnquiryModal 
         isOpen={isEnquiryOpen}
