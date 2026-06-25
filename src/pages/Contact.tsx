@@ -150,8 +150,10 @@ const ContactForm: React.FC = () => {
     return (
         <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-2">Name</label>
                 <input
+                    id="contact-name"
+                    aria-label="Name"
                     required
                     type="text"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-accent focus:border-accent"
@@ -161,8 +163,10 @@ const ContactForm: React.FC = () => {
                 />
             </div>
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                <label htmlFor="contact-phone" className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
                 <input
+                    id="contact-phone"
+                    aria-label="Phone Number"
                     required
                     type="tel"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-accent focus:border-accent"
@@ -172,8 +176,10 @@ const ContactForm: React.FC = () => {
                 />
             </div>
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                 <input
+                    id="contact-email"
+                    aria-label="Email Address"
                     type="email"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-accent focus:border-accent"
                     placeholder="your@email.com"
