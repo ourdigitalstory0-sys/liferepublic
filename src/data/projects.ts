@@ -263,22 +263,27 @@ export const projectsRegistry: Project[] = [
     },
     {
         id: 'kolte-patil-life-republic-canvas-luxury-3-4-bhk-flats-hinjewadi',
-        title: 'Kolte Patil Life Republic Canvas | Luxury 3 & 4 BHK Hinjewadi',
+        title: 'Kolte Patil Life Republic Canvas | Premium 3, 3.5 & 4 BHK Hinjewadi',
         category: 'Ultra Luxury',
         location: 'Sector R3 (Canvas)',
         price: '₹1.49 Cr*',
         image: '/images/home/canvas-thumb.jpg',
-        description: 'Ultra-luxury living at Canvas, Kolte Patil Life Republic Hinjewadi. Premium 3 & 4 BHK homes with panoramic township views and infinity amenities.',
-        features: ['3 & 4 BHK', 'MahaRERA: P52100077008', 'Sector R3'],
-        overview: 'Canvas at Kolte Patil Life Republic Township Hinjewadi represents the peak of ultra-luxury living. Located in Sector R3, it offers unparalleled access to nature and elite lifestyle infrastructure.',
-        amenities: ['Infinity Pool', 'Private Clubhouse', 'Automated Parking', 'Lounge Area', 'Sports Deck'],
+        description: 'Ultra-luxury living at Canvas, Kolte Patil Life Republic Hinjewadi. Premium 3, 3.5 & 4 BHK residences in 40-storey high-rise towers with elite specifications.',
+        features: ['3, 3.5 & 4 BHK', 'MahaRERA: P52100077008', '40-Storey Towers'],
+        overview: 'Canvas at Kolte Patil Life Republic Township represents the zenith of ultra-luxury living. Spanning 6.34 acres, it features four iconic G+4P+40 storey towers offering panoramic views, an infinity-edge pool, and a massive 21,000 sq.ft. indoor recreation zone.',
+        amenities: ['Infinity-edge Pool', '21,000 sq.ft. Clubhouse', 'Pickleball & Padel Tennis', 'Fitness Plaza', 'Co-working Spaces', 'Extensive Open Spaces'],
         masterLayout: '/images/home/master-layout-full.jpg',
         floorPlans: [
-            { type: '3 BHK Luxury', size: '1350 sq.ft.', image: '/images/home/master-layout-full.jpg', details: ['Carpet Area: 1350 sq.ft.', 'Wrap-around Balcony'] },
-            { type: '4 BHK Ultra', size: '1800 sq.ft.', image: '/images/home/master-layout-full.jpg', details: ['Carpet Area: 1800 sq.ft.', 'Private Entrance Lobby'] }
+            { type: '3 BHK Premium', size: '1332 - 1452 sq.ft.', image: '/images/home/master-layout-full.jpg', details: ['Carpet Area: 1332-1452 sq.ft.', 'Dual Master Bedrooms', 'Large Deck'] },
+            { type: '3.5 BHK Luxury', size: '1700 sq.ft.', image: '/images/home/master-layout-full.jpg', details: ['Carpet Area: ~1700 sq.ft.', 'Expansive Layout', 'Premium Finishes'] },
+            { type: '4 BHK Ultra', size: '2024 sq.ft.', image: '/images/home/master-layout-full.jpg', details: ['Carpet Area: ~2024 sq.ft.', 'Grand Entrance Lobby', 'Maximum Privacy'] }
         ],
         specifications: [
-            { title: 'Elite Finishes', items: ['Italian Marble Flooring', 'Home Automation', 'Premium Fittings'] }
+            { title: 'Elite Finishes', items: ['Italian Marble Flooring', 'Home Automation', 'Premium Fittings', 'Heat-reflective glass'] }
+        ],
+        faqs: [
+            { question: "What is the possession date for Canvas?", answer: "Target possession is June 2028, with RERA possession by December 2028." },
+            { question: "How tall are the Canvas towers?", answer: "Canvas features 4 high-rise towers reaching G+4P+40 floors." }
         ],
         themeColor: '#9b59b6'
     }
