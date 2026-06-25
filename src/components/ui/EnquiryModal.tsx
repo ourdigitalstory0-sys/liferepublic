@@ -81,12 +81,18 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
             setIsSubmitted(true);
             setTimeout(() => { setIsSubmitted(false); onClose(); }, 6000);
         } catch (err) {
-            console.error("Supabase Dispatch Failed. Activating WhatsApp Sovereign Fallback.");
+            console.error("Standard Dispatch Failed. Activating WhatsApp Sovereign Fallback.", err);
             setError("Standard Dispatch Interrupted. Activating Sovereign WhatsApp Protocol...");
+            
+            // Actually launch the fallback!
             setTimeout(() => {
+                const message = encodeURIComponent(`Hi, I would like to enquire about ${projectName || 'Life Republic'}`);
+                window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+                
                 setIsSubmitting(false);
-                setError("System error. Please try again later.");
-            }, 2000);
+                setError(null);
+                onClose();
+            }, 2500);
         }
     };
 

@@ -259,16 +259,22 @@ export const api = {
             if (recentlyViewed.length > 2) score += 40; // Deep interest in multiple sectors
             if (lead.project_id) score += 20;
 
-            // 1. ALWAYS fire the email notification (Sovereign Fail-safe)
-            await emailService.sendLeadNotification({
-                name: lead.name,
-                phone: lead.phone,
-                email: lead.email,
-                message: `${lead.message} [Score: ${score}] [Journey: ${attribution.user_journey}]`,
-                project: lead.project_id ? `Project ID: ${lead.project_id}` : `Attribution: ${attribution.entry_page}`
-            }).catch(console.error); // Catch email errors silently
+            // 1. Fire email notification (Primary Fail-safe)
+            let emailSent = false;
+            try {
+                await emailService.sendLeadNotification({
+                    name: lead.name,
+                    phone: lead.phone,
+                    email: lead.email,
+                    message: `${lead.message} [Score: ${score}] [Journey: ${attribution.user_journey}]`,
+                    project: lead.project_id ? `Project ID: ${lead.project_id}` : `Attribution: ${attribution.entry_page}`
+                });
+                emailSent = true;
+            } catch (e) {
+                console.error("Email dispatch failed.");
+            }
 
-            // 2. Try Supabase Insert silently
+            // 2. Try Supabase Insert
             try {
                 const { error } = await supabase.from('leads').insert({ 
                     ...lead, 
@@ -281,21 +287,22 @@ export const api = {
                     }
                 });
                 
-                if (error) {
-                    console.error("Supabase insert failed, but email was dispatched.", error);
-                } else {
-                    // Mark as synced in vault
-                    const vault = JSON.parse(localStorage.getItem('lr_sovereign_vault') || '[]');
-                    const last = vault[vault.length - 1];
-                    if (last) last.synced = true;
-                    localStorage.setItem('lr_sovereign_vault', JSON.stringify(vault));
-                }
+                if (error) throw error;
+
+                // Mark as synced in vault
+                const vault = JSON.parse(localStorage.getItem('lr_sovereign_vault') || '[]');
+                const last = vault[vault.length - 1];
+                if (last) last.synced = true;
+                localStorage.setItem('lr_sovereign_vault', JSON.stringify(vault));
                 
-                // Return success regardless of DB status because email & vault worked
                 return null;
             } catch (e) {
-                console.error("Database connection failed, but email was dispatched.", e);
-                return null;
+                console.error("Database connection failed.", e);
+                // If DB fails AND email fails, we MUST throw so UI can show WhatsApp fallback
+                if (!emailSent) {
+                    throw new Error("Both Database and Email systems failed.");
+                }
+                return null; // DB failed but email succeeded, so treat as UI success
             }
         },
         updateStatus: async (id: number, status: 'New' | 'Contacted' | 'Closed') => {

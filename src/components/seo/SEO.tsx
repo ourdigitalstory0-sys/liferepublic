@@ -171,14 +171,14 @@ export const SEO: React.FC<SEOProps> = ({
             <meta property="og:site_name" content="Kolte Patil Life Republic" />
             <meta property="og:title" content={finalTitle} />
             <meta property="og:description" content={metaDescription} />
-            <meta property="og:image" content={DOMAIN + image} />
+            <meta property="og:image" content={image.startsWith('http') ? image : DOMAIN + image} />
 
             {/* Twitter */}
             <meta property="twitter:card" content="summary_large_image" />
             <meta property="twitter:url" content={fullCanonical} />
             <meta property="twitter:title" content={finalTitle} />
             <meta property="twitter:description" content={metaDescription} />
-            <meta property="twitter:image" content={DOMAIN + image} />
+            <meta property="twitter:image" content={image.startsWith('http') ? image : DOMAIN + image} />
 
             {/* Structured Data (JSON-LD) */}
             {allSchemas.map((s, i) => (

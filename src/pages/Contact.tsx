@@ -139,9 +139,11 @@ const ContactForm: React.FC = () => {
             }));
             alert('Thank you! We will contact you shortly.');
             setFormData({ name: '', phone: '', email: '', message: '' });
-        } catch (error) {
-            console.error(error);
-            alert('Something went wrong. Please try again.');
+        } catch (e) {
+            console.error(e);
+            alert('System busy. Redirecting to WhatsApp desk for immediate assistance...');
+            const message = encodeURIComponent(`Hi, I'm ${formData.name}. ${formData.message}`);
+            window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
         } finally {
             setLoading(false);
         }
