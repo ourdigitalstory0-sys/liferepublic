@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { BannersManager } from '../../components/admin/BannersManager';
 import { ProjectsManager } from '../../components/admin/ProjectsManager';
 import { ImageManager } from '../../components/admin/ImageManager';
@@ -14,6 +14,11 @@ export const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState<'overview' | 'projects' | 'banners' | 'media' | 'leads' | 'settings' | 'amenities'>('overview');
     const [stats, setStats] = useState({ leads: 0, projects: 0, banners: 0 });
     const navigate = useNavigate();
+
+    const heatMapData = useMemo(() => {
+        // eslint-disable-next-line react-hooks/purity
+        return Array.from({ length: 32 }).map(() => Math.random());
+    }, []);
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
@@ -235,8 +240,7 @@ export const AdminDashboard = () => {
                         </div>
 
                         <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
-                            {Array.from({ length: 32 }).map((_, i) => {
-                                const intensity = Math.random();
+                            {heatMapData.map((intensity, i) => {
                                 const color = intensity > 0.8 ? 'bg-red-500' : intensity > 0.5 ? 'bg-orange-400' : intensity > 0.2 ? 'bg-orange-200' : 'bg-gray-100';
                                 return (
                                     <div 

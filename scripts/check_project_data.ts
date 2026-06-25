@@ -13,7 +13,7 @@ console.log(`
 ----------------------------------
 `);
 
-let errors = [];
+const errors = [];
 
 // 1. Audit Sector Slugs & Registry
 try {

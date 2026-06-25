@@ -53,7 +53,7 @@ export const SEO: React.FC<SEOProps> = ({
     // Advanced Keyword Matrix Routing using Data Layer
     const getPathSpecificKeywords = (path: string) => {
         const segments = path.split('/').filter(Boolean);
-        let cluster: string[] = [...seoMatrix.base];
+        const cluster: string[] = [...seoMatrix.base];
         
         // 1. Configuration Keywords
         if (path.includes('1-bhk')) cluster.push(...seoMatrix.configurations["1-bhk"]);

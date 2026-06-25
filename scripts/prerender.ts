@@ -59,7 +59,7 @@ const specialLocationRoutes = [
 ];
 
 async function getDynamicRoutes() {
-    let routes: string[] = [];
+    const routes: string[] = [];
     
     // Add projects
     projects.forEach(p => routes.push(`/projects/${ID_TO_SLUG[p.id] || p.id}`));
