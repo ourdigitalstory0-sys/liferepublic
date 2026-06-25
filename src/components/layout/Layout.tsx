@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { FloatingContact } from '../ui/FloatingContact';
-import { Concierge } from '../ui/Concierge';
 import { Breadcrumbs } from '../seo/Breadcrumbs';
 import { EnquiryModal } from '../ui/EnquiryModal';
 import { NeuralSearch } from '../ui/NeuralSearch';
@@ -84,7 +83,6 @@ export const Layout: React.FC<LayoutProps> = ({ children, ariaLabel }) => {
       
       {/* Global UI Hardening Layer */}
       <FloatingContact />
-      <Concierge />
       
       <EnquiryModal 
         isOpen={isEnquiryOpen}
