@@ -107,12 +107,13 @@ export default defineConfig((env: any) => {
           // Sovereign Velocity Chunking
           manualChunks: (id) => {
             if (id.includes('node_modules')) {
-              if (id.includes('react')) return 'vendor-core';
-              if (id.includes('framer-motion')) return 'velocity-motion';
-              if (id.includes('lucide-react')) return 'velocity-icons';
-              if (id.includes('supabase')) return 'velocity-storage';
-              if (id.includes('swiper')) return 'velocity-gallery';
-              return 'vendor-libs';
+              if (id.includes('react/') || id.includes('react-dom/') || id.includes('react-router') || id.includes('react-helmet')) return 'vendor-react';
+              if (id.includes('framer-motion')) return 'vendor-motion';
+              if (id.includes('lucide-react')) return 'vendor-icons';
+              if (id.includes('@supabase') || id.includes('supabase')) return 'vendor-storage';
+              if (id.includes('swiper')) return 'vendor-gallery';
+              if (id.includes('@google') || id.includes('googleapis')) return 'vendor-google';
+              return 'vendor-utils';
             }
           },
           chunkFileNames: 'assets/js/[name]-[hash].js',

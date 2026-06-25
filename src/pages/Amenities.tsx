@@ -44,7 +44,7 @@ export const Amenities: React.FC = () => {
                 canonical="/amenities"
             />
             <section className="bg-primary-dark text-white py-28 relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/images/slider/1.webp')] bg-cover bg-center opacity-30"></div>
+                <div className="absolute inset-0 bg-[url('/images/slider/1.jpg')] bg-cover bg-center opacity-30"></div>
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent"></div>
                 <div className="container mx-auto px-4 relative z-10 text-center">
                     <motion.h1

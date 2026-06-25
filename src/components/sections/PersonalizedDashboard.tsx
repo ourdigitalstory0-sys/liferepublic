@@ -16,7 +16,7 @@ export const PersonalizedDashboard: React.FC = () => {
 
     return (
         <section className="py-20 bg-secondary overflow-hidden relative">
-            <div className="absolute inset-0 bg-[url('/images/pattern-dark.svg')] opacity-10"></div>
+            <div className="absolute inset-0 opacity-10"></div>
             <div className="container mx-auto px-4 relative z-10">
                 <motion.div 
                     initial={{ opacity: 0, y: 30 }}

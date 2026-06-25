@@ -93,7 +93,7 @@ export const SectorLanding: React.FC = () => {
 
             {/* Hero Section */}
             <section className="relative py-24 bg-secondary overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/images/pattern-gold.svg')] opacity-5"></div>
+                <div className="absolute inset-0 opacity-5"></div>
                 <div className="container mx-auto px-4 relative">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

@@ -35,7 +35,7 @@ const testimonials = [
 export const TestimonialCarousel: React.FC = () => {
     return (
         <section className="py-32 bg-secondary text-white overflow-hidden relative">
-            <div className="absolute inset-0 bg-[url('/images/pattern-gold.svg')] opacity-5 pointer-events-none"></div>
+            <div className="absolute inset-0 opacity-5 pointer-events-none"></div>
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center mb-20">
                     <span className="text-accent text-[10px] font-bold uppercase tracking-[0.5em] block mb-4 italic">Social Synthesis</span>
