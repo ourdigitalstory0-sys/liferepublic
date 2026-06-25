@@ -84,10 +84,10 @@ const Home: React.FC = () => {
             </NeuralErrorBoundary>
 
             {/* Phase 3: Product & Conversion */}
-            <section className="py-20 bg-gray-50" aria-label="Featured Township Projects">
+            <section className="py-12 md:py-20 bg-gray-50" aria-label="Featured Township Projects">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-serif font-bold mb-4 text-secondary">Kolte Patil Life Republic Township Hinjewadi</h2>
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-secondary">Kolte Patil Life Republic Township Hinjewadi</h2>
                         <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
                         <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
                             Experience the finest living at <strong>Kolte Patil Life Republic Township Hinjewadi</strong>. Discover our diverse range of 2, 3, 4 BHK flats and luxury villas, designed to offer a unique lifestyle in Pune's most integrated township.
@@ -116,7 +116,7 @@ const Home: React.FC = () => {
             </section>
 
             {/* Phase 4: Market Authority */}
-            <section className="py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white relative overflow-hidden" aria-label="Hinjewadi Investment Location Advantage">
+            <section className="py-16 md:py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white relative overflow-hidden" aria-label="Hinjewadi Investment Location Advantage">
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                     <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[100px]"></div>
                     <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[100px]"></div>
@@ -130,7 +130,7 @@ const Home: React.FC = () => {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Hinjewadi: A Real Estate Investment Hotspot</h2>
+                        <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Hinjewadi: A Real Estate Investment Hotspot</h2>
                         <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-green-500 to-orange-500 mx-auto mb-6 rounded-full"></div>
                         <p className="text-gray-300 max-w-2xl mx-auto text-lg font-light leading-relaxed">
                             Connected to the world, yet a world of its own. Located in the heart of Hinjewadi, a prime real estate corridor, Kolte Patil Life Republic Township offers unmatched connectivity and property value appreciation. Request the <strong>Price List 2026</strong> today.
@@ -172,12 +172,12 @@ const Home: React.FC = () => {
             <RecommendedProjects />
 
             {/* Phase 5: Architectural Monograph */}
-            <section className="py-32 bg-white overflow-hidden" aria-label="Township Architecture and Volumes">
+            <section className="py-16 md:py-32 bg-white overflow-hidden" aria-label="Township Architecture and Volumes">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col lg:flex-row gap-20 items-start">
                         <div className="lg:w-1/3 lg:sticky lg:top-32">
                             <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-accent text-[10px] font-bold uppercase tracking-[0.5em] block mb-6">Foundation & Flow</motion.span>
-                            <h2 className="text-5xl md:text-6xl font-serif font-bold text-secondary leading-[1.1] mb-8">Township <br />Volumes</h2>
+                            <h2 className="text-4xl md:text-6xl font-serif font-bold text-secondary leading-[1.1] mb-8">Township <br />Volumes</h2>
                             <p className="text-gray-500 text-lg font-light leading-relaxed mb-10">A 390-acre masterplan designed around the principles of <strong>spatial harmony</strong>, <strong>tectonic integrity</strong>, and <strong>sustainable community flow</strong>.</p>
                             <div className="flex flex-col gap-8">
                                 {[
@@ -216,10 +216,10 @@ const Home: React.FC = () => {
             <TestimonialCarousel />
 
             {/* Phase 6: Deep Content & SEO */}
-            <section className="py-20 bg-primary/20" aria-label="About Kolte Patil Life Republic">
+            <section className="py-12 md:py-20 bg-primary/20" aria-label="About Kolte Patil Life Republic">
                 <div className="container mx-auto px-4 text-center">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                        <h2 className="text-4xl font-serif font-bold mb-6 text-secondary">About Kolte Patil Life Republic Township</h2>
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-secondary">About Kolte Patil Life Republic Township</h2>
                         <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
                         <div className="max-w-5xl mx-auto text-left space-y-6 text-gray-600 leading-relaxed text-lg">
                             <p><strong>Kolte Patil Life Republic</strong> is a premium 390+ acre integrated township located in the heart of <strong>Hinjewadi, Pune</strong>. Developed by the renowned Kolte Patil Developers, this township is designed to offer a holistic lifestyle with world-class amenities, smart infrastructure, and lush green surroundings near Rajiv Gandhi Infotech Park.</p>
@@ -229,9 +229,9 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
-            <section className="py-20 bg-secondary overflow-hidden relative" aria-label="Community Hub">
+            <section className="py-12 md:py-20 bg-secondary overflow-hidden relative" aria-label="Community Hub">
                 <div className="container mx-auto px-4 relative z-10">
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12">
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl md:rounded-[3rem] p-6 md:p-16 flex flex-col md:flex-row items-center gap-12">
                         <div className="flex-1">
                             <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">Join Pune's Most Vibrant Township Community</h2>
                             <p className="text-lg text-white/60 mb-8 max-w-xl">From weekend organic markets to sunrise yoga in the 3.5-acre Urban Park, life at Life Republic is more than just a home—it's a movement.</p>
@@ -243,7 +243,7 @@ const Home: React.FC = () => {
 
             <BrochureEngine />
 
-            <section className="py-32 bg-gray-50 overflow-hidden" aria-label="Neural Architecture Gallery">
+            <section className="py-16 md:py-32 bg-gray-50 overflow-hidden" aria-label="Neural Architecture Gallery">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto">
                         <NeuralGallery 

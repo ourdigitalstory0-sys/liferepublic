@@ -35,7 +35,7 @@ export const Navbar: React.FC = () => {
     return (
         <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 px-6 py-8 ${scrolled ? 'sm:py-4' : 'sm:py-8'}`}>
             <nav className="container mx-auto" aria-label="Main Navigation">
-                <div className={`relative flex items-center justify-between px-10 py-5 bg-secondary/80 backdrop-blur-3xl rounded-full border border-white/10 shadow-2xl transition-all ${scrolled ? 'shadow-accent/20 border-accent/20' : ''}`}>
+                <div className={`relative flex items-center justify-between px-4 md:px-10 py-3 md:py-5 bg-secondary/80 backdrop-blur-3xl rounded-full border border-white/10 shadow-2xl transition-all ${scrolled ? 'shadow-accent/20 border-accent/20' : ''}`}>
                     <Link to="/" className="flex items-center gap-3.5 group">
                         <div className="flex items-center gap-3">
                             <div className="relative w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center shadow-lg group-hover:bg-accent/20 transition-all duration-700 border border-white/10 overflow-hidden">
@@ -100,7 +100,7 @@ export const Navbar: React.FC = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: '100%' }} className="fixed inset-0 bg-secondary z-[110] lg:hidden p-6 sm:p-10 flex flex-col">
-                        <div className="flex justify-between items-center mb-16 relative z-10">
+                        <div className="flex justify-between items-center mb-8 sm:mb-16 relative z-10">
                             <Link to="/" className="flex items-center gap-4 group">
                                 <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center shadow-xl border border-white/20">
                                     <img loading="lazy" src="/images/life-republic-logo-color.png" alt="LR" className="w-full h-full object-contain p-1.5" />

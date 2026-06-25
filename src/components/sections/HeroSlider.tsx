@@ -110,7 +110,7 @@ export const HeroSlider: React.FC = () => {
                                                 initial={{ opacity: 0, y: 30 }}
                                                 animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                                                 transition={{ duration: 0.8, delay: 0.1 }}
-                                                className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg tracking-tight"
+                                                className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg tracking-tight"
                                             >
                                                 {slide.title}
                                             </HeadingTag>
@@ -118,7 +118,7 @@ export const HeroSlider: React.FC = () => {
                                                 initial={{ opacity: 0, y: 20 }}
                                                 animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                                 transition={{ duration: 0.8, delay: 0.4 }}
-                                                className="text-lg md:text-2xl text-gray-100 font-light tracking-wide max-w-3xl drop-shadow-md mb-8"
+                                                className="text-base sm:text-lg md:text-2xl text-gray-100 font-light tracking-wide max-w-3xl drop-shadow-md mb-8"
                                             >
                                                 {slide.subtitle}
                                             </motion.p>
@@ -131,7 +131,7 @@ export const HeroSlider: React.FC = () => {
                                                 <Button
                                                     variant="primary"
                                                     size="lg"
-                                                    className="gap-2 bg-accent hover:bg-white hover:text-accent border-2 border-transparent px-10 py-4 font-bold rounded-full shadow-2xl"
+                                                    className="gap-2 bg-accent hover:bg-white hover:text-accent border-2 border-transparent px-6 py-3 sm:px-10 sm:py-4 font-bold rounded-full shadow-2xl"
                                                     onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}
                                                 >
                                                     Enquire Now <Sparkles size={20} />
@@ -139,7 +139,7 @@ export const HeroSlider: React.FC = () => {
                                                 <Button
                                                     variant="outline"
                                                     size="lg"
-                                                    className="gap-2 bg-white/10 backdrop-blur-md border-2 border-white/20 text-white hover:bg-white hover:text-accent px-10 py-4 font-bold rounded-full transition-all"
+                                                    className="gap-2 bg-white/10 backdrop-blur-md border-2 border-white/20 text-white hover:bg-white hover:text-accent px-6 py-3 sm:px-10 sm:py-4 font-bold rounded-full transition-all"
                                                     onClick={() => navigate('/projects')}
                                                 >
                                                     Explore Portfolio <ArrowRight size={20} />
