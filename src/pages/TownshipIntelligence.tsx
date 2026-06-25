@@ -11,7 +11,7 @@ export const TownshipIntelligence: React.FC = () => {
     return (
         <div className="pt-32 pb-20 bg-white">
             <SEO 
-                title="Township Intelligence | Kolte Patil Life Republic Official"
+                title="Township Intelligence | Kolte Patil Life Republic"
                 description="Explore the infrastructure, connectivity, and community intelligence of Kolte Patil Life Republic, Hinjewadi. The definitive guide to Pune's most integrated township."
                 canonical="/township-intelligence"
             />

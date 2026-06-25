@@ -110,7 +110,7 @@ export const TownshipGuide: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="max-w-4xl mx-auto text-center"
                     >
-                        <span className="text-accent font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Official Pillar Content 2026</span>
+                        <span className="text-accent font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Pillar Content 2026</span>
                         <h1 className="text-4xl md:text-7xl font-serif font-bold text-white mb-8 leading-tight">
                             The Sovereign Guide to <br />
                             <span className="text-accent underline decoration-accent/30 italic">Life Republic</span>
@@ -239,7 +239,7 @@ export const TownshipGuide: React.FC = () => {
                         <div className="flex flex-col md:flex-row items-center justify-between mb-10 gap-6">
                             <div className="max-w-md">
                                 <h3 className="text-2xl font-serif font-bold text-secondary mb-2">The Trust Ledger</h3>
-                                <p className="text-sm text-gray-500">Official MahaRERA registration certificates for all active and proposed clusters within the 390-acre domain.</p>
+                                <p className="text-sm text-gray-500">MahaRERA registration certificates for all active and proposed clusters within the 390-acre domain.</p>
                             </div>
                             <div className="flex items-center gap-3 bg-white px-6 py-3 rounded-2xl shadow-sm border border-gray-100">
                                 <Shield className="text-accent" size={20} />

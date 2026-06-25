@@ -21,4 +21,4 @@ export const RERA_REGISTRY = [
 
 export const getReraLink = (rera: string) => `https://maharera.mahaonline.gov.in/SearchList/Search?rera=${rera}`;
 
-export const RERA_DISCLAIMER = "Disclaimer: All project information, including but not limited to the RERA registration numbers, specifications, and layout plans, is synchronized with the official MahaRERA portal. Life Republic is a 390-acre township by Kolte-Patil Developers. Verify all details on maharera.mahaonline.gov.in.";
+export const RERA_DISCLAIMER = "Disclaimer: All project information, including but not limited to the RERA registration numbers, specifications, and layout plans, is synchronized with the MahaRERA portal. Life Republic is a 390-acre township by Kolte-Patil Developers. Verify all details on maharera.mahaonline.gov.in.";

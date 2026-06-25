@@ -88,10 +88,10 @@ export const pseoRegistry: Record<string, LandingConfig> = {
     },
     'kolte-patil-life-republic-price': {
         title: 'Kolte Patil Life Republic Price List 2026 | All Projects',
-        description: 'Official price list for all Kolte Patil Life Republic projects. 1, 2, 3, 4 BHK flats starting ₹45 Lakhs.',
+        description: 'price list for all Kolte Patil Life Republic projects. 1, 2, 3, 4 BHK flats starting ₹45 Lakhs.',
         keywords: 'kolte patil life republic price, life republic price list 2026, life republic hinjewadi price',
         infraScore: 97, rentalYield: '5.5% - 7.0%', commutePhase1: '10 mins',
-        highlights: ['Official pricing from ₹45L to ₹3Cr+', 'Flexible payment plans', 'Home loan pre-approved']
+        highlights: ['pricing from ₹45L to ₹3Cr+', 'Flexible payment plans', 'Home loan pre-approved']
     },
     'kolte-patil-life-republic-reviews': {
         title: 'Kolte Patil Life Republic Reviews 2026 | Resident Feedback',
@@ -102,7 +102,7 @@ export const pseoRegistry: Record<string, LandingConfig> = {
     },
     'kolte-patil-life-republic-master-plan': {
         title: 'Kolte Patil Life Republic Master Plan | 390 Acre Township Map',
-        description: 'Explore the official master plan of Kolte Patil Life Republic 390-acre township Hinjewadi with sector details.',
+        description: 'Explore the master plan of Kolte Patil Life Republic 390-acre township Hinjewadi with sector details.',
         keywords: 'life republic master plan, kolte patil hinjewadi master plan, life republic layout plan',
         infraScore: 97, rentalYield: '5.5% - 7.0%', commutePhase1: '10 mins',
         highlights: ['390 acres integrated township', '30+ residential sectors', 'Self-sustaining ecosystem']
@@ -241,7 +241,7 @@ export const pseoRegistry: Record<string, LandingConfig> = {
         highlights: ['High rental demand', 'IT professional tenant base', 'Premium rental yields']
     },
     'kolte-patil-hinjewadi-pune': {
-        title: 'Kolte Patil Hinjewadi Pune | Life Republic Official Site',
+        title: 'Kolte Patil Hinjewadi Pune | Life Republic Site',
         description: 'Kolte Patil Developers Hinjewadi Pune. Life Republic - largest 390-acre integrated township.',
         keywords: 'kolte patil hinjewadi, kolte patil pune, kolte patil life republic hinjewadi',
         infraScore: 98, rentalYield: '5.5% - 7.0%', commutePhase1: '10 mins',

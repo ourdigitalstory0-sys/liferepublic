@@ -119,7 +119,7 @@ export const Testimonials: React.FC = () => {
                         <div className="max-w-3xl">
                             <div className="flex items-center gap-4 mb-6">
                                 <Cpu size={24} className="text-accent" />
-                                <span className="text-[11px] font-bold text-accent uppercase tracking-[0.6em]">Official Community Narratives</span>
+                                <span className="text-[11px] font-bold text-accent uppercase tracking-[0.6em]">Community Narratives</span>
                             </div>
                             <h2 className="text-7xl md:text-9xl font-serif font-bold text-secondary tracking-tighter leading-none italic">Citizen <br />Monographs.</h2>
                         </div>

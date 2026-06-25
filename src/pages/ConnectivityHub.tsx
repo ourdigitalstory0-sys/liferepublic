@@ -45,7 +45,7 @@ export const ConnectivityHub: React.FC = () => {
         <div className="pt-20">
             <SEO 
                 title="Connectivity & Distance Guide | Life Republic to Hinjewadi Phase 1, 2, 3"
-                description="Official connectivity guide for Kolte Patil Life Republic. Real-time distance data to Hinjewadi IT Park, Metro Line 3, Mumbai Expressway, and Marunji Road."
+                description="connectivity guide for Kolte Patil Life Republic. Real-time distance data to Hinjewadi IT Park, Metro Line 3, Mumbai Expressway, and Marunji Road."
                 keywords="Life Republic connectivity, Hinjewadi phase 1 distance, Life Republic to Mumbai Expressway, Pune Metro Line 3 Hinjewadi, Marunji road development"
             />
             <Breadcrumbs />

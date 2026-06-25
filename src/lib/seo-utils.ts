@@ -53,7 +53,7 @@ export const generateSemanticKeywords = (ctx: SEOContext): string => {
     ];
 
     const authority = [
-        "Kolte Patil Developers Official Portal",
+        "Kolte Patil Developers Portal",
         "MahaRERA Registered Projects Hinjewadi",
         "Gated Township West Pune",
         "Top Real Estate Developer in Pune 2026",
@@ -145,7 +145,7 @@ export const generateSemanticTitle = (ctx: SEOContext): string => {
     const hasBranding = ctx.title.includes('Life Republic');
     const templates = hasBranding ? [
         `${ctx.title} | ${ctx.category} in ${ctx.location} | Sovereign 2026`,
-        `${ctx.title} - Official Price & Brochure | Starting ${ctx.price}`,
+        `${ctx.title} - Price & Brochure | Starting ${ctx.price}`,
         `${ctx.title} | High-Yield ${ctx.category} in Hinjewadi`
     ] : [
         `${ctx.title} at Life Republic | ${ctx.category} in ${ctx.location}`,

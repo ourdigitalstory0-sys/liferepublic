@@ -118,7 +118,7 @@ export const EMICalculator: React.FC<EMICalculatorProps> = ({ basePrice = 750000
             <div className="bg-gray-50 p-6 flex items-center gap-3 border-t border-gray-100">
                 <Info size={14} className="text-gray-400" />
                 <p className="text-[10px] text-gray-400 font-medium">
-                    *Estimates are indicative. Actual bank rates may vary based on credit score and official bank policy.
+                    *Estimates are indicative. Actual bank rates may vary based on credit score and bank policy.
                 </p>
             </div>
         </div>

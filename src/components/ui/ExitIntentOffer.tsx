@@ -59,11 +59,11 @@ export const ExitIntentOffer: React.FC = () => {
                             </div>
                             <h3 className="text-4xl font-serif font-bold text-white mb-6">Access <br />Private Beta <br />Price List</h3>
                             <p className="text-white/60 text-lg leading-relaxed font-light">
-                                Unlock the official <strong>2026 pricing</strong> and inventory availability before the next market surge.
+                                Unlock the <strong>2026 pricing</strong> and inventory availability before the next market surge.
                             </p>
                         </div>
                         <div className="relative z-10 flex items-center gap-2 text-accent text-xs font-bold uppercase tracking-widest">
-                            <ShieldCheck size={16} /> Official Sales Desk Verified
+                            <ShieldCheck size={16} /> Sales Desk Verified
                         </div>
                     </div>
 
@@ -95,7 +95,7 @@ export const ExitIntentOffer: React.FC = () => {
                         </form>
                         
                         <p className="text-center text-[10px] text-gray-400 mt-8">
-                            Your privacy is our priority. No spam, only the official price list.
+                            Your privacy is our priority. No spam, only the price list.
                         </p>
                     </div>
                 </motion.div>

@@ -50,7 +50,7 @@ export const Contact: React.FC = () => {
         <div className="pt-20">
             <SEO
                 title="Contact Kolte Patil Life Republic Sales Office | Hinjewadi"
-                description="Get in touch with the official sales team for Life Republic by Kolte Patil. Schedule a VIP site visit, request a brochure, or request a callback for best deals."
+                description="Get in touch with the sales team for Life Republic by Kolte Patil. Schedule a VIP site visit, request a brochure, or request a callback for best deals."
                 keywords="Life Republic Contact No, Kolte Patil Sales Office Hinjewadi, Life Republic Address, Site Visit Life Republic, Booking Office Hinjewadi, Kolte Patil Customer Care"
                 canonical="/contact"
                 schema={localBusinessSchema}

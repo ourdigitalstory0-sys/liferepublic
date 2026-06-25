@@ -37,7 +37,7 @@ export const SEO: React.FC<SEOProps> = ({
         ? (title.includes('Kolte Patil Life Republic') && title.includes('Hinjewadi')) 
             ? title 
             : `${siteTitle} | ${cleanTitle || title} | ${locationSuffix}`
-        : `${siteTitle} | Official Premium Township | ${locationSuffix}`;
+        : `${siteTitle} | Premium Township | ${locationSuffix}`;
 
     // Ensure it doesn't get too crazy long for Google (keep under 60-70 chars)
     const finalTitle = fullTitle.length > 70 ? fullTitle.substring(0, 67) + '...' : fullTitle;

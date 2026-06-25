@@ -268,7 +268,7 @@ function App() {
             </Layout>
           } />
           <Route path="/media-center" element={
-            <Layout ariaLabel="Official Media Center & Press Monographs">
+            <Layout ariaLabel="Media Center & Press Monographs">
               <MediaCenter />
             </Layout>
           } />

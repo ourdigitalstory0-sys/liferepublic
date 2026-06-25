@@ -130,7 +130,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                         </AnimatePresence>
 
                         {/* Sovereign Header */}
-                        <div className="p-10 sm:p-16 border-b border-gray-100 flex items-center justify-between bg-white relative">
+                        <div className="p-10 sm:p-16 border-b border-gray-100 flex items-center justify-between bg-white relative z-50">
                             <div>
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className={`w-10 h-10 ${isHighIntent ? 'bg-accent text-secondary' : 'bg-secondary text-white'} rounded-2xl flex items-center justify-center shadow-2xl`}>
@@ -148,7 +148,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                                     )}
                                 </h3>
                             </div>
-                            <button onClick={onClose} className="p-4 bg-gray-50 hover:bg-red-50 hover:text-red-500 rounded-full transition-all text-gray-300">
+                            <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onClose(); }} className="p-4 bg-gray-100 hover:bg-red-100 hover:text-red-600 rounded-full transition-all text-gray-600 cursor-pointer relative z-[60] shadow-sm">
                                 <X size={32} />
                             </button>
                         </div>

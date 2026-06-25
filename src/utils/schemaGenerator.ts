@@ -66,7 +66,7 @@ export const generateGlobalSchema = (path: string = '/') => {
                 '@type': 'WebPage',
                 '@id': `${DOMAIN}${path}#webpage`,
                 'url': `${DOMAIN}${path}`,
-                'name': 'Kolte Patil Life Republic Hinjewadi | Official Township Site',
+                'name': 'Kolte Patil Life Republic Hinjewadi | Township Site',
                 'isPartOf': { '@id': `${DOMAIN}/#website` },
                 'about': { '@id': `${DOMAIN}/#organization` },
                 'provider': { '@id': `${DOMAIN}/#organization` },
@@ -113,7 +113,7 @@ export const generateImageGallerySchema = (project: Project) => {
         '@context': 'https://schema.org',
         '@type': 'ImageGallery',
         'name': `${project.title} Image Gallery`,
-        'description': `Official project images and floor plans for ${project.title} at Life Republic Hinjewadi.`,
+        'description': `project images and floor plans for ${project.title} at Life Republic Hinjewadi.`,
         'image': images.map(url => ({
             '@type': 'ImageObject',
             'contentUrl': url,

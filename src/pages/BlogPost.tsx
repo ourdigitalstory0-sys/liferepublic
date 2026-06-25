@@ -165,7 +165,7 @@ export const BlogPostPage: React.FC = () => {
                             </div>
                             <div>
                                 <p className="text-secondary font-bold">Life Republic Media Desk</p>
-                                <p className="text-xs text-gray-400 font-medium tracking-widest uppercase">Official Sovereign Publication</p>
+                                <p className="text-xs text-gray-400 font-medium tracking-widest uppercase">Sovereign Publication</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-6">

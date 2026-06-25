@@ -54,8 +54,8 @@ export const MediaCenter: React.FC = () => {
     return (
         <div className="bg-white">
             <SEO
-                title="Sovereign Media Center | Official Press & Milestones | Life Republic"
-                description="Access the official Life Republic Media Center. 2026 construction updates, architectural monographs, and resident stories from Pune's 390-acre township."
+                title="Sovereign Media Center | Press & Milestones | Life Republic"
+                description="Access the Life Republic Media Center. 2026 construction updates, architectural monographs, and resident stories from Pune's 390-acre township."
                 keywords="Life Republic News, Construction Updates Hinjewadi, Hinjewadi Metro Update 2026, Kolte Patil Life Republic Blog"
                 canonical="/media-center"
             />
@@ -106,7 +106,7 @@ export const MediaCenter: React.FC = () => {
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8 border-b border-gray-100 pb-12">
                         <div className="max-w-2xl">
-                            <span className="text-[10px] font-bold text-accent uppercase tracking-[0.4em] mb-4 block">Official Feed</span>
+                            <span className="text-[10px] font-bold text-accent uppercase tracking-[0.4em] mb-4 block">Feed</span>
                             <h2 className="text-4xl md:text-6xl font-serif font-bold text-secondary tracking-tighter">Architectural Insights.</h2>
                         </div>
                         <div className="flex gap-6">
