@@ -65,7 +65,7 @@ export const HeroSlider: React.FC = () => {
     }, []);
 
     return (
-        <section className="relative h-screen w-full overflow-hidden">
+        <section className="relative h-[100dvh] w-full overflow-hidden">
             <motion.div style={{ y }} className="absolute inset-0 w-full h-full">
                 <Swiper
                     modules={[Autoplay, EffectFade, Navigation, Pagination]}
@@ -83,87 +83,87 @@ export const HeroSlider: React.FC = () => {
                     }}
                     className="h-full w-full"
                 >
-                    {slides.map((slide, index) => (
-                        <SwiperSlide key={slide.id}>
-                            <div className="relative h-full w-full">
-                                <div className="absolute inset-0 bg-black/40 z-10" />
-                                <img
-                                    src={slide.image_url}
-                                    alt={slide.title}
-                                    loading={index === 0 ? "eager" : "lazy"}
-                                    fetchPriority={index === 0 ? "high" : "low"}
-                                    className="h-full w-full object-cover"
-                                />
-                                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 1, delay: 0.2 }}
-                                        className="mb-8 w-24 h-24 bg-white/10 backdrop-blur-xl rounded-3xl p-3 border border-white/20 shadow-2xl overflow-hidden"
-                                    >
-                                        <img loading="lazy" src="/images/life-republic-logo-color.png" alt="Life Republic" className="w-full h-full object-contain brightness-110" />
-                                    </motion.div>
-                                    <motion.h1
-                                        initial={{ opacity: 0, y: 30 }}
-                                        animate={index === 0 ? { opacity: 1, y: 0 } : {}}
-                                        whileInView={index !== 0 ? { opacity: 1, y: 0 } : {}}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.8, delay: 0.1 }}
-                                        className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg tracking-tight"
-                                    >
-                                        {slide.title}
-                                    </motion.h1>
-                                    <motion.p
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.8, delay: 0.4 }}
-                                        className="text-lg md:text-2xl text-gray-100 font-light tracking-wide max-w-3xl drop-shadow-md mb-8"
-                                    >
-                                        {slide.subtitle}
-                                    </motion.p>
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 30 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.8, delay: 0.6 }}
-                                        className="flex flex-col sm:flex-row gap-4 justify-center"
-                                    >
-                                        <Button
-                                            variant="primary"
-                                            size="lg"
-                                            className="gap-2 bg-accent hover:bg-white hover:text-accent border-2 border-transparent px-10 py-4 font-bold rounded-full shadow-2xl"
-                                            onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}
-                                        >
-                                            Enquire Now <Sparkles size={20} />
-                                        </Button>
-                                        <Button
-                                            variant="outline"
-                                            size="lg"
-                                            className="gap-2 bg-white/10 backdrop-blur-md border-2 border-white/20 text-white hover:bg-white hover:text-accent px-10 py-4 font-bold rounded-full transition-all"
-                                            onClick={() => navigate('/projects')}
-                                        >
-                                            Explore Portfolio <ArrowRight size={20} />
-                                        </Button>
-
-                                        {/* Intelligence Nudge */}
-                                        {personalizationStore.getHistory().searchQueries.length > 0 && (
-                                            <motion.button
-                                                initial={{ opacity: 0, x: 20 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                onClick={() => window.dispatchEvent(new CustomEvent('open-neural-search'))}
-                                                className="flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-sm font-bold hover:bg-white hover:text-secondary transition-all group"
+                    {slides.map((slide, index) => {
+                        const HeadingTag = index === 0 ? motion.h1 : motion.h2;
+                        return (
+                            <SwiperSlide key={slide.id}>
+                                {({ isActive }) => (
+                                    <div className={`relative h-full w-full transition-opacity duration-1000 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                                        <div className="absolute inset-0 bg-black/40 z-10" />
+                                        <img
+                                            src={slide.image_url}
+                                            alt={slide.title}
+                                            loading={index === 0 ? "eager" : "lazy"}
+                                            fetchPriority={index === 0 ? "high" : "low"}
+                                            className="h-full w-full object-cover"
+                                        />
+                                        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
+                                            <motion.div
+                                                initial={{ opacity: 0, scale: 0.8 }}
+                                                animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                                                transition={{ duration: 1, delay: 0.2 }}
+                                                className="mb-8 w-24 h-24 bg-white/10 backdrop-blur-xl rounded-3xl p-3 border border-white/20 shadow-2xl overflow-hidden"
                                             >
-                                                <Sparkles size={16} className="text-accent" />
-                                                Resume Search: "{personalizationStore.getHistory().searchQueries[0]}"
-                                            </motion.button>
-                                        )}
-                                    </motion.div>
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                    ))}
+                                                <img loading="lazy" src="/images/life-republic-logo-color.png" alt="Life Republic" className="w-full h-full object-contain brightness-110" />
+                                            </motion.div>
+                                            <HeadingTag
+                                                initial={{ opacity: 0, y: 30 }}
+                                                animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                                                transition={{ duration: 0.8, delay: 0.1 }}
+                                                className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg tracking-tight"
+                                            >
+                                                {slide.title}
+                                            </HeadingTag>
+                                            <motion.p
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                                transition={{ duration: 0.8, delay: 0.4 }}
+                                                className="text-lg md:text-2xl text-gray-100 font-light tracking-wide max-w-3xl drop-shadow-md mb-8"
+                                            >
+                                                {slide.subtitle}
+                                            </motion.p>
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 30 }}
+                                                animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                                                transition={{ duration: 0.8, delay: 0.6 }}
+                                                className="flex flex-col sm:flex-row gap-4 justify-center"
+                                            >
+                                                <Button
+                                                    variant="primary"
+                                                    size="lg"
+                                                    className="gap-2 bg-accent hover:bg-white hover:text-accent border-2 border-transparent px-10 py-4 font-bold rounded-full shadow-2xl"
+                                                    onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}
+                                                >
+                                                    Enquire Now <Sparkles size={20} />
+                                                </Button>
+                                                <Button
+                                                    variant="outline"
+                                                    size="lg"
+                                                    className="gap-2 bg-white/10 backdrop-blur-md border-2 border-white/20 text-white hover:bg-white hover:text-accent px-10 py-4 font-bold rounded-full transition-all"
+                                                    onClick={() => navigate('/projects')}
+                                                >
+                                                    Explore Portfolio <ArrowRight size={20} />
+                                                </Button>
+
+                                                {/* Intelligence Nudge */}
+                                                {personalizationStore.getHistory().searchQueries.length > 0 && (
+                                                    <motion.button
+                                                        initial={{ opacity: 0, x: 20 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        onClick={() => window.dispatchEvent(new CustomEvent('open-neural-search'))}
+                                                        className="flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-sm font-bold hover:bg-white hover:text-secondary transition-all group"
+                                                    >
+                                                        <Sparkles size={16} className="text-accent" />
+                                                        Resume Search: "{personalizationStore.getHistory().searchQueries[0]}"
+                                                    </motion.button>
+                                                )}
+                                            </motion.div>
+                                        </div>
+                                    </div>
+                                )}
+                            </SwiperSlide>
+                        );
+                    })}
                 </Swiper>
             </motion.div>
 

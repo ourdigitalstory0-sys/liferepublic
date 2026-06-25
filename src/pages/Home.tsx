@@ -84,7 +84,7 @@ const Home: React.FC = () => {
             </NeuralErrorBoundary>
 
             {/* Phase 3: Product & Conversion */}
-            <section className="py-20 bg-gray-50">
+            <section className="py-20 bg-gray-50" aria-label="Featured Township Projects">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl font-serif font-bold mb-4 text-secondary">Kolte Patil Life Republic Township Hinjewadi</h2>
@@ -116,7 +116,7 @@ const Home: React.FC = () => {
             </section>
 
             {/* Phase 4: Market Authority */}
-            <section className="py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white relative overflow-hidden">
+            <section className="py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white relative overflow-hidden" aria-label="Hinjewadi Investment Location Advantage">
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                     <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[100px]"></div>
                     <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[100px]"></div>
@@ -172,7 +172,7 @@ const Home: React.FC = () => {
             <RecommendedProjects />
 
             {/* Phase 5: Architectural Monograph */}
-            <section className="py-32 bg-white overflow-hidden">
+            <section className="py-32 bg-white overflow-hidden" aria-label="Township Architecture and Volumes">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col lg:flex-row gap-20 items-start">
                         <div className="lg:w-1/3 lg:sticky lg:top-32">
@@ -216,7 +216,7 @@ const Home: React.FC = () => {
             <TestimonialCarousel />
 
             {/* Phase 6: Deep Content & SEO */}
-            <section className="py-20 bg-primary/20">
+            <section className="py-20 bg-primary/20" aria-label="About Kolte Patil Life Republic">
                 <div className="container mx-auto px-4 text-center">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                         <h2 className="text-4xl font-serif font-bold mb-6 text-secondary">About Kolte Patil Life Republic Township</h2>
@@ -229,7 +229,7 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
-            <section className="py-20 bg-secondary overflow-hidden relative">
+            <section className="py-20 bg-secondary overflow-hidden relative" aria-label="Community Hub">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12">
                         <div className="flex-1">
@@ -243,7 +243,7 @@ const Home: React.FC = () => {
 
             <BrochureEngine />
 
-            <section className="py-32 bg-gray-50 overflow-hidden">
+            <section className="py-32 bg-gray-50 overflow-hidden" aria-label="Neural Architecture Gallery">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto">
                         <NeuralGallery 
@@ -259,7 +259,7 @@ const Home: React.FC = () => {
             <CommunityCalendar />
 
             {/* Popular Searches Footer */}
-            <section className="py-12 bg-gray-100 border-t border-gray-200">
+            <section className="py-12 bg-gray-100 border-t border-gray-200" aria-label="Popular Real Estate Searches">
                 <div className="container mx-auto px-4">
                     <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6">Popular Searches</h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">

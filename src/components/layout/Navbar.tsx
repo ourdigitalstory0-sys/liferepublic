@@ -33,8 +33,8 @@ export const Navbar: React.FC = () => {
     };
 
     return (
-        <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 px-6 py-8 ${scrolled ? 'sm:py-4' : 'sm:py-8'}`}>
-            <div className="container mx-auto">
+        <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 px-6 py-8 ${scrolled ? 'sm:py-4' : 'sm:py-8'}`}>
+            <nav className="container mx-auto" aria-label="Main Navigation">
                 <div className={`relative flex items-center justify-between px-10 py-5 bg-secondary/80 backdrop-blur-3xl rounded-full border border-white/10 shadow-2xl transition-all ${scrolled ? 'shadow-accent/20 border-accent/20' : ''}`}>
                     <Link to="/" className="flex items-center gap-3.5 group">
                         <div className="flex items-center gap-3">
@@ -79,7 +79,7 @@ export const Navbar: React.FC = () => {
                         <Button variant="primary" size="lg" className="hidden sm:flex rounded-full px-8 py-3.5 font-bold text-xs tracking-[0.25em] uppercase gap-2.5 shadow-2xl shadow-accent/20 hover:scale-105 transition-all" onClick={() => window.dispatchEvent(new CustomEvent('open-enquiry-modal'))}>
                             Enquire Now <Sparkles size={14} />
                         </Button>
-                        <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-3 bg-white/5 rounded-2xl text-white hover:text-accent transition-all border border-white/10">
+                        <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-3 bg-white/5 rounded-2xl text-white hover:text-accent transition-all border border-white/10" aria-label="Toggle Menu">
                             {isOpen ? <X size={28} /> : <Menu size={28} />}
                         </button>
                     </div>
@@ -96,7 +96,7 @@ export const Navbar: React.FC = () => {
                         </motion.div>
                     )}
                 </AnimatePresence>
-            </div>
+            </nav>
             <AnimatePresence>
                 {isOpen && (
                     <motion.div initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: '100%' }} className="fixed inset-0 bg-secondary z-[110] lg:hidden p-6 sm:p-10 flex flex-col">
@@ -110,7 +110,7 @@ export const Navbar: React.FC = () => {
                                     <span className="text-accent text-[9px] font-bold uppercase tracking-[0.4em] mt-1">Sovereign Township</span>
                                 </div>
                             </Link>
-                            <button onClick={() => setIsOpen(false)} className="p-3 sm:p-4 bg-white/5 rounded-full text-white border border-white/10 hover:bg-white/10 transition-colors">
+                            <button onClick={() => setIsOpen(false)} className="p-3 sm:p-4 bg-white/5 rounded-full text-white border border-white/10 hover:bg-white/10 transition-colors" aria-label="Close Menu">
                                 <X size={28} />
                             </button>
                         </div>
@@ -124,6 +124,6 @@ export const Navbar: React.FC = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </nav>
+        </header>
     );
 };
