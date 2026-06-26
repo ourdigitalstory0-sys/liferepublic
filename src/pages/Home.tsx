@@ -65,57 +65,94 @@ const Home: React.FC = () => {
                 schema={schema}
             />
             
-            {/* Phase 1: Identity & Entry */}
+            {/* Phase 1: Captivation */}
             <HeroSlider />
-            <PersonalizedDashboard />
             <ResidentPulse />
 
-            {/* Phase 2: Immersive Exploration (Protected) */}
-            <NeuralErrorBoundary>
-                <MasterPlan />
-            </NeuralErrorBoundary>
-
-            <NeuralErrorBoundary>
-                <AerialTour />
-            </NeuralErrorBoundary>
-
-            <NeuralErrorBoundary>
-                <SectorMesh />
-            </NeuralErrorBoundary>
-
-            {/* Phase 3: Product & Conversion */}
-            <section className="py-12 md:py-20 bg-gray-50" aria-label="Featured Township Projects">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-secondary">Kolte Patil Life Republic Township Hinjewadi</h2>
-                        <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
-                        <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
-                            Experience the finest living at <strong>Kolte Patil Life Republic Township Hinjewadi</strong>. Discover our diverse range of 2, 3, 4 BHK flats and luxury villas, designed to offer a unique lifestyle in Pune's most integrated township.
-                        </p>
-                        <div className="mb-10 flex justify-center">
-                            <Link to="/township-guide" className="inline-flex items-center gap-2 text-accent font-bold border-b-2 border-accent/20 hover:border-accent pb-1 transition-all group">
-                                Read the Ultimate Township Guide 2026 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                            </Link>
+            {/* Phase 2: Introduction & Scale */}
+            <section className="py-16 md:py-32 bg-gray-50 overflow-hidden relative" aria-label="Township Architecture and Volumes">
+                <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-accent/5 rounded-bl-[100%] pointer-events-none"></div>
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="flex flex-col lg:flex-row gap-20 items-center">
+                        <div className="lg:w-1/2">
+                            <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-accent text-xs font-bold uppercase tracking-[0.5em] block mb-6">The Masterplan</motion.span>
+                            <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-4xl md:text-6xl font-serif font-bold text-secondary leading-[1.1] mb-8">A 390-Acre <br /><span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">Vision</span></motion.h2>
+                            <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-gray-500 text-lg font-light leading-relaxed mb-10"><strong>Kolte Patil Life Republic</strong> is a premium integrated township located in the heart of <strong>Hinjewadi, Pune</strong>. Designed around the principles of spatial harmony and sustainable community flow, it offers an unparalleled holistic lifestyle near Rajiv Gandhi Infotech Park.</motion.p>
+                            
+                            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="flex flex-col gap-8">
+                                {[
+                                    { label: '01', title: 'Macro Infrastructure', desc: 'A 150ft wide spine road connecting the entire ecosystem.' },
+                                    { label: '02', title: 'Micro Habitats', desc: 'Lush green clusters designed for intimate community living.' },
+                                    { label: '03', title: 'Neural Connectivity', desc: 'Seamless integration with Pune Metro and Mumbai-Pune Expressway.' }
+                                ].map((vol, idx) => (
+                                    <div key={idx} className="group cursor-pointer hover:pl-2 transition-all duration-300">
+                                        <div className="flex items-center gap-4 mb-2">
+                                            <span className="text-accent font-bold text-xs font-sans tracking-tighter opacity-50 group-hover:opacity-100 transition-opacity">{vol.label}</span>
+                                            <h4 className="text-secondary font-bold uppercase text-xs tracking-widest">{vol.title}</h4>
+                                        </div>
+                                        <p className="text-gray-400 text-sm pl-8 group-hover:text-gray-600 transition-colors">{vol.desc}</p>
+                                    </div>
+                                ))}
+                            </motion.div>
                         </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {featuredProjects.map((project, index) => (
-                            <ProjectCard key={project.id} project={project} priority={index < 3} />
-                        ))}
-                    </div>
-
-                    <div className="text-center mt-12">
-                        <Link to="/projects">
-                            <Button variant="primary" size="lg" className="gap-2">
-                                View All Projects <ArrowRight size={20} />
-                            </Button>
-                        </Link>
+                        <div className="lg:w-1/2 grid grid-cols-2 gap-4 md:gap-8">
+                            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="aspect-[4/5] rounded-3xl overflow-hidden relative group shadow-2xl">
+                                <img loading="lazy" src="/images/gallery/nature-nest.webp" alt="Infrastructure" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/90 transition-colors duration-500"></div>
+                                <div className="absolute bottom-6 left-6 text-white transform group-hover:-translate-y-2 transition-transform duration-500">
+                                    <h3 className="text-2xl font-serif font-bold">The Park</h3>
+                                    <p className="text-[10px] uppercase tracking-widest text-white/70 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">3.5 Acre Urban Lung</p>
+                                </div>
+                            </motion.div>
+                            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="aspect-[4/5] rounded-3xl overflow-hidden relative group shadow-2xl md:mt-16">
+                                <img loading="lazy" src="/images/gallery/clubhouse.webp" alt="Community" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/90 transition-colors duration-500"></div>
+                                <div className="absolute bottom-6 left-6 text-white transform group-hover:-translate-y-2 transition-transform duration-500">
+                                    <h3 className="text-2xl font-serif font-bold">The Club</h3>
+                                    <p className="text-[10px] uppercase tracking-widest text-white/70 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">Social Synthesis</p>
+                                </div>
+                            </motion.div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* Phase 4: Market Authority */}
+            {/* Phase 3: The Core Offering (Projects) */}
+            <section className="py-16 md:py-32 bg-white" aria-label="Featured Township Projects">
+                <div className="container mx-auto px-4">
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                        <span className="text-accent text-xs font-bold uppercase tracking-[0.5em] block mb-4">The Collection</span>
+                        <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 text-secondary">
+                            Life Republic <span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">Properties</span>
+                        </h2>
+                        <div className="w-16 h-1 bg-accent mx-auto mb-8 rounded-full"></div>
+                        <p className="text-gray-500 max-w-2xl mx-auto text-lg mb-10 font-light">
+                            Discover our diverse range of premium properties, from ultra-luxury villas and bespoke bungalow plots to state-of-the-art smart apartments.
+                        </p>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {featuredProjects.map((project, index) => (
+                            <motion.div key={project.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }} className="hover:-translate-y-2 transition-transform duration-500">
+                                <ProjectCard project={project} priority={index < 3} />
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-20">
+                        <Link to="/projects">
+                            <Button variant="outline" size="lg" className="gap-2 px-10 py-4 text-sm tracking-[0.2em] border-secondary text-secondary hover:bg-secondary hover:text-white transition-all duration-300">
+                                View Entire Collection <ArrowRight size={18} />
+                            </Button>
+                        </Link>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Phase 4: Lifestyle */}
+            <AmenitiesCarousel />
+
+            {/* Phase 5: Location Authority */}
             <section className="py-16 md:py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white relative overflow-hidden" aria-label="Hinjewadi Investment Location Advantage">
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                     <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[100px]"></div>
@@ -133,7 +170,7 @@ const Home: React.FC = () => {
                         <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Hinjewadi: A Real Estate Investment Hotspot</h2>
                         <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-green-500 to-orange-500 mx-auto mb-6 rounded-full"></div>
                         <p className="text-gray-300 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-                            Connected to the world, yet a world of its own. Located in the heart of Hinjewadi, a prime real estate corridor, Kolte Patil Life Republic Township offers unmatched connectivity and property value appreciation. Request the <strong>Price List 2026</strong> today.
+                            Connected to the world, yet a world of its own. Located in the heart of Hinjewadi, a prime real estate corridor, Kolte Patil Life Republic Township offers unmatched connectivity and property value appreciation.
                         </p>
                     </motion.div>
 
@@ -168,97 +205,19 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
-            <InfraTracker />
-            <RecommendedProjects />
+            {/* Phase 6: Interactive Depth */}
+            <NeuralErrorBoundary>
+                <MasterPlan />
+            </NeuralErrorBoundary>
 
-            {/* Phase 5: Architectural Monograph */}
-            <section className="py-16 md:py-32 bg-white overflow-hidden" aria-label="Township Architecture and Volumes">
-                <div className="container mx-auto px-4">
-                    <div className="flex flex-col lg:flex-row gap-20 items-start">
-                        <div className="lg:w-1/3 lg:sticky lg:top-32">
-                            <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-accent text-[10px] font-bold uppercase tracking-[0.5em] block mb-6">Foundation & Flow</motion.span>
-                            <h2 className="text-4xl md:text-6xl font-serif font-bold text-secondary leading-[1.1] mb-8">Township <br />Volumes</h2>
-                            <p className="text-gray-500 text-lg font-light leading-relaxed mb-10">A 390-acre masterplan designed around the principles of <strong>spatial harmony</strong>, <strong>tectonic integrity</strong>, and <strong>sustainable community flow</strong>.</p>
-                            <div className="flex flex-col gap-8">
-                                {[
-                                    { label: '01', title: 'Macro Infrastructure', desc: 'A 150ft wide spine road connecting the entire ecosystem.' },
-                                    { label: '02', title: 'Micro Habitats', desc: 'Lush green clusters designed for intimate community living.' },
-                                    { label: '03', title: 'Neural Connectivity', desc: 'Seamless integration with Pune Metro and Mumbai-Pune Expressway.' }
-                                ].map((vol, idx) => (
-                                    <div key={idx} className="group cursor-pointer">
-                                        <div className="flex items-center gap-4 mb-2">
-                                            <span className="text-accent font-bold text-xs font-sans tracking-tighter">{vol.label}</span>
-                                            <h4 className="text-secondary font-bold uppercase text-xs tracking-widest group-hover:text-accent transition-colors">{vol.title}</h4>
-                                        </div>
-                                        <div className="w-full h-[1px] bg-gray-100 group-hover:bg-accent transition-colors"></div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} className="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden relative group">
-                                <img loading="lazy" src="/images/gallery/nature-nest.webp" alt="Infrastructure" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" />
-                                <div className="absolute bottom-10 left-10 text-white z-10"><h3 className="text-3xl font-serif font-bold mb-2">The Park</h3><p className="text-xs uppercase tracking-widest text-white/70">3.5 Acre Urban Lung</p></div>
-                            </motion.div>
-                            <motion.div initial={{ opacity: 0, y: 100 }} whileInView={{ opacity: 1, y: 0 }} className="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden relative group md:mt-20">
-                                <img loading="lazy" src="/images/gallery/clubhouse.webp" alt="Community" className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" />
-                                <div className="absolute bottom-10 left-10 text-white z-10"><h3 className="text-3xl font-serif font-bold mb-2">The Club</h3><p className="text-xs uppercase tracking-widest text-white/70">Social Synthesis</p></div>
-                            </motion.div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <ConstructionUpdates />
-            <RecentlyViewed />
-            <AmenitiesCarousel />
-            <FAQ />
+            {/* Phase 7: Social Proof & Trust */}
             <TestimonialCarousel />
 
-            {/* Phase 6: Deep Content & SEO */}
-            <section className="py-12 md:py-20 bg-primary/20" aria-label="About Kolte Patil Life Republic">
-                <div className="container mx-auto px-4 text-center">
-                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                        <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-secondary">About Kolte Patil Life Republic Township</h2>
-                        <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
-                        <div className="max-w-5xl mx-auto text-left space-y-6 text-gray-600 leading-relaxed text-lg">
-                            <p><strong>Kolte Patil Life Republic</strong> is a premium 390+ acre integrated township located in the heart of <strong>Hinjewadi, Pune</strong>. Developed by the renowned Kolte Patil Developers, this township is designed to offer a holistic lifestyle with world-class amenities, smart infrastructure, and lush green surroundings near Rajiv Gandhi Infotech Park.</p>
-                            <p>The township offers a wide range of residential options including <strong>2 BHK, 3 BHK, and 4 BHK flats in Hinjewadi</strong>, as well as exclusive villas and row houses. With sectors like <strong>Life Republic Atmos</strong>, <strong>Life Republic Aros</strong>, and <strong>Life Republic Arezo</strong>, homebuyers can choose from under-construction and <strong>ready possession flats in Pune</strong>.</p>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-
-            <section className="py-12 md:py-20 bg-secondary overflow-hidden relative" aria-label="Community Hub">
-                <div className="container mx-auto px-4 relative z-10">
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl md:rounded-[3rem] p-6 md:p-16 flex flex-col md:flex-row items-center gap-12">
-                        <div className="flex-1">
-                            <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">Join Pune's Most Vibrant Township Community</h2>
-                            <p className="text-lg text-white/60 mb-8 max-w-xl">From weekend organic markets to sunrise yoga in the 3.5-acre Urban Park, life at Life Republic is more than just a home—it's a movement.</p>
-                            <Link to="/community-hub" className="inline-flex items-center gap-2 bg-white text-secondary px-8 py-4 rounded-full font-bold hover:bg-accent transition-all">Explore Resident Hub <ArrowRight size={18} /></Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
+            {/* Phase 8: Conversion & Info */}
+            <FAQ />
             <BrochureEngine />
 
-            <section className="py-16 md:py-32 bg-gray-50 overflow-hidden" aria-label="Neural Architecture Gallery">
-                <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto">
-                        <NeuralGallery 
-                            title="The Living Volume"
-                            images={{
-                                day: '/images/aerial-night.png'
-                            }}
-                        />
-                    </div>
-                </div>
-            </section>
-
-            <CommunityCalendar />
-
-            {/* Popular Searches Footer */}
+            {/* Phase 9: SEO & Discovery */}
             <section className="py-12 bg-gray-100 border-t border-gray-200" aria-label="Popular Real Estate Searches">
                 <div className="container mx-auto px-4">
                     <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6">Popular Searches</h3>

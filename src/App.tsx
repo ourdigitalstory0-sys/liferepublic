@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { ProtectedRoute } from './components/admin/ProtectedRoute';
 import { Navbar } from './components/layout/Navbar';
@@ -46,23 +46,52 @@ import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminLayout } from './components/admin/AdminLayout';
 import { ImageManager } from './components/admin/ImageManager';
 
-// Premium Loading Component for Suspense Boundary
+import { motion, AnimatePresence } from 'framer-motion';
+
 export const PageLoader = () => (
-  <div className="min-h-screen flex flex-col items-center justify-center bg-white fixed inset-0 z-[1000]">
-    <div className="relative">
-      <div className="w-32 h-32 border-[1px] border-accent/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-12 h-12 border-t-2 border-accent rounded-full animate-spin"></div>
+  <motion.div 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.8, ease: "easeInOut" }}
+    className="min-h-screen flex flex-col items-center justify-center bg-primary fixed inset-0 z-[1000]"
+  >
+    <div className="w-full max-w-xs px-8">
+      {/* Premium minimal expanding line loader */}
+      <div className="w-full h-[1px] bg-gray-200 relative overflow-hidden">
+        <motion.div 
+          initial={{ x: '-100%' }}
+          animate={{ x: '100%' }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          className="absolute top-0 left-0 w-full h-full bg-accent"
+        />
+      </div>
+      
+      <div className="mt-8 flex flex-col items-center space-y-3">
+        <motion.div 
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-[10px] font-bold text-secondary uppercase tracking-[0.8em]"
+        >
+          Kolte Patil
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="text-[9px] font-light text-gray-400 uppercase tracking-[0.5em]"
+        >
+          Life Republic
+        </motion.div>
       </div>
     </div>
-    <div className="mt-12 space-y-4 text-center">
-      <div className="text-[10px] font-bold text-secondary uppercase tracking-[0.8em] animate-pulse">Synthesizing Architecture</div>
-      <div className="text-[9px] font-medium text-gray-400 uppercase tracking-[0.4em]">Life Republic v5.5</div>
-    </div>
-  </div>
+  </motion.div>
 );
 
 function App() {
+  const location = useLocation();
+
   useEffect(() => {
     if (!sessionStorage.getItem('lr_entry_page')) {
       sessionStorage.setItem('lr_entry_page', window.location.pathname);
@@ -73,31 +102,32 @@ function App() {
     <SmoothScrolling>
       <ExitIntentOffer />
       <FloatingContact />
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={
-            <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi">
-              <Home />
-            </Layout>
-          } />
-          <Route path="/projects" element={
-            <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi Gallery">
-              <Projects />
-            </Layout>
-          } />
-          <Route path="/projects/:id" element={
-            <Layout ariaLabel="Kolte Patil Life Republic Township Project Monograph">
-              <ProjectDetails />
-            </Layout>
-          } />
-          <Route path="/amenities" element={
-            <Layout ariaLabel="Kolte Patil Life Republic Township Amenities">
-              <Amenities />
-            </Layout>
-          } />
-          <Route path="/contact" element={
-            <Layout ariaLabel="Contact Kolte Patil Life Republic">
+      <AnimatePresence mode="wait">
+        <Suspense fallback={<PageLoader />}>
+          <Routes location={location} key={location.pathname}>
+            {/* Public Routes */}
+            <Route path="/" element={
+              <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi">
+                <Home />
+              </Layout>
+            } />
+            <Route path="/projects" element={
+              <Layout ariaLabel="Kolte Patil Life Republic Township Hinjewadi Gallery">
+                <Projects />
+              </Layout>
+            } />
+            <Route path="/projects/:id" element={
+              <Layout ariaLabel="Kolte Patil Life Republic Township Project Monograph">
+                <ProjectDetails />
+              </Layout>
+            } />
+            <Route path="/amenities" element={
+              <Layout ariaLabel="Kolte Patil Life Republic Township Amenities">
+                <Amenities />
+              </Layout>
+            } />
+            <Route path="/contact" element={
+              <Layout ariaLabel="Contact Kolte Patil Life Republic">
               <Contact />
             </Layout>
           } />
@@ -315,7 +345,8 @@ function App() {
           {/* Catch-all for 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Suspense>
+        </Suspense>
+      </AnimatePresence>
     </SmoothScrolling>
   );
 }

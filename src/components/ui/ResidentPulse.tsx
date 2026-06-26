@@ -14,7 +14,7 @@ const activities = [
 
 export const ResidentPulse: React.FC = () => {
     return (
-        <div className="bg-white border-y border-gray-100 py-6 overflow-hidden relative group max-w-[100vw]">
+        <div className="bg-white border-y border-gray-100 py-6 overflow-hidden relative group w-full">
             {/* Background Synthesis HUD Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-white z-10 pointer-events-none"></div>
             
