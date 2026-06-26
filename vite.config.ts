@@ -104,19 +104,7 @@ export default defineConfig((env: any) => {
       },
       rollupOptions: {
         output: isSsr ? {} : {
-          // Sovereign Velocity Chunking
-          manualChunks: (id) => {
-            if (id.includes('node_modules')) {
-              if (id.includes('react-google-maps')) return 'vendor-google-maps';
-              if (id.includes('react/') || id.includes('react-dom/') || id.includes('react-router') || id.includes('react-helmet')) return 'vendor-react';
-              if (id.includes('framer-motion')) return 'vendor-motion';
-              if (id.includes('lucide-react')) return 'vendor-icons';
-              if (id.includes('@supabase') || id.includes('supabase')) return 'vendor-storage';
-              if (id.includes('swiper')) return 'vendor-gallery';
-              if (id.includes('@google') || id.includes('googleapis')) return 'vendor-google';
-              return 'vendor-utils';
-            }
-          },
+          // Rely on Vite's default chunking strategy to prevent React ESM interop issues
           chunkFileNames: 'assets/js/[name]-[hash].js',
           entryFileNames: 'assets/js/[name]-[hash].js',
           assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
