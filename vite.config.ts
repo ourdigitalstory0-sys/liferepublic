@@ -107,6 +107,7 @@ export default defineConfig((env: any) => {
           // Sovereign Velocity Chunking
           manualChunks: (id) => {
             if (id.includes('node_modules')) {
+              if (id.includes('react-google-maps')) return 'vendor-google-maps';
               if (id.includes('react/') || id.includes('react-dom/') || id.includes('react-router') || id.includes('react-helmet')) return 'vendor-react';
               if (id.includes('framer-motion')) return 'vendor-motion';
               if (id.includes('lucide-react')) return 'vendor-icons';

@@ -98,9 +98,26 @@ async function prerender() {
             console.log(`Rendering: ${route}`);
             const { html: appHtml, head: headHtml } = await render(route);
 
+            let cleanAppHtml = appHtml || '';
+            
+            // Extract leaked Helmet tags from the body
+            const titles = cleanAppHtml.match(/<title[^>]*>.*?<\/title>/gi) || [];
+            const metas = cleanAppHtml.match(/<meta[^>]*>/gi) || [];
+            const links = cleanAppHtml.match(/<link[^>]*(data-rh="true"|rel="canonical"|rel="alternate"|rel="preload")[^>]*>/gi) || [];
+            
+            // Combine extracted tags
+            const extractedHeadTags = [...titles, ...metas, ...links].join('\n');
+
+            // Strip them from the body to prevent hydration mismatch
+            cleanAppHtml = cleanAppHtml.replace(/<title[^>]*>.*?<\/title>/gi, '');
+            cleanAppHtml = cleanAppHtml.replace(/<meta[^>]*>/gi, '');
+            cleanAppHtml = cleanAppHtml.replace(/<link[^>]*(data-rh="true"|rel="canonical"|rel="alternate"|rel="preload")[^>]*>/gi, '');
+
+            const finalHead = (headHtml || '') + '\n' + extractedHeadTags;
+
             const renderedHtml = template
-                .replace('<!--app-head-->', headHtml || '')
-                .replace('<!--app-html-->', appHtml || '');
+                .replace('<!--app-head-->', finalHead)
+                .replace('<!--app-html-->', cleanAppHtml);
 
             const filePath = route === '/'
                 ? path.join(OUT_DIR, 'index.html')
