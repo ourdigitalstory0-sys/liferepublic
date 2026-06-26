@@ -14,14 +14,14 @@ const testimonials = [
         role: "IT Professional, Infosys",
         text: "Living in Life Republic is like living in a resort. My commute to Hinjewadi Phase 1 is just 10 mins, and my kids love the school within the campus.",
         location: "Echoes Resident",
-        image: "/images/home/urban-park.webp"
+        image: "/images/home/arezo-thumb.jpg"
     },
     {
         name: "Priya Sharma",
         role: "Healthcare Professional",
         text: "The security and community feel here is unmatched. As a working mother, I feel safe knowing my parents are comfortable in this township.",
         location: "Aros Resident",
-        image: "/images/home/clubhouse-bg.webp"
+        image: "/images/home/aros-thumb.jpg"
     },
     {
         name: "Sandeep Varma",
@@ -44,8 +44,7 @@ export const TestimonialCarousel: React.FC = () => {
                 </div>
 
                 <Swiper
-                    modules={[Autoplay, Pagination, EffectFade]}
-                    effect="fade"
+                    modules={[Autoplay, Pagination]}
                     autoplay={{ delay: 6000 }}
                     loop={true}
                     pagination={{ clickable: true }}

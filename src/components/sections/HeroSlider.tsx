@@ -19,7 +19,7 @@ import type { Banner } from '../../lib/types';
 const defaultSlides = [
     {
         id: 1,
-        image_url: '/images/slider/1.jpg',
+        image_url: '/images/home/master-layout-full.jpg',
         title: 'Kolte Patil Life Republic Township Hinjewadi',
         subtitle: 'Experience 400+ acres of integrated community living near Rajiv Gandhi IT Park in Hinjewadi',
         description: 'A 390+ acre integrated township in Hinjewadi that offers a world of its own.',
@@ -27,7 +27,7 @@ const defaultSlides = [
     },
     {
         id: 2,
-        image_url: '/images/slider/2.webp',
+        image_url: '/images/home/24k-espada-thumb.jpg',
         title: 'Luxury 1, 2 & 3 BHK Flats in Pune West',
         subtitle: 'Homes designed for those who dream big. Ready possession apartments available.',
         description: 'From smart homes to luxury villas, find your perfect space.',
@@ -35,7 +35,7 @@ const defaultSlides = [
     },
     {
         id: 3,
-        image_url: '/images/slider/3.webp',
+        image_url: '/images/home/atmos-thumb.jpg',
         title: 'World-Class Amenities & Infrastructure',
         subtitle: 'Global schools, 150ft wide roads, and multi-level security',
         description: 'Join a vibrant community of over 10,000 happy families.',
