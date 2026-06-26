@@ -126,7 +126,7 @@ export const MasterPlan: React.FC = () => {
                     </p>
                 </div>
 
-                <div className="relative group max-w-[1400px] mx-auto rounded-[6rem] overflow-hidden shadow-[0_120px_240px_-60px_rgba(0,0,0,0.3)] border-[16px] border-gray-50 bg-gray-200 aspect-video lg:h-[900px]">
+                <div className="relative group w-full max-w-[1400px] mx-auto rounded-[3rem] md:rounded-[6rem] overflow-hidden shadow-[0_120px_240px_-60px_rgba(0,0,0,0.3)] border-8 md:border-[16px] border-gray-50 bg-gray-200 h-[60vh] sm:h-[80vh] lg:h-[900px]">
                     {!imgLoaded && (
                         <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
                             <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
@@ -168,10 +168,10 @@ export const MasterPlan: React.FC = () => {
                     <AnimatePresence>
                         {activeSector && (
                             <motion.div 
-                                initial={{ opacity: 0, x: 150, scale: 0.9 }}
-                                animate={{ opacity: 1, x: 0, scale: 1 }}
-                                exit={{ opacity: 0, x: 150, scale: 0.9 }}
-                                className="absolute right-16 bottom-16 w-[550px] bg-white rounded-[5rem] shadow-[0_100px_200px_-50px_rgba(0,0,0,0.5)] p-16 border border-white z-40 overflow-hidden group/hud"
+                                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                exit={{ opacity: 0, y: 50, scale: 0.9 }}
+                                className="absolute left-4 right-4 sm:left-auto sm:right-16 bottom-4 sm:bottom-16 sm:w-[550px] bg-white rounded-[2.5rem] sm:rounded-[5rem] shadow-[0_100px_200px_-50px_rgba(0,0,0,0.5)] p-8 sm:p-16 border border-white z-40 overflow-hidden group/hud"
                             >
                                 <div className="absolute top-0 right-0 p-12 opacity-5">
                                     <Globe size={150} />

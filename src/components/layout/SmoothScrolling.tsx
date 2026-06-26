@@ -11,7 +11,7 @@ export const SmoothScrolling = ({ children }: SmoothScrollingProps) => {
     }
 
     return (
-        <ReactLenis root>
+        <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true, syncTouch: true }}>
             {children}
         </ReactLenis>
     );

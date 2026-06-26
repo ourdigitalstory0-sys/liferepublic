@@ -89,11 +89,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                             className="text-2xl font-serif font-bold text-secondary mb-2 line-clamp-1 hover:text-accent transition-colors cursor-pointer"
                             onClick={handleProjectClick}
                         >
-                            {project.title.split('|')[0]}
+                            {project?.title ? project.title.split('|')[0] : 'Sovereign Project'}
                         </h3>
                         <div className="flex items-center text-gray-400 text-[10px] font-bold uppercase tracking-widest">
                             <MapPin size={12} className="mr-1.5 text-accent" />
-                            {project.location}
+                            {project?.location || 'Pune West'}
                         </div>
                     </div>
 
@@ -129,7 +129,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, priority = fa
                                             {project.overview || project.description}
                                         </p>
                                         <div className="flex flex-wrap gap-2">
-                                            {project.features.slice(0, 3).map((feature, index) => (
+                                            {(project?.features || []).slice(0, 3).map((feature, index) => (
                                                 <span
                                                     key={index}
                                                     className="px-3 py-1 bg-accent/5 text-accent text-[9px] rounded-lg border border-accent/10 font-bold uppercase tracking-wider"

@@ -48,20 +48,20 @@ export const AerialTour: React.FC = () => {
                 </div>
 
                 {/* Metadata HUD */}
-                <div className="absolute bottom-12 left-12 right-12 flex justify-between items-end z-20">
+                <div className="absolute bottom-6 sm:bottom-12 left-6 right-6 sm:left-12 sm:right-12 flex flex-col sm:flex-row justify-between items-start sm:items-end z-20 gap-6 sm:gap-0">
                     <div className="space-y-4">
                         <div className="flex items-center gap-3 text-white/60">
-                            <Navigation size={20} className="text-accent" />
+                            <Navigation size={20} className="text-accent shrink-0" />
                             <span className="text-xs font-bold uppercase tracking-widest">Altitude: 1200ft MSL</span>
                         </div>
                         <div className="flex items-center gap-3 text-white/60">
-                            <Sparkles size={20} className="text-accent" />
+                            <Sparkles size={20} className="text-accent shrink-0" />
                             <span className="text-xs font-bold uppercase tracking-widest">Visual Index: 98.4%</span>
                         </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left sm:text-right w-full sm:w-auto">
                         <div className="text-[10px] font-bold text-accent uppercase tracking-[0.5em] mb-2">Live Rendering</div>
-                        <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
+                        <div className="w-full sm:w-48 h-1 bg-white/10 rounded-full overflow-hidden">
                             <motion.div 
                                 style={{ width: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]) }}
                                 className="h-full bg-accent"
