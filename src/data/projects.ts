@@ -2,6 +2,31 @@ import type { Project } from '../lib/types';
 
 export const projectsRegistry: Project[] = [
     {
+        id: 'kolte-patil-life-republic-nora-bungalow-plots-hinjewadi',
+        title: 'Kolte Patil Life Republic Nora | Premium Bungalow Plots Hinjewadi',
+        category: 'Plots',
+        location: 'Sector R11 (Nora)',
+        price: '₹1.80Cr*',
+        image: '/images/gallery/eros/master-layout.webp',
+        description: 'Build your dream home at Nora in Kolte Patil Life Republic Township. Exclusive premium bungalow plots offering the ultimate luxury of customizing your own space in Hinjewadi.',
+        features: ['Bungalow Plots', 'Sector R11', 'Customizable Luxury'],
+        overview: 'Nora at Kolte Patil Life Republic Township offers an exclusive opportunity to build your own masterpiece. These premium bungalow plots provide the perfect canvas for your bespoke residence with world-class township infrastructure.',
+        amenities: ['Exclusive Gated Community', 'Lush Green Landscapes', 'Wide Internal Roads', 'Dedicated Utilities Infrastructure', 'Clubhouse Access', '24/7 Security'],
+        masterLayout: '/images/home/master-layout-full.jpg',
+        floorPlans: [
+            { type: 'Premium Plot', size: 'Various Sizes', image: '/images/home/master-layout-full.jpg', details: ['Build to Suit', 'Vastu Compliant Layouts', 'Premium Location'] }
+        ],
+        specifications: [
+            { title: 'Infrastructure', items: ['Concrete Internal Roads', 'Underground Cabling', 'Water Supply Connection'] },
+            { title: 'Security', items: ['Gated Community', 'CCTV Surveillance at entry', '24x7 Security Personnel'] }
+        ],
+        faqs: [
+            { question: "What is the starting price for Nora Plots?", answer: "The premium bungalow plots at Nora start from ₹1.80Cr*." },
+            { question: "Can I build my own design?", answer: "Yes, Nora offers the flexibility to build your custom bungalow design adhering to township guidelines." }
+        ],
+        themeColor: '#7e6d57'
+    },
+    {
         id: 'kolte-patil-life-republic-atmos-modern-2-3-bhk-flats-hinjewadi',
         title: 'Kolte Patil Life Republic Atmos | Modern 2, 2.5 & 3 BHK Hinjewadi',
         category: 'Lifestyle',
