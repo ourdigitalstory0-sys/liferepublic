@@ -69,8 +69,6 @@ function App() {
     }
   }, []);
 
-  console.log('App Rendering, pathname:', window?.location?.pathname);
-
   return (
     <SmoothScrolling>
       <ExitIntentOffer />
