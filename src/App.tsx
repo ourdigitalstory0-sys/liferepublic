@@ -116,6 +116,7 @@ function App() {
                 <Projects />
               </Layout>
             } />
+            <Route path="/projects/sector-r17b-life-republic" element={<Navigate to="/projects/kolte-patil-life-republic-nora-bungalow-plots-hinjewadi" replace />} />
             <Route path="/projects/:id" element={
               <Layout ariaLabel="Kolte Patil Life Republic Township Project Monograph">
                 <ProjectDetails />
